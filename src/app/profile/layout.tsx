@@ -12,9 +12,10 @@ export default function ProfileLayout({
 }) {
   const cookieStore = cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
-  if (!selectedId || selectedId) {
-    redirect("/my-classes"); 
-  }
+  if (!selectedId || selectedId === "undefined") {
+  redirect("/my-classes");
+}
+
   return (
     <>
       <SidebarProvider>
