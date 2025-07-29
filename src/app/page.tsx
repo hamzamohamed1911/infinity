@@ -24,7 +24,6 @@ const Star = ({ style }: { style: React.CSSProperties }) => (
     }}
   />
 );
-
 // Animated Button Component
 const AnimatedButton = ({
   children,
@@ -223,7 +222,7 @@ export default function Home() {
           <p className="text-2xl md:text-3xl text-[#606060] mb-6">
             مُدرس الفيزياء للثانوية العامة والأزهرية
           </p>
-          <AnimatedButton className="bg-[#831AD3] text-white">
+          <AnimatedButton href="/my-classes"  className="bg-[#831AD3] text-white">
             ابدأ الآن
           </AnimatedButton>
         </motion.div>
