@@ -33,6 +33,7 @@ export async function GetUnit({
   unit_id: string
 }): Promise<APIResponse<CourseDetails>> {
   const token = await getAuthToken();
+  console.log("token" ,token)
   const response = await fetch(`${API_URL}api/v1/get-unit/${unit_id}`, {
     method: "GET",
     headers: {

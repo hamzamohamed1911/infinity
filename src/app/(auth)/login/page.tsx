@@ -80,7 +80,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full lg:py-4 py-3 rounded-md bg-primary text-white hover:bg-[#5A3DA0] transition-colors lg:text-2xl text-lg font-semibold disabled:opacity-50"
+            className="w-full lg:py-4 py-3 rounded-md bg-primary text-white hover:bg-primary/10 transition-colors lg:text-2xl text-lg font-semibold disabled:opacity-50"
           >
             {isSubmitting ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
           </button>

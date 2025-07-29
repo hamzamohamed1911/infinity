@@ -4,14 +4,11 @@ import type { Metadata } from "next";
 import CallSupport from "@/components/CallSupport";
 import Providers from "@/context/Providers";
 import { Toaster } from "@/components/ui/sonner";
-import { argbToHex } from "@/lib/utils/argbToHex";
-import { getWebConfig } from "@/lib/apis/webconfig.api";
-import type { CSSProperties } from "react";
 
 const alexandria = Alexandria({
-  subsets: ["latin", "arabic"],
   weight: ["400", "700"],
   variable: "--font-alexandria",
+  subsets: ["arabic"],
 });
 export const metadata: Metadata = {
   title: "Inifinty",
@@ -22,27 +19,14 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const config = await getWebConfig();
-
-  const primaryColor = argbToHex(config?.primary_color || "0xff000000");
-  const secondaryColor = argbToHex(config?.secondary_color || "0xffffffff");
-  const backgroundColor = argbToHex(config?.background_color || "0xffffffff");
-  const styleVars: CSSProperties = {
-    "--primary-color": primaryColor,
-    "--secondary-color": secondaryColor,
-    "--background-color": backgroundColor,
-  } as React.CSSProperties;
   return (
     <html dir="rtl" lang="ar">
-      <body
-        style={styleVars}
-        className={`${alexandria.variable} font-sans relative`}
-      >
+      <body className={`${alexandria.variable} font-sans relative`}>
         <Providers>
           <Toaster />
           {children}
+          <CallSupport />
         </Providers>
-        <CallSupport />
       </body>
     </html>
   );

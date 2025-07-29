@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { logo, userImage } from "../../../public";
+import {userImage } from "../../../public";
 import { IoGridOutline } from "react-icons/io5";
 import { BiStore } from "react-icons/bi";
 import { GrHelpBook } from "react-icons/gr";
@@ -34,8 +34,11 @@ import { useSidebar } from "@/lib/context/SidebarContext";
 import { useQuery } from "@tanstack/react-query";
 import { GetProfileData } from "@/lib/apis/profile.api";
 import { Skeleton } from "../ui/skeleton";
+import { useTheme } from "@/context/theme-context";
 
 const Navbar = ({id}:{id:string}) => {
+    const { logo } = useTheme();
+
   const pathname = usePathname();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -82,7 +85,7 @@ const Navbar = ({id}:{id:string}) => {
 
   return (
     <>
-      <nav className="bg-primarydark shadow-md top-0 z-50">
+      <nav className="bg-primary  shadow-md top-0 z-50">
         <div className="xl:max-w-[90%] container max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 gap-2">
             <button
@@ -164,8 +167,8 @@ const Navbar = ({id}:{id:string}) => {
                   href={item.href}
                   className={`flex items-center gap-4 px-3 h-12 justify-center rounded-md text-md font-medium transition-colors whitespace-nowrap ${
                     pathname === item.href
-                      ? "bg-white text-primarydark"
-                      : "hover:bg-white hover:text-primarydark text-white"
+                      ? "bg-white text-primary"
+                      : "hover:bg-white hover:text-primary text-white"
                   }`}
                 >
                   {item.icon}
@@ -214,11 +217,11 @@ const Navbar = ({id}:{id:string}) => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex gap-2">
-            <Button className="text-white" onClick={handleLogout}>
+            <Button className="text-white bg-primary" onClick={handleLogout}>
               تسجيل الخروج
             </Button>
             <Button
-              className="border-primary border-2 text-primary hover:bg-primary hover:text-white bg-transparent"
+              className="border-[var(--primary-color)] border-2 text-primary hover:bg-primary hover:text-white bg-transparent"
               onClick={() => setIsLogoutModalOpen(false)}
             >
               إلغاء

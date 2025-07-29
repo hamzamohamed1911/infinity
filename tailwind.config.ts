@@ -19,9 +19,9 @@ const config: Config = {
                 ]
   		},
   		colors: {
-  			primary: '#831AD3',
+  			primary: 'var(--primary-color)',
   			primarydark: '#6B14A8',
-  			secondary: '#606060',
+  			secondary: 'var(--secondary-color)',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
