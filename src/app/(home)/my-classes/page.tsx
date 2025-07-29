@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { placeholder } from "../../../../public";
+import {  placeholder } from "../../../../public";
 // import {
 //   Dialog,
 //   DialogClose,
@@ -16,6 +16,7 @@ import { GetClassesData } from "@/lib/apis/profile.api";
 import { fetchTeachers } from "../../api/register";
 import StartCourseButton from "@/components/StartCourseButton";
 import AuthNavBar from "@/app/(auth)/_authComponent/AuthNavBar";
+import NoDataMessage from "@/components/NoDataMessage";
 // import { DialogTrigger } from "@radix-ui/react-dialog";
 
 async function MyClassesContent() {
@@ -36,6 +37,9 @@ async function MyClassesContent() {
             <h2 className="text-secondary lg:text-3xl text-2xl font-[500]">
               صفوف انت منضم إليها
             </h2>
+            {(!ClassesData || ClassesData.length === 0) && (
+              <NoDataMessage text="لا توجد صفوف متاحة حاليًا." />
+            )}
             <div className="my-6 xl:gap-8 md:gap-6 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-4  sm:px-0 w-full">
               {ClassesData?.map((course) => (
                 <div
@@ -103,7 +107,7 @@ async function MyClassesContent() {
 export default function page() {
   return (
     <Suspense fallback={<CardSkeleton />}>
-      <AuthNavBar/>
+      <AuthNavBar />
       <MyClassesContent />
     </Suspense>
   );
