@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import {
   fetchTeachers,
   registerUser,
@@ -20,6 +20,10 @@ import {
   SubscribeFormData,
   subscribeSchema,
 } from "@/lib/schemes/authSchema";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { GetClassroomsList } from "@/lib/apis/listService.api";
+import { Dropdown } from "@/components/Dropdown";
+import { GetStateList } from "@/lib/apis/auth";
 
 const Register = () => {
   const steps = [{ id: "signup" }, { id: "interest" }, { id: "knowledge" }];
@@ -29,6 +33,32 @@ const Register = () => {
   );
   const [formType, setFormType] = useState<"basic" | "secondary">("basic");
   const [showAlternateContent, setShowAlternateContent] = useState(false);
+  const { data: statesResponse } = useQuery({
+    queryKey: ["states"],
+    queryFn: GetStateList,
+  });
+  const { data: classRoomResponse } = useQuery({
+    queryKey: ["classroom"],
+    queryFn: GetClassroomsList,
+  });
+  const states =
+    statesResponse && "data" in statesResponse ? statesResponse.data : [];
+  const classroom =
+    classRoomResponse && "data" in classRoomResponse
+      ? classRoomResponse.data
+      : [];
+  const [showFields, setShowFields] = useState({
+    password: false,
+    passwordConfirmation: false,
+  });
+  const toggleFieldVisibility = (
+    field: "password" | "passwordConfirmation"
+  ) => {
+    setShowFields((prev) => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
+  };
 
   // Fetch teacher count
   const { data: teacherCountResponse } = useQuery({
@@ -262,9 +292,17 @@ const Register = () => {
                   <div className="flex flex-col gap-3 text-secondary my-4">
                     <div className="flex flex-col gap-3 text-secondary my-3">
                       <Label className="text-lg font-medium">المدينة</Label>
-                      <Input
-                        {...subscribeForm.register("state_id")}
-                        className="!h-12 rounded-lg border-[1px]"
+                      <Controller
+                        control={subscribeForm.control}
+                        name="state_id"
+                        render={({ field }) => (
+                          <Dropdown
+                            placeholder="اختر المدينة"
+                            data={states}
+                            value={Number(field.value)}
+                            onChange={(value) => field.onChange(String(value))}
+                          />
+                        )}
                       />
                       {subscribeForm.formState.errors.state_id && (
                         <p className="text-red-500">
@@ -308,6 +346,19 @@ const Register = () => {
                         {...subscribeForm.register("classroom_id")}
                         className="!h-12 rounded-lg border-[1px]"
                       />
+                      <Controller
+                        control={subscribeForm.control}
+                        name="classroom_id"
+                        render={({ field }) => (
+                          <Dropdown
+                            placeholder="اختر الصف"
+                            data={classroom}
+                            value={Number(field.value)}
+                            onChange={(value) => field.onChange(String(value))}
+                          />
+                        )}
+                      />
+
                       {subscribeForm.formState.errors.classroom_id && (
                         <p className="text-red-500">
                           {subscribeForm.formState.errors.classroom_id.message}
@@ -423,15 +474,29 @@ const Register = () => {
                             )}
                       </div>
                     </div>
-                    <div className="flex flex-col gap-3 text-secondary w-full my-4">
+                    <div className="flex flex-col gap-3 text-secondary w-full my-4 relative">
                       <Label className="text-lg font-medium">كلمة المرور</Label>
-                      <Input
-                        type="password"
-                        {...(teacherCount <= 1
-                          ? basicForm.register("password")
-                          : subscribeForm.register("password"))}
-                        className="!h-12 rounded-lg border-[1px]"
-                      />
+
+                      <div className="relative">
+                        <Input
+                          type={showFields.password ? "text" : "password"}
+                          {...(teacherCount <= 1
+                            ? basicForm.register("password")
+                            : subscribeForm.register("password"))}
+                          className="!h-12 rounded-lg border-[1px]"
+                        />
+                        <button
+                          type="button"
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-primary"
+                          onClick={() => toggleFieldVisibility("password")}
+                        >
+                          {showFields.password ? (
+                            <FaEye className="h-6 w-6" />
+                          ) : (
+                            <FaEyeSlash className="h-6 w-6" />
+                          )}
+                        </button>
+                      </div>
                       {teacherCount <= 1
                         ? basicForm.formState.errors.password && (
                             <p className="text-red-500">
@@ -448,13 +513,32 @@ const Register = () => {
                       <Label className="text-lg font-medium">
                         تأكيد كلمة المرور
                       </Label>
-                      <Input
-                        type="password"
-                        {...(teacherCount <= 1
-                          ? basicForm.register("password_confirmation")
-                          : subscribeForm.register("password_confirmation"))}
-                        className="!h-12 rounded-lg border-[1px]"
-                      />
+                      <div className="relative">
+                        <Input
+                          type={
+                            showFields.passwordConfirmation
+                              ? "text"
+                              : "password"
+                          }
+                          {...(teacherCount <= 1
+                            ? basicForm.register("password_confirmation")
+                            : subscribeForm.register("password_confirmation"))}
+                          className="!h-12 rounded-lg border-[1px]"
+                        />
+                        <button
+                          type="button"
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-primary"
+                          onClick={() =>
+                            toggleFieldVisibility("passwordConfirmation")
+                          }
+                        >
+                          {showFields.passwordConfirmation ? (
+                            <FaEye className="h-6 w-6" />
+                          ) : (
+                            <FaEyeSlash className="h-6 w-6" />
+                          )}
+                        </button>
+                      </div>
                       {teacherCount <= 1
                         ? basicForm.formState.errors.password_confirmation && (
                             <p className="text-red-500">
@@ -478,9 +562,17 @@ const Register = () => {
                       <>
                         <div className="flex flex-col gap-3 text-secondary w-full my-3">
                           <Label className="text-lg font-medium">المدينة</Label>
-                          <Input
-                            {...basicForm.register("state_id")}
-                            className="!h-12 rounded-lg border-[1px]"
+                          <Controller
+                            control={basicForm.control}
+                            name="state_id"
+                            render={({ field }) => (
+                              <Dropdown
+                                placeholder="اختر المدينة"
+                                data={states}
+                                value={Number(field.value)}
+                                onChange={(value) => field.onChange(String(value))}
+                              />
+                            )}
                           />
                           {basicForm.formState.errors.state_id && (
                             <p className="text-red-500">
@@ -490,9 +582,17 @@ const Register = () => {
                         </div>
                         <div className="flex flex-col gap-3 text-secondary w-full my-3">
                           <Label className="text-lg font-medium">الصف</Label>
-                          <Input
-                            {...basicForm.register("classroom_id")}
-                            className="!h-12 rounded-lg border-[1px]"
+                          <Controller
+                            control={basicForm.control}
+                            name="classroom_id"
+                            render={({ field }) => (
+                              <Dropdown
+                                placeholder="اختر الصف"
+                                data={classroom}
+                                value={Number(field.value)}
+                                onChange={(value) => field.onChange(String(value))}
+                              />
+                            )}
                           />
                           {basicForm.formState.errors.classroom_id && (
                             <p className="text-red-500">

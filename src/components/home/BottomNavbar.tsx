@@ -8,14 +8,15 @@ import { IoGridOutline } from "react-icons/io5";
 import { GrHelpBook } from "react-icons/gr";
 import { motion } from "framer-motion";
 
-const navItems = [
+
+
+export default function BottomNavbar({id}:{id:string}) {
+  const navItems = [
   { href: "/profile", icon: User, label: "الملف الشخصى" },
-  { href: "/", icon: IoGridOutline, label: "مشترياتى" },
-  { href: "/store", icon: BiStore, label: "المتجر" },
+  { href: `/my-purchases/${id}`, icon: IoGridOutline, label: "مشترياتى" },
+  { href: `/store/${id}`, icon: BiStore, label: "المتجر" },
   { href: "/questions-bank", icon: GrHelpBook, label: "بنك الاسئلة" },
 ];
-
-export default function BottomNavbar() {
   const pathname = usePathname();
 
   return (

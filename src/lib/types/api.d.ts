@@ -1,7 +1,7 @@
 // api.d.ts
 
 declare type SuccessfulResponse<T> = {
-  version: number;
+  version?: number;
   success: true;
   status: number;
   data: T;

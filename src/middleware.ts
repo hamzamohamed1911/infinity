@@ -11,7 +11,7 @@ export default withAuth(
     }
 
     if (pathname === "/login" && req.nextauth.token) {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
+      return NextResponse.redirect(new URL("/my-purchases", req.url));
     }
 
     // حماية صفحة my-classes
@@ -19,9 +19,10 @@ export default withAuth(
       return NextResponse.redirect(new URL("/login", req.url));
     }
 
-    if (!req.nextauth.token && pathname !== "/login") {
-      return NextResponse.redirect(new URL("/login", req.url));
-    }
+ if (!req.nextauth.token && !["/login", "/register", "/forgot-password"].includes(pathname)) {
+  return NextResponse.redirect(new URL("/login", req.url));
+}
+
 
     return NextResponse.next();
   },

@@ -48,7 +48,6 @@ export function Comment({ text, author, replies }: Props) {
           <Button
             size="sm"
             onClick={() => {
-              console.log("تم الرد:", replyText);
               setReplyText("");
               setShowReply(false);
             }}

@@ -4,6 +4,7 @@ declare type UserProfile = {
   code: string;
   wallet: number;
   gender: "m" | "f";
+  status:string | undefined;
   email: string;
   type: string; 
   phone: string;
@@ -17,4 +18,14 @@ type ProfileApiData = {
   youtube_link: string | null;
   quizzes: unknown[]; // عدّلهم لو عندك type
   assignments: unknown[];
+};
+declare type Dclasses = {
+  id: string; 
+  name: string;
+  rank: number | null; 
+  description: string | null;
+  content: string | null;
+  thumbnail: string | null; 
+  image: string | null;
+  date: string | null;
 };

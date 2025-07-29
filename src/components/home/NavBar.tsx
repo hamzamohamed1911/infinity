@@ -35,7 +35,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GetProfileData } from "@/lib/apis/profile.api";
 import { Skeleton } from "../ui/skeleton";
 
-const Navbar: React.FC = () => {
+const Navbar = ({id}:{id:string}) => {
   const pathname = usePathname();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -45,12 +45,12 @@ const Navbar: React.FC = () => {
   const { data: profileData, isLoading } = useQuery({
     queryKey: ["profile"],
     queryFn: () => GetProfileData(),
+    
   });
 
   const profile =
     profileData && "data" in profileData ? profileData.data.profile : undefined;
 
-  console.log(profile);
   const handleLogout = async () => {
     try {
       await logout();
@@ -64,40 +64,40 @@ const Navbar: React.FC = () => {
 
   const navItems = [
     {
-      href: "/dashboard/questions-bank",
-      label: "بنك الاسئلة",
-      icon: <GrHelpBook className="h-6 w-6" />,
+      href: `/my-purchases/${id}`,
+      label: "مشترياتي",
+      icon: <IoGridOutline className="h-6 w-6" />,
     },
     {
-      href: "/dashboard/store",
+      href: `/store/${id}`,
       label: "المتجر",
       icon: <BiStore className="h-6 w-6" />,
     },
     {
-      href: "/dashboard",
-      label: "مشترياتي",
-      icon: <IoGridOutline className="h-6 w-6" />,
+      href: "/questions-bank",
+      label: "بنك الاسئلة",
+      icon: <GrHelpBook className="h-6 w-6" />,
     },
   ];
 
   return (
     <>
       <nav className="bg-primarydark shadow-md top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="xl:max-w-[90%] container max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 gap-2">
             <button
-              className="md:hidden flex items-center text-white text-2xl"
+              className="sm:hidden flex items-center text-white text-2xl"
               onClick={toggleSidebar}
             >
               <RxHamburgerMenu />
             </button>
             {/* User Profile */}
             {isLoading ? (
-              <div className="flex  h-20 gap-2 items-center">
+              <div className="sm:flex hidden  h-20 gap-2 items-center">
                 <Skeleton className="size-10 bg-gray-300 rounded-full animate-pulse" />
               </div>
             ) : (
-              <div className="ml-4 sm:ml-6 md:flex hidden justify-center items-center">
+              <div className="ml-4 sm:ml-6 sm:flex hidden justify-center items-center">
                 <DropdownMenu>
                   <DropdownMenuTrigger
                     className="focus:bg-transparent hover:bg-transparent focus:border-none"
@@ -112,13 +112,17 @@ const Navbar: React.FC = () => {
                         className="h-10 w-10 rounded-full"
                       />
                       <span className="text-white text-md flex flex-col gap-1">
-                        <p className="text-xl font-medium">
+                        <p className="text-lg font-medium text-start">
                           {profile?.name || "مستخدم"}
                         </p>
                         <span>
                           نظام :{" "}
-                          <span className="text-[#B3EA86] text-xl">
-                            أونلاين
+                          <span className="text-[#B3EA86] text-lg">
+                            {profile?.status === "1"
+                              ? "أونلاين"
+                              : profile?.status === "2"
+                              ? "سنتر"
+                              : "غير مشترك"}
                           </span>
                         </span>
                       </span>
@@ -158,7 +162,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-4 px-3 h-12 justify-center rounded-md text-md font-medium transition-colors ${
+                  className={`flex items-center gap-4 px-3 h-12 justify-center rounded-md text-md font-medium transition-colors whitespace-nowrap ${
                     pathname === item.href
                       ? "bg-white text-primarydark"
                       : "hover:bg-white hover:text-primarydark text-white"

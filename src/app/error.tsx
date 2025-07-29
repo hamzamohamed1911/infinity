@@ -44,7 +44,7 @@ export default function Error({
         </h2>
 
         {/* Error Message */}
-        <p className="text-secondary text-xl">
+        <p className="text-secondary text-lg !break-all">
           {error.message || "حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى لاحقًا."}
         </p>
 
@@ -52,13 +52,13 @@ export default function Error({
         <div className="flex justify-center md:flex-row flex-col gap-4">
           <button
             onClick={reset}
-            className="2xl:px-6 px-5 py-3 bg-primary text-white text-xl font-semibold rounded-lg  hover:bg-primary-dark transition-all duration-300 cursor-pointer"
+            className="2xl:px-6 px-5 py-3 bg-primary text-white text-lg font-semibold rounded-lg  hover:bg-primary-dark transition-all duration-300 cursor-pointer"
             >
            حاول مرة أخرى
           </button>
           <button
             onClick={() => router.push("/")}
-            className="2xl:px-6 px-5 py-3 border-primary border-[2px] text-primary text-xl font-semibold rounded-lg  hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer"
+            className="2xl:px-6 px-5 py-3 border-primary border-[2px] text-primary text-lg font-semibold rounded-lg  hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer"
             >
            الذهاب إلى الصفحة الرئيسية
           </button>

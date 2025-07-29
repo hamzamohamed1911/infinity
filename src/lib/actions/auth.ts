@@ -25,7 +25,6 @@ export const logout = async () => {
     }
 
 
-
     return {
       success: true,
       data,

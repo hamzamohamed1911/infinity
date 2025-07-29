@@ -11,56 +11,56 @@ import { BiBookContent } from "react-icons/bi";
 import { TbBellSchool } from "react-icons/tb";
 import { LuBook } from "react-icons/lu";
 import { FiUsers } from "react-icons/fi";
-import { useSidebar } from "@/lib/context/SidebarContext";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useSidebar } from "@/lib/context/SidebarContext";
 
-const SideBar = () => {
+const SideBar = ({id}:{id:string}) => {
   const pathname = usePathname();
   const { isSidebarOpen, closeSidebar } = useSidebar();
 
   const SideBarItems = [
     {
-      href: "/dashboard",
+      href: `/my-purchases/${id}`,
       label: "الرئيسية",
       icon: <AiOutlineHome className="text-2xl" />,
     },
     {
-      href: "/dashboard/courses",
+      href: `/my-purchases/${id}/courses`,
       label: "كورسات",
       icon: <FaAward className="text-2xl" />,
     },
     {
-      href: "/dashboard/units",
+      href: `/my-purchases/${id}/units`,
       label: "الوحدات",
       icon: <RiBookMarkedLine className="text-2xl" />,
     },
     {
-      href: "/dashboard/Lessons",
+      href: `/my-purchases/${id}/lessons`,
       label: "الدروس",
       icon: <MdOndemandVideo className="text-2xl" />,
     },
     {
-      href: "/dashboard/exams",
+      href: `/my-purchases/${id}/exams`,
       label: "إمتحانات",
       icon: <MdEditNote className="text-2xl" />,
     },
     {
-      href: "/dashboard/homeworks",
+      href: `/my-purchases/${id}/homeworks`,
       label: "واجبات",
       icon: <BiBookContent className="text-2xl" />,
     },
     {
-      href: "/dashboard/live",
+      href: `/my-purchases/${id}/live`,
       label: "لايف",
       icon: <TbBellSchool className="text-2xl" />,
     },
     {
-      href: "/dashboard/forum",
+      href: `/my-purchases/${id}/forum`,
       label: "منتدى",
       icon: <FiUsers className="text-2xl" />,
     },
     {
-      href: "/dashboard/books",
+      href: `/my-purchases/${id}/books`,
       label: "كتب",
       icon: <LuBook className="text-2xl" />,
     },

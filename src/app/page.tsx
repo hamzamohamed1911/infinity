@@ -95,14 +95,14 @@ export default function Home() {
 
       {/* Header */}
       <motion.header
-        className="fixed top-0 left-0 right-0 z-20 flex justify-between items-center p-6 md:p-8 bg-gray-900/90 backdrop-blur-sm"
+        className="fixed top-0 left-0 right-0 z-20 flex justify-between items-center p-6  bg-[#831AD3]/10 backdrop-blur-sm"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <Link href="/" className="flex-shrink-0 ">
-                <Image src={logo} alt="main logo" width={150} height={40} priority />
-              </Link>
+          <Image src={logo} alt="main logo" width={150} height={40} priority />
+        </Link>
         <nav className="hidden md:flex gap-4 text-xl">
           <Link
             href="#home"
@@ -185,7 +185,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="flex flex-col md:flex-row-reverse items-center justify-center min-h-screen px-6 md:px-12 pt-20"
+        className="flex flex-col md:flex-row-reverse items-center justify-center min-h-screen px-6 md:px-12 pt-20 bg-[#831AD3]/10"
       >
         <motion.div
           className="md:w-1/2 mt-8 md:mt-0"
@@ -230,7 +230,10 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 px-6 md:px-12 text-center">
+      <section
+        id="about"
+        className="py-16 px-6 md:px-12 text-center bg-[#831AD3]/10"
+      >
         <motion.h2
           className="text-3xl md:text-4xl font-bold mb-8"
           initial={{ opacity: 0 }}
@@ -264,13 +267,13 @@ export default function Home() {
           احصل على تطبيقنا
         </motion.h2>
         <div className="flex flex-col md:flex-row-reverse justify-center md:gap-6 gap-2 items-center">
-           <AnimatedButton
+          <AnimatedButton
             href="https://play.google.com"
             className="bg-black hover:bg-black/40 transition-colors duration-700 text-white rounded-md py-1 md:min-w-80 min-w-auto  flex justify-center items-center"
           >
-            <FaGooglePlay size={50}  className="mx-2 " />
+            <FaGooglePlay size={50} className="mx-2 " />
 
-             <div className="flex flex-col gap-1 text-end">
+            <div className="flex flex-col gap-1 text-end">
               <span className="text-xs">Get it on</span>
               <span className=" text-2xl">Google Play</span>
             </div>
@@ -285,7 +288,6 @@ export default function Home() {
               <span className=" text-2xl">App Store</span>
             </div>
           </AnimatedButton>
-         
         </div>
       </section>
 
