@@ -69,13 +69,13 @@ const UnsubscripDialog = () => {
       </DialogTrigger>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-start text-secondary mt-2">
+          <DialogTitle className="text-xl font-semibold text-start text-[#8E8E8E] mt-2">
             خد بالك!
           </DialogTitle>
         </DialogHeader>
 
         <div className="my-2 text-center">
-          <p className="text-secondary text-md font-medium  text-start">
+          <p className="text-[#8E8E8E] text-md font-medium  text-start">
             انت دلوقتي هتلغى نظامك
           </p>
         </div>
@@ -105,7 +105,7 @@ const UnsubscripDialog = () => {
             </DialogClose>
             <Button
               type="submit"
-              className="text-white h-10 shadow-md w-full"
+              className="text-whitew-full hover:bg-primary-400 h-12 shadow-md  hover:shadow-lg text-xl"
               disabled={mutation.isPending}
             >
               {mutation.isPending ? "جاري الحفظ..." : "متابعة"}

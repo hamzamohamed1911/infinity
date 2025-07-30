@@ -10,6 +10,7 @@ import {
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "./theme-context";
 import { ReactNode } from "react";
+import { generateColorShades } from "@/lib/utils/generateColorShades";
 
 const queryClient = new QueryClient();
 
@@ -33,20 +34,31 @@ function ThemeLoader({ children }: { children: ReactNode }) {
       data.data.mobile_config.primary_color ?? "0xff831AD3"
     ),
     secondaryColor: argbToHex(
-      data.data.mobile_config.secondary_color ?? "0xff606060",
+      data.data.mobile_config.secondary_color ?? "0xff606060"
     ),
     backgroundColor: argbToHex(
-      data.data.mobile_config.background_color ?? "0xffffffff",
+      data.data.mobile_config.background_color ?? "0xffffffff"
     ),
     logo: data.data.mobile_config?.academy_logo,
     teacherImage: data.data.mobile_config.teacher_image,
     appName: data.data.mobile_config.app_name,
   };
+  const primaryShades = generateColorShades(theme.primaryColor);
+  const secondaryShades = generateColorShades(theme.secondaryColor);
 
   // Set CSS variables
+
   const root = document.documentElement;
-  root.style.setProperty("--primary-color", theme.primaryColor);
-  root.style.setProperty("--secondary-color", theme.secondaryColor);
+  Object.entries(primaryShades).forEach(([key, value]) => {
+    root.style.setProperty(`--primary-${key}`, value);
+  });
+
+  Object.entries(secondaryShades).forEach(([key, value]) => {
+    root.style.setProperty(`--secondary-${key}`, value);
+  });
+  root.style.setProperty("--primary-color", theme.primaryColor); 
+  root.style.setProperty("--secondary-color", theme.primaryColor); 
+
   root.style.setProperty("--background-color", theme.backgroundColor);
 
   return <ThemeProvider value={theme}>{children}</ThemeProvider>;

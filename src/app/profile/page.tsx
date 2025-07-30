@@ -12,10 +12,10 @@ async function ProfileContent() {
   const profileData =
     Profile && "data" in Profile ? Profile.data.profile : undefined;
   return (
-    <section className="min-h-screen w-full">
-      <h1 className="font-bold  text-3xl text-secondary my-4">الملف الشخصي</h1>
+    <section className="min-h-screen w-full text-[#606060]">
+      <h1 className="font-bold  text-3xl  my-4">الملف الشخصي</h1>
       <div className="w-[80%] mx-auto bg-[#E8E8E8] h-[0.5px] my-8" />
-      <div className="flex flex-col gap-6 text-secondary my-8">
+      <div className="flex flex-col gap-6  my-8">
         <div className="w-full flex md:flex-row flex-col gap-4 justify-between">
           <div className="md:w-1/2 flex flex-col gap-2">
             <label className="text-lg font-medium">الاسم</label>

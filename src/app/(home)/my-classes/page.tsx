@@ -32,9 +32,9 @@ async function MyClassesContent() {
   return (
     <>
       <section>
-        <div className="container mx-auto flex w-full p-4">
+        <div className="container mx-auto xl:max-w-[90%] max-w-full flex w-full p-4">
           <div className=" lg:m-6 md:m-4 m-2  flex flex-col gap-4 w-full">
-            <h2 className="text-secondary lg:text-3xl text-2xl font-[500]">
+            <h2 className="text-secondary lg:text-3xl md:text-2xl text-xl font-[500]">
               صفوف انت منضم إليها
             </h2>
             {(!ClassesData || ClassesData.length === 0) && (

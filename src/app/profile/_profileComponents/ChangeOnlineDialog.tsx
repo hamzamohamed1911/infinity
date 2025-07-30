@@ -106,21 +106,22 @@ const ChangeOnlineDialog = () => {
       </DialogTrigger>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-start text-secondary mt-2">
+          <DialogTitle className="text-xl font-semibold text-start text-[#8E8E8E] mt-2">
             خد بالك!
           </DialogTitle>
         </DialogHeader>
 
         <div className="my-2 text-center">
-          <p className="text-secondary text-md font-medium text-start">
-            انت دلوقتي هتغير نظامك من{" "}
-            <span className="text-[#509319]">اونلاين</span> لنظام{" "}
-            <span className="text-[#509319]">السنتر</span>
+          <p className="text-[#8E8E8E] text-md font-medium text-start flex gap-2">
+            <span>انت دلوقتي هتغير نظامك من</span>
+            <span className="text-secondary-800">اونلاين</span> 
+            <span>لنظام</span>
+            <span className="text-secondary-800">السنتر</span>
           </p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-          <div className="flex flex-col gap-3 text-secondary">
+          <div className="flex flex-col gap-3 text-[#8E8E8E]">
             <label className="text-md font-medium">رقم هاتف ولي الأمر</label>
             <input
               {...register("parent_phone")}
@@ -211,7 +212,7 @@ const ChangeOnlineDialog = () => {
             </DialogClose>
             <Button
               type="submit"
-              className="text-white h-10 shadow-md w-full"
+              className="text-whitew-full hover:bg-primary-400 h-12 shadow-md  hover:shadow-lg text-xl"
               disabled={mutation.isPending}
             >
               {mutation.isPending ? "جاري الحفظ..." : "متابعة"}

@@ -41,7 +41,7 @@ const ChangePasswordDialog = () => {
         </DialogHeader>
         <form>
           <div className="py-4 ">
-            <div className="flex flex-col gap-3 text-secondary my-4 ">
+            <div className="flex flex-col gap-3 text-[#606060] my-4 ">
               <div>
                 <label className="text-lg font-medium block my-2">
                   كلمة المرور القديمة
@@ -121,7 +121,7 @@ const ChangePasswordDialog = () => {
             <DialogClose asChild>
               <Button
                 variant="default"
-                className="bg-primary text-white w-full h-12 shadow-md border border-gray-200 hover:shadow-lg"
+              className="text-whitew-full hover:bg-primary-400 h-12 shadow-md  hover:shadow-lg text-xl"
               >
                 تمام
               </Button>

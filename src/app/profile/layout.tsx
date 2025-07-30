@@ -3,7 +3,7 @@ import Navbar from "@/components/home/NavBar";
 import { SidebarProvider } from "@/lib/context/SidebarContext";
 import ProfileSideBar from "./_profileComponents/ProfileSideBar";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
 export default function ProfileLayout({
   children,
@@ -12,9 +12,9 @@ export default function ProfileLayout({
 }) {
   const cookieStore = cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
-  if (!selectedId || selectedId === "undefined") {
-  redirect("/my-classes");
-}
+//   if (!selectedId || selectedId === "undefined") {
+//   redirect("/my-classes");
+// }
 
   return (
     <>

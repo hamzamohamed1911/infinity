@@ -37,9 +37,9 @@ const BarcodeDialog = ({ code }: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="md:w-1/2 flex flex-col gap-2 cursor-pointer hover:underline text-blue-600">
-          <label className="text-lg font-medium text-secondary">الباركود</label>
-          <p className="font-semibold md:text-xl text-lg">{code}</p>
+        <div className="md:w-1/2 flex flex-col gap-2 cursor-pointer hover:underline ">
+          <label className="text-lg font-medium ">الباركود</label>
+          <p className="font-semibold md:text-xl text-lg text-blue-600">{code}</p>
         </div>
       </DialogTrigger>
 
@@ -59,7 +59,7 @@ const BarcodeDialog = ({ code }: Props) => {
         </div>
 
         <Button
-          className="bg-primary text-white w-full h-12 shadow-md border border-gray-200 hover:shadow-lg"
+              className="text-whitew-full hover:bg-primary-400 h-12 shadow-md  hover:shadow-lg text-xl"
           onClick={downloadBarcode}
         >
           تحميل الباركود
