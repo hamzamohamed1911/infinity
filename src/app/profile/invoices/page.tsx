@@ -20,16 +20,16 @@ const invoices: Invoice[] = [
     amount: 250,
     date: "2025-07-2",
   },
-  { id: 3, student: "حمزه", course: "فيزياء", amount: 500, date: "2025-07-4" },
+  { id: 3, student: "حمزه", course: "فيزياء", amount: 500, date: "2025-07-04" },
   { id: 4, student: "جنا", course: "رياضيات", amount: 600, date: "2025-07-05" },
-  { id: 5, student: "مريم", course: "فيزياء", amount: 700, date: "2025-07-7" },
-  { id: 6, student: "يوسف", course: "رياضيات", amount: 521, date: "2025-8-1" },
-  { id: 7, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-3" },
-  { id: 8, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-3" },
-  { id: 9, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-3" },
-  { id: 10, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-3" },
-  { id: 11, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-3" },
-  { id: 12, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-3" },
+  { id: 5, student: "مريم", course: "فيزياء", amount: 700, date: "2025-07-07" },
+  { id: 6, student: "يوسف", course: "رياضيات", amount: 521, date: "2025-8-01" },
+  { id: 7, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-03" },
+  { id: 8, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-03" },
+  { id: 9, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-03" },
+  { id: 10, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-03" },
+  { id: 11, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-03" },
+  { id: 12, student: "هبه", course: "فيزياء", amount: 250, date: "2025-8-03" },
 ];
 
 const columns: ColumnDef<Invoice>[] = [
@@ -43,7 +43,7 @@ export default function InvoicePage() {
   return (
     <div className="p-6">
       <h1 className="text-xl font-bold mb-4">فواتير الطالب</h1>
-      <DataTable columns={columns} data={invoices} />
+      <DataTable columns={columns} data={invoices} searchColumn="الاسم" />
     </div>
   );
 }

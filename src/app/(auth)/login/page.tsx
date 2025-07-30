@@ -41,13 +41,13 @@ const Login = () => {
 
   return (
     <section>
-      <div className="text-secondary text-center flex flex-col gap-2">
+      <div className="text-[#8E8E8E] text-center flex flex-col gap-2">
         <h2 className="lg:text-4xl text-3xl font-bold"> تسجيل الدخول</h2>
         <p className="font-medium text-xl mt-2">كمل رحلتك يا بطل</p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-4 max-w-lg mx-auto">
-          <div className="flex flex-col gap-3 text-secondary">
+          <div className="flex flex-col gap-3 text-[#8E8E8E]">
             <label className="text-lg font-medium">رقم التليفون</label>
             <input
               {...register("phone")}
@@ -59,7 +59,7 @@ const Login = () => {
           {errors.phone && (
             <p className="text-red-500 text-sm">{errors.phone.message}</p>
           )}
-          <div className="flex flex-col gap-3 text-secondary">
+          <div className="flex flex-col gap-3 text-[#8E8E8E]">
             <label className="text-lg font-medium">كلمة السر</label>
             <input
               {...register("password")}
@@ -80,13 +80,13 @@ const Login = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full lg:py-4 py-3 rounded-md bg-primary text-white hover:bg-primary/10 transition-colors lg:text-2xl text-lg font-semibold disabled:opacity-50"
+            className="w-full lg:h-14 h-12  rounded-md bg-primary text-white  transition-colors lg:text-2xl  font-semibold disabled:opacity-50  hover:bg-primary-400  shadow-md  hover:shadow-lg text-xl"
           >
             {isSubmitting ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
           </button>
         </div>
       </form>
-      <div className="text-center text-secondary flex flex-col gap-2 font-normal text-xl my-4">
+      <div className="text-center text-[#8E8E8E] flex flex-col gap-2 font-normal text-xl my-4">
         <span className="flex gap-2 justify-center items-center">
           <p> جديد في المنصة؟ </p>
           <Link className="underline text-primary" href="/register">
