@@ -8,6 +8,7 @@ interface ChartItemProps {
   completed: number;
   color: string;
   label: string;
+  type: string;
 }
 
 const ProfileCharts = ({
@@ -16,6 +17,7 @@ const ProfileCharts = ({
   completed,
   color,
   label,
+  type,
 }: ChartItemProps) => {
   const data = [
     { name: "Completed", value },
@@ -23,7 +25,7 @@ const ProfileCharts = ({
   ];
 
   return (
-    <div className="bg-white rounded-xl px-4 py-6 shadow  gap-4 flex flex-col items-center">
+    <div className="bg-white rounded-xl px-4 py-6  shadow  gap-4 flex flex-col items-center">
       <div className="relative  h-[120px]">
         <PieChart width={120} height={120}>
           <Pie
@@ -49,15 +51,24 @@ const ProfileCharts = ({
         </p>
       </div>
 
-      <p className="text-md font-normal text-[#8E8E8E] ">
-        <span className="font-bold" style={{ color }}>
-          {completed}
+      <div
+        style={{ border: `2px solid ${color}` }}
+        className="h-10 rounded-3xl w-auto   bg-white flex justify-center items-center md:text-md text-sm"
+      >
+        <span
+          style={{ backgroundColor: color }}
+          className={
+            " rounded-3xl text-white h-full w-1/2 flex justify-center items-center px-4 whitespace-nowrap"
+          }
+        >
+          {completed} {type}
         </span>
-        من
-        {total}
-      </p>
+        <span style={{ color: color }} className=" rounded-3xl bg-transparent h-full w-1/2 flex justify-center items-center px-4 whitespace-nowrap">
+          من {total}
+        </span>
+      </div>
 
-      <p className="text-base font-medium  text-secondary">{label}</p>
+      <p className="text-base font-medium  text-[#606060]">{label}</p>
     </div>
   );
 };

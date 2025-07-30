@@ -59,7 +59,7 @@ const BarcodeDialog = ({ code }: Props) => {
         </div>
 
         <Button
-              className="text-whitew-full hover:bg-primary-400 h-12 shadow-md  hover:shadow-lg text-xl"
+              className="text-white w-full hover:bg-primary-400 h-12 shadow-md  hover:shadow-lg text-xl"
           onClick={downloadBarcode}
         >
           تحميل الباركود

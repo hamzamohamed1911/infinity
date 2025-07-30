@@ -9,6 +9,7 @@ import { BiBookContent } from "react-icons/bi";
 import { useSidebar } from "@/lib/context/SidebarContext";
 import { FaArrowLeft } from "react-icons/fa6";
 import { MdInsertChartOutlined } from "react-icons/md";
+import { Receipt } from 'lucide-react';
 
 const ProfileSideBar = () => {
   const pathname = usePathname();
@@ -26,8 +27,8 @@ const ProfileSideBar = () => {
       icon: <MdInsertChartOutlined className="text-2xl" />,
     },
     {
-      href: "/profile/videos",
-      label: "الفيديوهات",
+      href: "/profile/view-details",
+      label: "تفاصيل المشاهدات",
       icon: <RiBookMarkedLine className="text-2xl" />,
     },
     {
@@ -39,6 +40,11 @@ const ProfileSideBar = () => {
       href: "/profile/homeworks",
       label: "واجبات",
       icon: <BiBookContent className="text-2xl" />,
+    },
+     {
+      href: "/profile/invoices",
+      label: "الفواتير",
+      icon: <Receipt className="text-2xl" />,
     },
   ];
   const currentRouteLabel =

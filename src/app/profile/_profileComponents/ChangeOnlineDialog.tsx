@@ -212,7 +212,7 @@ const ChangeOnlineDialog = () => {
             </DialogClose>
             <Button
               type="submit"
-              className="text-whitew-full hover:bg-primary-400 h-12 shadow-md  hover:shadow-lg text-xl"
+              className="text-white w-full hover:bg-primary-400 h-12 shadow-md  hover:shadow-lg text-xl"
               disabled={mutation.isPending}
             >
               {mutation.isPending ? "جاري الحفظ..." : "متابعة"}

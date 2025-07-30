@@ -24,7 +24,7 @@ export default function ProfileLayout({
         <div className="bg-white h-full">
           <div className="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <ProfileSideBar />
-            <main className="flex-1 max-auto container xl:max-w-[80%] max-w-full xl:p-8 md:p-6 p-4 h-full ">
+            <main className="flex-1 max-auto container xl:max-w-[80%] max-w-full xl:p-8 md:p-6 p-4 h-full mb-14">
               {children}
             </main>
           </div>
