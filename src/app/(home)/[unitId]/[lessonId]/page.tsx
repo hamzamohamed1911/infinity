@@ -23,7 +23,7 @@ async function LessonContent({ unitId }: { unitId: string }) {
   return (
     <section className="flex flex-col gap-4 w-full">
       {UnitData && <BreadCrumb lessonData={UnitData} unitData={UnitData} />}
-      <div className="grid grid-cols-12 gap-8">
+      <div className="grid md:grid-cols-12 grid-cols-2 gap-8">
         <div className="  col-span-7 flex flex-col gap-4">
           <Tabs dir="rtl" defaultValue="player1" className="w-full my-8">
             <TabsList
