@@ -23,8 +23,8 @@ async function LessonContent({ unitId }: { unitId: string }) {
   return (
     <section className="flex flex-col gap-4 w-full">
       {UnitData && <BreadCrumb lessonData={UnitData} unitData={UnitData} />}
-      <div className="grid md:grid-cols-12 grid-cols-2 gap-8">
-        <div className="  col-span-7 flex flex-col gap-4">
+      <div className="grid md:grid-cols-12 grid-cols-1 gap-8">
+        <div className="col-span-7 flex flex-col gap-4">
           <Tabs dir="rtl" defaultValue="player1" className="w-full my-8">
             <TabsList
               className="w-full bg-transparent gap-2 justify-start
@@ -81,16 +81,16 @@ async function LessonContent({ unitId }: { unitId: string }) {
             </div>
             <div className="flex flex-col lg:gap-8 md:gap-6 gap-4">
               {/* عدد المشاهدات */}
-              <div className="text-[#606060]  lg:text-xl text-lg flex gap-2 items-center">
+              <div className="text-[#606060] whitespace-nowrap lg:text-xl text-lg flex gap-2 items-center">
                 عدد المشاهدات المتبقية:
                 <span className="text-[#5C1294] font-bold">4</span>
               </div>
 
               {/* امتحان المحاضرة */}
-              <div className="text-[#8E8E8E] lg:text-xl text-lg flex gap-4 items-center">
+              <div className="text-[#8E8E8E] whitespace-nowrap lg:text-xl text-lg flex gap-4 items-center">
                 إمتحان المحاضرة:
                 <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
-                  <MdEditNote size={24} />
+                  <MdEditNote className="shrik-0" size={24} />
                   <span>إمتحان الوحدة الأولى</span>
                 </div>
               </div>
