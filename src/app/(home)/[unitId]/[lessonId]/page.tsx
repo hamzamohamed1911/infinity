@@ -73,7 +73,7 @@ async function LessonContent({ unitId }: { unitId: string }) {
                 تفاصيل الدورة
               </h2>
 
-              <p className="text-[#606060] lg:text-xl text-lg">
+              <p className="text-[#606060] lg:text-xl md:text-lg text-md">
                 دورة اللغة الإنجليزية هذه مصممة لتعليم المهارات الأساسية في
                 المحادثة والقراءة والكتابة. ستساعدك على تحسين فهمك للغة
                 الإنجليزية وتطبيقها في الحياة اليومية.
@@ -81,13 +81,13 @@ async function LessonContent({ unitId }: { unitId: string }) {
             </div>
             <div className="flex flex-col lg:gap-8 md:gap-6 gap-4">
               {/* عدد المشاهدات */}
-              <div className="text-[#606060] whitespace-nowrap lg:text-xl text-lg flex gap-2 items-center">
+              <div className="text-[#606060] whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">
                 عدد المشاهدات المتبقية:
                 <span className="text-[#5C1294] font-bold">4</span>
               </div>
 
               {/* امتحان المحاضرة */}
-              <div className="text-[#8E8E8E] whitespace-nowrap lg:text-xl text-lg flex flex-wrap gap-4 items-center">
+              <div className="text-[#8E8E8E] whitespace-nowrap lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
                 إمتحان المحاضرة:
                 <div className="text-[#3187FF] underline flex gap-2 flex-wrap items-center cursor-pointer">
                   <MdEditNote className="shrik-0" size={24} />
@@ -96,7 +96,7 @@ async function LessonContent({ unitId }: { unitId: string }) {
               </div>
 
               {/* واجب المحاضرة */}
-              <div className="text-[#8E8E8E] lg:text-xl text-lg flex flex-wrap gap-4 items-center">
+              <div className="text-[#8E8E8E] lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
                 واجب المحاضرة:
                 <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
                   <BiBookContent size={24} />
