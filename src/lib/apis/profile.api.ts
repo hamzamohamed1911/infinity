@@ -14,6 +14,7 @@ interface SubscribeBody {
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export async function GetProfileData(): Promise<APIResponse<ProfileApiData>> {
   const token = await getAuthToken();
+  console.log("token" ,token)
   const response = await fetch(`${API_URL}api/v1/profile`, {
     method: "GET",
     cache: "no-cache",

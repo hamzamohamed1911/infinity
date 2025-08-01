@@ -23,8 +23,8 @@ async function LessonContent({ unitId }: { unitId: string }) {
   return (
     <section className="flex flex-col gap-4 w-full">
       {UnitData && <BreadCrumb lessonData={UnitData} unitData={UnitData} />}
-      <div className="grid md:grid-cols-12 grid-cols-1 gap-8">
-        <div className="col-span-7 flex flex-col gap-4">
+      <div className="grid md:grid-cols-12 grid-cols-1 lg:gap-8 md:gap-6 gap-4">
+        <div className="col-span-12 md:col-span-7 flex flex-col gap-4">
           <Tabs dir="rtl" defaultValue="player1" className="w-full my-8">
             <TabsList
               className="w-full bg-transparent gap-2 justify-start
@@ -87,16 +87,16 @@ async function LessonContent({ unitId }: { unitId: string }) {
               </div>
 
               {/* امتحان المحاضرة */}
-              <div className="text-[#8E8E8E] whitespace-nowrap lg:text-xl text-lg flex gap-4 items-center">
+              <div className="text-[#8E8E8E] whitespace-nowrap lg:text-xl text-lg flex flex-wrap gap-4 items-center">
                 إمتحان المحاضرة:
-                <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
+                <div className="text-[#3187FF] underline flex gap-2 flex-wrap items-center cursor-pointer">
                   <MdEditNote className="shrik-0" size={24} />
                   <span>إمتحان الوحدة الأولى</span>
                 </div>
               </div>
 
               {/* واجب المحاضرة */}
-              <div className="text-[#8E8E8E] lg:text-xl text-lg flex gap-4 items-center">
+              <div className="text-[#8E8E8E] lg:text-xl text-lg flex flex-wrap gap-4 items-center">
                 واجب المحاضرة:
                 <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
                   <BiBookContent size={24} />
@@ -106,7 +106,7 @@ async function LessonContent({ unitId }: { unitId: string }) {
             </div>
           </Card>
         </div>
-        <div className="col-span-5">
+        <div className="col-span-12 md:col-span-5">
           <Card className="w-full p-4">
             <Accordion type="single" collapsible className="w-full">
               <div className="space-y-3">
