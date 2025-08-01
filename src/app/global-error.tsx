@@ -14,7 +14,7 @@ export default function GlobalError({
   return (
     <html>
       <body>
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-violet-50 to-violet-100 text-center p-6 animate-fadeIn">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-backgroundColor text-center p-6 animate-fadeIn">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 mb-8">
             <Image
@@ -39,7 +39,7 @@ export default function GlobalError({
           <div className="flex gap-4">
             <button
               onClick={() => reset()}
-              className="2xl:px-6 px-5 py-3 bg-primary text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-primary-dark transition-all duration-300"
+              className="2xl:px-6 px-5 py-3 bg-primary text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-primary-400 transition-all duration-300"
             >
               حاول مرة أخرى
             </button>

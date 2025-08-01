@@ -109,14 +109,16 @@ async function LessonContent({ unitId }: { unitId: string }) {
         <div className="col-span-12 md:col-span-5">
           <Card className="w-full p-4">
             <Accordion type="single" collapsible className="w-full">
-              <div className="space-y-3">
+              <div className="space-y-3 ">
                 {UnitData?.lessons.map((lesson) => (
                   <AccordionItem key={lesson.id} value={lesson.id.toString()}>
-                    <AccordionTrigger className="text-lg font-medium border px-4 py-3 rounded-lg hover:border-primary hover:text-primary group transition-all">
+                    <AccordionTrigger className="md:text-xl text-lg border px-4 py-4 rounded-lg hover:border-primary hover:text-primary group transition-all">
                       {lesson.name}
                     </AccordionTrigger>
-                    <AccordionContent className="border p-4">
-                      <span>اذهب للدرس</span>
+                    <AccordionContent className="border border-b-0 pb-0 text-primary md:text-xl text-lg">
+                      <div  className="border-[1px] border-primary p-4"> المحاضرة الاولى</div>
+                      <div  className="border-[1px] border-primary p-4"> واجب المحاضرة الاولى </div>
+                      <div  className="border-[1px] border-primary p-4"> امتحان المحاضرة الاولى </div>
                     </AccordionContent>
                   </AccordionItem>
                 ))}

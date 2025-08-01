@@ -2,6 +2,7 @@ import tinycolor from "tinycolor2";
 
 export function generateColorShades(baseColor: string) {
   return {
+    50: tinycolor(baseColor).lighten(52).toHexString(), 
     100: tinycolor(baseColor).lighten(45).toHexString(),
     200: tinycolor(baseColor).lighten(35).toHexString(),
     300: tinycolor(baseColor).lighten(25).toHexString(),

@@ -51,7 +51,7 @@ const ProfileSideBar = () => {
     SideBarItems.find((item) => item.href === pathname)?.label || "غير معروف";
   return (
     <aside
-      className={`fixed inset-y-0  h-full left-0 md:w-72 w-full overflow-auto border-[1px] border-[#E8E8E8] md:bg-white bg-[#F7F7F8] md:my-8 my-0 md:rounded-2xl rounded-none transition-transform duration-300 ease-in-out z-40 ${
+      className={`fixed inset-y-0  h-full left-0 md:w-72 w-full overflow-auto border-[1px] border-[#E8E8E8] md:bg-white bg-backgroundColor md:my-8 my-0 md:rounded-2xl rounded-none transition-transform duration-300 ease-in-out z-40 ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       } md:translate-x-0 md:static md:block ${
         isSidebarOpen ? "block" : "hidden"

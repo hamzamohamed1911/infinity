@@ -41,30 +41,30 @@ const Login = () => {
 
   return (
     <section>
-      <div className="text-[#8E8E8E] text-center flex flex-col gap-2">
-        <h2 className="lg:text-4xl text-3xl font-bold"> تسجيل الدخول</h2>
-        <p className="font-medium text-xl mt-2">كمل رحلتك يا بطل</p>
+      <div className="text-[#606060] text-center flex flex-col gap-2 mb-4">
+        <h2 className=" text-[#606060] text-2xl font-bold"> تسجيل الدخول</h2>
+        <p className="font-medium text-lg ">كمل رحلتك يا بطل</p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-4 max-w-lg mx-auto">
-          <div className="flex flex-col gap-3 text-[#8E8E8E]">
+          <div className="flex flex-col gap-3 text-[#606060]">
             <label className="text-lg font-medium">رقم التليفون</label>
             <input
               {...register("phone")}
               name="phone"
               type="tel"
-              className="py-4 px-4 rounded-lg border-[1px] focus:ring-primary"
+              className="py-3 px-4 rounded-lg border-[1px] focus:ring-primary"
             />
           </div>
           {errors.phone && (
             <p className="text-red-500 text-sm">{errors.phone.message}</p>
           )}
-          <div className="flex flex-col gap-3 text-[#8E8E8E]">
+          <div className="flex flex-col gap-3 text-[#606060]">
             <label className="text-lg font-medium">كلمة السر</label>
             <input
               {...register("password")}
               name="password"
-              className="py-4 px-4 rounded-lg border-[1px] focus:ring-primary"
+              className="py-3 px-4 rounded-lg border-[1px] focus:ring-primary"
             />
           </div>
           {errors.password && (
@@ -72,7 +72,7 @@ const Login = () => {
           )}
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
           <Link
-            className="underline text-primary text-xl my-4 font-normal"
+            className="underline text-primary text-lg my-4 font-normal"
             href="/forgot-password"
           >
             نسيت كلمة السر
@@ -80,25 +80,25 @@ const Login = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full lg:h-14 h-12  rounded-md bg-primary text-white  transition-colors lg:text-2xl  font-semibold disabled:opacity-50  hover:bg-primary-400  shadow-md  hover:shadow-lg text-xl"
+            className="w-full text-white  hover:bg-primary-400 lg:h-14 md:h-12 h-10 shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
           >
             {isSubmitting ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
           </button>
         </div>
       </form>
-      <div className="text-center text-[#8E8E8E] flex flex-col gap-2 font-normal text-xl my-4">
-        <span className="flex gap-2 justify-center items-center">
-          <p> جديد في المنصة؟ </p>
-          <Link className="underline text-primary" href="/register">
+      <div className="text-center text-[#606060] flex flex-col gap-4 font-normal  md:text-lg text-md my-4">
+        <div>
+          جديد في المنصة؟
+          <Link className="underline text-primary m-2" href="/register">
             تسجيل حساب
           </Link>
-        </span>
-        <span className="flex gap-2 justify-center items-center flex-wrap">
-          <p>ممكن تعرف كيفية استخدام المنصة</p>
-          <Link className="underline text-primary" href="/login">
-            من هنا
+        </div>
+        <div>
+           ممكن تعرف كيفية استخدام المنصة من
+          <Link className="underline text-primary m-2" href="/login">
+            هنا
           </Link>
-        </span>
+        </div>
       </div>
     </section>
   );

@@ -16,10 +16,10 @@ const CoursesDetails = async ({id}:{id:string}) => {
 
   return (
     <div className="flex flex-col gap-6 my-6">
-      <h1 className="font-bold lg:text-3xl text-2xl text-secondary ">
+      <h1 className="font-bold lg:text-3xl text-2xl text-[#606060] ">
         {profileData?.classroom_name}
       </h1>
-      <div className="h-36 rounded-md bg-[#C285F0]/30 border-[#C285F0]/30 border-[1px] grid grid-cols-10 justify-center items-center">
+      <div className="h-36 rounded-md bg-primary-50 border-primary-50 border-[1px] grid grid-cols-10 justify-center items-center">
         <p className="text-[#5C1294] col-span-7 p-4 md:text-lg text-md">
           {" "}
           عايز تقفل الإمتحانات؟ إحصل دلوقتي على بنك الأسئلة المتخصص بتاعنا

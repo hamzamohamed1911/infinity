@@ -115,3 +115,14 @@ declare type CourseDetails = {
   exams_count: number;
   homeworks_count: number;
 };
+declare type UnitsD = {
+  id: number;
+  name: string;
+  booking_status: number;
+  price: string;
+  lessons: Lesson[];
+  description: string | null;
+  lessons_count: number;
+  exams_count: number;
+  homeworks_count: number;
+};

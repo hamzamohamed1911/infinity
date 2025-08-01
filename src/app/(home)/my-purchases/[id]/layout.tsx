@@ -15,7 +15,7 @@ export default function HomeLayout({
   return (
     <>
       <Navbar id={params.id} />
-      <div className="bg-[#F7F7F8]">
+      <div className="bg-backgroundColor">
         <div className="flex lg:max-w-[90%] max-w-full container mx-auto md:px-4 px-0 lg:px-8 ">
           <SideBar id={params.id} />
           <main className="flex-1  xl:p-8 md:p-6 p-4 min-h-screen ">

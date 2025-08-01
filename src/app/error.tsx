@@ -39,36 +39,35 @@ export default function Error({
         </div>
 
         {/* Error Title */}
-        <h2 className="text-3xl font-bold text-gray-800">
+        <h2 className="lg:text-3xl text-2xl font-bold text-gray-800">
           عذرًا، حدث خطأ ما!
         </h2>
 
         {/* Error Message */}
-        <p className="text-secondary text-lg !break-all">
-          {error.message || "حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى لاحقًا."}
+        <p className="text-[#8E8E8E] text-lg !break-all">
+          {error.message ||
+            "حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى لاحقًا."}
         </p>
 
         {/* Action Buttons */}
         <div className="flex justify-center md:flex-row flex-col gap-4">
           <button
             onClick={reset}
-            className="2xl:px-6 px-5 py-3 bg-primary text-white text-lg font-semibold rounded-lg  hover:bg-primary-dark transition-all duration-300 cursor-pointer"
-            >
-           حاول مرة أخرى
+            className="2xl:px-6 md:px-5 px-3 py-3 bg-primary text-white border-[2px]  lg:text-lg md:text-md text-sm font-semibold rounded-lg  hover:bg-primary-400  transition-all duration-300 cursor-pointer"
+          >
+            حاول مرة أخرى
           </button>
           <button
             onClick={() => router.push("/")}
-            className="2xl:px-6 px-5 py-3 border-primary border-[2px] text-primary text-lg font-semibold rounded-lg  hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer"
-            >
-           الذهاب إلى الصفحة الرئيسية
+            className="2xl:px-6 md:px-5 px-3 py-3 border-primary border-[2px] text-primary lg:text-lg md:text-md text-sm font-semibold rounded-lg  hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer"
+          >
+            الذهاب إلى الصفحة الرئيسية
           </button>
         </div>
 
         {/* Error Digest (for debugging, hidden in production) */}
         {process.env.NODE_ENV === "development" && error.digest && (
-          <p className="text-sm text-gray-400 mt-4">
-            Error ID: {error.digest}
-          </p>
+          <p className="text-sm text-gray-400 mt-4">Error ID: {error.digest}</p>
         )}
       </div>
     </div>

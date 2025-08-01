@@ -6,7 +6,7 @@ export default function HomeLayout({
 }) {
   return (
     <>
-        <div className="bg-[#F7F7F8]">
+        <div className="bg-backgroundColor">
           <main className=" mx-auto  max-auto container xl:max-w-[80%] max-w-full xl:p-8 md:p-6 p-4 min-h-screen ">
             {children}
           </main>
