@@ -21,9 +21,8 @@ import {
   subscribeSchema,
 } from "@/lib/schemes/authSchema";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { GetClassroomsList } from "@/lib/apis/listService.api";
 import { Dropdown } from "@/components/Dropdown";
-import { GetStateList } from "@/lib/apis/auth";
+import { GetClassroomsList, GetStateList } from "@/lib/apis/auth";
 
 const Register = () => {
   const steps = [{ id: "signup" }, { id: "interest" }, { id: "knowledge" }];
@@ -41,6 +40,7 @@ const Register = () => {
     queryKey: ["classroom"],
     queryFn: GetClassroomsList,
   });
+  console.log(classRoomResponse)
   const states =
     statesResponse && "data" in statesResponse ? statesResponse.data : [];
   const classroom =
@@ -211,9 +211,9 @@ const Register = () => {
           ))}
         </nav>
 
-        <div className="text-secondary text-center flex flex-col gap-2">
-          <h2 className="md:text-4xl text-3xl font-bold">سجل معانا دلوقتي</h2>
-          <p className="font-medium text-xl">
+        <div className=" text-center flex flex-col gap-2 mt-2">
+          <h2 className=" lg:text-3xl text-2xl font-bold text-[#606060]">سجل معانا دلوقتي</h2>
+          <p className="font-medium text-xl text-[#606060 mt-2">
             إبدأ معانا رحلتك في التعلم وتجيب أعلى الدرجات
           </p>
         </div>
@@ -226,7 +226,7 @@ const Register = () => {
         >
           {activeStep === 0 && (
             <>
-              <p className="mb-4 md:text-3xl text-2xl font-bold text-secondary">
+              <p className="mb-4  lg:text-2xl text-xl font-bold text-[#606060]">
                 اختار نظامك
               </p>
               <RadioGroup
@@ -238,14 +238,14 @@ const Register = () => {
                 }}
               >
                 <div className="flex items-start justify-center gap-4">
-                  <p className="md:text-xl text-lg text-secondary">
+                  <p className="text-lg text-[#606060]">
                     أنت مشترك مع المدرس في سنتر وعايز تنضم للحصص بتاعته لإستفادة
                     أكبر
                   </p>
                   <div className="flex items-center justify-end gap-2 shrink-0">
                     <Label
                       htmlFor="basic"
-                      className="text-primary lg:text-2xl text-xl !font-[700]"
+                      className="text-primary  lg:text-xl text-lg !font-[700]"
                     >
                       : السنتر
                     </Label>
@@ -257,13 +257,13 @@ const Register = () => {
                   </div>
                 </div>
                 <div className="flex items-start justify-center gap-4">
-                  <p className="md:text-xl text-lg text-secondary">
+                  <p className="text-lg text-[#606060]">
                     أنت مشترك مع المدرس أونلاين وعايز تنضم للحصص بتاعته
                   </p>
                   <div className="flex items-center justify-end gap-2 shrink-0">
                     <Label
                       htmlFor="secondary"
-                      className="text-primary lg:text-2xl text-xl !font-[700]"
+                      className="text-primary  lg:text-xl text-lg !font-[700]"
                     >
                       : الأونلاين
                     </Label>
@@ -278,7 +278,7 @@ const Register = () => {
               <Button
                 type="button"
                 onClick={handleNext}
-                className="w-full !h-12 rounded-md bg-primary text-white hover:bg-[#5A3DA0] transition-colors text-2xl font-semibold"
+                className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
               >
                 متابعة
               </Button>
@@ -289,8 +289,8 @@ const Register = () => {
             <div className="w-full h-full">
               <div className="w-full">
                 {teacherCount > 1 && showAlternateContent ? (
-                  <div className="flex flex-col gap-3 text-secondary my-4">
-                    <div className="flex flex-col gap-3 text-secondary my-3">
+                  <div className="flex flex-col gap-3 text-[#606060] my-4">
+                    <div className="flex flex-col gap-3 text-[#606060] my-3">
                       <Label className="text-lg font-medium">المدينة</Label>
                       <Controller
                         control={subscribeForm.control}
@@ -312,7 +312,7 @@ const Register = () => {
                     </div>
                     {formType === "basic" && (
                       <div className="flex md:flex-row flex-col gap-2 w-full my-3">
-                        <div className="flex flex-col gap-3 text-secondary w-full">
+                        <div className="flex flex-col gap-3 text-[#606060] w-full">
                           <Label className="text-lg font-medium">السنتر</Label>
                           <Input
                             {...subscribeForm.register("center_id")}
@@ -324,7 +324,7 @@ const Register = () => {
                             </p>
                           )}
                         </div>
-                        <div className="flex flex-col gap-3 text-secondary w-full">
+                        <div className="flex flex-col gap-3 text-[#606060] w-full">
                           <Label className="text-lg font-medium">
                             المجموعة
                           </Label>
@@ -340,7 +340,7 @@ const Register = () => {
                         </div>
                       </div>
                     )}
-                    <div className="flex flex-col gap-3 text-secondary w-full my-3">
+                    <div className="flex flex-col gap-3 text-[#606060] w-full my-3">
                       <Label className="text-lg font-medium">الصف</Label>
                       <Input
                         {...subscribeForm.register("classroom_id")}
@@ -365,7 +365,7 @@ const Register = () => {
                         </p>
                       )}
                     </div>
-                    <div className="flex flex-col gap-3 text-secondary w-full my-3">
+                    <div className="flex flex-col gap-3 text-[#606060] w-full my-3">
                       <Label className="text-lg font-medium">المدرس</Label>
                       <Input
                         {...subscribeForm.register("teacher_id")}
@@ -380,7 +380,7 @@ const Register = () => {
                   </div>
                 ) : (
                   <>
-                    <div className="flex flex-col gap-3 text-secondary my-4">
+                    <div className="flex flex-col gap-3 text-[#606060] my-4">
                       <Label className="text-lg font-medium">الاسم</Label>
                       <Input
                         {...(teacherCount <= 1
@@ -400,7 +400,7 @@ const Register = () => {
                             </p>
                           )}
                     </div>
-                    <div className="flex flex-col gap-3 text-secondary my-4">
+                    <div className="flex flex-col gap-3 text-[#606060] my-4">
                       <Label className="text-lg font-medium">
                         البريد الإلكتروني
                       </Label>
@@ -423,7 +423,7 @@ const Register = () => {
                           )}
                     </div>
                     <div className="flex md:flex-row flex-col gap-2 w-full my-4">
-                      <div className="flex flex-col gap-3 text-secondary w-full">
+                      <div className="flex flex-col gap-3 text-[#606060] w-full">
                         <Label className="text-lg font-medium">
                           رقم هاتف الطالب
                         </Label>
@@ -445,7 +445,7 @@ const Register = () => {
                               </p>
                             )}
                       </div>
-                      <div className="flex flex-col gap-3 text-secondary w-full">
+                      <div className="flex flex-col gap-3 text-[#606060] w-full">
                         <Label className="text-lg font-medium">
                           رقم هاتف ولي الأمر
                         </Label>
@@ -474,7 +474,7 @@ const Register = () => {
                             )}
                       </div>
                     </div>
-                    <div className="flex flex-col gap-3 text-secondary w-full my-4 relative">
+                    <div className="flex flex-col gap-3 text-[#606060] w-full my-4 relative">
                       <Label className="text-lg font-medium">كلمة المرور</Label>
 
                       <div className="relative">
@@ -509,7 +509,7 @@ const Register = () => {
                             </p>
                           )}
                     </div>
-                    <div className="flex flex-col gap-3 text-secondary w-full my-4">
+                    <div className="flex flex-col gap-3 text-[#606060] w-full my-4">
                       <Label className="text-lg font-medium">
                         تأكيد كلمة المرور
                       </Label>
@@ -560,7 +560,7 @@ const Register = () => {
                     </div>
                     {teacherCount <= 1 && (
                       <>
-                        <div className="flex flex-col gap-3 text-secondary w-full my-3">
+                        <div className="flex flex-col gap-3 text-[#606060] w-full my-3">
                           <Label className="text-lg font-medium">المدينة</Label>
                           <Controller
                             control={basicForm.control}
@@ -570,7 +570,9 @@ const Register = () => {
                                 placeholder="اختر المدينة"
                                 data={states}
                                 value={Number(field.value)}
-                                onChange={(value) => field.onChange(String(value))}
+                                onChange={(value) =>
+                                  field.onChange(String(value))
+                                }
                               />
                             )}
                           />
@@ -580,7 +582,7 @@ const Register = () => {
                             </p>
                           )}
                         </div>
-                        <div className="flex flex-col gap-3 text-secondary w-full my-3">
+                        <div className="flex flex-col gap-3 text-[#606060] w-full my-3">
                           <Label className="text-lg font-medium">الصف</Label>
                           <Controller
                             control={basicForm.control}
@@ -590,7 +592,9 @@ const Register = () => {
                                 placeholder="اختر الصف"
                                 data={classroom}
                                 value={Number(field.value)}
-                                onChange={(value) => field.onChange(String(value))}
+                                onChange={(value) =>
+                                  field.onChange(String(value))
+                                }
                               />
                             )}
                           />
@@ -607,7 +611,7 @@ const Register = () => {
               </div>
               <Button
                 type="submit"
-                className="w-full !h-12 rounded-md bg-primary text-white hover:bg-[#5A3DA0] transition-colors text-2xl font-semibold"
+                className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
                 disabled={
                   registerMutation.isPending ||
                   registerWithSubscribeMutation.isPending
@@ -621,11 +625,11 @@ const Register = () => {
             </div>
           )}
           {activeStep === 2 && (
-            <div className="max-w-lg h-full flex flex-col gap-8">
-              <p className="text-secondary font-semibold lg:text-2xl text-xl !leading-snug">
+            <div className="max-w-lg h-full flex flex-col xl:gap-8 lg:gap-6  gap-4">
+              <p className="text-[#606060]  lg:text-xl text-lg !leading-snug">
                 هيتم مراجعة تسجيلك من فريق المدرس ويتم الرد عليك خلال 24 ساعة
               </p>
-              <p className="text-secondary font-semibold lg:text-2xl text-xl !leading-snug">
+              <p className="text-[#606060]  lg:text-xl text-lg !leading-snug">
                 ممكن تعرف كيفية استخدام المنصة من{" "}
                 <Link
                   className="text-primary underline hover:text-primarydark"
@@ -640,14 +644,14 @@ const Register = () => {
       </div>
 
       <div className="flex flex-col gap-4">
-        <div className="text-center text-secondary flex flex-col gap-2 font-normal md:text-xl text-lg my-4">
-          <span className="flex gap-2 justify-center items-center">
+        <div className="text-center text-[#606060] flex flex-col gap-2 font-normal md:text-xl text-lg my-4">
+          <span className="flex gap-2 justify-center items-center ">
             <p>لديك حساب بالفعل؟</p>
             <Link className="underline text-primary" href="/login">
               تسجيل الدخول
             </Link>
           </span>
-          <span className="flex gap-2 justify-center items-center">
+          <span className="flex gap-2 justify-center items-center mt-2">
             <p>ممكن تعرف كيفية استخدام المنصة</p>
             <Link className="underline text-primary" href="/login">
               من هنا

@@ -66,7 +66,7 @@ const PhoneForm: React.FC<{
   errors: Partial<FieldErrorsImpl<PhoneFormData>>;
   isSubmitting: boolean;
 }> = ({ register, errors, isSubmitting }) => (
-  <div className="flex flex-col gap-4 text-secondary my-4">
+  <div className="flex flex-col gap-4 text-[#606060] my-4">
     <label className="text-lg font-medium">رقم التليفون</label>
     <input
       type="tel"
@@ -80,7 +80,7 @@ const PhoneForm: React.FC<{
     <button
       type="submit"
       disabled={isSubmitting}
-      className="w-full py-4 rounded-lg bg-primary text-white hover:bg-[#5A3DA0] transition-colors text-xl font-semibold shadow-md disabled:opacity-50"
+            className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
     >
       {isSubmitting ? "جاري المعالجة..." : "إعادة تعيين كلمة المرور"}
     </button>
@@ -107,7 +107,7 @@ const CodeForm: React.FC<{
 }) => {
   const otpValue = watch("code"); // Use "code" field name as per CodeFormData
   return (
-    <div className="flex flex-col gap-3 text-secondary my-4">
+    <div className="flex flex-col gap-3 text-[#606060] my-4">
       <p className="text-center">
         لقد تم ارسال كود التحقق لهذا الرقم :{" "}
         <span className="text-sm text-primary font-semibold">{phone}</span>
@@ -154,7 +154,7 @@ const CodeForm: React.FC<{
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-4 rounded-lg bg-primary text-white hover:bg-[#5A3DA0] transition-colors text-xl font-semibold shadow-md disabled:opacity-50"
+            className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
       >
         {isSubmitting ? "جاري المعالجة..." : "التحقق من الكود"}
       </button>
@@ -188,7 +188,7 @@ const PasswordForm: React.FC<{
     }));
   };
   return (
-    <div className="flex flex-col gap-3 text-secondary my-4 ">
+    <div className="flex flex-col gap-3 text-[#606060] my-4 ">
       <label className="text-lg font-medium bloack">كلمة المرور الجديدة</label>
       <div className="relative">
         <input
@@ -242,7 +242,7 @@ const PasswordForm: React.FC<{
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-4 rounded-lg bg-primary text-white hover:bg-[#5A3DA0] transition-colors text-xl font-semibold shadow-md disabled:opacity-50"
+            className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
       >
         {isSubmitting ? "جاري المعالجة..." : "تحديث كلمة المرور"}
       </button>

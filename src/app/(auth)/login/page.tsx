@@ -7,8 +7,21 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LoginFormData, loginSchema } from "@/lib/schemas/authSchema";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 const Login = () => {
   const [error, setError] = useState<string | null>(null);
+  const [showFields, setShowFields] = useState({
+    password: false,
+  });
+
+  const toggleFieldVisibility = (field: "password") => {
+    setShowFields((prev) => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
+  };
+
   const router = useRouter();
   const {
     register,
@@ -61,11 +74,25 @@ const Login = () => {
           )}
           <div className="flex flex-col gap-3 text-[#606060]">
             <label className="text-lg font-medium">كلمة السر</label>
-            <input
-              {...register("password")}
-              name="password"
-              className="py-3 px-4 rounded-lg border-[1px] focus:ring-primary"
-            />
+            <div className="relative">
+              <input
+                {...register("password")}
+                name="password"
+                type={showFields.password ? "text" : "password"}
+               className="py-3 px-4 rounded-lg border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-right w-full"
+              />
+              <button
+                type="button"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-primary"
+                onClick={() => toggleFieldVisibility("password")}
+              >
+                {showFields.password ? (
+                  <FaEye className="h-6 w-6" />
+                ) : (
+                  <FaEyeSlash className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
           {errors.password && (
             <p className="text-red-500 text-sm">{errors.password.message}</p>
@@ -80,7 +107,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full text-white  hover:bg-primary-400 lg:h-14 md:h-12 h-10 shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
+            className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
           >
             {isSubmitting ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
           </button>
@@ -94,7 +121,7 @@ const Login = () => {
           </Link>
         </div>
         <div>
-           ممكن تعرف كيفية استخدام المنصة من
+          ممكن تعرف كيفية استخدام المنصة من
           <Link className="underline text-primary m-2" href="/login">
             هنا
           </Link>

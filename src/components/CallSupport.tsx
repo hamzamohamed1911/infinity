@@ -6,8 +6,6 @@ import {
   Dialog,
   DialogTrigger,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
@@ -24,13 +22,58 @@ const CallSupport = () => {
       </DialogTrigger>
 
       <DialogContent className="max-w-2xl rounded-xl">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold text-center text-secondary">
-            تواصل معنا عبر الوسائل التالية
-          </DialogTitle>
-        </DialogHeader>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="flex flex-col items-start justify-start gap-4 py-6 text-center">
+        <div className="grid grid-cols-2 2xl:gap-10 md:gap-6 gap-4">
+          <div className="flex flex-col items-start justify-start gap-4 py-6 ">
+            <h2 className="text-lg font-bold  text-[#8E8E8E]">
+              دعم المدرس
+            </h2>
+            <p className=" text-md font-semibold  text-[#606060]">
+              ممكن تتواصل مع المدرس من هنا!
+            </p>
+            <a
+              href="https://wa.me/201234567890"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-[#3187FF] underline"
+            >
+              <FaWhatsapp
+                className="bg-green-600 text-white size-10 p-2 rounded-full"
+                size={30}
+              />{" "}
+              01234567890
+            </a>
+
+            <a
+              href="https://facebook.com/yourpage"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-[#3187FF] underline"
+            >
+              <FaFacebookF
+                className="bg-blue-600 text-white size-10 p-2 rounded-full"
+                size={30}
+              />{" "}
+              Mr. Mai
+            </a>
+
+            <a
+              href="https://t.me/yourtelegram"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-[#3187FF] underline"
+            >
+              <FaTelegramPlane className="bg-[#00B0F2] text-white size-10 p-2 rounded-full" />{" "}
+              01234567890
+            </a>
+          </div>
+          <div className="flex flex-col items-start justify-start gap-4 py-6 ">
+            <h2 className="text-lg font-bold  text-[#8E8E8E]">
+              تيم السنتر
+            </h2>
+
+            <p className=" text-md font-semibold  text-[#606060]">
+              كلم تيم السنتر من هنا
+            </p>
             <a
               href="https://wa.me/201234567890"
               target="_blank"
@@ -68,7 +111,94 @@ const CallSupport = () => {
             </a>
           </div>
         </div>
+        <div className="grid grid-cols-2 2xl:gap-10 md:gap-6 gap-4">
+          <div className="flex flex-col items-start justify-start gap-4 py-6 ">
+            <h2 className="text-lg font-bold  text-[#8E8E8E]">
+              دعم الفني للمنصة
+            </h2>
+            <p className=" text-md font-semibold  text-[#606060]">
+              لو عندك مشكلة فنية تقدر تتواصل مع الفريق التقني من هنا
+            </p>
+            <a
+              href="https://wa.me/201234567890"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-[#3187FF] underline"
+            >
+              <FaWhatsapp
+                className="bg-green-600 text-white size-10 p-2 rounded-full"
+                size={30}
+              />{" "}
+              01234567890
+            </a>
 
+            <a
+              href="https://facebook.com/yourpage"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-[#3187FF] underline"
+            >
+              <FaFacebookF
+                className="bg-blue-600 text-white size-10 p-2 rounded-full"
+                size={30}
+              />{" "}
+              Mr. Mai
+            </a>
+
+            <a
+              href="https://t.me/yourtelegram"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-[#3187FF] underline"
+            >
+              <FaTelegramPlane className="bg-[#00B0F2] text-white size-10 p-2 rounded-full" />{" "}
+              01234567890
+            </a>
+          </div>
+          <div className="flex flex-col items-start justify-start gap-4 py-6 ">
+            <h2 className="text-lg font-bold  text-[#8E8E8E]">
+              فريق الاونلاين
+            </h2>
+            <p className=" text-md font-semibold  text-[#606060]">
+              ممكن تتواصل مع فريق الاونلاين من هنا!
+            </p>
+            <a
+              href="https://wa.me/201234567890"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-[#3187FF] underline"
+            >
+              <FaWhatsapp
+                className="bg-green-600 text-white size-10 p-2 rounded-full"
+                size={30}
+              />{" "}
+              01234567890
+            </a>
+
+            <a
+              href="https://facebook.com/yourpage"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-[#3187FF] underline"
+            >
+              <FaFacebookF
+                className="bg-blue-600 text-white size-10 p-2 rounded-full"
+                size={30}
+              />{" "}
+              Mr. Mai
+            </a>
+
+            <a
+              href="https://t.me/yourtelegram"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-[#3187FF] underline"
+            >
+              <FaTelegramPlane className="bg-[#00B0F2] text-white size-10 p-2 rounded-full" />{" "}
+              01234567890
+            </a>
+          </div>
+        </div>
         <DialogFooter className="flex justify-center">
           <DialogClose asChild>
             <Button

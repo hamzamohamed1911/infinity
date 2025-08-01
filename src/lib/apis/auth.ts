@@ -104,3 +104,20 @@ export async function GetStateList(): Promise<APIResponse<statelist[]>> {
 
   return payload;
 }
+export async function GetClassroomsList(): Promise<APIResponse<statelist[]>> {
+  const response = await fetch(`${API_URL}api/v1/classrooms`, {
+    method: "GET",
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const payload: APIResponse<statelist[]> = await response.json();
+
+  if (!("success" in payload) || !payload.success) {
+    throw new Error("فشل في جلب البيانات");
+  }
+
+  return payload;
+}
