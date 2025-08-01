@@ -355,7 +355,7 @@ const ForgetPassword: React.FC = () => {
 
   return (
     <div className="w-full max-w-lg bg-white rounded-lg p-6 ">
-      <h2 className="text-3xl font-bold text-center text-primary mb-6">
+      <h2 className="md:text-2xl text-xl font-bold text-center text-primary mb-6">
         إعادة تعيين كلمة المرور
       </h2>
       {step === 1 && (

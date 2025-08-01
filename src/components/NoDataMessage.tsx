@@ -10,7 +10,7 @@ export default function NoDataMessage({ text }: { text: string }) {
         height={500}
         src={noDataAvilable}
       />
-      <p className="text-center lg:text-xl text-lg text-secondary mt-10">{text}</p>
+      <p className="text-center lg:text-xl text-lg text-[#606060] mt-10">{text}</p>
     </div>
   );
 }
