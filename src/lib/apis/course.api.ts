@@ -27,7 +27,6 @@ if (!payload || !payload.data) {
 
   return payload;
 }
-
 export async function GetUnits({
   course_id,
 }: {
@@ -73,5 +72,22 @@ if (!payload || !payload.data) {
 }
 
 
+  return payload;
+}
+export async function GetLesson({
+  lesson_id,
+}: {
+  lesson_id: string
+}): Promise<APIResponse<LessonDetails>> {
+  const token = await getAuthToken();
+  const response = await fetch(`${API_URL}api/v1/lesson/${lesson_id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const payload = await response.json();
   return payload;
 }

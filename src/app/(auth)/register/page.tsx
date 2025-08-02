@@ -40,7 +40,6 @@ const Register = () => {
     queryKey: ["classroom"],
     queryFn: GetClassroomsList,
   });
-  console.log(classRoomResponse)
   const states =
     statesResponse && "data" in statesResponse ? statesResponse.data : [];
   const classroom =

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { useParams } from "next/navigation";
 
-export function BreadCrumb({ unitData, lessonData }: { unitData: CourseDetails; lessonData?: CourseDetails }) {
+export function BreadCrumb({ unitData, lessonData }: { unitData: CourseDetails; lessonData?: LessonDetails }) {
   const params = useParams(); // { unitId: "256", lessonId: "45", ... }
 
   return (

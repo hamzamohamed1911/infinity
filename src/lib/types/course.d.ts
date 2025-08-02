@@ -21,7 +21,6 @@ declare type Section = {
   lessons: Lesson[];
   description: string | null;
 };
-
 declare type Book = {
   id: number;
   name: string;

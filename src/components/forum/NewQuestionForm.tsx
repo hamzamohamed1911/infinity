@@ -8,7 +8,6 @@ export function NewQuestionForm() {
   const [question, setQuestion] = useState("");
 
   const handleSubmit = () => {
-    console.log("New Question:", question);
     setQuestion("");
   };
 

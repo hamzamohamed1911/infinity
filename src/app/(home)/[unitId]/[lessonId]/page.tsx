@@ -1,8 +1,8 @@
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { Card } from "@/components/ui/card";
 
-import { GetUnit } from "@/lib/apis/course.api";
-import UnitSkeleton from "@/components/UnitSkeleton";
+import { GetUnit, GetLesson } from "@/lib/apis/course.api";
+import LessonSkeleton from "@/components/LessonSkeleton";
 import { Suspense } from "react";
 import { unitBg } from "../../../../../public";
 import Image from "next/image";
@@ -16,18 +16,37 @@ import {
 } from "@/components/ui/accordion";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { MdOndemandVideo } from "react-icons/md";
-
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-async function LessonContent({ unitId }: { unitId: string }) {
+async function LessonContent({
+  unitId,
+  lessonId,
+}: {
+  unitId: string;
+  lessonId: string;
+}) {
   const Unit = await GetUnit({ unit_id: unitId });
-  const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
+  const lesson = await GetLesson({ lesson_id: lessonId });
 
+  const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
+  const LessonData = Unit && "data" in lesson ? lesson.data : undefined;
+  if (!LessonData) {
+    return (
+      <div className="text-center h-screen flex justify-center items-center text-red-600 text-xl font-bold">
+        {lesson?.message ?? "حدث خطأ أثناء تحميل المحاضرة."}
+      </div>
+    );
+  }
   return (
     <section className="flex flex-col gap-4 w-full">
-      {UnitData && <BreadCrumb lessonData={UnitData} unitData={UnitData} />}
+      {LessonData && UnitData && (
+        <BreadCrumb
+          lessonData={LessonData}
+          unitData={UnitData as CourseDetails}
+        />
+      )}
       <div className="grid md:grid-cols-12 grid-cols-1 lg:gap-8 md:gap-6 gap-4">
         <div className="col-span-12 md:col-span-7 flex flex-col gap-4">
           <Tabs dir="rtl" defaultValue="player1" className="w-full my-8">
@@ -88,7 +107,9 @@ async function LessonContent({ unitId }: { unitId: string }) {
               {/* عدد المشاهدات */}
               <div className="text-[#606060] whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">
                 عدد المشاهدات المتبقية:
-                <span className="text-[#5C1294] font-bold">4</span>
+                <span className="text-[#5C1294] font-bold">
+                  {LessonData?.remaining_views}
+                </span>
               </div>
 
               {/* امتحان المحاضرة */}
@@ -134,10 +155,11 @@ async function LessonContent({ unitId }: { unitId: string }) {
           </Card>
         </div>
         <div className="col-span-12 md:col-span-5">
+        {LessonData?.sub_lessons.length > 0 ? ( 
           <Card className="w-full p-4">
             <Accordion type="single" collapsible className="w-full">
               <div className="space-y-3 ">
-                {UnitData?.lessons.map((lesson) => (
+                {LessonData?.sub_lessons.map((lesson: SubLesson) => (
                   <AccordionItem key={lesson.id} value={lesson.id.toString()}>
                     <AccordionTrigger className="md:text-xl text-lg border px-4 py-4 rounded-lg hover:border-primary hover:text-primary group transition-all">
                       {lesson.name}
@@ -145,19 +167,22 @@ async function LessonContent({ unitId }: { unitId: string }) {
                     <AccordionContent className="border border-b-0 pb-0 text-primary md:text-xl text-lg">
                       <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
                         <div className="flex gap-2">
-                        <MdOndemandVideo size={24} /> <span> المحاضرة الاولى </span>
+                          <MdOndemandVideo size={24} />{" "}
+                          <span> المحاضرة الاولى </span>
                         </div>
                         <Checkbox />
                       </div>
                       <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
                         <div className="flex gap-2">
-                        <BiBookContent size={24} /> <span>  واجب المحاضرة الاولى  </span>
+                          <BiBookContent size={24} />{" "}
+                          <span> واجب المحاضرة الاولى </span>
                         </div>
                         <Checkbox />
                       </div>
-                     <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
+                      <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
                         <div className="flex gap-2">
-                        <MdEditNote size={24} /> <span>  امتحان المحاضرة الاولى </span>
+                          <MdEditNote size={24} />{" "}
+                          <span> امتحان المحاضرة الاولى </span>
                         </div>
                         <Checkbox />
                       </div>
@@ -167,15 +192,22 @@ async function LessonContent({ unitId }: { unitId: string }) {
               </div>
             </Accordion>
           </Card>
-        </div>
+        ):(<div className="h-[30vh] flex justify-center items-center"> <p className="text-xl text-[#8E8E8E]">
+          عذرا لا توجد دروس متاحه حاليا</p></div>)}
+          </div>
+       
       </div>
     </section>
   );
 }
-export default function Page({ params }: { params: { unitId: string } }) {
+export default function Page({
+  params,
+}: {
+  params: { unitId: string; lessonId: string };
+}) {
   return (
-    <Suspense fallback={<UnitSkeleton />}>
-      <LessonContent unitId={params.unitId} />
+    <Suspense fallback={<LessonSkeleton />}>
+      <LessonContent lessonId={params.lessonId} unitId={params.unitId} />
     </Suspense>
   );
 }
