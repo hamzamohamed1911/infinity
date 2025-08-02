@@ -97,7 +97,7 @@ const Login = () => {
           {errors.password && (
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {error && <p className="text-red-500 text-sm text-center leading-loose">{error}</p>}
           <Link
             className="underline text-primary text-lg my-4 font-normal"
             href="/forgot-password"

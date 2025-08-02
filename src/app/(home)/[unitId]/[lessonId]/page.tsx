@@ -15,6 +15,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { MdOndemandVideo } from "react-icons/md";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 async function LessonContent({ unitId }: { unitId: string }) {
   const Unit = await GetUnit({ unit_id: unitId });
@@ -104,6 +109,28 @@ async function LessonContent({ unitId }: { unitId: string }) {
                 </div>
               </div>
             </div>
+            <div className="flex justify-between gap-4">
+              <Button
+                variant="ghost"
+                className="group flex items-center justify-center font-semibold shadow-md text-lg gap-2 text-secondary-900  hover:bg-secondary-900 hover:text-white w-full lg:h-14 h-12 rounded-lg transition-all duration-300"
+              >
+                <FaArrowRight
+                  size={30}
+                  className="transform transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
+                />
+                المحاضرة السابقة
+              </Button>
+              <Button
+                variant="ghost"
+                className="group flex items-center justify-center font-semibold shadow-md text-lg gap-2 text-secondary-900  hover:bg-secondary-900 hover:text-white w-full lg:h-14 h-12 rounded-lg transition-all duration-300"
+              >
+                المحاضرة التالية
+                <FaArrowLeft
+                  size={30}
+                  className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
+                />
+              </Button>
+            </div>
           </Card>
         </div>
         <div className="col-span-12 md:col-span-5">
@@ -116,9 +143,24 @@ async function LessonContent({ unitId }: { unitId: string }) {
                       {lesson.name}
                     </AccordionTrigger>
                     <AccordionContent className="border border-b-0 pb-0 text-primary md:text-xl text-lg">
-                      <div  className="border-[1px] border-primary p-4"> المحاضرة الاولى</div>
-                      <div  className="border-[1px] border-primary p-4"> واجب المحاضرة الاولى </div>
-                      <div  className="border-[1px] border-primary p-4"> امتحان المحاضرة الاولى </div>
+                      <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
+                        <div className="flex gap-2">
+                        <MdOndemandVideo size={24} /> <span> المحاضرة الاولى </span>
+                        </div>
+                        <Checkbox />
+                      </div>
+                      <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
+                        <div className="flex gap-2">
+                        <BiBookContent size={24} /> <span>  واجب المحاضرة الاولى  </span>
+                        </div>
+                        <Checkbox />
+                      </div>
+                     <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
+                        <div className="flex gap-2">
+                        <MdEditNote size={24} /> <span>  امتحان المحاضرة الاولى </span>
+                        </div>
+                        <Checkbox />
+                      </div>
                     </AccordionContent>
                   </AccordionItem>
                 ))}
