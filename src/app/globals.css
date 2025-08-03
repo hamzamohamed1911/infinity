@@ -2,17 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-  --font-alexandria: 'Alexandria', sans-serif;
+  --font-alexandria: "Alexandria", sans-serif;
 }
-
 
 body {
   font-family: var(--font-alexandria);
 }
-
-
 
 @layer base {
   :root {
@@ -82,4 +78,46 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+.btn-link {
+  position: relative;
+  display: inline-block;
+  width: 180px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
+  background-color: var(--primary-500); /* الزرار بلون من الأول */
+  transition: box-shadow 0.4s ease-in-out;
+}
+
+.btn-link:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color:var(--primary-400);
+}
+
+.btn-link svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: stroke-dashoffset 0.8s ease-in-out;
+}
+
+.btn-link:hover svg {
+  stroke-dashoffset: -480;
+}
+
+.btn-link span {
+  position: relative;
+  display: inline-block;
+  line-height: 60px;
 }

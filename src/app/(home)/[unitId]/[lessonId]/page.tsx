@@ -155,47 +155,52 @@ async function LessonContent({
           </Card>
         </div>
         <div className="col-span-12 md:col-span-5">
-        {LessonData?.sub_lessons.length > 0 ? ( 
-          <Card className="w-full p-4">
-            <Accordion type="single" collapsible className="w-full">
-              <div className="space-y-3 ">
-                {LessonData?.sub_lessons.map((lesson: SubLesson) => (
-                  <AccordionItem key={lesson.id} value={lesson.id.toString()}>
-                    <AccordionTrigger className="md:text-xl text-lg border px-4 py-4 rounded-lg hover:border-primary hover:text-primary group transition-all">
-                      {lesson.name}
-                    </AccordionTrigger>
-                    <AccordionContent className="border border-b-0 pb-0 text-primary md:text-xl text-lg">
-                      <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
-                        <div className="flex gap-2">
-                          <MdOndemandVideo size={24} />{" "}
-                          <span> المحاضرة الاولى </span>
+          {LessonData?.sub_lessons.length > 0 ? (
+            <Card className="w-full p-4">
+              <Accordion type="single" collapsible className="w-full">
+                <div className="space-y-3 ">
+                  {LessonData?.sub_lessons.map((lesson: SubLesson) => (
+                    <AccordionItem key={lesson.id} value={lesson.id.toString()}>
+                      <AccordionTrigger className="md:text-xl text-lg border px-4 py-4 rounded-lg hover:border-primary hover:text-primary group transition-all">
+                        {lesson.name}
+                      </AccordionTrigger>
+                      <AccordionContent className="border border-b-0 pb-0 text-primary md:text-xl text-lg">
+                        <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
+                          <div className="flex gap-2">
+                            <MdOndemandVideo size={24} />{" "}
+                            <span> المحاضرة الاولى </span>
+                          </div>
+                          <Checkbox />
                         </div>
-                        <Checkbox />
-                      </div>
-                      <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
-                        <div className="flex gap-2">
-                          <BiBookContent size={24} />{" "}
-                          <span> واجب المحاضرة الاولى </span>
+                        <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
+                          <div className="flex gap-2">
+                            <BiBookContent size={24} />{" "}
+                            <span> واجب المحاضرة الاولى </span>
+                          </div>
+                          <Checkbox />
                         </div>
-                        <Checkbox />
-                      </div>
-                      <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
-                        <div className="flex gap-2">
-                          <MdEditNote size={24} />{" "}
-                          <span> امتحان المحاضرة الاولى </span>
+                        <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
+                          <div className="flex gap-2">
+                            <MdEditNote size={24} />{" "}
+                            <span> امتحان المحاضرة الاولى </span>
+                          </div>
+                          <Checkbox />
                         </div>
-                        <Checkbox />
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </div>
-            </Accordion>
-          </Card>
-        ):(<div className="h-[30vh] flex justify-center items-center"> <p className="text-xl text-[#8E8E8E]">
-          عذرا لا توجد دروس متاحه حاليا</p></div>)}
-          </div>
-       
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </div>
+              </Accordion>
+            </Card>
+          ) : (
+            <div className="h-[30vh] flex justify-center items-center">
+              {" "}
+              <p className="text-xl text-[#8E8E8E]">
+                عذرا لا توجد دروس متاحه حاليا
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

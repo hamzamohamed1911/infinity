@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaGooglePlay, FaApple } from "react-icons/fa";
 import { heroImg, logo } from "../../public";
+import Footer from "@/components/Footer";
 
 // Star component for background animation
 const Star = ({ style }: { style: React.CSSProperties }) => (
@@ -25,42 +26,9 @@ const Star = ({ style }: { style: React.CSSProperties }) => (
   />
 );
 // Animated Button Component
-const AnimatedButton = ({
-  children,
-  href,
-  className,
-}: {
-  children: React.ReactNode;
-  href?: string;
-  className?: string;
-}) => (
-  <motion.div className="relative">
-    {href ? (
-      <Link
-        href={href}
-        className={`inline-flex items-center px-6 py-3 rounded-full transition-colors ${className}`}
-      >
-        {children}
-      </Link>
-    ) : (
-      <button
-        className={`inline-flex items-center px-6 py-3 rounded-full transition-colors ${className}`}
-      >
-        {children}
-      </button>
-    )}
-  </motion.div>
-);
 
 export default function Home() {
-  const [email, setEmail] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`تم الاشتراك بـ ${email}`);
-    setEmail("");
-  };
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -211,20 +179,41 @@ export default function Home() {
           />
         </motion.div>
         <motion.div
-          className="md:w-1/2 text-center md:text-right"
+          className="md:w-1/2 text-center md:text-right flex flex-col gap-6"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          <h1 className="text-4xl md:text-7xl font-bold mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
             م/ حسام دكروني
           </h1>
-          <p className="text-2xl md:text-3xl text-[#606060] mb-6">
-            مُدرس الفيزياء للثانوية العامة والأزهرية
+          <p className="text-xl md:text-2xl text-white mb-6 leading-10">
+            يلا انضم لينا دلوقتي وابدأ رحلة تعليمية مختلفة فيها الشرح المبسط .
+            هنا مش هتتعلم لغة عربية وبس، دي كمان بتفهمها وتقفلها بكل سهولة
           </p>
-          <AnimatedButton href="/my-classes"  className="bg-[#831AD3] text-white">
-            ابدأ الآن
-          </AnimatedButton>
+          <Link
+            href="/my-classes"
+            className="btn-link bg-primary-500 rounded-md group "
+          >
+            <svg
+              width="180"
+              height="60"
+              viewBox="0 0 180 60"
+              className="absolute top-0 left-0 w-full h-full border-svg"
+            >
+              <polyline
+                points="179,1 179,59 1,59 1,1 179,1"
+                className="stroke-white"
+              />
+              <polyline
+                points="179,1 179,59 1,59 1,1 179,1"
+                className="stroke-white"
+              />
+            </svg>
+            <span className="relative z-10 text-white text-lg font-medium">
+              ابدأ الآن
+            </span>
+          </Link>
         </motion.div>
       </section>
 
@@ -243,7 +232,7 @@ export default function Home() {
           عن فضاء التعليم
         </motion.h2>
         <motion.p
-          className="text-lg text-[#606060] max-w-2xl mx-auto"
+          className="text-lg text-white max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -266,9 +255,9 @@ export default function Home() {
           احصل على تطبيقنا
         </motion.h2>
         <div className="flex flex-col md:flex-row-reverse justify-center md:gap-6 gap-2 items-center">
-          <AnimatedButton
+          <Link
             href="https://play.google.com"
-            className="bg-black hover:bg-black/40 transition-colors duration-700 text-white rounded-md py-1 md:min-w-80 min-w-auto  flex justify-center items-center"
+            className="bg-black px-6 py-3 hover:bg-black/40 transition-colors duration-700 text-white rounded-md  md:min-w-80 min-w-auto  flex justify-center items-center"
           >
             <FaGooglePlay size={50} className="mx-2 " />
 
@@ -276,65 +265,22 @@ export default function Home() {
               <span className="text-xs">Get it on</span>
               <span className=" text-2xl">Google Play</span>
             </div>
-          </AnimatedButton>
-          <AnimatedButton
+          </Link>
+          <Link
             href="https://www.apple.com/app-store/"
-            className="bg-black hover:bg-black/40 transition-colors duration-700 text-white rounded-md py-1 md:min-w-80 min-w-auto  flex justify-center items-center"
+            className="bg-black px-6 py-3 hover:bg-black/40 transition-colors duration-700 text-white rounded-md  md:min-w-80 min-w-auto  flex justify-center items-center"
           >
             <FaApple size={50} className="mx-2 " />
             <div className="flex flex-col gap-1 text-end">
               <span className="text-xs">Available on the</span>
               <span className=" text-2xl">App Store</span>
             </div>
-          </AnimatedButton>
+          </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer
-        id="contact"
-        className="py-16 px-6 md:px-12 bg-[#831AD3]/10 text-center"
-      >
-        <motion.h2
-          className="text-3xl md:text-4xl font-bold mb-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          اشترك في نشرتنا الإخبارية
-        </motion.h2>
-        <form onSubmit={handleSubscribe} className="max-w-md mx-auto">
-          <motion.div
-            className="flex gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="أدخل بريدك الإلكتروني"
-              className="flex-1 p-3 rounded-full bg-gray-800 text-white border border-[#606060] focus:outline-none focus:border-[#831AD3]"
-              required
-            />
-            <AnimatedButton className="bg-[#831AD3] text-white">
-              اشترك
-            </AnimatedButton>
-          </motion.div>
-        </form>
-        <motion.p
-          className="mt-8 text-[#606060]"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          © 2025 فضاء التعليم. جميع الحقوق محفوظة.
-        </motion.p>
-      </footer>
+      <Footer />
     </div>
   );
 }
