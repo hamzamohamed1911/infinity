@@ -6,8 +6,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaGooglePlay, FaApple } from "react-icons/fa";
-import { heroImg, logo } from "../../public";
+import { heroImg } from "../../public";
 import Footer from "@/components/Footer";
+import { useTheme } from "@/context/theme-context";
 
 // Star component for background animation
 const Star = ({ style }: { style: React.CSSProperties }) => (
@@ -29,6 +30,7 @@ const Star = ({ style }: { style: React.CSSProperties }) => (
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { logo } = useTheme();
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -68,7 +70,7 @@ export default function Home() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <Link href="/" className="flex-shrink-0 ">
-          <Image src={logo} alt="main logo" width={150} height={40} priority />
+          <Image src={logo} alt="main logo" width={80} height={40} priority />
         </Link>
         <nav className="hidden md:flex gap-4 text-xl">
           <Link
@@ -191,29 +193,31 @@ export default function Home() {
             يلا انضم لينا دلوقتي وابدأ رحلة تعليمية مختلفة فيها الشرح المبسط .
             هنا مش هتتعلم لغة عربية وبس، دي كمان بتفهمها وتقفلها بكل سهولة
           </p>
-          <Link
-            href="/my-classes"
-            className="btn-link bg-primary-500 rounded-md group "
-          >
-            <svg
-              width="180"
-              height="60"
-              viewBox="0 0 180 60"
-              className="absolute top-0 left-0 w-full h-full border-svg"
+          <div className="w-full flex md:justify-start justify-center">
+            <Link
+              href="/my-classes"
+              className="btn-link bg-primary-500 rounded-md group "
             >
-              <polyline
-                points="179,1 179,59 1,59 1,1 179,1"
-                className="stroke-white"
-              />
-              <polyline
-                points="179,1 179,59 1,59 1,1 179,1"
-                className="stroke-white"
-              />
-            </svg>
-            <span className="relative z-10 text-white text-lg font-medium">
-              ابدأ الآن
-            </span>
-          </Link>
+              <svg
+                width="180"
+                height="60"
+                viewBox="0 0 180 60"
+                className="absolute top-0 left-0 w-full h-full border-svg"
+              >
+                <polyline
+                  points="179,1 179,59 1,59 1,1 179,1"
+                  className="stroke-white"
+                />
+                <polyline
+                  points="179,1 179,59 1,59 1,1 179,1"
+                  className="stroke-white"
+                />
+              </svg>
+              <span className="relative z-10 text-white text-lg font-medium">
+                ابدأ الآن
+              </span>
+            </Link>
+          </div>
         </motion.div>
       </section>
 

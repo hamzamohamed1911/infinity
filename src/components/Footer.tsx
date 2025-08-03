@@ -22,7 +22,7 @@ const Footer = () => {
         {/* Right Side: Logo & Description */}
         <div className="flex flex-col items-center md:items-start gap-4 md:gap-6">
           <Image src={logo} alt="Logo" width={100} height={100} />
-          <p className="text-sm md:text-base">
+          <p className="text-sm md:text-base leading-loose">
             منصة تعليمية تقدم محتوى متميز يساعدك في تطوير مهاراتك وتحقيق أهدافك
             التعليمية.
           </p>
@@ -80,7 +80,7 @@ const Footer = () => {
          </h3>
             <a
               href="#"
-              className="text-white underline text-start w-full md:w-auto  block"
+              className="text-white underline md:text-start text-center w-full md:w-auto  block"
             >
               تقديم شكوى
             </a>
