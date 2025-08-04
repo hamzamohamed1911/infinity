@@ -5,12 +5,14 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaGooglePlay, FaApple } from "react-icons/fa";
 import { heroImg } from "../../public";
 import Footer from "@/components/Footer";
 import { useTheme } from "@/context/theme-context";
 import Courses from "@/components/landingPage/Courses";
 import LastCourses from "@/components/landingPage/LastCourses";
+import ScrollToTopButton from "@/components/landingPage/ScrollToTopButton";
+import DownloadAppSection from "@/components/landingPage/DownloadAppSection";
+import Store from "@/components/landingPage/Store";
 
 // Star component for background animation
 const Star = ({ style }: { style: React.CSSProperties }) => (
@@ -111,12 +113,11 @@ export default function Home() {
           {isMenuOpen ? "×" : "☰"}
         </button>
       </motion.header>
-
       {/* Mobile Menu */}
       <motion.div
         className={`md:hidden ${
           isMenuOpen ? "block" : "hidden"
-        } bg-gray-900/90 bgt p-6 fixed top-16 right-0 w-full z-10 backdrop-blur-sm`}
+        } bg-gray-900/90 bgt p-6 fixed top-20 right-0 w-full z-10 backdrop-blur-sm`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: isMenuOpen ? 1 : 0, y: isMenuOpen ? 0 : -20 }}
         transition={{ duration: 0.3 }}
@@ -152,7 +153,6 @@ export default function Home() {
           </Link>
         </nav>
       </motion.div>
-
       {/* Hero Section */}
       <section
         id="home"
@@ -222,7 +222,6 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
-
       {/* About Section */}
       <section
         id="about"
@@ -248,47 +247,15 @@ export default function Home() {
           مخصصة، لمساعدتك على استكشاف عالم المعرفة بسهولة وثقة.
         </motion.p>
       </section>
-
-{/* Courses Section */}
+      {/* Courses Section */}
       <Courses />
-       {/* Last Courses Section */}
-      <LastCourses/>
+      {/* Last Courses Section */}
+      <LastCourses />
+      {/* Store */}
+      <Store/>
       {/* Download Section */}
-      <section id="app" className="py-16 px-6 md:px-12  bg-[#831AD3]/10">
-        <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center mb-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          احصل على تطبيقنا
-        </motion.h2>
-        <div className="flex flex-col md:flex-row-reverse justify-center md:gap-6 gap-2 items-center">
-          <Link
-            href="https://play.google.com"
-            className="bg-black px-6 py-3 hover:bg-black/40 transition-colors duration-700 text-white rounded-md  md:min-w-80 min-w-auto  flex justify-center items-center"
-          >
-            <FaGooglePlay size={50} className="mx-2 " />
-
-            <div className="flex flex-col gap-1 text-end">
-              <span className="text-xs">Get it on</span>
-              <span className=" text-2xl">Google Play</span>
-            </div>
-          </Link>
-          <Link
-            href="https://www.apple.com/app-store/"
-            className="bg-black px-6 py-3 hover:bg-black/40 transition-colors duration-700 text-white rounded-md  md:min-w-80 min-w-auto  flex justify-center items-center"
-          >
-            <FaApple size={50} className="mx-2 " />
-            <div className="flex flex-col gap-1 text-end">
-              <span className="text-xs">Available on the</span>
-              <span className=" text-2xl">App Store</span>
-            </div>
-          </Link>
-        </div>
-      </section>
-
+      <DownloadAppSection />
+      <ScrollToTopButton />
       {/* Footer */}
       <Footer />
     </div>

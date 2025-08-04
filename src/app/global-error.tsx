@@ -26,11 +26,11 @@ export default function GlobalError({
             />
           </Link>
 
-          <h2 className="2xl:text-5xl xl:text-6xl lg:text-5xl text-4xl font-extrabold text-secondary mb-4">
-            حدث خطأ!
+          <h2 className="2xl:text-5xl xl:text-6xl lg:text-5xl text-4xl font-extrabold text-gray-800 mb-4">
+           حدث خطأ ما !
           </h2>
 
-          <p className="text-secondary text-lg md:text-xl max-w-md mb-8">
+          <p className="text-[#8E8E8E] text-lg md:text-xl max-w-md mb-8">
             عذرًا، حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى أو العودة إلى
             الصفحة الرئيسية.
             {error.digest && `رمز الخط: ${error.digest})`}

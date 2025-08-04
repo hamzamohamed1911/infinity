@@ -1,7 +1,6 @@
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { placeholder } from "../../../public";
-import Link from "next/link";
 import { Button } from "../ui/button";
 
 const dummyCourses = [
@@ -67,32 +66,6 @@ const Courses = () => {
             </div>
           </Card>
         ))}
-      </div>
-
-      <div className="flex justify-center items-center mt-8">
-        <Link
-          href="/my-classes"
-          className="btn-link bg-primary-500 rounded-md group "
-        >
-          <svg
-            width="180"
-            height="60"
-            viewBox="0 0 180 60"
-            className="absolute top-0 left-0 w-full h-full border-svg"
-          >
-            <polyline
-              points="179,1 179,59 1,59 1,1 179,1"
-              className="stroke-white"
-            />
-            <polyline
-              points="179,1 179,59 1,59 1,1 179,1"
-              className="stroke-white"
-            />
-          </svg>
-          <span className="relative z-10 text-white text-lg font-medium">
-            عرض المزيد
-          </span>
-        </Link>
       </div>
     </section>
   );
