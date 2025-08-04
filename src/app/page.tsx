@@ -9,6 +9,8 @@ import { FaGooglePlay, FaApple } from "react-icons/fa";
 import { heroImg } from "../../public";
 import Footer from "@/components/Footer";
 import { useTheme } from "@/context/theme-context";
+import Courses from "@/components/landingPage/Courses";
+import LastCourses from "@/components/landingPage/LastCourses";
 
 // Star component for background animation
 const Star = ({ style }: { style: React.CSSProperties }) => (
@@ -247,8 +249,12 @@ export default function Home() {
         </motion.p>
       </section>
 
+{/* Courses Section */}
+      <Courses />
+       {/* Last Courses Section */}
+      <LastCourses/>
       {/* Download Section */}
-      <section id="courses" className="py-16 px-6 md:px-12  bg-[#831AD3]/10">
+      <section id="app" className="py-16 px-6 md:px-12  bg-[#831AD3]/10">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-8"
           initial={{ opacity: 0 }}
