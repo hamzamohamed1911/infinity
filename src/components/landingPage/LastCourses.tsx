@@ -1,16 +1,13 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import Image from "next/image";
 import { placeholder } from "../../../public";
 import { Button } from "../ui/button";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 
 const dummyCourses = [
   {
@@ -74,37 +71,51 @@ const LastCourses = () => {
         اخر الكورسات
       </h2>
 
-      <Carousel dir="ltr" className="w-full max-w-7xl mx-auto px-2">
-        <CarouselContent>
-          {dummyCourses.map((course) => (
-            <CarouselItem key={course.id} className="md:basis-1/2 lg:basis-1/3">
-              <Card className="overflow-hidden text-right bg-white rounded-2xl group relative cursor-pointer h-full">
-                {/* الصورة */}
-                <div className="w-full h-72 relative">
-                  <Image
-                    src={course.image}
-                    alt={course.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
+      <Swiper
+        modules={[Autoplay]}
+        spaceBetween={20}
+        loop={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
+        dir="rtl"
+        className="max-w-7xl mx-auto"
+      >
+        {dummyCourses.map((course) => (
+          <SwiperSlide key={course.id}>
+            <Card className="overflow-hidden text-right bg-white rounded-2xl group relative cursor-pointer h-full">
+              <div className="w-full h-72 relative">
+                <Image
+                  src={course.image}
+                  alt={course.title}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
 
-                {/* المحتوى يظهر عند الـ hover */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-center items-center text-center text-white">
-                  <h3 className="text-lg font-bold mb-2">{course.title}</h3>
-                  <p className="text-sm mb-4">{course.description}</p>
-                  <Button className="text-white w-full hover:bg-primary-400 md:h-12 h-10 shadow-md hover:shadow-lg text-xl">
-                    عرض الكورس
-                  </Button>
-                </div>
-              </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-
-        <CarouselPrevious className="!text-white !bg-primary hover:!bg-primary-400 border-none " />
-        <CarouselNext className="!text-white !bg-primary hover:!bg-primary-400 border-none " />
-      </Carousel>
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-center items-center text-center text-white">
+                <h3 className="text-lg font-bold mb-2">{course.title}</h3>
+                <p className="text-sm mb-4">{course.description}</p>
+                <Button className="text-white w-full hover:bg-primary-400 md:h-12 h-10 shadow-md hover:shadow-lg text-xl">
+                  عرض الكورس
+                </Button>
+              </div>
+            </Card>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
   );
 };
