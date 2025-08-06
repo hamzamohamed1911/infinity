@@ -4,8 +4,6 @@ import { Card } from "@/components/ui/card";
 import { GetUnit, GetLesson } from "@/lib/apis/course.api";
 import LessonSkeleton from "@/components/LessonSkeleton";
 import { Suspense } from "react";
-import { unitBg } from "../../../../../public";
-import Image from "next/image";
 import { MdEditNote } from "react-icons/md";
 import { BiBookContent } from "react-icons/bi";
 import {
@@ -19,6 +17,8 @@ import { MdOndemandVideo } from "react-icons/md";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import Player1 from "./_components/Player1";
+import Link from "next/link";
 
 async function LessonContent({
   unitId,
@@ -78,12 +78,7 @@ async function LessonContent({
               <TabsContent value="player1">
                 {" "}
                 <div className="w-full h-full relative 2xl:min-h-96  min-h-72">
-                  <Image
-                    alt="unit background"
-                    src={unitBg}
-                    fill
-                    className="object-cover rounded-lg"
-                  />
+                  <Player1 encrypted={LessonData.encrypted_video_link} />
                 </div>
               </TabsContent>
               <TabsContent value="player2">محتوى هتخلص قريب</TabsContent>
@@ -98,9 +93,7 @@ async function LessonContent({
               </h2>
 
               <p className="text-[#606060] lg:text-xl md:text-lg text-md">
-                دورة اللغة الإنجليزية هذه مصممة لتعليم المهارات الأساسية في
-                المحادثة والقراءة والكتابة. ستساعدك على تحسين فهمك للغة
-                الإنجليزية وتطبيقها في الحياة اليومية.
+                {LessonData?.description || "لا توجد بيانات"}
               </p>
             </div>
             <div className="flex flex-col lg:gap-8 md:gap-6 gap-4">
@@ -111,45 +104,53 @@ async function LessonContent({
                   {LessonData?.remaining_views}
                 </span>
               </div>
-
-              {/* امتحان المحاضرة */}
-              <div className="text-[#8E8E8E] whitespace-nowrap lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
-                إمتحان المحاضرة:
-                <div className="text-[#3187FF] underline flex gap-2 flex-wrap items-center cursor-pointer">
-                  <MdEditNote className="shrik-0" size={24} />
-                  <span>إمتحان الوحدة الأولى</span>
-                </div>
-              </div>
-
-              {/* واجب المحاضرة */}
-              <div className="text-[#8E8E8E] lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
-                واجب المحاضرة:
-                <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
-                  <BiBookContent size={24} />
-                  <span>4 واجبات</span>
-                </div>
-              </div>
+              {LessonData?.enable_assessments && (
+                <>
+                 {/* امتحان المحاضرة */}
+                  <div className="text-[#8E8E8E] whitespace-nowrap lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
+                   إمتحانات المحاضرة:
+                    <div className="text-[#3187FF] underline flex gap-2 flex-wrap items-center cursor-pointer">
+                      <MdEditNote className="shrik-0" size={24} />
+                      <span>{LessonData?.sub_exams.length} إمتحانات</span>
+                    </div>
+                    <ol className="list-decimal ps-5 flex flex-col gap-2 w-full">
+                      {LessonData?.sub_exams.map((exam) => (
+                        <li key={exam.id}>
+                          <Link
+                            href={`/${unitId}/${LessonData.id}/exams/${exam.id}`}
+                            className="text-secondary-900 underline text-lg hover:text-secondary-800 transition-colors"
+                          >
+                            {exam.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                  {/* واجب المحاضرة */}
+                  <div className="text-[#8E8E8E] lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
+                    واجب المحاضرة:
+                    <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
+                      <BiBookContent size={24} />
+                      <span>{LessonData?.sub_homeworks.length} واجبات</span>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-            <div className="flex justify-between gap-4">
+            <div className="flex justify-between md:gap-4 gap-2 w-full">
               <Button
                 variant="ghost"
-                className="group flex items-center justify-center font-semibold shadow-md text-lg gap-2 text-secondary-900  hover:bg-secondary-900 hover:text-white w-full lg:h-14 h-12 rounded-lg transition-all duration-300"
+                className="group flex items-center justify-center font-semibold shadow-md lg:text-lg md:text-md text-xs lg:gap-2 gap-1 text-secondary-900  hover:bg-secondary-900 hover:text-white w-full lg:h-14 h-12 rounded-lg transition-all duration-300"
               >
-                <FaArrowRight
-                  size={30}
-                  className="transform transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110"
-                />
+                <FaArrowRight className="transform transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" />
                 المحاضرة السابقة
               </Button>
               <Button
                 variant="ghost"
-                className="group flex items-center justify-center font-semibold shadow-md text-lg gap-2 text-secondary-900  hover:bg-secondary-900 hover:text-white w-full lg:h-14 h-12 rounded-lg transition-all duration-300"
+                className="group flex items-center justify-center font-semibold shadow-md lg:text-lg md:text-md text-xs lg:gap-2 gap-1 text-secondary-900  hover:bg-secondary-900 hover:text-white w-full lg:h-14 h-12 rounded-lg transition-all duration-300"
               >
                 المحاضرة التالية
-                <FaArrowLeft
-                  size={30}
-                  className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
-                />
+                <FaArrowLeft className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110" />
               </Button>
             </div>
           </Card>
@@ -165,24 +166,27 @@ async function LessonContent({
                         {lesson.name}
                       </AccordionTrigger>
                       <AccordionContent className="border border-b-0 pb-0 text-primary md:text-xl text-lg">
-                        <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
+                        <Link
+                          href={`/${unitId}/${lesson.id}`}
+                          className="border-[1px] border-primary p-4 flex justify-between gap-2"
+                        >
                           <div className="flex gap-2">
                             <MdOndemandVideo size={24} />{" "}
-                            <span> المحاضرة الاولى </span>
+                            <span> الدرس {lesson.name} </span>
                           </div>
-                          <Checkbox />
-                        </div>
+                          <Checkbox checked={lesson.is_viewed} />
+                        </Link>
                         <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
                           <div className="flex gap-2">
                             <BiBookContent size={24} />{" "}
-                            <span> واجب المحاضرة الاولى </span>
+                            <span> واجب الدرس {lesson.name} </span>
                           </div>
                           <Checkbox />
                         </div>
                         <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
                           <div className="flex gap-2">
                             <MdEditNote size={24} />{" "}
-                            <span> امتحان المحاضرة الاولى </span>
+                            <span> امتحان الدرس {lesson.name} </span>
                           </div>
                           <Checkbox />
                         </div>

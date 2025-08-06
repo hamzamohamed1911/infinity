@@ -1,6 +1,6 @@
 import { BreadCrumb } from "@/components/BreadCrumb";
 import Image from "next/image";
-import { unitBg } from "../../../../public";
+import { placeholder} from "../../../../public";
 import { RiBookMarkedLine } from "react-icons/ri";
 import { MdEditNote } from "react-icons/md";
 import { BiBookContent } from "react-icons/bi";
@@ -15,6 +15,7 @@ import NoDataMessage from "@/components/NoDataMessage";
 async function UnitContent({ unitId }: { unitId: string }) {
   const Unit = await GetUnit({ unit_id: unitId });
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
+  console.log("UnitData" ,UnitData)
 
   return (
     <section className="flex flex-col gap-4 w-full">
@@ -60,8 +61,8 @@ async function UnitContent({ unitId }: { unitId: string }) {
         </div>
         <div className=" w-full h-full relative 2xl:min-h-96  min-h-72 col-span-7 ">
           <Image
-            alt="unit background"
-            src={unitBg}
+            alt={UnitData?.name || "unit background"}
+            src={UnitData?.image || placeholder}
             fill
             className="object-cover rounded-lg"
           />

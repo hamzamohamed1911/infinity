@@ -111,6 +111,7 @@ declare type CourseDetails = {
   lessons: Lesson[];
   description: string | null;
   lessons_count: number;
+  image:string | null;
   exams_count: number;
   homeworks_count: number;
 };

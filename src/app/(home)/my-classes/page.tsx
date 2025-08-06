@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {  placeholder } from "../../../../public";
+import { placeholder } from "../../../../public";
 // import {
 //   Dialog,
 //   DialogClose,
@@ -34,7 +34,7 @@ async function MyClassesContent() {
       <section>
         <div className="container mx-auto xl:max-w-[90%] max-w-full flex w-full p-4">
           <div className=" lg:m-6 md:m-4 m-2  flex flex-col gap-4 w-full">
-            <h2 className="text-[#606060]  md:text-2xl text-xl font-[500]">
+            <h2 className="text-[#606060]  lg:text-3xl md:text-2xl text-xl font-[500]">
               صفوف انت منضم إليها
             </h2>
             {(!ClassesData || ClassesData.length === 0) && (
@@ -44,8 +44,9 @@ async function MyClassesContent() {
               {ClassesData?.map((course) => (
                 <div
                   key={course.id}
-                  className="overflow-hidden rounded-lg border border-gray-200 bg-white "
+                  className="overflow-hidden rounded-lg border border-gray-200 bg-white flex flex-col"
                 >
+                  {/* الصورة */}
                   <div className="relative h-80 w-full overflow-hidden bg-cyan-400">
                     <Image
                       src={course?.image || course.thumbnail || placeholder}
@@ -54,45 +55,26 @@ async function MyClassesContent() {
                       className="object-cover"
                     />
                   </div>
-                  <div className="p-4 flex flex-col gap-3">
-                    <h3 className="mb-2 text-xl font-bold">{course.name}</h3>
+
+                  {/* المحتوى */}
+                  <div className="p-4 flex flex-col gap-3 flex-1">
+                    <h3 className="md:text-xl text-lg font-bold">
+                      {course.name}
+                    </h3>
+
                     {course?.description && (
-                      <p className="text-md text-secondary truncate">
-                        <strong>{course?.description}</strong>
+                      <p className="text-sm text-[#606060]">
+                        <strong>
+                          {course.description.length > 60
+                            ? course.description.slice(0, 60) + "..."
+                            : course.description}
+                        </strong>
                       </p>
                     )}
 
-                    <StartCourseButton courseId={course.id} />
-
-                    {/* <div className="mt-3 w-full flex items-center justify-center gap-1 text-lg text-primary hover:text-primarydark underline ">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <button>إلغاء الإنضمام</button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-[500px] no-close-icon no-x ">
-                          <DialogHeader className="!text-start text-secondary flex flex-col gap-4">
-                            <DialogTitle>خد بالك!</DialogTitle>
-                            <DialogDescription className="text-xl">
-                              هل أنت متأكد من إلغاء الانضمام؟
-                            </DialogDescription>
-                          </DialogHeader>
-                          <DialogFooter className="flex flex-row gap-4 w-full">
-                            <DialogClose asChild>
-                              <Button
-                                variant="outline"
-                                className="border-primary text-primary w-full"
-                              >
-                                العودة
-                              </Button>
-                            </DialogClose>
-
-                            <Button className="bg-primary text-white w-full">
-                              إلغاء الإنضمام
-                            </Button>
-                          </DialogFooter>
-                        </DialogContent>
-                      </Dialog>
-                    </div> */}
+                    <div className="mt-auto">
+                      <StartCourseButton courseId={course.id} />
+                    </div>
                   </div>
                 </div>
               ))}

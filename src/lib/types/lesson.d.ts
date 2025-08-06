@@ -2,6 +2,7 @@ declare interface SubLesson {
   id: number;
   lesson_id: number | null;
   name: string;
+  is_viewed:boolean;
   video_provider: string;
   encrypted_video_url: string;
   encrypted_url: string;
@@ -30,8 +31,14 @@ declare interface Url {
 declare interface Quiz {
   id: number;
 }
+declare interface SubExam  {
+  id: string;
+  name: string;
+};
 
 declare interface LessonDetails {
+   sub_exams: SubExam[];
+   sub_homeworks:subHomeworks[]
   id: number;
   name: string;
   video_provider: string;
@@ -57,14 +64,14 @@ declare interface LessonDetails {
   sub_lessons: SubLesson[];
   discount: number;
   thumbnail: string;
-  image: string;
+  image: string | null;
   attachments: Attachment[];
   videos: Video[];
   urls: Url[];
   quiz: Quiz;
   enable_video: number;
   enable_assessments: number;
-
+  description:string| null;
   // 👇 علشان ازرار المحاضرة السابقة والتالية
   next_lesson_id?: number | null;
   prev_lesson_id?: number | null;

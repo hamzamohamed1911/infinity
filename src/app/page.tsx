@@ -13,6 +13,7 @@ import LastCourses from "@/components/landingPage/LastCourses";
 import ScrollToTopButton from "@/components/landingPage/ScrollToTopButton";
 import DownloadAppSection from "@/components/landingPage/DownloadAppSection";
 import Store from "@/components/landingPage/Store";
+import PromoVideo from "@/components/landingPage/PromoVideo";
 
 // Star component for background animation
 const Star = ({ style }: { style: React.CSSProperties }) => (
@@ -249,6 +250,7 @@ export default function Home() {
       </section>
       {/* Courses Section */}
       <Courses />
+      <PromoVideo/>
       {/* Last Courses Section */}
       <LastCourses />
       {/* Store */}

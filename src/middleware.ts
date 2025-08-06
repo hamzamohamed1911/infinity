@@ -11,7 +11,7 @@ export default withAuth(
     }
 
     if (pathname === "/login" && req.nextauth.token) {
-      return NextResponse.redirect(new URL("/my-purchases", req.url));
+      return NextResponse.redirect(new URL("/my-classes", req.url));
     }
 
     // حماية صفحة my-classes

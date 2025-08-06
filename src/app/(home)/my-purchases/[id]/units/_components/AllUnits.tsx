@@ -5,6 +5,7 @@ import { placeholder } from "../../../../../../../public";
 import Link from "next/link";
 
 const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
+  console.log(UnitsData)
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {UnitsData.map((unit: CourseDetails) => (

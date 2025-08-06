@@ -15,7 +15,7 @@ export default function LessonSkeleton() {
         <div className="col-span-12 md:col-span-7 flex flex-col gap-4">
           {/* Tabs placeholder */}
           <div className="w-full my-8">
-            <div className="w-full bg-transparent gap-2 justify-start flex overflow-x-auto whitespace-nowrap">
+            <div className="w-full bg-transparent gap-2 justify-start flex overflow-x-auto whitespace-nowrap my-2">
               {[1, 2, 3].map((_, i) => (
                 <Skeleton
                   key={i}

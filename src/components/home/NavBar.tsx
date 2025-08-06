@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {userImage } from "../../../public";
+import { userImage } from "../../../public";
 import { IoGridOutline } from "react-icons/io5";
 import { BiStore } from "react-icons/bi";
 import { GrHelpBook } from "react-icons/gr";
@@ -36,8 +36,8 @@ import { GetProfileData } from "@/lib/apis/profile.api";
 import { Skeleton } from "../ui/skeleton";
 import { useTheme } from "@/context/theme-context";
 
-const Navbar = ({id}:{id:string}) => {
-    const { logo } = useTheme();
+const Navbar = ({ id }: { id: string }) => {
+  const { logo } = useTheme();
 
   const pathname = usePathname();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
@@ -48,7 +48,6 @@ const Navbar = ({id}:{id:string}) => {
   const { data: profileData, isLoading } = useQuery({
     queryKey: ["profile"],
     queryFn: () => GetProfileData(),
-    
   });
 
   const profile =
