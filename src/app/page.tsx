@@ -224,7 +224,7 @@ export default function Home() {
         </motion.div>
       </section>
       {/* About Section */}
-      <section
+       <section
         id="about"
         className="py-16 px-6 md:px-12 text-center bg-[#831AD3]/10"
       >
@@ -250,11 +250,12 @@ export default function Home() {
       </section>
       {/* Courses Section */}
       <Courses />
-      <PromoVideo/>
+      {/* Promo video Section */}
+      <PromoVideo />
       {/* Last Courses Section */}
       <LastCourses />
       {/* Store */}
-      <Store/>
+      <Store />
       {/* Download Section */}
       <DownloadAppSection />
       <ScrollToTopButton />

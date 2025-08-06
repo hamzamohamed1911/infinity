@@ -32,6 +32,7 @@ async function LessonContent({
 
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
   const LessonData = Unit && "data" in lesson ? lesson.data : undefined;
+  console.log("LessonData" ,LessonData)
   if (!LessonData) {
     return (
       <div className="text-center h-screen flex justify-center items-center text-red-600 text-xl font-bold">
@@ -100,7 +101,7 @@ async function LessonContent({
               {/* عدد المشاهدات */}
               <div className="text-[#606060] whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">
                 عدد المشاهدات المتبقية:
-                <span className="text-[#5C1294] font-bold">
+                <span className="text-primary font-bold">
                   {LessonData?.remaining_views}
                 </span>
               </div>
@@ -133,6 +134,18 @@ async function LessonContent({
                       <BiBookContent size={24} />
                       <span>{LessonData?.sub_homeworks.length} واجبات</span>
                     </div>
+                       <ol className="list-decimal ps-5 flex flex-col gap-2 w-full">
+                      {LessonData?.sub_homeworks.map((homework) => (
+                        <li key={homework.id}>
+                          <Link
+                            href={`/${unitId}/${LessonData.id}/home-work/${homework.id}`}
+                            className="text-secondary-900 underline text-lg hover:text-secondary-800 transition-colors"
+                          >
+                            {homework.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ol>
                   </div>
                 </>
               )}
