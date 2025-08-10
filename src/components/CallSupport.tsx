@@ -15,8 +15,7 @@ const CallSupport = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="fixed z-50 lg:right-20 md:right-10 right-5 bottom-1/3 text-primary flex p-4 justify-center items-center text-2xl font-semibold bg-white shadow-xl gap-2 rounded-full transition-all hover:translate-y-1 duration-700">
-          <span className="md:block hidden">كلم الدعم</span>
+        <button className="fixed z-50 lg:left-20 md:left-10 left-5 bottom-1/4 text-primary flex p-4 justify-center items-center text-2xl font-semibold bg-white shadow-xl gap-2 rounded-full transition-all hover:translate-y-1 duration-700">
           <LuMessageCircleQuestion size={40} />
         </button>
       </DialogTrigger>

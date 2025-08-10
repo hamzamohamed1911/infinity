@@ -1,5 +1,4 @@
 import { SidebarProvider } from "@/lib/context/SidebarContext";
-import { Toaster } from "sonner";
 
 export default function HomeLayout({
   children,
@@ -10,7 +9,6 @@ export default function HomeLayout({
     <>
       <SidebarProvider>
         <main>
-          <Toaster />
           {children}
         </main>
       </SidebarProvider>

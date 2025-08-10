@@ -14,7 +14,6 @@ interface SubscribeBody {
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export async function GetProfileData(): Promise<APIResponse<ProfileApiData>> {
   const token = await getAuthToken();
-  console.log("token" ,token)
   const response = await fetch(`${API_URL}api/v1/profile`, {
     method: "GET",
     cache: "no-cache",
@@ -91,4 +90,27 @@ export async function GetClassesData({teacherId}:{teacherId:number}): Promise<AP
   }
 
    return payload;
+}
+export async function changePassword(payload: ChangePasswordPayload) {
+  try {
+    const token = await getAuthToken(); 
+    const res = await fetch(`${API_URL}api/v1/change-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`Failed to change password: ${errorText || res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error in changePassword:", error);
+    throw error;
+  }
 }

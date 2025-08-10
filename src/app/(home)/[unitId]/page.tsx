@@ -15,7 +15,6 @@ import NoDataMessage from "@/components/NoDataMessage";
 async function UnitContent({ unitId }: { unitId: string }) {
   const Unit = await GetUnit({ unit_id: unitId });
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
-  console.log("UnitData" ,UnitData)
 
   return (
     <section className="flex flex-col gap-4 w-full">

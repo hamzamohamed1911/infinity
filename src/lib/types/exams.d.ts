@@ -54,4 +54,20 @@ declare type Option = {
   id: number;
   title: string;
   is_correct?: boolean;
+   url: string | null;
+};
+type SaveAnswerPayload = {
+  answer: {
+    question_id: number;
+    question_type: string;
+    answer: string | number;
+    url?: string;
+  };
+};
+
+declare type QuestionAnswer = {
+  question_id: number;
+  question_type: "text" | "radio" |string;
+  answer: string | number;
+  url?: string;
 };

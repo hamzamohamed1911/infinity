@@ -19,6 +19,8 @@ import { Button } from "@/components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Player1 from "./_components/Player1";
 import Link from "next/link";
+import Player2 from "./_components/Player2";
+import Player3 from "./_components/Player3";
 
 async function LessonContent({
   unitId,
@@ -32,7 +34,6 @@ async function LessonContent({
 
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
   const LessonData = Unit && "data" in lesson ? lesson.data : undefined;
-  console.log("LessonData" ,LessonData)
   if (!LessonData) {
     return (
       <div className="text-center h-screen flex justify-center items-center text-red-600 text-xl font-bold">
@@ -82,8 +83,12 @@ async function LessonContent({
                   <Player1 encrypted={LessonData.encrypted_video_link} />
                 </div>
               </TabsContent>
-              <TabsContent value="player2">محتوى هتخلص قريب</TabsContent>
-              <TabsContent value="player3">محتوى آخر المشاهدات</TabsContent>
+              <TabsContent value="player2">
+                <Player2 encrypted={LessonData.encrypted_video_link} />
+              </TabsContent>
+              <TabsContent value="player3">
+                <Player3 googleDriveId={LessonData.google_drive_id} />
+              </TabsContent>
             </div>
           </Tabs>
 
@@ -107,9 +112,9 @@ async function LessonContent({
               </div>
               {LessonData?.enable_assessments && (
                 <>
-                 {/* امتحان المحاضرة */}
+                  {/* امتحان المحاضرة */}
                   <div className="text-[#8E8E8E] whitespace-nowrap lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
-                   إمتحانات المحاضرة:
+                    إمتحانات المحاضرة:
                     <div className="text-[#3187FF] underline flex gap-2 flex-wrap items-center cursor-pointer">
                       <MdEditNote className="shrik-0" size={24} />
                       <span>{LessonData?.sub_exams.length} إمتحانات</span>
@@ -134,7 +139,7 @@ async function LessonContent({
                       <BiBookContent size={24} />
                       <span>{LessonData?.sub_homeworks.length} واجبات</span>
                     </div>
-                       <ol className="list-decimal ps-5 flex flex-col gap-2 w-full">
+                    <ol className="list-decimal ps-5 flex flex-col gap-2 w-full">
                       {LessonData?.sub_homeworks.map((homework) => (
                         <li key={homework.id}>
                           <Link

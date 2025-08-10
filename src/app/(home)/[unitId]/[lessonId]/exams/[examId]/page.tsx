@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { BreadCrumb } from "@/components/BreadCrumb";
 import UnitSkeleton from "@/components/UnitSkeleton";
 import { Suspense } from "react";
 import { GetExam } from "@/lib/apis/exams.api";
 import { GetUnit } from "@/lib/apis/course.api";
 import { Card } from "@/components/ui/card";
+import Deadlines from "../../_components/Deadlines";
+import ExamButton from "../../_components/ExamButton";
 
 async function UnitContent({
   examId,
@@ -17,30 +18,60 @@ async function UnitContent({
   const ExamData = Exam && "data" in Exam ? Exam.data : undefined;
   const Unit = await GetUnit({ unit_id: unitId });
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
-  console.log(ExamData);
   return (
     <section className="flex flex-col gap-4 w-full">
       {ExamData && UnitData && (
-        <BreadCrumb unitData={UnitData} ExamData={ExamData} />
+        <BreadCrumb  unitData={UnitData} ExamData={ExamData} />
       )}
       <Card className="w-full lg:p-8 md:p-6 p-4 flex flex-col lg:gap-6 gap-4">
         <div className="flex flex-col lg:gap-6 gap-4">
           <p className="text-[#606060]  lg:text-xl md:text-lg text-md ">
-            محاولاتك المتبقية
+            محاولاتك السابقة
           </p>
-          <div className="grid lg:grid-cols-7 md:grid-cols-2 grid-cols-1 gap-4 justify-between">
-          {ExamData?.user_exams_retries.map((exam) => (
-            <div key={exam.id} className="border-[1px] rounded-md p-2 col-span-2">
-              {exam?.final_grade} الدرجة {exam?.ended_at} تاريخ
-            </div>
-          ))}
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-10 lg:gap-8 md:gap-6 gap-4">
+            {ExamData?.user_exams_retries.map((exam) => {
+              const examDate = new Date(exam.ended_at);
+              const dateString = examDate.toLocaleDateString("ar-EG", {
+                weekday: "long",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              });
+
+              return (
+                <div
+                  key={exam.id}
+                  className="border border-gray-200 rounded-md p-4 flex   gap-4 justify-center items-center bg-white shadow-sm font-semibold"
+                >
+                  <div className="flex items-center gap-2 flex-wrap  text-gray-700">
+                    <span className="text-[#A4A4A4] font-semibold text-md">
+                      تاريخ
+                    </span>
+                    <span className="text-secondary-900 text-sm">
+                      {dateString.split(" ")[0]}
+                    </span>
+                    <span className="text-secondary-900 text-sm">
+                      {dateString.split(" ")[1]}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2  ">
+                    <span className="text-[#A4A4A4] text-md">الدرجة</span>
+                    <span className="text-secondary-900 text-sm">
+                      {exam.final_grade}/{ExamData.questions_count}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-        <div className="text-[#606060] whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">
-          <p>محاولاتك المتبقية :</p>
+        <div className="whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">
+          <p className="text-[#606060]  ">محاولاتك المتبقية :</p>
           <span className="text-primary font-bold">{ExamData?.retries}</span>
         </div>
+        {ExamData && <ExamButton unitId={unitId} examId={examId} ExamData={ExamData} />}
       </Card>
+      <Deadlines />
     </section>
   );
 }
@@ -51,7 +82,7 @@ export default function Page({
 }) {
   return (
     <Suspense fallback={<UnitSkeleton />}>
-      <UnitContent examId={params.examId} unitId={params.unitId} />
+      <UnitContent  examId={params.examId} unitId={params.unitId} />
     </Suspense>
   );
 }

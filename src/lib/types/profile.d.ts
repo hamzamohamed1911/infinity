@@ -29,3 +29,8 @@ declare type Dclasses = {
   image: string | null;
   date: string | null;
 };
+declare type ChangePasswordPayload = {
+  old_password: string;
+  new_password: string;
+  new_password_confirmation: string;
+}

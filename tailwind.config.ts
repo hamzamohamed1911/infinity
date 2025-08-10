@@ -82,6 +82,10 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+         halfSpin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(270deg)' },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -99,7 +103,9 @@ const config: Config = {
           },
         },
       },
+       
       animation: {
+          halfSpin: 'halfSpin 0.7s ease-in-out',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
