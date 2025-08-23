@@ -1,10 +1,10 @@
-// app/(auth)/logout/page.tsx
-export const dynamic = "force-dynamic";
+"use client";
 
-import { signOut } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { signOut } from "next-auth/react";
+import { useEffect } from "react";
 
-export default async function LogoutPage() {
-  await signOut({ redirect: false });
-  redirect("/login");
-}
+export default function LogoutPage() {
+  useEffect(() => {
+    signOut({ redirect: true, callbackUrl: "/login" });
+  }, []);
+} 
