@@ -18,13 +18,63 @@ async function UnitContent({
   const ExamData = Exam && "data" in Exam ? Exam.data : undefined;
   const Unit = await GetUnit({ unit_id: unitId });
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
+
+  // دالة لتنسيق التاريخ والوقت
+  function formatDateTime(dateTimeString: string) {
+    const dateObj = new Date(dateTimeString);
+    const date = dateObj.toLocaleDateString("ar-EG", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+    const time = dateObj.toLocaleTimeString("ar-EG", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    return { date, time };
+  }
+
   return (
     <section className="flex flex-col gap-4 w-full">
       {ExamData && UnitData && (
-        <BreadCrumb  unitData={UnitData} ExamData={ExamData} />
+        <BreadCrumb unitData={UnitData} ExamData={ExamData} />
       )}
       <Card className="w-full lg:p-8 md:p-6 p-4 flex flex-col lg:gap-6 gap-4">
-        <div className="flex flex-col lg:gap-6 gap-4">
+        {/* عرض معلومات الامتحان */}
+        {ExamData && (
+          <div className="mt-6">
+            <div className="flex items-center gap-2 mb-4">
+              <p className="text-[#606060]  lg:text-xl md:text-lg text-md ">
+                تفاصيل الامتحان
+              </p>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl shadow-sm grid sm:grid-cols-2 gap-4 text-gray-700">
+              <div>
+                <span className="font-semibold">تاريخ البداية: </span>
+                {formatDateTime(ExamData.start_date).date}
+              </div>
+              <div>
+                <span className="font-semibold">تاريخ النهاية: </span>
+                {formatDateTime(ExamData.end_date).date}
+              </div>
+              <div>
+                <span className="font-semibold">وقت البداية: </span>
+                {formatDateTime(ExamData.start_date).time}
+              </div>
+              <div>
+                <span className="font-semibold">وقت النهاية: </span>
+                {formatDateTime(ExamData.end_date).time}
+              </div>
+              <div className="sm:col-span-2">
+                <span className="font-semibold">زمن الامتحان: </span>
+                {ExamData.period} دقيقة
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="flex flex-col lg:gap-6 gap-4 mt-6">
           <p className="text-[#606060]  lg:text-xl md:text-lg text-md ">
             محاولاتك السابقة
           </p>
@@ -41,9 +91,9 @@ async function UnitContent({
               return (
                 <div
                   key={exam.id}
-                  className="border border-gray-200 rounded-md p-4 flex   gap-4 justify-center items-center bg-white shadow-sm font-semibold"
+                  className="border border-gray-200 rounded-md p-4 flex gap-4 justify-center items-center bg-white shadow-sm font-semibold"
                 >
-                  <div className="flex items-center gap-2 flex-wrap  text-gray-700">
+                  <div className="flex items-center gap-2 flex-wrap text-gray-700">
                     <span className="text-[#A4A4A4] font-semibold text-md">
                       تاريخ
                     </span>
@@ -54,7 +104,7 @@ async function UnitContent({
                       {dateString.split(" ")[1]}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2  ">
+                  <div className="flex items-center gap-2">
                     <span className="text-[#A4A4A4] text-md">الدرجة</span>
                     <span className="text-secondary-900 text-sm">
                       {exam.final_grade}/{ExamData.questions_count}
@@ -65,16 +115,21 @@ async function UnitContent({
             })}
           </div>
         </div>
+
         <div className="whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">
           <p className="text-[#606060]  ">محاولاتك المتبقية :</p>
           <span className="text-primary font-bold">{ExamData?.retries}</span>
         </div>
-        {ExamData && <ExamButton unitId={unitId} examId={examId} ExamData={ExamData} />}
+
+        {ExamData && (
+          <ExamButton unitId={unitId} examId={examId} ExamData={ExamData} />
+        )}
       </Card>
       <Deadlines />
     </section>
   );
 }
+
 export default function Page({
   params,
 }: {
@@ -82,7 +137,7 @@ export default function Page({
 }) {
   return (
     <Suspense fallback={<UnitSkeleton />}>
-      <UnitContent  examId={params.examId} unitId={params.unitId} />
+      <UnitContent examId={params.examId} unitId={params.unitId} />
     </Suspense>
   );
 }

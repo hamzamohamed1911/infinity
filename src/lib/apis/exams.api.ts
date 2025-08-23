@@ -55,7 +55,6 @@ export async function joinExam({
     throw error;
   }
 }
-
 export async function saveAnswer(
   payload: SaveAnswerPayload,
   examId: number | string
@@ -82,7 +81,6 @@ export async function saveAnswer(
     throw error;
   }
 }
-
 export async function submitAnswer(
   examId: number | string,
   answers: QuestionAnswer[]
@@ -114,4 +112,23 @@ export async function submitAnswer(
   }
 
   return res.json();
+}
+export async function GetExams({
+  course_id,
+  assessment_type
+}: {
+  course_id: string;
+  assessment_type:number;
+}): Promise<APIResponse<ExamDetails>> {
+  const token = await getAuthToken();
+  const response = await fetch(`${API_URL}api/v1/exams?course_id=${course_id}&assessment_type=${assessment_type}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const payload = await response.json();
+  return payload;
 }

@@ -11,6 +11,8 @@ declare type Lesson = {
   attachments: Attachment[];
   display_mode: string;
   is_purchased_before: boolean;
+  thumbnail?:string;
+  image?:string;
 };
 
 declare type Section = {
@@ -66,6 +68,7 @@ answers: unknown[];
 declare type Bundle = {
   id: number;
   name: string;
+  description?:string;
   booking_status: number;
   price: string;
   thumbnail: string;

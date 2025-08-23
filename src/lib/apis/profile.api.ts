@@ -2,7 +2,7 @@
 
 import { getAuthToken } from "../utils/auth-token";
 import { revalidatePath, revalidateTag } from "next/cache";
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 interface SubscribeBody {
   teacher_id: number;
   state_id?: number;
@@ -11,7 +11,7 @@ interface SubscribeBody {
   center_id?: number;
   parent_phone?: string;
 }
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export async function GetProfileData(): Promise<APIResponse<ProfileApiData>> {
   const token = await getAuthToken();
   const response = await fetch(`${API_URL}api/v1/profile`, {
@@ -21,7 +21,7 @@ export async function GetProfileData(): Promise<APIResponse<ProfileApiData>> {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    next: { tags: ["profile"] }, 
+    next: { tags: ["profile"] },
   });
 
   const payload: APIResponse<ProfileApiData> = await response.json();
@@ -30,7 +30,7 @@ export async function GetProfileData(): Promise<APIResponse<ProfileApiData>> {
     throw new Error("فشل في جلب البيانات");
   }
 
-   return payload;
+  return payload;
 }
 export async function subscribeTeacher(data: SubscribeBody) {
   const token = await getAuthToken();
@@ -45,7 +45,7 @@ export async function subscribeTeacher(data: SubscribeBody) {
   });
   const result = await response.json();
   revalidatePath("/profile");
-  revalidateTag("profile")
+  revalidateTag("profile");
   if (!response.ok) {
     throw new Error(result?.message || "فشل في الاشتراك");
   }
@@ -65,14 +65,18 @@ export async function unsubscrip(data: SubscribeBody) {
   });
   const result = await response.json();
   revalidatePath("/profile");
-  revalidateTag("profile")
+  revalidateTag("profile");
   if (!response.ok) {
     throw new Error(result?.message || "فشل في الفاء الاشتراك");
   }
 
   return result;
 }
-export async function GetClassesData({teacherId}:{teacherId:number}): Promise<APIResponse<Dclasses[]>> {
+export async function GetClassesData({
+  teacherId,
+}: {
+  teacherId: number;
+}): Promise<APIResponse<Dclasses[]>> {
   const token = await getAuthToken();
   const response = await fetch(`${API_URL}api/v1/teacher-course/${teacherId}`, {
     method: "GET",
@@ -89,11 +93,11 @@ export async function GetClassesData({teacherId}:{teacherId:number}): Promise<AP
     throw new Error("فشل في جلب البيانات");
   }
 
-   return payload;
+  return payload;
 }
 export async function changePassword(payload: ChangePasswordPayload) {
   try {
-    const token = await getAuthToken(); 
+    const token = await getAuthToken();
     const res = await fetch(`${API_URL}api/v1/change-password`, {
       method: "POST",
       headers: {
@@ -111,6 +115,31 @@ export async function changePassword(payload: ChangePasswordPayload) {
     return await res.json();
   } catch (error) {
     console.error("Error in changePassword:", error);
+    throw error;
+  }
+}
+export async function UpdateProfilePicture(formData: FormData) {
+  try {
+    const token = await getAuthToken();
+
+    const res = await fetch(`${API_URL}api/v1/user/image`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(
+        `Failed to update profile picture: ${errorText || res.status}`
+      );
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error in Update Profile Picture:", error);
     throw error;
   }
 }

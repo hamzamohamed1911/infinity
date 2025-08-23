@@ -9,7 +9,11 @@ declare type SuccessfulResponse<T> = {
   errors: undefined;
 };
 declare type ErrorResponse = {
+  success: false;
+  status: number;
   message: string;
+  data?: null;
+  errors?: unknown;
 };
 
 declare type APIResponse<T> = SuccessfulResponse<T> | ErrorResponse;

@@ -1,35 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { decryptVideo } from "@/lib/utils/decryptVideo";
-
-function getYoutubeId(url: string): string | null {
-  const match = url.match(/v=([^&]+)/);
-  return match ? match[1] : null;
-}
+import { FaCirclePlay } from "react-icons/fa6";
 
 export default function Player1({ encrypted }: { encrypted: string }) {
-  const [embedUrl, setEmbedUrl] = useState("");
+  const handleClick = () => {
+    window.open(
+      `infinity://infinity.com/video?encrypted=${encrypted}`,
+      "_blank"
+    );
+  };
 
-  useEffect(() => {
-    const decrypted = decryptVideo(encrypted);
-    const videoId = getYoutubeId(decrypted);
-    if (videoId) {
-      setEmbedUrl(`https://www.youtube.com/embed/${videoId}`);
-    }
-  }, [encrypted]);
-
-  return embedUrl ? (
-    <iframe
-      width="100%"
-      height="100%"
-      className="w-full 2xl:min-h-96  min-h-72 mt-4"
-      src={embedUrl}
-      title="YouTube Video"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    />
-  ) : (
-    <p>جاري تحميل الفيديو...</p>
+  return (
+    <div className="relative w-full 2xl:min-h-96 min-h-72 mt-4">
+      <div className="absolute inset-0 bg-black flex items-center justify-center rounded-lg">
+        <button
+          onClick={handleClick}
+          className="text-white px-6 py-3 bg-primary rounded-full font-bold hover:bg-primary-400 transition flex justify-center items-center gap-2"
+        >
+          <FaCirclePlay size={30} className="text-white" /> تشغيل الفيديو
+        </button>
+      </div>
+    </div>
   );
 }

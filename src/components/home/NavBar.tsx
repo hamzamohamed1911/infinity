@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { FaSearch, FaCog, FaSignOutAlt } from "react-icons/fa";
+import { FaCog, FaSignOutAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,6 +34,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GetProfileData } from "@/lib/apis/profile.api";
 import { Skeleton } from "../ui/skeleton";
 import { useTheme } from "@/context/theme-context";
+import Search from "./Search";
 
 const Navbar = ({ id }: { id: string }) => {
   const { logo } = useTheme();
@@ -176,20 +176,8 @@ const Navbar = ({ id }: { id: string }) => {
               ))}
             </div>
             {/* Search */}
-            <div className="flex items-center">
-              <div className="relative">
-                <Input
-                  type="text"
-                  className="pe-10 md:w-64 w-auto bg-white focus:ring-none focus:border-none rounded-3xl"
-                />
-                <div className="absolute inset-y-0 left-0 flex items-center pe-3">
-                  <FaSearch
-                    className="h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                </div>
-              </div>
-            </div>
+            <Search />
+
             {/* Logo */}
             <div className="flex items-center">
               <Link href="/">

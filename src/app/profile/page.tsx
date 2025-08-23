@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import BarcodeDialog from "./_profileComponents/BarcodeDialog";
 import ChangeOnlineDialog from "./_profileComponents/ChangeOnlineDialog";
 import UnsubscripDialog from "./_profileComponents/UnsubscripDialog";
+import UpdateImage from "./_profileComponents/UpdateImage";
 
 async function ProfileContent() {
   const Profile = await GetProfileData();
@@ -16,6 +17,8 @@ async function ProfileContent() {
       <h1 className="font-bold  md:text-4xl text-3xl  my-4">الملف الشخصي</h1>
       <div className="w-[80%] mx-auto bg-[#E8E8E8] h-[0.5px] my-8" />
       <div className="flex flex-col gap-6  my-8">
+        {profileData?.avatar && <UpdateImage imgUrl={profileData?.avatar}/>}
+        
         <div className="w-full flex md:flex-row flex-col gap-4 justify-between">
           <div className="md:w-1/2 flex flex-col gap-2">
             <label className="text-lg font-medium">الاسم</label>
@@ -68,7 +71,7 @@ async function ProfileContent() {
           </div>
           <div className="md:w-1/2 flex flex-col gap-2">
             <label className="text-lg font-medium">رقم هاتف ولي الأمر</label>
-            <p className="font-semibold md:text-xl text-lg">3555556545</p>
+            <p className="font-semibold md:text-xl text-lg"> {profileData?.parent_phone}</p>
           </div>
         </div>
         <div className=" flex flex-col gap-2">

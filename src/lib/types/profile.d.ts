@@ -5,6 +5,7 @@ declare type UserProfile = {
   wallet: number;
   gender: "m" | "f";
   status:string | undefined;
+  parent_phone:string;
   email: string;
   type: string; 
   phone: string;
