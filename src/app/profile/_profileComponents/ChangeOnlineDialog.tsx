@@ -139,7 +139,7 @@ const ChangeOnlineDialog = () => {
                 <Dropdown
                   label="المدينة"
                   placeholder="اختر المدينة"
-                  data={states}
+                  data={states ?? []}
                   value={field.value}
                   onChange={field.onChange}
                   loading={loadingstates}
@@ -154,7 +154,7 @@ const ChangeOnlineDialog = () => {
                 <Dropdown
                   label="السنتر"
                   placeholder="اختر السنتر"
-                  data={centers}
+                  data={centers ?? []}
                   value={field.value}
                   onChange={field.onChange}
                   loading={
@@ -179,7 +179,7 @@ const ChangeOnlineDialog = () => {
                 <Dropdown
                   label="المجموعة"
                   placeholder="اختر المجموعة"
-                  data={groups}
+                  data={groups ?? []}
                   value={field.value}
                   onChange={field.onChange}
                 />

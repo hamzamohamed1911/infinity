@@ -51,7 +51,7 @@ const Navbar = ({ id }: { id: string }) => {
   });
 
   const profile =
-    profileData && "data" in profileData ? profileData.data.profile : undefined;
+    profileData && "data" in profileData ? profileData?.data?.profile : undefined;
 
   const handleLogout = async () => {
     try {

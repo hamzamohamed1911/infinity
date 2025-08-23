@@ -11,7 +11,7 @@ import UpdateImage from "./_profileComponents/UpdateImage";
 async function ProfileContent() {
   const Profile = await GetProfileData();
   const profileData =
-    Profile && "data" in Profile ? Profile.data.profile : undefined;
+    Profile && "data" in Profile ? Profile?.data?.profile : undefined;
   return (
     <section className="min-h-screen w-full text-[#606060]">
       <h1 className="font-bold  md:text-4xl text-3xl  my-4">الملف الشخصي</h1>

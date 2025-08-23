@@ -1,12 +1,8 @@
-"use client";
+// app/logout/page.tsx
+import { redirect } from "next/navigation";
+import { signOut } from "@/lib/auth";
 
-import { signOut } from "next-auth/react";
-import { useEffect } from "react";
-
-export default function LogoutPage() {
-  useEffect(() => {
-    signOut({ redirect: true, callbackUrl: "/login" });
-  }, []);
-
-  return <div className="h-screen flex items-center justify-center"></div>;
+export default async function LogoutPage() {
+  await signOut({ redirect: false });
+  redirect("/login");
 }
