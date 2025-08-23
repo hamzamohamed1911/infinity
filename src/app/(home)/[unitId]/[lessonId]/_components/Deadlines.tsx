@@ -24,8 +24,7 @@ const Deadlines = async () => {
     examsList && "data" in examsList && Array.isArray(examsList.data)
       ? examsList.data
       : [];
-
-  // فلترة الامتحانات بحيث تكون النهارده أو بكرة
+console.log(ExamsData)
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
