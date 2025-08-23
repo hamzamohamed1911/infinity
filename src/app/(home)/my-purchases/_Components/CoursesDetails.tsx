@@ -8,7 +8,7 @@ import Image, { StaticImageData } from "next/image";
 const CoursesDetails = async ({id}:{id:string}) => {
   const Profile = await GetProfileData();
   const profileData =
-    Profile && "data" in Profile ? Profile.data.profile : undefined;
+    Profile && "data" in Profile ? Profile?.data?.profile : undefined;
       const course = await GetCourse({course_id:id});
   const courseData =
     course && "data" in course ? course.data : undefined;

@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { getAuthToken } from "../utils/auth-token";
 import { revalidatePath, revalidateTag } from "next/cache";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -84,10 +85,14 @@ export async function GetClassesData({
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
   });
 
   const payload: APIResponse<Dclasses[]> = await response.json();
+  if (payload?.message === "Unauthenticated.") {
+    redirect("/logout");
+  }
 
   if (!("success" in payload) || !payload.success) {
     throw new Error("فشل في جلب البيانات");

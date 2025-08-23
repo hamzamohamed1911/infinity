@@ -125,7 +125,7 @@ async function UnitContent({
           <ExamButton unitId={unitId} examId={examId} ExamData={ExamData} />
         )}
       </Card>
-      <Deadlines />
+      <Deadlines unitId={unitId} examId={examId} />
     </section>
   );
 }

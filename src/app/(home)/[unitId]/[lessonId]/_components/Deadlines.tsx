@@ -1,13 +1,17 @@
 import Image from "next/image";
 import { FiChevronLeft } from "react-icons/fi";
 import { studentstudying } from "../../../../../../public";
-import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { GetExams } from "@/lib/apis/exams.api";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+type ExamButtonProps = {
+  unitId: string;
+  examId: string;
+};
 
-const Deadlines = async () => {
+const Deadlines = async ({  unitId, examId }: ExamButtonProps) => {
   const cookieStore = cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
 
@@ -24,7 +28,7 @@ const Deadlines = async () => {
     examsList && "data" in examsList && Array.isArray(examsList.data)
       ? examsList.data
       : [];
-console.log(ExamsData)
+  console.log(ExamsData);
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
@@ -99,16 +103,16 @@ console.log(ExamsData)
                 </div>
 
                 {/* زر بدء الحل */}
-                <Button
-                  variant="ghost"
-                  className="mt-4 group w-full border border-primary text-primary flex items-center justify-center text-md gap-1 h-10 rounded-md hover:bg-primary-400 hover:text-white transition"
+                <Link
+                  href={`/${unitId}/${examId}/exams/${exam.id}`}
+                  className="mt-4 group w-full border border-primary text-primary flex items-center justify-center text-md gap-1 h-10 hover:bg-primary-400 hover:text-white transition rounded-md"
                 >
                   <span>ابدأ حل</span>
                   <FiChevronLeft
                     size={25}
                     className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
                   />
-                </Button>
+                </Link>
               </div>
             </div>
           ))}

@@ -211,7 +211,9 @@ const Register = () => {
         </nav>
 
         <div className=" text-center flex flex-col gap-2 mt-2">
-          <h2 className=" lg:text-3xl text-2xl font-bold text-[#606060]">سجل معانا دلوقتي</h2>
+          <h2 className=" lg:text-3xl text-2xl font-bold text-[#606060]">
+            سجل معانا دلوقتي
+          </h2>
           <p className="font-medium text-xl text-[#606060 mt-2">
             إبدأ معانا رحلتك في التعلم وتجيب أعلى الدرجات
           </p>
@@ -297,7 +299,7 @@ const Register = () => {
                         render={({ field }) => (
                           <Dropdown
                             placeholder="اختر المدينة"
-                            data={states}
+                            data={states ?? []}
                             value={Number(field.value)}
                             onChange={(value) => field.onChange(String(value))}
                           />
@@ -351,7 +353,7 @@ const Register = () => {
                         render={({ field }) => (
                           <Dropdown
                             placeholder="اختر الصف"
-                            data={classroom}
+                            data={classroom ?? []}
                             value={Number(field.value)}
                             onChange={(value) => field.onChange(String(value))}
                           />
@@ -567,7 +569,7 @@ const Register = () => {
                             render={({ field }) => (
                               <Dropdown
                                 placeholder="اختر المدينة"
-                                data={states}
+                                data={states ?? []}
                                 value={Number(field.value)}
                                 onChange={(value) =>
                                   field.onChange(String(value))
@@ -589,7 +591,7 @@ const Register = () => {
                             render={({ field }) => (
                               <Dropdown
                                 placeholder="اختر الصف"
-                                data={classroom}
+                                data={classroom ?? []}
                                 value={Number(field.value)}
                                 onChange={(value) =>
                                   field.onChange(String(value))
