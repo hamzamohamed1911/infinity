@@ -117,6 +117,7 @@ declare type CourseDetails = {
   image:string | null;
   exams_count: number;
   homeworks_count: number;
+  thumbnail?:string;
 };
 declare type UnitsD = {
   id: number;

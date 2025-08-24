@@ -7,4 +7,4 @@ export default function LogoutPage() {
   useEffect(() => {
     signOut({ redirect: true, callbackUrl: "/login" });
   }, []);
-} 
+}

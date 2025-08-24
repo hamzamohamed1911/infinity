@@ -14,7 +14,7 @@ import { FiUsers } from "react-icons/fi";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useSidebar } from "@/lib/context/SidebarContext";
 
-const SideBar = ({id}:{id:string}) => {
+const SideBar = ({ id }: { id: string }) => {
   const pathname = usePathname();
   const { isSidebarOpen, closeSidebar } = useSidebar();
 
@@ -69,7 +69,7 @@ const SideBar = ({id}:{id:string}) => {
     SideBarItems.find((item) => item.href === pathname)?.label || "غير معروف";
   return (
     <aside
-      className={`fixed inset-y-0 left-0 md:w-72 w-full overflow-auto border-[1px] border-[#E8E8E8] md:bg-white bg-backgroundColor md:my-8 my-0 md:rounded-2xl rounded-none transition-transform duration-300 ease-in-out z-50 ${
+      className={`fixed shrink-0 inset-y-0 left-0 md:w-72 w-full overflow-auto border-[1px] border-[#E8E8E8] md:bg-white bg-backgroundColor md:my-8 my-0 md:rounded-2xl rounded-none transition-transform duration-300 ease-in-out z-50 ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       } md:translate-x-0 md:static md:block ${
         isSidebarOpen ? "block" : "hidden"
@@ -78,7 +78,7 @@ const SideBar = ({id}:{id:string}) => {
       <div className="bg-white h-16 md:hidden flex justify-between items-center px-4 text-primary">
         <p className="text-xl font-bold ">{currentRouteLabel}</p>
         <button onClick={() => closeSidebar()}>
-          <FaArrowLeft size={22}/>
+          <FaArrowLeft size={22} />
         </button>
       </div>
       {/* Sidebar content */}

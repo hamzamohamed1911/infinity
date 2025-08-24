@@ -12,7 +12,6 @@ interface SubscribeBody {
   center_id?: number;
   parent_phone?: string;
 }
-
 export async function GetProfileData(): Promise<APIResponse<ProfileApiData>> {
   const token = await getAuthToken();
   const response = await fetch(`${API_URL}api/v1/profile`, {
@@ -21,12 +20,15 @@ export async function GetProfileData(): Promise<APIResponse<ProfileApiData>> {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
     next: { tags: ["profile"] },
   });
 
   const payload: APIResponse<ProfileApiData> = await response.json();
-
+  if (payload?.message === "Unauthenticated.") {
+    redirect("/logout");
+  }
   if (!("success" in payload) || !payload.success) {
     throw new Error("فشل في جلب البيانات");
   }

@@ -4,14 +4,14 @@ import Image from "next/image";
 import { placeholder } from "../../../../../../../public";
 import Link from "next/link";
 
-const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
+const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
   console.log("UnitsData", UnitsData);
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {UnitsData.map((unit: CourseDetails) => (
         <Card key={unit.id} className="overflow-hidden shadow-none border-none">
           <Image
-            src={unit.image || placeholder}
+            src={unit.thumbnail || unit.image || placeholder}
             alt={unit.name}
             width={600}
             height={600}
@@ -38,4 +38,4 @@ const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
   );
 };
 
-export default AllUnits;
+export default AllLessons;
