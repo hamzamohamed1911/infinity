@@ -3,11 +3,13 @@ import { IoIosArrowBack } from "react-icons/io";
 import Image from "next/image";
 import { placeholder } from "../../../../../../../public";
 import Link from "next/link";
+import { MdEditNote, MdOndemandVideo } from "react-icons/md";
+import { LuBook } from "react-icons/lu";
 
-const AllCourses = ({ CoursesData }: { CoursesData: Dclasses[] }) => {
+const AllCourses = ({ CoursesData }: { CoursesData: CourseType[] }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {CoursesData.map((course: Dclasses) => (
+      {CoursesData.map((course: CourseType) => (
         <Card
           key={course.id}
           className="overflow-hidden shadow-none border-none"
@@ -23,6 +25,26 @@ const AllCourses = ({ CoursesData }: { CoursesData: Dclasses[] }) => {
             <h3 className="text-lg font-semibold text-[#606060]">
               {course.name}
             </h3>
+            <div className="flex justify-between text-[#8E8E8E]">
+              <div className="flex items-center gap-1 text-sm">
+                <MdEditNote size={20} />
+                <span>{course?.exams?.length} </span>
+                <span>امتحان</span>
+              </div>
+
+              <div className="flex items-center gap-1 text-sm">
+                <LuBook size={20} />
+                <span>{course?.books?.length} </span>
+                <span>كتب</span>
+              </div>
+
+              <div className="flex items-center gap-1 text-sm">
+                <MdOndemandVideo size={20} />
+                <span>{course?.lessons?.length} </span>
+                <span>دروس</span>
+              </div>
+            </div>
+
             <Link
               href={`/${course.id}`}
               className="group flex items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"

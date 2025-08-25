@@ -1,19 +1,12 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Suspense } from "react";
 import UnitSkeleton from "@/components/UnitSkeleton";
-import { fetchTeachers } from "@/app/api/register";
 import AllCourses from "./_components/AllCourses";
-import { GetClassesData } from "@/lib/apis/profile.api";
+import { GetCoursesbundles } from "@/lib/apis/course.api";
 
-async function UnitsContent() {
-  const teachersResponse = await fetchTeachers();
-  const teachers = teachersResponse?.data || [];
-  const actualTeacher = teachers.length === 1 ? teachers[0].id : undefined;
-  if (!actualTeacher) {
-    return <p className="text-red-500">لا يوجد مدرس محدد.</p>;
-  }
-  const classes = await GetClassesData({ teacherId: actualTeacher });
-  const ClassesData = classes && "data" in classes ? classes.data : undefined;
+async function UnitsContent({ courseId }: { courseId: string }) {
+  const courses = await GetCoursesbundles({ course_id: courseId });
+  const ClassesData = courses && "data" in courses ? courses.data : undefined;
 
   return (
     <section>
@@ -46,22 +39,18 @@ async function UnitsContent() {
           <TabsContent value="all">
             <AllCourses CoursesData={ClassesData ?? []} />
           </TabsContent>
-          <TabsContent value="ending">
-            ending
-          </TabsContent>
-          <TabsContent value="recent">
-           recent
-          </TabsContent>
+          <TabsContent value="ending">ending</TabsContent>
+          <TabsContent value="recent">recent</TabsContent>
         </div>
       </Tabs>
     </section>
   );
 }
 
-export default function page() {
+export default function page({ params }: { params: { id: string } }) {
   return (
     <Suspense fallback={<UnitSkeleton />}>
-      <UnitsContent />
+      <UnitsContent courseId={params.id} />
     </Suspense>
   );
 }

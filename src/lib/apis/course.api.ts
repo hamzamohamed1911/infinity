@@ -28,6 +28,29 @@ if (!payload || !payload.data) {
 
   return payload;
 }
+export async function GetCoursesbundles({
+  course_id,
+}: {
+  course_id: string
+}): Promise<APIResponse<CourseType[]>> {
+  const token = await getAuthToken();
+  const response = await fetch(`${API_URL}api/v1/bundles/${course_id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const payload = await response.json();
+
+if (!payload || !payload.data) {
+  throw new Error("فشل في جلب البيانات");
+}
+
+
+  return payload;
+}
 export async function GetUnits({
   course_id,
 }: {

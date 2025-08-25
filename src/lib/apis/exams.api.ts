@@ -18,7 +18,7 @@ export async function GetExam({
   });
 
   const payload = await response.json();
-  console.log("exam response " , payload)
+  console.log("exam response ", payload);
   return payload;
 }
 export async function joinExam({
@@ -40,10 +40,10 @@ export async function joinExam({
         Authorization: `Bearer ${token}`,
       },
     });
-console.log("joinExam response" , response)
+    console.log("joinExam response", response);
     const payload = await response.json();
-    console.log("payload" ,payload)
-  
+    console.log("payload", payload);
+
     if (!response.ok) {
       throw new Error(payload.message || "Failed to join exam");
     }
@@ -71,7 +71,7 @@ export async function saveAnswer(
       },
       body: JSON.stringify(payload),
     });
-  console.log("resssss" , res)
+    console.log("resssss", res);
     if (!res.ok) {
       const errorText = await res.text();
       throw new Error(`Failed to save answer: ${errorText || res.status}`);
@@ -94,10 +94,10 @@ export async function submitAnswer(
       question_id: a.question_id,
       question_type: a.question_type,
       answer: a.question_type === "radio" ? Number(a.answer) : String(a.answer),
-      ...(a.question_type !== "radio" && { url: a.url || "" }), 
+      ...(a.question_type !== "radio" && { url: a.url || "" }),
     })),
   };
-  console.log("submitAnswerpayload" , payload)
+  console.log("submitAnswerpayload", payload);
 
   const res = await fetch(`${API_URL}api/v1/exams/submit/${examId}`, {
     method: "POST",
@@ -117,19 +117,22 @@ export async function submitAnswer(
 }
 export async function GetExams({
   course_id,
-  assessment_type
+  assessment_type=1,
 }: {
   course_id: string;
-  assessment_type:number;
-}): Promise<APIResponse<ExamDetails>> {
+  assessment_type: number;
+}): Promise<APIResponse<ExamDetails[]>> {
   const token = await getAuthToken();
-  const response = await fetch(`${API_URL}api/v1/exams?course_id=${course_id}&assessment_type=${assessment_type}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await fetch(
+    `${API_URL}api/v1/exams?course_id=${course_id}&assessment_type=${assessment_type}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
   const payload = await response.json();
   return payload;

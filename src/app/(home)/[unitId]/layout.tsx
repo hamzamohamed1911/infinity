@@ -1,6 +1,7 @@
 import Navbar from "@/components/home/NavBar";
 import BottomNavbar from "@/components/home/BottomNavbar";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default function LessonLayout({
   children,
@@ -9,9 +10,9 @@ export default function LessonLayout({
 }) {
   const cookieStore = cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
-//   if (!selectedId || selectedId === "undefined") {
-//   redirect("/my-classes");
-// }
+  if (!selectedId || selectedId === "undefined") {
+  redirect("/my-classes");
+}
   return (
     <>
       <Navbar id={selectedId || ""}/>

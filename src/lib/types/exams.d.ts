@@ -28,8 +28,8 @@ declare type ExamDetails = {
   user_exams_retries: UserExamRetry[];
   answers: []; 
   is_attempted: boolean;
+  image?:string;
 }
-
 // السؤال الواحد
 declare type Question = {
   id: number;

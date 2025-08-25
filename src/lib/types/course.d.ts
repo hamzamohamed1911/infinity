@@ -80,6 +80,7 @@ declare type Bundle = {
 };
 
 declare type CourseType = {
+  
   id: number;
   name: string;
   featured: number;
@@ -93,6 +94,9 @@ declare type CourseType = {
   books: Book[];
   bundles: Bundle[];
   quizzes: unknown[];
+  thumbnail?:string;
+  exams?: exam[];
+  lessons?: Lesson[];
 };
 declare type Lesson = {
   id: number;
