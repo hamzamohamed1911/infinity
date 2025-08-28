@@ -1,0 +1,66 @@
+name: Auto Deploy to Development
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy-on-dev:
+    runs-on: ubuntu-latest
+    environment: 'develop'
+    steps:
+      - name: Fetch Branch ${{ github.ref_name }}
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: cd /root/nextjs && git fetch origin ${{ github.ref_name }}
+          host: ${{ secrets.SERVER_IP }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          privateKey: ${{ secrets.SERVER_KEY }}
+
+      - name: Checkout to ${{ github.ref_name }}
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: cd /root/nextjs && git checkout ${{ github.ref_name }}
+          host: ${{ secrets.SERVER_IP }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          privateKey: ${{ secrets.SERVER_KEY }}
+
+      - name: Pull from ${{ github.ref_name }}
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: cd /root/nextjs && git pull origin ${{ github.ref_name }}
+          host: ${{ secrets.SERVER_IP }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          privateKey: ${{ secrets.SERVER_KEY }}
+
+      - name: Installing dependencies...
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: cd /root/nextjs && npm install
+          host: ${{ secrets.SERVER_IP }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          privateKey: ${{ secrets.SERVER_KEY }}
+
+      - name: Building the application...
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: cd /root/nextjs && npm run build
+          host: ${{ secrets.SERVER_IP }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          privateKey: ${{ secrets.SERVER_KEY }}
+
+      - name: Restarting PM2 process...
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: pm2 restart all
+          host: ${{ secrets.SERVER_IP }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          privateKey: ${{ secrets.SERVER_KEY }}
+
