@@ -8,7 +8,7 @@ on:
 jobs:
   deploy-on-dev:
     runs-on: ubuntu-latest
-    environment: 'develop'
+    environment: 'development'
     steps:
       - name: Fetch Branch ${{ github.ref_name }}
         uses: garygrossgarten/github-action-ssh@release
