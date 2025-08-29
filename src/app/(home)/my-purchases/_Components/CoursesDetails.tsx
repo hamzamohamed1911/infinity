@@ -7,13 +7,13 @@ import Ads from "./Ads";
 const CoursesDetails = async ({ id }: { id: string }) => {
   const Profile = await GetProfileData();
   const profileData =
-    Profile && "data" in Profile ? Profile?.data?.profile : undefined;
+  Profile && "data" in Profile ? Profile?.data?.profile : undefined;
   const course = await GetCourse({ course_id: id });
   const courseData = course && "data" in course ? course.data : undefined;
   const imageSrc: string | StaticImageData = courseData?.image || placeholder;
 
   return (
-    <div className="flex flex-col gap-6 my-6">
+    <div className="flex flex-col gap-6 my-6 w-full">
       <h1 className="font-bold lg:text-3xl text-2xl text-[#606060] ">
         {profileData?.classroom_name}
       </h1>

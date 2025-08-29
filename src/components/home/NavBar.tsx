@@ -49,9 +49,10 @@ const Navbar = ({ id }: { id: string }) => {
     queryKey: ["profile"],
     queryFn: () => GetProfileData(),
   });
-
   const profile =
-    profileData && "data" in profileData ? profileData?.data?.profile : undefined;
+    profileData && "data" in profileData
+      ? profileData?.data?.profile
+      : undefined;
 
   const handleLogout = async () => {
     try {
@@ -63,7 +64,6 @@ const Navbar = ({ id }: { id: string }) => {
       setError(err instanceof Error ? err.message : "خطأ غير معروف");
     }
   };
-
   const navItems = [
     {
       href: `/my-purchases/${id}`,
@@ -88,18 +88,18 @@ const Navbar = ({ id }: { id: string }) => {
         <div className="xl:max-w-[90%] container max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 gap-2">
             <button
-              className="sm:hidden flex items-center text-white text-2xl"
+              className="md:hidden flex items-center text-white text-2xl"
               onClick={toggleSidebar}
             >
               <RxHamburgerMenu />
             </button>
             {/* User Profile */}
             {isLoading ? (
-              <div className="sm:flex hidden  h-20 gap-2 items-center">
+              <div className="md:flex hidden  h-20 gap-2 items-center">
                 <Skeleton className="size-10 bg-gray-300 rounded-full animate-pulse" />
               </div>
             ) : (
-              <div className="ml-4 sm:ml-6 sm:flex hidden justify-center items-center">
+              <div className="ml-4 sm:ml-6 md:flex hidden justify-center items-center">
                 <DropdownMenu>
                   <DropdownMenuTrigger
                     className="focus:bg-transparent hover:bg-transparent focus:border-none"

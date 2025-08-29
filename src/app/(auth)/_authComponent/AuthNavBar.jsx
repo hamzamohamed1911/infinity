@@ -1,14 +1,20 @@
+"use client";
+
 import Image from "next/image";
-import { logo } from "../../../../public";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 const AuthNavBar = () => {
+  const { logo } = useTheme();
+
   return (
-    <nav className="bg-primary h-20 w-full flex justify-center items-center">
-      <div className="container mx-auto flex justify-end p-4">
-        <Link href="/" className="inline-block">
-          <Image alt="logo" src={logo} className="w-auto h-auto" />
-        </Link>
+    <nav className="bg-primary">
+      <div className="xl:max-w-[90%] container max-w-full mx-auto  h-20 w-full flex justify-center items-center ">
+        <div className="container mx-auto flex justify-end p-4">
+          <Link href="/" className="inline-block">
+            <Image alt="logo" src={logo} className="w-auto h-auto" />
+          </Link>
+        </div>
       </div>
     </nav>
   );
