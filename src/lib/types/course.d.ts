@@ -57,6 +57,7 @@ declare type Exam = {
   degree: number;
   user_degree: number | null;
   min_grade: number;
+  image:string;
   assessment_type: string;
 questions: unknown[];
   questions_count: number;

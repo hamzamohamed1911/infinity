@@ -9,9 +9,10 @@ import Link from "next/link";
 type ExamButtonProps = {
   unitId: string;
   examId: string;
+  examType: number;
 };
 
-const Deadlines = async ({  unitId, examId }: ExamButtonProps) => {
+const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
   const cookieStore = cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
 
@@ -21,14 +22,14 @@ const Deadlines = async ({  unitId, examId }: ExamButtonProps) => {
 
   const examsList = await GetExams({
     course_id: selectedId,
-    assessment_type: 1,
+    assessment_type: examType,
   });
 
   const ExamsData: ExamDetails[] =
     examsList && "data" in examsList && Array.isArray(examsList.data)
       ? examsList.data
       : [];
-  console.log(ExamsData);
+  console.log("deadlines ExamsData", ExamsData);
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
@@ -52,10 +53,12 @@ const Deadlines = async ({  unitId, examId }: ExamButtonProps) => {
       </p>
 
       {filteredExams.length === 0 ? (
-        <p className="text-gray-500">لا يوجد امتحانات قريبة </p>
+        <p className="text-gray-500">
+          {examType === 1 ? "لا توجد امتحانات قريبة" : "لا توجد واجبات قريبة"}
+        </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredExams.map((exam: Exam) => (
+          {filteredExams.map((exam: ExamDetails) => (
             <div
               key={exam.id}
               className="border rounded-xl overflow-hidden shadow-sm bg-white"

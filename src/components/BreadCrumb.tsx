@@ -11,11 +11,21 @@ import {
 } from "@/components/ui/breadcrumb";
 import { useParams } from "next/navigation";
 
-export function BreadCrumb({ unitData, lessonData ,ExamData }: { unitData: CourseDetails; lessonData?: LessonDetails ,ExamData? :ExamDetails }) {
-  const params = useParams(); // { unitId: "256", lessonId: "45", ... }
+export function BreadCrumb({ 
+  unitData, 
+  lessonData, 
+  ExamData, 
+  examType = "exam" 
+}: { 
+  unitData: CourseDetails; 
+  lessonData?: LessonDetails; 
+  ExamData?: ExamDetails;
+  examType?: "exam" | "homework";
+}) {
+  const params = useParams(); 
 
   return (
-    <Breadcrumb className="text-secondary font-semibold" dir="rtl">
+    <Breadcrumb className="text-secondary font-semibold p-4 gap-4" dir="rtl">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
@@ -24,7 +34,6 @@ export function BreadCrumb({ unitData, lessonData ,ExamData }: { unitData: Cours
         </BreadcrumbItem>
 
         <BreadcrumbSeparator />
-
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href={`/${params.unitId}`}>
@@ -44,8 +53,12 @@ export function BreadCrumb({ unitData, lessonData ,ExamData }: { unitData: Cours
         {ExamData && (
           <>
             <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{`إمتحان ${ExamData?.name || "الامتحان"}`}</BreadcrumbPage>
+            <BreadcrumbItem >
+                <BreadcrumbPage>
+                {examType === "homework"
+                  ? `واجب ${ExamData?.name || "الواجب"}`
+                  : `إمتحان ${ExamData?.name || "الامتحان"}`}
+              </BreadcrumbPage>
             </BreadcrumbItem>
           </>
         )}

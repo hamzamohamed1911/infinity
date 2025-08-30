@@ -24,7 +24,6 @@ async function HomeWorksContent({ courseId }: { courseId: string }) {
   });
 
   const SolvedExamsData = HomeWorksData?.filter((exam) => exam.is_attempted);
- console.log("HomeWorks" ,HomeWorks)
   return (
     <section>
       <Tabs dir="rtl" defaultValue="all" className="w-full my-8">

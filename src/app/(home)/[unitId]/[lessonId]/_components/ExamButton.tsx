@@ -10,9 +10,15 @@ type ExamButtonProps = {
   ExamData: ExamDetails;
   unitId: string;
   examId: string;
+  examType?: "exam" | "homework";
 };
 
-const ExamButton = ({ ExamData, unitId, examId }: ExamButtonProps) => {
+const ExamButton = ({
+  ExamData,
+  unitId,
+  examId,
+  examType = "exam",
+}: ExamButtonProps) => {
   const router = useRouter();
 
   const mutation = useMutation({
@@ -23,10 +29,17 @@ const ExamButton = ({ ExamData, unitId, examId }: ExamButtonProps) => {
         exam_parent_id: examId,
       }),
     onSuccess: () => {
-      router.push(`/${unitId}/${examId}/exams/${ExamData.id}/exam`);
-      toast.success("تم بدء الامتحان بنجاح!", {
-        className: "!bg-primary !text-white !border-primary",
-      });
+      if (examType === "homework") {
+        router.push(`/${unitId}/${examId}/home-works/${ExamData.id}/home-work`);
+        toast.success("تم بدء الواجب بنجاح!", {
+          className: "!bg-primary !text-white !border-primary",
+        });
+      } else {
+        router.push(`/${unitId}/${examId}/exams/${ExamData.id}/exam`);
+        toast.success("تم بدء الامتحان بنجاح!", {
+          className: "!bg-primary !text-white !border-primary",
+        });
+      }
     },
     onError: (error: Error) => {
       toast.error(error.message || "حدث خطأ أثناء بدء الامتحان", {
@@ -40,10 +53,16 @@ const ExamButton = ({ ExamData, unitId, examId }: ExamButtonProps) => {
       <button
         onClick={() => mutation.mutate()}
         disabled={mutation.isPending}
-        className="bg-primary-400 hover:bg-primary-500 text-white rounded-md group flex gap-2 items-center justify-center w-52 h-16 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-primary-400 hover:bg-primary-500 text-white rounded-md group flex gap-2 items-center justify-center w-52 lg:h-16 md:h-14 h-12 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <span className="relative z-10 text-lg font-medium">
-          {ExamData?.is_attempted ? "إعادة الإمتحان" : "ابدأ الإمتحان"}
+       <span className="relative z-10 md:text-lg text-md font-medium">
+          {ExamData?.is_attempted
+            ? examType === "homework"
+              ? "إعادة الواجب"
+              : "إعادة الإمتحان"
+            : examType === "homework"
+            ? "ابدأ الواجب"
+            : "ابدأ الإمتحان"}
         </span>
         <IoRefreshOutline
           size={33}

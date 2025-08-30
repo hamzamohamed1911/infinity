@@ -6,6 +6,12 @@ import { useState } from "react";
 import { useSearch } from "@/lib/hooks/useSearch";
 import Image from "next/image";
 import { placeholder } from "../../../public";
+import { useDebounce } from "@/lib/hooks/useDebounce";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const truncate = (text: string, length = 80) => {
   if (!text) return "";
@@ -14,30 +20,42 @@ const truncate = (text: string, length = 80) => {
 
 const SearchBox = () => {
   const [keyword, setKeyword] = useState("");
-  const teacher_id = "6569"; // أو تاخده من props
+  const [open, setOpen] = useState(false);
 
-  const { data, isLoading, isError } = useSearch(teacher_id, keyword);
+  const teacher_id = "6569";
+  const debouncedKeyword = useDebounce(keyword, 500);
 
+  const { data, isLoading, isError } = useSearch(teacher_id, debouncedKeyword);
   return (
-    <div className="flex items-center">
-      <div className="relative w-full md:w-80">
-        {/* Input */}
-        <div className="relative w-full">
-          <Input
-            type="text"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            className="pe-10 bg-white rounded-3xl shadow-sm"
-            placeholder="ابحث هنا..."
-          />
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-            <FaSearch className="h-5 w-5 text-gray-400" aria-hidden="true" />
-          </div>
-        </div>
+    <Popover open={open} onOpenChange={setOpen}>
+      <div className="flex items-center">
+        <div className="relative w-full md:w-80">
+          {/* Input */}
+            <div className="relative w-full">
+                        <PopoverTrigger asChild>
 
-        {/* Results */}
-        {keyword.length > 0 && (
-          <div className="absolute top-full mt-2 w-full bg-white rounded-lg shadow-lg border max-h-96 overflow-y-auto z-50">
+              <Input
+                type="text"
+                value={keyword}
+                onChange={(e) => {
+                  setKeyword(e.target.value);
+                  setOpen(true); // يفتح أول ما يكتب
+                }}
+                className="pe-10 bg-white rounded-3xl shadow-sm"
+                placeholder="ابحث هنا..."
+              />
+              </PopoverTrigger>
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+                <FaSearch
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+          
+
+          {/* Results */}
+          <PopoverContent className="w-80 p-0 max-h-96 overflow-y-auto">
             {isLoading && (
               <p className="p-3 text-gray-500 text-sm">جاري التحميل...</p>
             )}
@@ -47,7 +65,6 @@ const SearchBox = () => {
               </p>
             )}
 
-            {/* ✅ لو مفيش نتائج */}
             {data && !data.success && (
               <p className="p-3 text-gray-500 text-sm">{data.message}</p>
             )}
@@ -156,14 +173,35 @@ const SearchBox = () => {
                       {data.data.exams.map((exam: Exam) => (
                         <div
                           key={exam.id}
-                          className="p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
+                          className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
                         >
-                          <p className="font-medium text-gray-800">
-                            {exam.name}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {truncate(exam.description ?? "")}
-                          </p>
+                          {exam.image ? (
+                            <div className="w-12 h-12 rounded-md overflow-hidden">
+                              <Image
+                                src={exam.image}
+                                alt={exam.name}
+                                width={50}
+                                height={50}
+                                className="object-cover"
+                              />
+                            </div>
+                          ) : (
+                            <Image
+                              src={placeholder}
+                              alt={exam.name}
+                              width={50}
+                              height={50}
+                              className="rounded-md object-cover"
+                            />
+                          )}
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-800">
+                              {exam.name}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {truncate(exam.description ?? "")}
+                            </p>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -214,10 +252,10 @@ const SearchBox = () => {
                 )}
               </div>
             )}
-          </div>
-        )}
+          </PopoverContent>
+        </div>
       </div>
-    </div>
+    </Popover>
   );
 };
 

@@ -143,7 +143,7 @@ async function LessonContent({
                       {LessonData?.sub_homeworks.map((homework) => (
                         <li key={homework.id}>
                           <Link
-                            href={`/${unitId}/${LessonData.id}/home-work/${homework.id}`}
+                            href={`/${unitId}/${LessonData.id}/home-works/${homework.id}`}
                             className="text-secondary-900 underline text-lg hover:text-secondary-800 transition-colors"
                           >
                             {homework.name}

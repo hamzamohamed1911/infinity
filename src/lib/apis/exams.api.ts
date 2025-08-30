@@ -18,7 +18,6 @@ export async function GetExam({
   });
 
   const payload = await response.json();
-  console.log("exam response ", payload);
   return payload;
 }
 export async function joinExam({
@@ -40,9 +39,7 @@ export async function joinExam({
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("joinExam response", response);
     const payload = await response.json();
-    console.log("payload", payload);
 
     if (!response.ok) {
       throw new Error(payload.message || "Failed to join exam");
@@ -71,7 +68,6 @@ export async function saveAnswer(
       },
       body: JSON.stringify(payload),
     });
-    console.log("resssss", res);
     if (!res.ok) {
       const errorText = await res.text();
       throw new Error(`Failed to save answer: ${errorText || res.status}`);
@@ -97,7 +93,6 @@ export async function submitAnswer(
       ...(a.question_type !== "radio" && { url: a.url || "" }),
     })),
   };
-  console.log("submitAnswerpayload", payload);
 
   const res = await fetch(`${API_URL}api/v1/exams/submit/${examId}`, {
     method: "POST",

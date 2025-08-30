@@ -8,7 +8,6 @@ import { MdEditNote } from "react-icons/md";
 import { formatDate } from "@/lib/utils/format-date";
 
 const ExamsComponent = ({ ExamsData }: { ExamsData: ExamDetails[] }) => {
-  console.log("ExamsData", ExamsData);
 
   if (!ExamsData || ExamsData.length === 0) {
     return (

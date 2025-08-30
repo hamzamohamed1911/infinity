@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Clock, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
 import { placeholder } from "../../../../../../public";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,7 +15,7 @@ import ConfirmSubmitDialog from "./ConfirmSubmitDialog";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 
-export default function ExamComponent({
+export default function HomeWorkComponent({
   examData,
   examId,
 }: {
@@ -24,7 +24,6 @@ export default function ExamComponent({
 }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string | number>>({});
-  const [timeRemaining, setTimeRemaining] = useState(examData.period * 60);
   const [openDialog, setOpenDialog] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     undefined
@@ -40,30 +39,9 @@ export default function ExamComponent({
     await handleSubmitExam();
     setOpenDialog(false);
   };
-  // Timer effect
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeRemaining((prev) => {
-        if (prev <= 0) {
-          clearInterval(timer);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
 
   // Format time display
-  const formatTime = (seconds: number) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return `${hours}:${minutes.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
-  };
+
   const currentQuestion = examData.questions[currentQuestionIndex];
   const totalQuestions = examData.questions.length;
 
@@ -171,15 +149,9 @@ export default function ExamComponent({
                 onClick={() => setOpenDialog(true)}
                 className="flex items-center justify-end gap-2 text-red-600 text-sm underline cursor-pointer"
               >
-                <span>إنهاء الامتحان</span>
+                <span>إنهاء الواجب</span>
                 <X className="w-4 h-4" />
               </div>
-            </div>
-            <div className="w-full flex justify-center items-center">
-              <span className="w-fit flex items-center gap-2 text-[#DF6100] border border-[#DF6100] rounded-md px-6 h-12 font-medium text-lg shadow-sm">
-                <span>{formatTime(timeRemaining)}</span>
-                <Clock className="w-4 h-4" />
-              </span>
             </div>
 
             {/* Progress Steps */}
@@ -353,7 +325,7 @@ export default function ExamComponent({
                   </>
                 ) : (
                   <>
-                    إنهاء الامتحان
+                    إنهاء الواجب
                     <X className="w-6 h-6" />
                   </>
                 )}

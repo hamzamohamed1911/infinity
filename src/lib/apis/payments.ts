@@ -30,7 +30,6 @@ export async function chargeCode({
       },
       body: formData,
     });
-    console.log("resssss", res);
      if (!res.ok) {
       let errorMessage = `Failed: ${res.status}`;
       try {

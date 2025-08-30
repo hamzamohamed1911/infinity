@@ -17,7 +17,7 @@ export default function LessonLayout({
     <>
       <Navbar id={selectedId || ""}/>
       <div className="bg-backgroundColor md:mb-0 mb-20">
-        <div className="flex lg:max-w-[90%] max-w-full container mx-auto p-4">
+        <div className="flex lg:max-w-[90%] max-w-full container mx-auto  lg:p-4 md:p-2 py-0">
           <main className=" min-h-screen  md:m-6 m-0 w-full">{children}</main>
         </div>
       </div>
