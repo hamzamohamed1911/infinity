@@ -122,3 +122,31 @@ body {
   display: inline-block;
   line-height: 60px;
 }
+/* شيل البوردر الافتراضي من الـ input */
+.react-international-phone-input {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* شيل البوردر من الكونتري سيلكتور */
+.react-international-phone-country-selector {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* كمان من الزرار نفسه */
+.react-international-phone-country-selector-button {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* اجبر الـ dropdown يفتح شمال */
+.react-international-phone-country-selector-dropdown {
+  left: 0 !important;   
+  right: auto !important; 
+  transform: translateX(-100%) !important; 
+}
+
+

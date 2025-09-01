@@ -42,7 +42,7 @@ async function LessonContent({
     );
   }
   return (
-    <section className="flex flex-col gap-4 w-full">
+    <section className="flex flex-col gap-4 w-full p-4">
       {LessonData && UnitData && (
         <BreadCrumb
           lessonData={LessonData}

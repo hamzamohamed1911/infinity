@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 //login
 "use client";
 import Link from "next/link";
@@ -8,7 +9,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LoginFormData, loginSchema } from "@/lib/schemas/authSchema";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 const Login = () => {
   const [error, setError] = useState<string | null>(null);
   const [showFields, setShowFields] = useState({
@@ -26,6 +28,9 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
+
     formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -62,12 +67,21 @@ const Login = () => {
         <div className="flex flex-col gap-4 max-w-lg mx-auto">
           <div className="flex flex-col gap-3 text-[#606060]">
             <label className="text-lg font-medium">رقم التليفون</label>
-            <input
+{/* <PhoneInput
+  defaultCountry="EG"
+  value={watch("phone") || ""}
+  onChange={(phone) => setValue("phone", phone)}
+  className="flex items-center gap-2 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-primary border text-start"
+  inputClassName="flex-1 bg-transparent outline-none border-none text-start"
+/> */}
+ <input
               {...register("phone")}
               name="phone"
               type="tel"
               className="py-3 px-4 rounded-lg border-[1px] focus:ring-primary"
             />
+
+
           </div>
           {errors.phone && (
             <p className="text-red-500 text-sm">{errors.phone.message}</p>
@@ -79,7 +93,7 @@ const Login = () => {
                 {...register("password")}
                 name="password"
                 type={showFields.password ? "text" : "password"}
-               className="py-3 px-4 rounded-lg border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-right w-full"
+                className="py-3 px-4 rounded-lg border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-right w-full"
               />
               <button
                 type="button"
@@ -97,7 +111,11 @@ const Login = () => {
           {errors.password && (
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
-          {error && <p className="text-red-500 text-sm text-center leading-loose">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm text-center leading-loose">
+              {error}
+            </p>
+          )}
           <Link
             className="underline text-primary text-lg my-4 font-normal"
             href="/forgot-password"

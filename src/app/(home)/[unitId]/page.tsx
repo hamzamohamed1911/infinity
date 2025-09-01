@@ -17,7 +17,7 @@ async function UnitContent({ unitId }: { unitId: string }) {
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
 
   return (
-    <section className="flex flex-col gap-4 w-full">
+    <section className="flex flex-col gap-4 w-full p-4">
       {UnitData && <BreadCrumb unitData={UnitData} />}
       <div className="grid md:grid-cols-12 grid-cols-1 justify-center items-center gap-8 2xl:min-h-72  min-h-60 w-full">
         <div className="flex flex-col gap-6 col-span-5">

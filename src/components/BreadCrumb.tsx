@@ -25,7 +25,7 @@ export function BreadCrumb({
   const params = useParams(); 
 
   return (
-    <Breadcrumb className="text-secondary font-semibold p-4 gap-4" dir="rtl">
+    <Breadcrumb className="text-secondary font-semibold  gap-4" dir="rtl">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
