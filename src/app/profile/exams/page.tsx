@@ -1,10 +1,11 @@
+import ExamTable from "./_components/ExamTable";
 
 const page = () => {
   return (
-    <section>
-      exams profile
+    <section className="flex justify-center items-center min-h-screen w-full">
+      <ExamTable />
     </section>
-  )
-}
+  );
+};
 
-export default page
+export default page;

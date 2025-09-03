@@ -111,8 +111,8 @@ const SideBar = ({ id }: { id: string }) => {
                 onClick={closeSidebar}
                 className={`flex items-center gap-2 my-3 rounded-md text-lg font-medium transition-colors ${
                   pathname === item.href
-                    ? "bg-[#509319] text-white my-3 ps-2 h-[68px]"
-                    : "transition-all duration-600 hover:text-white hover:bg-[#509319] ps-4 hover:ps-2 h-[56px] hover:h-[68px] hover:text-2xl text-[#606060]"
+                    ? "bg-secondary-500 text-white my-3 ps-2 h-[68px]"
+                    : "transition-all duration-600 hover:text-white hover:bg-secondary-500 ps-4 hover:ps-2 h-[56px] hover:h-[68px] hover:text-2xl text-[#606060]"
                 }`}
               >
                 {item.icon}
