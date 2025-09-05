@@ -21,7 +21,7 @@ export default async function RootLayout({
 }) {
   return (
     <html dir="rtl" lang="ar">
-      <body className={`${alexandria.variable} font-sans relative`}>
+      <body className={`${alexandria.variable} h-full bg-backgroundColor font-sans relative`}>
         <Providers>
           <Toaster />
           {children}

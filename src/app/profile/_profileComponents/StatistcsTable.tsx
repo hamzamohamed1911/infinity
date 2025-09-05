@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import { DataTable } from "../../_profileComponents/DataTable";
+import { DataTable } from "./DataTable";
 import { useState } from "react";
-import {  useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { GetExamStatistics } from "@/lib/apis/statistics.api";
 import { formatDateArabic } from "@/lib/utils/formatDateArabic";
 import { Badge } from "@/components/ui/badge";
 
-
-export declare type ColumnDefWithCell<T> ={
+export declare type ColumnDefWithCell<T> = {
   accessorKey: keyof T;
   header: string;
   cell?: (row: T) => React.ReactNode;
-}
+};
 
 const columns: ColumnDefWithCell<ExamReport>[] = [
   { accessorKey: "exam_name", header: "الامتحان" },
@@ -31,8 +30,8 @@ const columns: ColumnDefWithCell<ExamReport>[] = [
     accessorKey: "is_success",
     header: "الحالة",
     cell: (row) => (
-             <Badge
-        variant={row.is_success === 1 ? "secondary" : "destructive"} 
+      <Badge
+        variant={row.is_success === 1 ? "secondary" : "destructive"}
         className="text-xs px-2 py-1"
       >
         {row.is_success === 1 ? "ناجح" : "راسب"}
@@ -41,30 +40,35 @@ const columns: ColumnDefWithCell<ExamReport>[] = [
   },
 ];
 
-
-
-export default function ExamTable() {
+export default function StatistcsTable({ id }: { id: number }) {
   const [search, setSearch] = useState("");
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
-
+  const [success, setSuccess] = useState<number | undefined>(undefined);
   // React Query
-const { data, isLoading, error } = useQuery<ApiResponse, Error>({
-  queryKey: ["exam-report", search, startDate, endDate, page, perPage],
-  queryFn: async () =>
-    GetExamStatistics({
-      id: 1,
-      keyword: search,
-      start_date: startDate?.toISOString().split("T")[0],
-      end_date: endDate?.toISOString().split("T")[0],
+  const { data, isLoading, error } = useQuery<ApiResponse, Error>({
+    queryKey: [
+      "exam-report",
+      search,
+      startDate,
+      endDate,
       page,
-      per_page: perPage,
-    }),
-});
-
-
+      perPage,
+      success,
+    ],
+    queryFn: async () =>
+      GetExamStatistics({
+        id: id,
+        keyword: search,
+        start_date: startDate?.toISOString().split("T")[0],
+        end_date: endDate?.toISOString().split("T")[0],
+        page,
+        per_page: perPage,
+        is_success: success,
+      }),
+  });
 
   return (
     <DataTable
@@ -82,6 +86,10 @@ const { data, isLoading, error } = useQuery<ApiResponse, Error>({
       onPageChange={(newPage) => setPage(newPage)}
       onPerPageChange={(newPerPage) => {
         setPerPage(newPerPage);
+        setPage(1);
+      }}
+      onSuccessFilter={(val) => {
+        setSuccess(val);
         setPage(1);
       }}
       isLoading={isLoading}

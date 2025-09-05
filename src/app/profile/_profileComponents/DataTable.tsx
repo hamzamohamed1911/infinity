@@ -24,20 +24,20 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ColumnDefWithCell } from "../exams/_components/ExamTable";
 import { FaSearch } from "react-icons/fa";
 import { TableSkeleton } from "@/components/TableSkeleton";
+import { ColumnDefWithCell } from "./StatistcsTable";
 
 interface ReusableTableProps {
-  columns: ColumnDefWithCell<ExamReport>[]; // <--- هنا
+  columns: ColumnDefWithCell<ExamReport>[];
   data: ApiResponse | undefined;
   onSearch: (value: string) => void;
   onDateFilter: (start: Date | undefined, end: Date | undefined) => void;
   onPageChange: (page: number) => void;
   onPerPageChange: (perPage: number) => void;
+  onSuccessFilter: (val: number | undefined) => void; // 👈 هنا
   isLoading: boolean;
   perPage: number; // <- أضف هذا
-
 }
 
 export function DataTable({
@@ -47,8 +47,9 @@ export function DataTable({
   onDateFilter,
   onPageChange,
   onPerPageChange,
+  onSuccessFilter,
   isLoading,
-  perPage
+  perPage,
 }: ReusableTableProps) {
   const [search, setSearch] = React.useState("");
   const [startDate, setStartDate] = React.useState<Date>();
@@ -75,7 +76,10 @@ export function DataTable({
           {/* Start Date */}
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" className="w-40 justify-between">
+              <Button
+                variant="outline"
+                className="md:w-40 w-full justify-between"
+              >
                 {startDate ? startDate.toLocaleDateString() : "تاريخ البداية"}
                 <CalendarIcon className="ml-2 h-4 w-4" />
               </Button>
@@ -95,7 +99,10 @@ export function DataTable({
           {/* End Date */}
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" className="w-40 justify-between">
+              <Button
+                variant="outline"
+                className="md:w-40 w-full  justify-between"
+              >
                 {endDate ? endDate.toLocaleDateString() : "تاريخ النهاية"}
                 <CalendarIcon className="ml-2 h-4 w-4" />
               </Button>
@@ -113,9 +120,30 @@ export function DataTable({
           </Popover>
         </div>
 
+        {/* ناجح ولا ساقط */}
+        <Select
+          dir="rtl"
+          onValueChange={(val) => {
+            if (val === "all") {
+              onSuccessFilter(undefined);
+            } else {
+              onSuccessFilter(Number(val));
+            }
+          }}
+        >
+          <SelectTrigger className="md:w-40 w-full ">
+            <SelectValue placeholder="كل الحالات" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">الكل</SelectItem>
+            <SelectItem value="1">ناجح</SelectItem>
+            <SelectItem value="0">راسب</SelectItem>
+          </SelectContent>
+        </Select>
+
         {/* Per Page */}
         <Select dir="rtl" onValueChange={(val) => onPerPageChange(Number(val))}>
-          <SelectTrigger className="w-32">
+          <SelectTrigger className="md:w-40 w-full ">
             <SelectValue placeholder="عدد الصفوف" />
           </SelectTrigger>
           <SelectContent>
@@ -143,8 +171,7 @@ export function DataTable({
           </TableHeader>
           <TableBody>
             {isLoading ? (
-               <TableSkeleton columns={columns.length} rows={perPage} />
-
+              <TableSkeleton columns={columns.length} rows={perPage} />
             ) : data?.data.length ? (
               data.data.map((row) => (
                 <TableRow key={row.id}>
@@ -166,7 +193,7 @@ export function DataTable({
         </Table>
       </ScrollArea>
       {/* Pagination */}
-      {data && (
+      {data && perPage >= 10 && (
         <div className="flex items-center justify-center gap-2 mt-4">
           {/* First page */}
           <Button

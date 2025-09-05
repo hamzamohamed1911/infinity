@@ -10,6 +10,7 @@ export async function GetExamStatistics({
   end_date,
   page = 1,
   per_page = 10,
+  is_success
 }: {
   id: number;
   keyword?: string;
@@ -17,6 +18,7 @@ export async function GetExamStatistics({
   end_date?: string;
   page?: number;
   per_page?: number;
+  is_success?:number;
 }): Promise<ApiResponse> {
   const token = await getAuthToken();
 
@@ -24,6 +26,10 @@ export async function GetExamStatistics({
   if (keyword) params.append("name", keyword);
   if (start_date) params.append("start_date", start_date);
   if (end_date) params.append("end_date", end_date);
+  if (is_success !== undefined) {
+  params.append("is_success", is_success.toString());
+}
+
   params.append("page", page.toString());
   params.append("per_page", per_page.toString());
 
