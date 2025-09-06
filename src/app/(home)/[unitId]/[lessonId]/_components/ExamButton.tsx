@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 type ExamButtonProps = {
   ExamData: ExamDetails;
-  unitId: string;
+  unitId?: string;
   examId: string;
   examType?: "exam" | "homework";
 };
@@ -25,12 +25,22 @@ const ExamButton = ({
     mutationFn: () =>
       joinExam({
         exam_id: ExamData.id,
-        unit_id: unitId,
+        unit_id: unitId ?? undefined,
         exam_parent_id: examId,
       }),
     onSuccess: () => {
       if (examType === "homework") {
-        router.push(`/${unitId}/${examId}/home-works/${ExamData.id}/home-work`);
+        if (unitId && examId) {
+          router.push(
+            `/${unitId}/${examId}/home-works/${ExamData.id}/home-work`
+          );
+        } else {
+          if (unitId && examId) {
+            router.push(`/${unitId}/${examId}/exams/${ExamData.id}/exam`);
+          } else {
+            router.push(`/exam/${ExamData.id}`);
+          }
+        }
         toast.success("تم بدء الواجب بنجاح!", {
           className: "!bg-primary !text-white !border-primary",
         });
@@ -55,7 +65,7 @@ const ExamButton = ({
         disabled={mutation.isPending}
         className="bg-primary-400 hover:bg-primary-500 text-white rounded-md group flex gap-2 items-center justify-center w-52 lg:h-16 md:h-14 h-12 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-       <span className="relative z-10 md:text-lg text-md font-medium">
+        <span className="relative z-10 md:text-lg text-md font-medium">
           {ExamData?.is_attempted
             ? examType === "homework"
               ? "إعادة الواجب"

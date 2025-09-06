@@ -32,7 +32,6 @@ interface CodeFormData {
   code: string;
 }
 
-
 // Zod validation schemas
 const phoneSchema = z.object({
   phone: z
@@ -40,14 +39,12 @@ const phoneSchema = z.object({
     .min(1, "رقم الهاتف مطلوب")
     .regex(/^\+?\d{10,15}$/, "رقم الهاتف غير صالح"),
 });
-
 const codeSchema = z.object({
   code: z
     .string()
     .min(1, "كود التحقق مطلوب")
     .length(6, "كود التحقق يجب أن يكون 6 أرقام"), // Changed to 6 digits
 });
-
 const passwordSchema = z
   .object({
     password: z
@@ -60,6 +57,7 @@ const passwordSchema = z
     message: "كلمة المرور وتأكيدها غير متطابقتين",
     path: ["confirmPassword"],
   });
+  
 // Step 1: Phone Input
 const PhoneForm: React.FC<{
   register: UseFormRegister<PhoneFormData>;

@@ -7,9 +7,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 type ExamButtonProps = {
-  unitId: string;
+  unitId?: string;
   examId: string;
-  examType: number;
+  examType?: number;
 };
 
 const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
@@ -107,7 +107,11 @@ const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
 
                 {/* زر بدء الحل */}
                 <Link
-                  href={`/${unitId}/${examId}/exams/${exam.id}`}
+                  href={
+                    unitId && examId
+                      ? `/${unitId}/${examId}/exams/${exam.id}`
+                      : `/exam/${exam.id}`
+                  }
                   className="mt-4 group w-full border border-primary text-primary flex items-center justify-center text-md gap-1 h-10 hover:bg-primary-400 hover:text-white transition rounded-md"
                 >
                   <span>ابدأ حل</span>

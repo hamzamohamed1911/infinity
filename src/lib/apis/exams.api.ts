@@ -1,5 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 import { getAuthToken } from "../utils/auth-token";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -18,6 +19,9 @@ export async function GetExam({
   });
 
   const payload = await response.json();
+   if (payload?.message === "Unauthenticated.") {
+      redirect("/logout");
+    }
   return payload;
 }
 export async function joinExam({
@@ -26,7 +30,7 @@ export async function joinExam({
   exam_parent_id,
 }: {
   exam_id: number;
-  unit_id: string;
+  unit_id?: string;
   exam_parent_id: string;
 }) {
   const token = await getAuthToken();
@@ -130,5 +134,8 @@ export async function GetExams({
   );
 
   const payload = await response.json();
+  if (payload?.message === "Unauthenticated.") {
+      redirect("/logout");
+    }
   return payload;
 }
