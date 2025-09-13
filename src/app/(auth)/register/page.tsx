@@ -24,9 +24,14 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Dropdown } from "@/components/Dropdown";
 import { GetClassroomsList, GetStateList } from "@/lib/apis/auth";
 import { PhoneInput } from "react-international-phone";
-
+type ApiError = {
+  message: string;
+  errors?: string[];
+};
 const Register = () => {
   const steps = [{ id: "signup" }, { id: "interest" }, { id: "knowledge" }];
+  const [errors, setErrors] = useState<string[]>([]);
+
   const [activeStep, setActiveStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>(
     new Array(steps.length).fill(false)
@@ -109,9 +114,9 @@ const Register = () => {
       setActiveStep(2); // Move to confirmation step
       setCompletedSteps((prev) => prev.map((_, i) => (i <= 2 ? true : false)));
     },
-    onError: (error) => {
+    onError: (error: ApiError) => {
       console.error("Registration failed:", error);
-      // Handle error (e.g., show toast notification)
+      setErrors(error.errors || [error.message || "حدث خطأ"]);
     },
   });
 
@@ -121,9 +126,9 @@ const Register = () => {
       setActiveStep(2); // Move to confirmation step
       setCompletedSteps((prev) => prev.map((_, i) => (i <= 2 ? true : false)));
     },
-    onError: (error) => {
+    onError: (error: ApiError) => {
       console.error("Registration with subscribe failed:", error);
-      // Handle error (e.g., show toast notification)
+      setErrors(error.errors || [error.message || "حدث خطأ"]);
     },
   });
 
@@ -463,12 +468,6 @@ const Register = () => {
                           />
                         )}
 
-                        {/* <Input
-                          {...(teacherCount <= 1
-                            ? basicForm.register("phone")
-                            : subscribeForm.register("phone"))}
-                          className="!h-12 rounded-lg border-[1px]"
-                        /> */}
                         {teacherCount <= 1
                           ? basicForm.formState.errors.phone && (
                               <p className="text-red-500">
@@ -518,12 +517,6 @@ const Register = () => {
                           />
                         )}
 
-                        {/* <Input
-                          {...(teacherCount <= 1
-                            ? basicForm.register("parent_phone")
-                            : subscribeForm.register("parent_phone"))}
-                          className="!h-12 rounded-lg border-[1px]"
-                        /> */}
                         {teacherCount <= 1
                           ? basicForm.formState.errors.parent_phone && (
                               <p className="text-red-500">
@@ -678,6 +671,14 @@ const Register = () => {
                   </>
                 )}
               </div>
+              {errors.length > 0 && (
+                <ul className="text-red-500 mt-2">
+                  {errors.map((err, idx) => (
+                    <li key={idx}>{err}</li>
+                  ))}
+                </ul>
+              )}
+
               <Button
                 type="submit"
                 className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "

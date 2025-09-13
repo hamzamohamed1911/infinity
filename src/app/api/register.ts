@@ -33,9 +33,10 @@ export const registerUser = async (data: {
     },
     body: JSON.stringify(data),
   });
+  const result = await response.json();
 
-  if (!response.ok) {
-    throw new Error("Registration failed");
+   if (!response.ok) {
+    throw result;
   }
 
   return response.json();
@@ -62,8 +63,9 @@ export const registerWithSubscribe = async (data: {
     body: JSON.stringify(data),
   });
 
-  if (!response.ok) {
-    throw new Error("Registration with subscribe failed");
+  const result = await response.json();
+ if (!response.ok) {
+    throw result;
   }
 
   return response.json();
