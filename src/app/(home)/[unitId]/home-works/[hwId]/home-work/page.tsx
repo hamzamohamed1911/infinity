@@ -1,7 +1,7 @@
 import UnitSkeleton from "@/components/UnitSkeleton";
 import { Suspense } from "react";
 import { GetExam } from "@/lib/apis/exams.api";
-import HomeWorkComponent from "../../../_components/HomeWorkComponent";
+import HomeWorkComponent from "../../../[lessonId]/_components/HomeWorkComponent";
 
 async function Exam({ hwId }: { hwId: string }) {
   const Exam = await GetExam({ exam_id: hwId });

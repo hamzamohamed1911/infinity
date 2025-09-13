@@ -23,6 +23,7 @@ import {
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Dropdown } from "@/components/Dropdown";
 import { GetClassroomsList, GetStateList } from "@/lib/apis/auth";
+import { PhoneInput } from "react-international-phone";
 
 const Register = () => {
   const steps = [{ id: "signup" }, { id: "interest" }, { id: "knowledge" }];
@@ -428,12 +429,46 @@ const Register = () => {
                         <Label className="text-lg font-medium">
                           رقم هاتف الطالب
                         </Label>
-                        <Input
+
+                        {/* داخل JSX */}
+                        {teacherCount <= 1 ? (
+                          <Controller
+                            control={basicForm.control}
+                            name="phone"
+                            render={({ field }) => (
+                              <PhoneInput
+                                defaultCountry="EG"
+                                value={field.value || ""}
+                                onChange={field.onChange}
+                                className="flex items-center gap-2 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-primary border text-start"
+                                inputClassName="flex-1 bg-transparent outline-none border-none text-start"
+                              />
+                            )}
+                          />
+                        ) : (
+                          <Controller
+                            control={subscribeForm.control}
+                            name="phone"
+                            render={({ field }) => (
+                              <PhoneInput
+                                defaultCountry="EG"
+                                value={field.value || ""}
+                                onChange={(val) => {
+                                  field.onChange(val);
+                                }}
+                                className="flex items-center gap-2 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-primary border text-start"
+                                inputClassName="flex-1 bg-transparent outline-none border-none text-start"
+                              />
+                            )}
+                          />
+                        )}
+
+                        {/* <Input
                           {...(teacherCount <= 1
                             ? basicForm.register("phone")
                             : subscribeForm.register("phone"))}
                           className="!h-12 rounded-lg border-[1px]"
-                        />
+                        /> */}
                         {teacherCount <= 1
                           ? basicForm.formState.errors.phone && (
                               <p className="text-red-500">
