@@ -2,6 +2,8 @@
 
 // Main Exam type
 declare type ExamDetails = {
+  section_id?:number;
+  lesson_id?:number;
   id: number;
   name: string;
   description: string | null;

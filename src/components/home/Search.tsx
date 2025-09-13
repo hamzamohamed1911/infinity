@@ -12,6 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import Link from "next/link";
 
 const truncate = (text: string, length = 80) => {
   if (!text) return "";
@@ -26,14 +27,14 @@ const SearchBox = () => {
   const debouncedKeyword = useDebounce(keyword, 500);
 
   const { data, isLoading, isError } = useSearch(teacher_id, debouncedKeyword);
+  console.log("search data", data);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className="flex items-center">
         <div className="relative w-full md:w-80">
           {/* Input */}
-            <div className="relative w-full">
-                        <PopoverTrigger asChild>
-
+          <div className="relative w-full">
+            <PopoverTrigger asChild>
               <Input
                 type="text"
                 value={keyword}
@@ -44,15 +45,11 @@ const SearchBox = () => {
                 className="pe-10 bg-white rounded-3xl shadow-sm"
                 placeholder="ابحث هنا..."
               />
-              </PopoverTrigger>
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <FaSearch
-                  className="h-5 w-5 text-gray-400"
-                  aria-hidden="true"
-                />
-              </div>
+            </PopoverTrigger>
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+              <FaSearch className="h-5 w-5 text-gray-400" aria-hidden="true" />
             </div>
-          
+          </div>
 
           {/* Results */}
           <PopoverContent className="w-80 p-0 max-h-96 overflow-y-auto">
@@ -77,43 +74,46 @@ const SearchBox = () => {
                     <p className="font-semibold mb-2 text-gray-700">الدروس</p>
                     <div className="space-y-2">
                       {data.data.lessons.map((lesson: Lesson) => (
-                        <div
-                          key={lesson.id}
-                          className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
-                        >
-                          {lesson.thumbnail || lesson.image ? (
-                            <div className="w-12 h-12 rounded-md overflow-hidden">
+                        <div key={lesson.id}>
+                          <Link
+                            className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
+                            href={`/${lesson.section_id}/${lesson.id}`}
+                          >
+                            {lesson.thumbnail || lesson.image ? (
+                              <div className="w-12 h-12 rounded-md overflow-hidden">
+                                <Image
+                                  src={
+                                    lesson.thumbnail ??
+                                    lesson.image ??
+                                    placeholder
+                                  }
+                                  alt={lesson.name ?? "Lesson"}
+                                  width={50}
+                                  height={50}
+                                  className="object-cover"
+                                />
+                              </div>
+                            ) : (
                               <Image
-                                src={
-                                  lesson.thumbnail ??
-                                  lesson.image ??
-                                  placeholder
-                                }
-                                alt={lesson.name ?? "Lesson"}
+                                src={placeholder}
+                                alt={lesson.name}
                                 width={50}
                                 height={50}
-                                className="object-cover"
+                                className="rounded-md object-cover"
                               />
-                            </div>
-                          ) : (
-                            <Image
-                              src={placeholder}
-                              alt={lesson.name}
-                              width={50}
-                              height={50}
-                              className="rounded-md object-cover"
-                            />
-                          )}
-                          <div className="flex-1">
-                            <p className="font-medium text-gray-800">
-                              {lesson.name}
-                            </p>
-                            {lesson.description && (
-                              <p className="text-xs text-gray-500">
-                                {truncate(lesson.description)}
-                              </p>
                             )}
-                          </div>
+
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-800">
+                                {lesson.name}
+                              </p>
+                              {lesson.description && (
+                                <p className="text-xs text-gray-500">
+                                  {truncate(lesson.description)}
+                                </p>
+                              )}
+                            </div>
+                          </Link>
                         </div>
                       ))}
                     </div>
@@ -214,37 +214,39 @@ const SearchBox = () => {
                     <p className="font-semibold mb-2 text-gray-700">الوحدات</p>
                     <div className="space-y-2">
                       {data.data.units.map((unit: Unit) => (
-                        <div
-                          key={unit.id}
-                          className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
-                        >
-                          {unit.image ? (
-                            <div className="w-12 h-12 rounded-md overflow-hidden">
+                        <div key={unit.id}>
+                          <Link
+                            href={`${unit.id}`}
+                            className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
+                          >
+                            {unit.image ? (
+                              <div className="w-12 h-12 rounded-md overflow-hidden">
+                                <Image
+                                  src={unit.image ?? unit.image ?? placeholder}
+                                  alt={unit.name ?? "unit"}
+                                  width={50}
+                                  height={50}
+                                  className="object-cover"
+                                />
+                              </div>
+                            ) : (
                               <Image
-                                src={unit.image ?? unit.image ?? placeholder}
-                                alt={unit.name ?? "unit"}
+                                src={placeholder}
+                                alt={unit.name}
                                 width={50}
                                 height={50}
-                                className="object-cover"
+                                className="rounded-md object-cover"
                               />
+                            )}
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-800">
+                                {unit.name}
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                {truncate(unit.description)}
+                              </p>
                             </div>
-                          ) : (
-                            <Image
-                              src={placeholder}
-                              alt={unit.name}
-                              width={50}
-                              height={50}
-                              className="rounded-md object-cover"
-                            />
-                          )}
-                          <div className="flex-1">
-                            <p className="font-medium text-gray-800">
-                              {unit.name}
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              {truncate(unit.description)}
-                            </p>
-                          </div>
+                          </Link>
                         </div>
                       ))}
                     </div>

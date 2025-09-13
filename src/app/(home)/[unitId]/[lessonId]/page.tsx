@@ -29,11 +29,16 @@ async function LessonContent({
   unitId: string;
   lessonId: string;
 }) {
-  const Unit = await GetUnit({ unit_id: unitId });
+  const validUnitId =
+    unitId && unitId !== "undefined" && unitId !== "null" ? unitId : null;
+
+  const Unit = validUnitId
+    ? await GetUnit({ unit_id: validUnitId })
+    : undefined;
   const lesson = await GetLesson({ lesson_id: lessonId });
 
-  const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
-  const LessonData = Unit && "data" in lesson ? lesson.data : undefined;
+  const UnitData = Unit?.data;
+  const LessonData = lesson?.data;
   if (!LessonData) {
     return (
       <div className="text-center h-screen flex justify-center items-center text-red-600 text-xl font-bold">

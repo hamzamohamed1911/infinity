@@ -13,6 +13,7 @@ declare type Lesson = {
   is_purchased_before: boolean;
   thumbnail?:string;
   image?:string;
+  section_id?:number;
 };
 
 declare type Section = {
@@ -113,6 +114,7 @@ declare type Lesson = {
 
 declare type CourseDetails = {
   id: number;
+  section_id:number;
   name: string;
   booking_status: number;
   price: string;

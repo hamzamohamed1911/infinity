@@ -8,13 +8,12 @@ async function HomeWorksContent({ courseId }: { courseId: string }) {
   const HomeWorks = await GetExams({ course_id: courseId, assessment_type: 2 });
 
   const HomeWorksData = HomeWorks && "data" in HomeWorks ? HomeWorks.data : [];
-
   // اليوم + بكرة
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
 
-  const DeadlinesHomeWorks= HomeWorksData?.filter((exam) => {
+  const DeadlinesHomeWorks = HomeWorksData?.filter((exam) => {
     if (!exam.end_date) return false;
     const endDate = new Date(exam.end_date);
     return (
@@ -53,13 +52,16 @@ async function HomeWorksContent({ courseId }: { courseId: string }) {
 
         <div className="mt-6">
           <TabsContent value="all">
-            <ExamsComponent ExamsData={HomeWorksData ?? []} />
+            <ExamsComponent type="homework" ExamsData={HomeWorksData ?? []} />
           </TabsContent>
           <TabsContent value="Deadlines">
-            <ExamsComponent ExamsData={DeadlinesHomeWorks ?? []} />
+            <ExamsComponent
+              type="homework"
+              ExamsData={DeadlinesHomeWorks ?? []}
+            />
           </TabsContent>
           <TabsContent value="Solved">
-            <ExamsComponent ExamsData={SolvedExamsData ?? []} />
+            <ExamsComponent type="homework" ExamsData={SolvedExamsData ?? []} />
           </TabsContent>
         </div>
       </Tabs>

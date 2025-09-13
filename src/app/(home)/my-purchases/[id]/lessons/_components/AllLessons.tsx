@@ -21,7 +21,7 @@ const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
               {unit.name}
             </h3>
             <Link
-              href={`/${unit.id}`}
+              href={`/${unit?.section_id}/${unit.id}`}
               className="group flex items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
             >
               شوف الدروس

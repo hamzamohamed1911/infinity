@@ -34,7 +34,6 @@ export async function GetExamStatistics({
   params.append("per_page", per_page.toString());
 
   const url = `${API_URL}api/v1/exam-report/${id}?${params.toString()}`;
-  console.log("Request URL:", url);
 
   const response = await fetch(url, {
     method: "GET",
@@ -49,7 +48,6 @@ export async function GetExamStatistics({
   }
 
   const payload: ApiResponse = await response.json();
-  console.log("response search" ,payload)
 
   return payload;
 }

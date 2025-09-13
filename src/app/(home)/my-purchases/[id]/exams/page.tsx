@@ -8,7 +8,6 @@ async function ExamContent({ courseId }: { courseId: string }) {
   const exams = await GetExams({ course_id: courseId, assessment_type: 1 });
 
   const ExamsData = exams && "data" in exams ? exams.data : [];
-
   // اليوم + بكرة
   const today = new Date();
   const tomorrow = new Date();
@@ -53,13 +52,13 @@ async function ExamContent({ courseId }: { courseId: string }) {
 
         <div className="mt-6">
           <TabsContent value="all">
-            <ExamsComponent ExamsData={ExamsData ?? []} />
+            <ExamsComponent type="exam" ExamsData={ExamsData ?? []} />
           </TabsContent>
           <TabsContent value="Deadlines">
-            <ExamsComponent ExamsData={DeadlinesExams ?? []} />
+            <ExamsComponent type="exam" ExamsData={DeadlinesExams ?? []} />
           </TabsContent>
           <TabsContent value="Solved">
-            <ExamsComponent ExamsData={SolvedExamsData ?? []} />
+            <ExamsComponent type="exam" ExamsData={SolvedExamsData ?? []} />
           </TabsContent>
         </div>
       </Tabs>

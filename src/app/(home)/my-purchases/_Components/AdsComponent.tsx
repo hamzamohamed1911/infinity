@@ -7,7 +7,6 @@ import { Pagination } from "swiper/modules";
 import Image from "next/image";
 
 const AdsComponent = ({ adsData }: { adsData: ads[] }) => {
-  console.log("adsDataadsData", adsData);
   return (
     <div className=" w-full container mx-auto  justify-center items-center p-4">
       <Swiper

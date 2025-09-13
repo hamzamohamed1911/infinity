@@ -29,7 +29,6 @@ const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
     examsList && "data" in examsList && Array.isArray(examsList.data)
       ? examsList.data
       : [];
-  console.log("deadlines ExamsData", ExamsData);
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);

@@ -7,8 +7,13 @@ import { Progress } from "@/components/ui/progress";
 import { MdEditNote } from "react-icons/md";
 import { formatDate } from "@/lib/utils/format-date";
 
-const ExamsComponent = ({ ExamsData }: { ExamsData: ExamDetails[] }) => {
-
+const ExamsComponent = ({
+  ExamsData,
+  type,
+}: {
+  ExamsData: ExamDetails[];
+  type: string;
+}) => {
   if (!ExamsData || ExamsData.length === 0) {
     return (
       <div className="flex justify-center items-center w-full h-60">
@@ -49,12 +54,18 @@ const ExamsComponent = ({ ExamsData }: { ExamsData: ExamDetails[] }) => {
                 </div>
               </div>
               <div className="flex gap-2 justify-center items-center">
-                <span> صلاحية الامتحان :</span>{" "}
+                <span>
+                  {type === "homework"
+                    ? "ًصلاحية الواجب :"
+                    : "صلاحية الامتحان :"}
+                </span>
                 <p>{formatDate(exam.end_date) || "لا يوجد"} </p>
               </div>
             </div>
             <Link
-              href={`/exam/${exam.id}`}
+              href={`/${exam.section_id}/${exam.lesson_id}${
+                type === "homework" ? "/home-works" : "/exams"
+              }/${exam.id}`}
               className="group flex items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
             >
               حله تاني

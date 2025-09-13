@@ -71,7 +71,6 @@ export default function ExamComponent({
     mutationFn: (payload: SaveAnswerPayload) =>
       saveAnswer(payload, examData.id || examId),
     onSuccess: () => {
-      console.log("Answer saved successfully");
     },
     onError: (error) => {
       console.error("Error saving answer:", error);
@@ -81,7 +80,6 @@ export default function ExamComponent({
     mutationFn: (answersPayload: QuestionAnswer[]) =>
       submitAnswer(examData.id || examId, answersPayload),
     onSuccess: () => {
-      console.log("Exam submitted successfully");
     },
     onError: (error) => {
       console.error("Error submitting exam:", error);
