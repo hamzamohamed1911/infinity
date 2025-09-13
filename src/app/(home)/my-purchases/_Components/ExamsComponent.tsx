@@ -33,7 +33,7 @@ const ExamsComponent = ({
             height={600}
             className="w-full h-80 object-cover"
           />
-          <CardContent className="p-2 space-y-3 text-start">
+          <CardContent className="p-2 space-y-3 text-start ">
             <h3 className="text-lg font-semibold text-[#606060]">
               {exam.name}
             </h3>
@@ -45,7 +45,7 @@ const ExamsComponent = ({
               />
               <span className="text-secondary-600">50%</span>
             </div>
-            <div className="flex gap-2 justify-between items-center text-[#606060] text-sm">
+            <div className="flex flex-wrap gap-2 justify-between items-center text-[#606060] text-sm">
               <div className="flex items-center gap-2  ">
                 <MdEditNote size={20} />
                 <div className="flex items-center gap-1 ">
@@ -63,10 +63,10 @@ const ExamsComponent = ({
               </div>
             </div>
             <Link
-              href={`/${exam.section_id}/${exam.lesson_id}${
+              href={`/${exam.section_id}${
                 type === "homework" ? "/home-works" : "/exams"
               }/${exam.id}`}
-              className="group flex items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
+              className="group flex mt-auto items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
             >
               حله تاني
               <IoIosArrowBack

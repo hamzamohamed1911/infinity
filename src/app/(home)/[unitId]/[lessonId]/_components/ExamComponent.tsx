@@ -70,8 +70,7 @@ export default function ExamComponent({
   const mutation = useMutation({
     mutationFn: (payload: SaveAnswerPayload) =>
       saveAnswer(payload, examData.id || examId),
-    onSuccess: () => {
-    },
+    onSuccess: () => {},
     onError: (error) => {
       console.error("Error saving answer:", error);
     },
@@ -79,8 +78,7 @@ export default function ExamComponent({
   const submitMutation = useMutation({
     mutationFn: (answersPayload: QuestionAnswer[]) =>
       submitAnswer(examData.id || examId, answersPayload),
-    onSuccess: () => {
-    },
+    onSuccess: () => {},
     onError: (error) => {
       console.error("Error submitting exam:", error);
     },
@@ -315,11 +313,13 @@ export default function ExamComponent({
                             className="w-16 h-16 object-cover rounded"
                           />
                           <span
+                            className="leading-7"
                             dangerouslySetInnerHTML={{ __html: option.title }}
                           />
                         </div>
                       ) : (
                         <span
+                          className="leading-7"
                           dangerouslySetInnerHTML={{ __html: option.title }}
                         />
                       )}

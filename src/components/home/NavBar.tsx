@@ -111,7 +111,7 @@ const Navbar = ({ id }: { id: string }) => {
                         alt="صورة المستخدم"
                         width={32}
                         height={32}
-                        className="h-10 w-10 rounded-full"
+                        className="h-10 w-10 rounded-full object-cover"
                       />
                       <span className="text-white text-md flex flex-col gap-1">
                         <p className="text-lg font-medium text-start">

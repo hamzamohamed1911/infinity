@@ -1,7 +1,7 @@
 import UnitSkeleton from "@/components/UnitSkeleton";
 import { Suspense } from "react";
 import { GetExam } from "@/lib/apis/exams.api";
-import ExamComponent from "../../../_components/ExamComponent";
+import ExamComponent from "../../../[lessonId]/_components/ExamComponent";
 
 async function Exam({ examId }: { examId: string }) {
   const Exam = await GetExam({ exam_id: examId });
@@ -9,7 +9,7 @@ async function Exam({ examId }: { examId: string }) {
 
   return (
     <section className="flex flex-col gap-4 w-full">
-      <p className="text-[#606060]  lg:text-xl md:text-lg text-md font-semibold">
+      <p className="text-[#606060]  lg:text-xl md:text-lg text-md font-semibold py-2 px-4">
         إمتحان {ExamData?.name}
       </p>
 

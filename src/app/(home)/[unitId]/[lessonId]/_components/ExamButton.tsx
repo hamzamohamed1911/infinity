@@ -31,12 +31,10 @@ const ExamButton = ({
     onSuccess: () => {
       if (examType === "homework") {
         if (unitId && examId) {
-          router.push(
-            `/${unitId}/${examId}/home-works/${ExamData.id}/home-work`
-          );
+          router.push(`/${unitId}/home-works/${ExamData.id}/home-work`);
         } else {
           if (unitId && examId) {
-            router.push(`/${unitId}/${examId}/exams/${ExamData.id}/exam`);
+            router.push(`/${unitId}/exams/${ExamData.id}/exam`);
           } else {
             router.push(`/exam/${ExamData.id}`);
           }
@@ -45,7 +43,7 @@ const ExamButton = ({
           className: "!bg-primary !text-white !border-primary",
         });
       } else {
-        router.push(`/${unitId}/${examId}/exams/${ExamData.id}/exam`);
+        router.push(`/${examId}/exams/${ExamData.id}/exam`);
         toast.success("تم بدء الامتحان بنجاح!", {
           className: "!bg-primary !text-white !border-primary",
         });
@@ -58,11 +56,21 @@ const ExamButton = ({
     },
   });
 
+  // حساب توفر الامتحان
+  const now = new Date();
+  const start = new Date(ExamData.start_date);
+  const end = new Date(ExamData.end_date);
+
+  const isAvailableByTime = now >= start && now <= end;
+  const isAvailableByFlag = ExamData.available_exam === 1;
+
+  const canStartExam = isAvailableByTime && isAvailableByFlag;
+
   return (
-    <div className="flex justify-center items-center mt-8">
+    <div className="flex flex-col gap-4 justify-center items-center mt-8">
       <button
         onClick={() => mutation.mutate()}
-        disabled={mutation.isPending}
+        disabled={mutation.isPending || !canStartExam}
         className="bg-primary-400 hover:bg-primary-500 text-white rounded-md group flex gap-2 items-center justify-center w-52 lg:h-16 md:h-14 h-12 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <span className="relative z-10 md:text-lg text-md font-medium">
@@ -81,6 +89,16 @@ const ExamButton = ({
           }`}
         />
       </button>
+
+      {/* عرض الرسالة الراجعة من الـ API لو الامتحان مش متاح */}
+      {!canStartExam && (
+        <p className="text-sm text-red-500 mt-2">
+          {ExamData.available_exam_message ||
+            (examType === "exam"
+              ? "الامتحان غير متاح حالياً"
+              : "الواجب غير متاح حالياً")}
+        </p>
+      )}
     </div>
   );
 };

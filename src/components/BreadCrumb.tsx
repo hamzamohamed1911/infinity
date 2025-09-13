@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import {
@@ -11,18 +11,18 @@ import {
 } from "@/components/ui/breadcrumb";
 import { useParams } from "next/navigation";
 
-export function BreadCrumb({ 
-  unitData, 
-  lessonData, 
-  ExamData, 
-  examType = "exam" 
-}: { 
-  unitData: CourseDetails; 
-  lessonData?: LessonDetails; 
+export function BreadCrumb({
+  unitData,
+  lessonData,
+  ExamData,
+  examType = "exam",
+}: {
+  unitData: CourseDetails;
+  lessonData?: LessonDetails;
   ExamData?: ExamDetails;
   examType?: "exam" | "homework";
 }) {
-  const params = useParams(); 
+  const params = useParams();
 
   return (
     <Breadcrumb className="text-secondary font-semibold  gap-4" dir="rtl">
@@ -36,9 +36,7 @@ export function BreadCrumb({
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link href={`/${params.unitId}`}>
-              {unitData?.name || "الوحدة"}
-            </Link>
+            <Link href={`/${params.unitId}`}>{unitData?.name || "الوحدة"}</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
 
@@ -53,8 +51,8 @@ export function BreadCrumb({
         {ExamData && (
           <>
             <BreadcrumbSeparator />
-            <BreadcrumbItem >
-                <BreadcrumbPage>
+            <BreadcrumbItem>
+              <BreadcrumbPage>
                 {examType === "homework"
                   ? `واجب ${ExamData?.name || "الواجب"}`
                   : `إمتحان ${ExamData?.name || "الامتحان"}`}

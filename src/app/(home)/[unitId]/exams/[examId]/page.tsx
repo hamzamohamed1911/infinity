@@ -1,19 +1,25 @@
 import { BreadCrumb } from "@/components/BreadCrumb";
-import UnitSkeleton from "@/components/UnitSkeleton";
 import { Suspense } from "react";
 import { GetExam } from "@/lib/apis/exams.api";
 import { GetUnit } from "@/lib/apis/course.api";
 import { Card, CardContent } from "@/components/ui/card";
-import Deadlines from "../../_components/Deadlines";
-import ExamButton from "../../_components/ExamButton";
+import Deadlines from "../../[lessonId]/_components/Deadlines";
+import ExamButton from "../../[lessonId]/_components/ExamButton";
+import AssignmentSkeleton from "@/components/AssignmentSkeleton";
 
-async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
-  const Exam = await GetExam({ exam_id: hwId });
+async function UnitContent({
+  examId,
+  unitId,
+}: {
+  unitId: string;
+  examId: string;
+}) {
+  const Exam = await GetExam({ exam_id: examId });
   const ExamData = Exam && "data" in Exam ? Exam.data : undefined;
-
   const Unit = await GetUnit({ unit_id: unitId });
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
-
+  console.log("ExamData", ExamData);
+  // دالة لتنسيق التاريخ والوقت
   function formatDateTime(dateTimeString: string) {
     const dateObj = new Date(dateTimeString);
     const date = dateObj.toLocaleDateString("ar-EG", {
@@ -29,22 +35,18 @@ async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
   }
 
   return (
-    <section className="flex flex-col gap-4 w-full">
+    <section className="flex flex-col gap-4 w-full p-4">
       {ExamData && UnitData && (
-        <BreadCrumb
-          examType="homework"
-          unitData={UnitData}
-          ExamData={ExamData}
-        />
+        <BreadCrumb unitData={UnitData} ExamData={ExamData} />
       )}
-      <Card className="m-4 ">
-        {/* عرض معلومات الواجب */}
-        <CardContent className="w-full lg:p-8 md:p-6 p-4 flex flex-col lg:gap-6 gap-4 m-0">
+      <Card className="m-0 ">
+        <CardContent className="w-full  flex flex-col lg:gap-6 gap-4 m-0">
+          {/* عرض معلومات الامتحان */}
           {ExamData && (
             <div className="mt-6">
               <div className="flex items-center gap-2 mb-4">
                 <p className="text-[#606060]  lg:text-xl md:text-lg text-md ">
-                  تفاصيل الواجب
+                  تفاصيل الامتحان
                 </p>
               </div>
 
@@ -56,6 +58,18 @@ async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
                 <div>
                   <span className="font-semibold">تاريخ النهاية: </span>
                   {formatDateTime(ExamData.end_date).date}
+                </div>
+                <div>
+                  <span className="font-semibold">وقت البداية: </span>
+                  {formatDateTime(ExamData.start_date).time}
+                </div>
+                <div>
+                  <span className="font-semibold">وقت النهاية: </span>
+                  {formatDateTime(ExamData.end_date).time}
+                </div>
+                <div className="sm:col-span-2">
+                  <span className="font-semibold">زمن الامتحان: </span>
+                  {ExamData.period} دقيقة
                 </div>
               </div>
             </div>
@@ -109,16 +123,12 @@ async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
           </div>
 
           {ExamData && (
-            <ExamButton
-              unitId={unitId}
-              examId={hwId}
-              ExamData={ExamData}
-              examType="homework"
-            />
+            <ExamButton unitId={unitId} examId={examId} ExamData={ExamData} />
           )}
         </CardContent>
       </Card>
-      <Deadlines examType={2} unitId={unitId} examId={hwId} />
+
+      <Deadlines examType={1} unitId={unitId} examId={examId} />
     </section>
   );
 }
@@ -126,11 +136,11 @@ async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
 export default function Page({
   params,
 }: {
-  params: { unitId: string; hwId: string };
+  params: { unitId: string; examId: string };
 }) {
   return (
-    <Suspense fallback={<UnitSkeleton />}>
-      <UnitContent hwId={params.hwId} unitId={params.unitId} />
+    <Suspense fallback={<AssignmentSkeleton />}>
+      <UnitContent examId={params.examId} unitId={params.unitId} />
     </Suspense>
   );
 }

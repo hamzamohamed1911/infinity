@@ -1,5 +1,11 @@
-
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 interface ConfirmSubmitDialogProps {
@@ -11,7 +17,7 @@ interface ConfirmSubmitDialogProps {
 export default function ConfirmSubmitDialog({
   open,
   onClose,
-  onConfirm
+  onConfirm,
 }: ConfirmSubmitDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -21,7 +27,8 @@ export default function ConfirmSubmitDialog({
             تأكيد إنهاء الامتحان
           </DialogTitle>
           <DialogDescription className="text-start">
-            هل أنت متأكد أنك تريد إنهاء الامتحان؟ لن تتمكن من تعديل الإجابات بعد الإنهاء.
+            هل أنت متأكد أنك تريد إنهاء الامتحان؟ لن تتمكن من تعديل الإجابات بعد
+            الإنهاء.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="w-full flex gap-2">

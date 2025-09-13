@@ -42,6 +42,7 @@ const SearchBox = () => {
                   setKeyword(e.target.value);
                   setOpen(true); // يفتح أول ما يكتب
                 }}
+                onFocus={() => setOpen(true)}
                 className="pe-10 bg-white rounded-3xl shadow-sm"
                 placeholder="ابحث هنا..."
               />
@@ -52,7 +53,10 @@ const SearchBox = () => {
           </div>
 
           {/* Results */}
-          <PopoverContent className="w-80 p-0 max-h-96 overflow-y-auto">
+          <PopoverContent
+            onOpenAutoFocus={(e) => e.preventDefault()}
+            className="w-80 p-0 max-h-96 overflow-y-auto"
+          >
             {isLoading && (
               <p className="p-3 text-gray-500 text-sm">جاري التحميل...</p>
             )}
@@ -216,7 +220,7 @@ const SearchBox = () => {
                       {data.data.units.map((unit: Unit) => (
                         <div key={unit.id}>
                           <Link
-                            href={`${unit.id}`}
+                            href={`/${unit.id}`}
                             className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
                           >
                             {unit.image ? (

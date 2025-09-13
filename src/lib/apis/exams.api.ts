@@ -64,6 +64,7 @@ export async function saveAnswer(
 ) {
   try {
     const token = await getAuthToken();
+    console.log("payload save answer" , payload)
     const res = await fetch(`${API_URL}api/v1/exams/save-answer/${examId}`, {
       method: "POST",
       headers: {
@@ -97,6 +98,7 @@ export async function submitAnswer(
       ...(a.question_type !== "radio" && { url: a.url || "" }),
     })),
   };
+    console.log("payload submit answer" , payload)
 
   const res = await fetch(`${API_URL}api/v1/exams/submit/${examId}`, {
     method: "POST",
