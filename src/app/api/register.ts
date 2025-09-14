@@ -39,7 +39,7 @@ export const registerUser = async (data: {
     throw result;
   }
 
-  return response.json();
+  return result;
 };
 export const registerWithSubscribe = async (data: {
   name: string;
@@ -68,5 +68,5 @@ export const registerWithSubscribe = async (data: {
     throw result;
   }
 
-  return response.json();
+  return result;
 };
