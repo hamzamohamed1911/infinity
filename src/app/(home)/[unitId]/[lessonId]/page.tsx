@@ -128,7 +128,7 @@ async function LessonContent({
                       {LessonData?.sub_exams.map((exam) => (
                         <li key={exam.id}>
                           <Link
-                            href={`/${unitId}/${LessonData.id}/exams/${exam.id}`}
+                            href={`/${unitId}/exams/${exam.id}`}
                             className="text-secondary-900 underline text-lg hover:text-secondary-800 transition-colors"
                           >
                             {exam.name}
@@ -148,7 +148,7 @@ async function LessonContent({
                       {LessonData?.sub_homeworks.map((homework) => (
                         <li key={homework.id}>
                           <Link
-                            href={`/${unitId}/${LessonData.id}/home-works/${homework.id}`}
+                            href={`/${unitId}/home-works/${homework.id}`}
                             className="text-secondary-900 underline text-lg hover:text-secondary-800 transition-colors"
                           >
                             {homework.name}
