@@ -23,6 +23,7 @@ import {
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Dropdown } from "@/components/Dropdown";
 import { GetClassroomsList, GetStateList } from "@/lib/apis/auth";
+import "react-international-phone/style.css";
 import { PhoneInput } from "react-international-phone";
 type ApiError = {
   message: string;
