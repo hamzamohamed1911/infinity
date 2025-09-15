@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 
-const WalletForm = () => {
+interface FawryFormProps {
+  model_type: string;
+  model_id: string | number;
+}
+const WalletForm = ({ model_type, model_id }: FawryFormProps) => {
+  console.log("model_id", model_id);
+  console.log("model_type", model_type);
   return (
     <form>
       <div className="flex flex-col gap-6">

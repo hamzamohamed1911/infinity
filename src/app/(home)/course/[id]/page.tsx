@@ -1,29 +1,27 @@
-import { BreadCrumb } from "@/components/BreadCrumb";
 import Image from "next/image";
-import { placeholder } from "../../../../public";
 import { RiBookMarkedLine } from "react-icons/ri";
 import { MdEditNote } from "react-icons/md";
 import { BiBookContent } from "react-icons/bi";
 import { Card } from "@/components/ui/card";
 
 import { ChevronRight } from "lucide-react";
-import { GetUnit } from "@/lib/apis/course.api";
+import { GetCourse } from "@/lib/apis/course.api";
 import UnitSkeleton from "@/components/UnitSkeleton";
 import { Suspense } from "react";
 import Link from "next/link";
 import NoDataMessage from "@/components/NoDataMessage";
-async function UnitContent({ unitId }: { unitId: string }) {
-  const Unit = await GetUnit({ unit_id: unitId });
+import { placeholder } from "../../../../../public";
+async function CourseContent({ id }: { id: string }) {
+  const Unit = await GetCourse({ course_id: id });
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
 
   return (
     <section className="flex flex-col gap-4 w-full p-4">
-      {UnitData && <BreadCrumb unitData={UnitData} />}
       <div className="grid md:grid-cols-12 grid-cols-1 justify-center items-center gap-8 2xl:min-h-72  min-h-60 w-full">
         <div className="flex flex-col gap-6 col-span-5">
           <div className="flex flex-col gap-4">
             <h2 className="text-[#8E8E8E] text-xl font-semibold">
-              تفاصيل الوحدة
+              تفاصيل الكورس
             </h2>
             <h3 className="text-[#606060] text-xl font-semibold">
               {UnitData?.name || "لا توجد بيانات"}
@@ -34,25 +32,31 @@ async function UnitContent({ unitId }: { unitId: string }) {
           </div>
           <div className="flex flex-col gap-4">
             <h2 className="text-[#8E8E8E] text-xl font-semibold">
-              في الوحدة هتلاقي
+              في الكورس هتلاقي
             </h2>
             <div className="text-[#606060] flex  flex-wrap lg:gap-6 gap-4">
               <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <RiBookMarkedLine size={30} />
                 <p className="whitespace-nowrap">
-                  {UnitData?.lessons_count || "لا توجد بيانات"} فيديو
+                  {UnitData?.books.length || "لا توجد بيانات"} كتاب
                 </p>
               </span>
               <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <MdEditNote size={30} />
                 <p className="whitespace-nowrap">
-                  {UnitData?.exams_count || "لا توجد بيانات"} إمتحانات
+                  {UnitData?.quizzes.length || "لا توجد بيانات"} إمتحانات
                 </p>
               </span>
               <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <BiBookContent size={30} />
                 <p className="whitespace-nowrap">
-                  {UnitData?.homeworks_count || "لا توجد بيانات"} واجبات
+                  {UnitData?.bundles.length || "لا توجد بيانات"} وحده
+                </p>
+              </span>
+              <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
+                <BiBookContent size={30} />
+                <p className="whitespace-nowrap">
+                  {UnitData?.quizzes.length || "لا توجد بيانات"} إمتحانات
                 </p>
               </span>
             </div>
@@ -73,7 +77,7 @@ async function UnitContent({ unitId }: { unitId: string }) {
             {UnitData.lessons.map((lesson) => (
               <Link
                 key={lesson.id}
-                href={`${unitId}/${lesson.id}`}
+                href={`${id}/${lesson.id}`}
                 className="group w-full flex justify-between items-center py-5 px-4 rounded-lg border cursor-pointer transition-all hover:border-primary hover:text-primary"
               >
                 <span className="text-lg font-medium">{lesson.name}</span>
@@ -88,10 +92,10 @@ async function UnitContent({ unitId }: { unitId: string }) {
     </section>
   );
 }
-export default function Page({ params }: { params: { unitId: string } }) {
+export default function Page({ params }: { params: { id: string } }) {
   return (
     <Suspense fallback={<UnitSkeleton />}>
-      <UnitContent unitId={params.unitId} />
+      <CourseContent id={params.id} />
     </Suspense>
   );
 }

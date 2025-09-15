@@ -63,7 +63,7 @@ const SideBar = ({ id }: { id: string }) => {
       icon: <FiUsers className="text-2xl" />,
     },
     {
-      href: `/my-purchases/${id}/books`,
+      href: `/books`,
       label: "كتب",
       icon: <LuBook className="text-2xl" />,
     },

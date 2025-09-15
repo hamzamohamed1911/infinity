@@ -13,49 +13,48 @@ import { FiUsers } from "react-icons/fi";
 import { useSidebar } from "@/lib/context/SidebarContext";
 import { FaArrowLeft } from "react-icons/fa6";
 
-const StoreSideBar = () => {
+const StoreSideBar = ({ id }: { id: string }) => {
   const pathname = usePathname();
   const { isSidebarOpen, closeSidebar } = useSidebar();
 
   const SideBarItems = [
-   
     {
-      href: "/store/courses",
+      href: `/store/${id}/courses`,
       label: "كورسات",
       icon: <FaAward className="text-2xl" />,
     },
     {
-      href: "/store/units",
+      href: `/store/${id}/units`,
       label: "الوحدات",
       icon: <RiBookMarkedLine className="text-2xl" />,
     },
     {
-      href: "/store/lessons",
+      href: `/store/${id}/lessons`,
       label: "الدروس",
       icon: <MdOndemandVideo className="text-2xl" />,
     },
     {
-      href: "/store/exams",
+      href: `/store/${id}/exams`,
       label: "إمتحانات",
       icon: <MdEditNote className="text-2xl" />,
     },
     {
-      href: "/store/homeworks",
+      href: ` /store/homeworks/${id}`,
       label: "واجبات",
       icon: <BiBookContent className="text-2xl" />,
     },
     {
-      href: "/store/live",
+      href: `/store/live/${id}`,
       label: "لايف",
       icon: <TbBellSchool className="text-2xl" />,
     },
     {
-      href: "/store/forum",
+      href: `/store/forum/${id}`,
       label: "منتدى",
       icon: <FiUsers className="text-2xl" />,
     },
     {
-      href: "/store/books",
+      href: `/store/books/${id}`,
       label: "كتب",
       icon: <LuBook className="text-2xl" />,
     },
@@ -73,7 +72,7 @@ const StoreSideBar = () => {
       <div className="bg-white h-16 md:hidden flex justify-between items-center px-4 text-primary">
         <p className="text-xl font-bold ">{currentRouteLabel}</p>
         <button onClick={() => closeSidebar()}>
-          <FaArrowLeft size={22}/>
+          <FaArrowLeft size={22} />
         </button>
       </div>
       {/* Sidebar content */}

@@ -21,6 +21,8 @@ import Player1 from "./_components/Player1";
 import Link from "next/link";
 import Player2 from "./_components/Player2";
 import Player3 from "./_components/Player3";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import PaymentDialog from "../payments/_components/PaymentDialog";
 
 async function LessonContent({
   unitId,
@@ -39,10 +41,21 @@ async function LessonContent({
 
   const UnitData = Unit?.data;
   const LessonData = lesson?.data;
+  console.log("LessonData:", lesson);
   if (!LessonData) {
     return (
-      <div className="text-center h-screen flex justify-center items-center text-red-600 text-xl font-bold">
-        {lesson?.message ?? "حدث خطأ أثناء تحميل المحاضرة."}
+      <div className="text-center h-screen max-w-xl mx-auto flex flex-col gap-4 justify-center items-center   ">
+        <p className="text-center leading-loose  text-red-600 lg:text-2xl md:text-xl text-lg font-bold">
+          {lesson?.message}
+        </p>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className=" bg-primary-500  w-52 h-12 text-white">
+              اشترى الآن
+            </Button>
+          </DialogTrigger>
+          <PaymentDialog model_type="lesson" model_id="149" />
+        </Dialog>
       </div>
     );
   }
