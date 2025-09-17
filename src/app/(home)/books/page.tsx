@@ -1,5 +1,12 @@
-const page = () => {
-  return <div>books</div>;
-};
+// app/books/page.tsx
 
-export default page;
+import BooksList from "./BooksList";
+
+export default function Page() {
+  return (
+    <section className="p-6">
+      <h1 className="text-2xl font-bold mb-4">📚 الكتب المتاحة</h1>
+      <BooksList />
+    </section>
+  );
+}

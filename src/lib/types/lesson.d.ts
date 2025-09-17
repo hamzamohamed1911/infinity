@@ -38,6 +38,7 @@ declare interface SubExam  {
 
 declare interface LessonDetails {
    sub_exams: SubExam[];
+   
    sub_homeworks:subHomeworks[]
   id: number;
   name: string;
@@ -72,6 +73,7 @@ declare interface LessonDetails {
   enable_video: number;
   enable_assessments: number;
   description:string| null;
+  
   // 👇 علشان ازرار المحاضرة السابقة والتالية
   next_lesson_id?: number | null;
   prev_lesson_id?: number | null;

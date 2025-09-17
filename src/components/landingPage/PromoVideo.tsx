@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 
@@ -16,8 +15,8 @@ const PromoVideo = () => {
               محاضرة تأسيسية لمنهج الفيزياء للثانوية العامة والأزهرية
             </p>
             <div className="w-full flex md:justify-start justify-center">
-                    <Link
-                href="/my-classes"
+              <Link
+                href="/my-courses"
                 className="btn-link bg-primary-500 rounded-md group  "
               >
                 <svg
@@ -36,11 +35,10 @@ const PromoVideo = () => {
                   />
                 </svg>
                 <span className="relative z-10 text-white text-lg font-medium">
-                 اكتشف دوراتنا التعليمية 
+                  اكتشف دوراتنا التعليمية
                 </span>
               </Link>
             </div>
-          
           </div>
 
           {/* Left side: Video */}
@@ -48,7 +46,7 @@ const PromoVideo = () => {
             <CardContent className="p-0 w-full">
               <iframe
                 className="w-full min-h-96 rounded-md"
-                  src="https://www.youtube.com/embed/ip3s7SvL4dY"
+                src="https://www.youtube.com/embed/ip3s7SvL4dY"
                 title="Promo Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

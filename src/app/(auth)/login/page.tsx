@@ -48,7 +48,7 @@ const Login = () => {
       if (result?.error) {
         setError(result.error);
       } else {
-        router.push("/my-classes");
+        router.push("/my-courses");
       }
     } catch (error: unknown) {
       const message =
@@ -67,21 +67,19 @@ const Login = () => {
         <div className="flex flex-col gap-4 max-w-lg mx-auto">
           <div className="flex flex-col gap-3 text-[#606060]">
             <label className="text-lg font-medium">رقم التليفون</label>
-{/* <PhoneInput
+            {/* <PhoneInput
   defaultCountry="EG"
   value={watch("phone") || ""}
   onChange={(phone) => setValue("phone", phone)}
   className="flex items-center gap-2 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-primary border text-start"
   inputClassName="flex-1 bg-transparent outline-none border-none text-start"
 /> */}
- <input
+            <input
               {...register("phone")}
               name="phone"
               type="tel"
               className="py-3 px-4 rounded-lg border-[1px] focus:ring-primary"
             />
-
-
           </div>
           {errors.phone && (
             <p className="text-red-500 text-sm">{errors.phone.message}</p>

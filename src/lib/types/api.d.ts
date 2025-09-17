@@ -14,6 +14,8 @@ declare type ErrorResponse = {
   message: string;
   data?: null;
   errors?: unknown;
+  preRequisites?: { id: number; name: string; type: string }[];
+
 };
 
 declare type APIResponse<T> = SuccessfulResponse<T> | ErrorResponse;

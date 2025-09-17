@@ -130,37 +130,39 @@ const SearchBox = () => {
                     <p className="font-semibold mb-2 text-gray-700">الباقات</p>
                     <div className="space-y-2">
                       {data.data.bundles.map((bundle: Bundle) => (
-                        <div
-                          key={bundle.id}
-                          className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
-                        >
-                          {bundle.thumbnail ? (
-                            <div className="w-12 h-12 rounded-md overflow-hidden">
+                        <div key={bundle.id}>
+                          <Link
+                            className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
+                            href={`/course/${bundle.id}`}
+                          >
+                            {bundle.thumbnail ? (
+                              <div className="w-12 h-12 rounded-md overflow-hidden">
+                                <Image
+                                  src={bundle.thumbnail}
+                                  alt={bundle.name}
+                                  width={50}
+                                  height={50}
+                                  className="object-cover"
+                                />
+                              </div>
+                            ) : (
                               <Image
-                                src={bundle.thumbnail}
+                                src={placeholder}
                                 alt={bundle.name}
                                 width={50}
                                 height={50}
-                                className="object-cover"
+                                className="rounded-md object-cover"
                               />
+                            )}
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-800">
+                                {bundle.name}
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                {truncate(bundle.description ?? "")}
+                              </p>
                             </div>
-                          ) : (
-                            <Image
-                              src={placeholder}
-                              alt={bundle.name}
-                              width={50}
-                              height={50}
-                              className="rounded-md object-cover"
-                            />
-                          )}
-                          <div className="flex-1">
-                            <p className="font-medium text-gray-800">
-                              {bundle.name}
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              {truncate(bundle.description ?? "")}
-                            </p>
-                          </div>
+                          </Link>
                         </div>
                       ))}
                     </div>

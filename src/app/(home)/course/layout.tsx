@@ -11,7 +11,7 @@ export default function CourseLayout({
   const cookieStore = cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
   if (!selectedId || selectedId === "undefined") {
-    redirect("/my-classes");
+    redirect("/my-courses");
   }
   return (
     <>

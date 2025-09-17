@@ -7,4 +7,5 @@ import placeholder from "./placeholder.svg"
 import  CourseDetails from "./CourseDetails.jpg"
 import unitBg from "./unitBg.jpg"
 import noDataAvilable from "./noDataAvailable.svg"
-export { studentstudying, logo, userImage ,heroImg ,exam ,placeholder ,CourseDetails ,unitBg ,noDataAvilable};
+import alertSvg from "./alert.svg"
+export { studentstudying, logo, userImage ,heroImg ,exam ,placeholder ,CourseDetails ,unitBg ,noDataAvilable ,alertSvg};

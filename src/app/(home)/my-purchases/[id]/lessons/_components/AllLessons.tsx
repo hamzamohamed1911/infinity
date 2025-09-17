@@ -24,7 +24,7 @@ const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
               href={`/${unit?.section_id}/${unit.id}`}
               className="group flex items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
             >
-              شوف الدروس
+              شوف الدرس
               <IoIosArrowBack
                 size={25}
                 className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"

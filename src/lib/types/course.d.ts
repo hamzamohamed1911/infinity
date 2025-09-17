@@ -1,6 +1,5 @@
 declare type Attachment = string;
 
-
 declare type Lesson = {
   id: number;
   name: string;
@@ -11,9 +10,9 @@ declare type Lesson = {
   attachments: Attachment[];
   display_mode: string;
   is_purchased_before: boolean;
-  thumbnail?:string;
-  image?:string;
-  section_id?:number;
+  thumbnail?: string;
+  image?: string;
+  section_id?: number;
 };
 
 declare type Section = {
@@ -26,6 +25,7 @@ declare type Section = {
 };
 declare type Book = {
   id: number;
+  image?: string;
   name: string;
   price: number;
   description: string | null;
@@ -58,19 +58,19 @@ declare type Exam = {
   degree: number;
   user_degree: number | null;
   min_grade: number;
-  image:string;
+  image: string;
   assessment_type: string;
-questions: unknown[];
+  questions: unknown[];
   questions_count: number;
-user_exams_retries: unknown[];
-answers: unknown[];
+  user_exams_retries: unknown[];
+  answers: unknown[];
   is_new_homework?: boolean;
 };
 
 declare type Bundle = {
   id: number;
   name: string;
-  description?:string;
+  description?: string;
   booking_status: number;
   price: string;
   thumbnail: string;
@@ -82,11 +82,10 @@ declare type Bundle = {
 };
 
 declare type CourseType = {
-  
   id: number;
   name: string;
   featured: number;
-  sticky: unknown; 
+  sticky: unknown;
   teacher: string;
   description: string | null;
   encrypted_video_link: string;
@@ -96,7 +95,7 @@ declare type CourseType = {
   books: Book[];
   bundles: Bundle[];
   quizzes: unknown[];
-  thumbnail?:string;
+  thumbnail?: string;
   exams?: exam[];
   lessons?: Lesson[];
 };
@@ -107,24 +106,24 @@ declare type Lesson = {
   price: number | string | null;
   discount: number | null;
   description: string | null;
-  attachments:  unknown[];
+  attachments: unknown[];
   display_mode: string;
   is_purchased_before: boolean;
 };
 
 declare type CourseDetails = {
   id: number;
-  section_id:number;
+  section_id: number;
   name: string;
   booking_status: number;
   price: string;
   lessons: Lesson[];
   description: string | null;
   lessons_count: number;
-  image:string | null;
+  image: string | null;
   exams_count: number;
   homeworks_count: number;
-  thumbnail?:string;
+  thumbnail?: string;
 };
 declare type UnitsD = {
   id: number;

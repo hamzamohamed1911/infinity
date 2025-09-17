@@ -37,7 +37,7 @@ const dummyCourses = [
     price: 1000,
     image: placeholder,
   },
-   {
+  {
     id: 5,
     title: "كورس المراجعة الخامسة",
     description: "شرح شامل لمنهج أولى ثانوي مع تدريبات تفاعلية وقطع ترجمة.",
@@ -122,7 +122,7 @@ const Store = () => {
 
       <div className="flex justify-center items-center mt-8">
         <Link
-          href="/my-classes"
+          href="/my-courses"
           className="btn-link bg-primary-500 rounded-md group "
         >
           <svg

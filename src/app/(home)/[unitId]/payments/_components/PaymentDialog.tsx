@@ -15,14 +15,16 @@ import WalletForm from "./WalletForm";
 interface DialogTabsProps {
   model_type: string;
   model_id: string | number;
+  name?: string;
 }
-const PaymentDialog = ({ model_type, model_id }: DialogTabsProps) => {
+const PaymentDialog = ({ model_type, model_id, name }: DialogTabsProps) => {
   return (
-    <DialogContent className="max-w-3xl">
+    <DialogContent className="md:max-w-3xl max-w-[90%]">
       <DialogHeader className="text-center w-full flex justify-center items-center gap-4">
         <DialogTitle>اختيار وسيلة الدفع</DialogTitle>
         <DialogDescription>
-          النوع: {model_type} / ID: {model_id}
+          <p>النوع: {model_type}</p>
+          {name || model_id}
         </DialogDescription>
       </DialogHeader>
 

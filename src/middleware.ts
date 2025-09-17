@@ -11,11 +11,11 @@ export default withAuth(
     }
 
     if (pathname === "/login" && req.nextauth.token) {
-      return NextResponse.redirect(new URL("/my-classes", req.url));
+      return NextResponse.redirect(new URL("/my-courses", req.url));
     }
 
-    // حماية صفحة my-classes
-    if (pathname.startsWith("/my-classes") && !req.nextauth.token) {
+    // حماية صفحة my-courses
+    if (pathname.startsWith("/my-courses") && !req.nextauth.token) {
       return NextResponse.redirect(new URL("/login", req.url));
     }
 

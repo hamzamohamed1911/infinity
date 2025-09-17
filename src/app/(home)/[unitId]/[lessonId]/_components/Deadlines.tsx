@@ -17,7 +17,7 @@ const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
   const selectedId = cookieStore.get("selected_course_id")?.value;
 
   if (!selectedId || selectedId === "undefined") {
-    redirect("/my-classes");
+    redirect("/my-courses");
   }
 
   const examsList = await GetExams({

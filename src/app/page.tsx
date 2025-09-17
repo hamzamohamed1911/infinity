@@ -198,7 +198,7 @@ export default function Home() {
           </p>
           <div className="w-full flex md:justify-start justify-center">
             <Link
-              href="/my-classes"
+              href="/my-courses"
               className="btn-link bg-primary-500 rounded-md group "
             >
               <svg
@@ -224,7 +224,7 @@ export default function Home() {
         </motion.div>
       </section>
       {/* About Section */}
-       <section
+      <section
         id="about"
         className="py-16 px-6 md:px-12 text-center bg-[#831AD3]/10"
       >

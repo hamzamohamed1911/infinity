@@ -23,6 +23,8 @@ import Player2 from "./_components/Player2";
 import Player3 from "./_components/Player3";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import PaymentDialog from "../payments/_components/PaymentDialog";
+import Image from "next/image";
+import { alertSvg } from "../../../../../public";
 
 async function LessonContent({
   unitId,
@@ -41,24 +43,55 @@ async function LessonContent({
 
   const UnitData = Unit?.data;
   const LessonData = lesson?.data;
-  console.log("LessonData:", lesson);
   if (!LessonData) {
+    const preRequisites = lesson?.preRequisites || [];
+
+    if (preRequisites.length > 0) {
+      return (
+        <div className="text-center h-screen max-w-xl mx-auto flex flex-col gap-4 justify-center items-center">
+          <div className="w-24 sm:w-28 md:w-36 lg:w-40">
+            <Image
+              src={alertSvg}
+              alt="alert icons"
+              width={150}
+              height={150}
+              className="h-auto w-full"
+            />
+          </div>
+
+          <p className="text-center !leading-10 text-red-600 lg:text-2xl md:text-xl text-lg font-bold">
+            {lesson?.message}
+          </p>
+          <div className="flex flex-col gap-4">
+            {preRequisites.map((item) => (
+              <Dialog key={item.id}>
+                <DialogTrigger asChild>
+                  <Button className="text-white w-full bg-primary-500  hover:bg-primary-400 lg:h-12 h-10 shadow-md hover:shadow-lg text-xl transition-all duration-500">
+                    اشترى الآن {item.name}
+                  </Button>
+                </DialogTrigger>
+                <PaymentDialog
+                  name={item.name}
+                  model_type={item.type}
+                  model_id={item.id}
+                />
+              </Dialog>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div className="text-center h-screen max-w-xl mx-auto flex flex-col gap-4 justify-center items-center   ">
-        <p className="text-center leading-loose  text-red-600 lg:text-2xl md:text-xl text-lg font-bold">
+      <div className="text-center h-screen max-w-xl mx-auto flex flex-col gap-4 justify-center items-center">
+        <Image src={alertSvg} width={150} height={150} alt="alert icons" />
+        <p className="text-center !leading-10 text-red-600 lg:text-2xl md:text-xl text-lg font-bold">
           {lesson?.message}
         </p>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button className=" bg-primary-500  w-52 h-12 text-white">
-              اشترى الآن
-            </Button>
-          </DialogTrigger>
-          <PaymentDialog model_type="lesson" model_id="149" />
-        </Dialog>
       </div>
     );
   }
+
   return (
     <section className="flex flex-col gap-4 w-full p-4">
       {LessonData && UnitData && (

@@ -20,6 +20,8 @@ export async function chargeCode({
     if (code) {
       formData.append("code", code);
     }
+    console.log(`${API_URL}api/v1/charge-by-code`);
+
     const token = await getAuthToken();
     const res = await fetch(`${API_URL}api/v1/charge-by-code`, {
       method: "POST",
