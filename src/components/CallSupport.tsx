@@ -20,12 +20,10 @@ const CallSupport = () => {
         </button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-2xl rounded-xl">
-        <div className="grid grid-cols-2 2xl:gap-10 md:gap-6 gap-4">
-          <div className="flex flex-col items-start justify-start gap-4 py-6 ">
-            <h2 className="text-lg font-bold  text-[#8E8E8E]">
-              دعم المدرس
-            </h2>
+      <DialogContent className="max-w-2xl rounded-xl max-h-[95%] overflow-auto">
+        <div className="grid grid-cols-2 2xl:gap-8 md:gap-6 gap-4">
+          <div className="flex flex-col items-start justify-start gap-4 py-4 ">
+            <h2 className="text-lg font-bold  text-[#8E8E8E]">دعم المدرس</h2>
             <p className=" text-md font-semibold  text-[#606060]">
               ممكن تتواصل مع المدرس من هنا!
             </p>
@@ -65,10 +63,8 @@ const CallSupport = () => {
               01234567890
             </a>
           </div>
-          <div className="flex flex-col items-start justify-start gap-4 py-6 ">
-            <h2 className="text-lg font-bold  text-[#8E8E8E]">
-              تيم السنتر
-            </h2>
+          <div className="flex flex-col items-start justify-start gap-4 py-4 ">
+            <h2 className="text-lg font-bold  text-[#8E8E8E]">تيم السنتر</h2>
 
             <p className=" text-md font-semibold  text-[#606060]">
               كلم تيم السنتر من هنا
@@ -111,7 +107,7 @@ const CallSupport = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 2xl:gap-10 md:gap-6 gap-4">
-          <div className="flex flex-col items-start justify-start gap-4 py-6 ">
+          <div className="flex flex-col items-start justify-start gap-4 py-4 ">
             <h2 className="text-lg font-bold  text-[#8E8E8E]">
               دعم الفني للمنصة
             </h2>
@@ -154,7 +150,7 @@ const CallSupport = () => {
               01234567890
             </a>
           </div>
-          <div className="flex flex-col items-start justify-start gap-4 py-6 ">
+          <div className="flex flex-col items-start justify-start gap-4 py-4 ">
             <h2 className="text-lg font-bold  text-[#8E8E8E]">
               فريق الاونلاين
             </h2>

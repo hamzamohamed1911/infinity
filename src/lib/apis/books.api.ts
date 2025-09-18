@@ -6,12 +6,15 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function GetBooks({
   page = 1,
+  per_page = 12,
 }: {
   page?: number;
+  per_page?: number;
 }): Promise<BooksApiResponse> {
   const token = await getAuthToken();
   const params = new URLSearchParams();
   params.append("page", page.toString());
+  params.append("per_page", per_page.toString());
 
   const url = `${API_URL}api/v1/books/?${params.toString()}`;
 

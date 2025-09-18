@@ -66,7 +66,7 @@ declare type Book = {
   image?: string;
   description: string | null;
   content: string | null;
-  price: string;
+  price: string | number | null;
   image?: string;
   teacher: Teacher;
 };

@@ -1,5 +1,3 @@
-// app/books/page.tsx
-
 import BooksList from "./BooksList";
 
 export default function Page() {
