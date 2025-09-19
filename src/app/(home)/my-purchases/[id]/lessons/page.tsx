@@ -7,7 +7,6 @@ import UnitSkeleton from "@/components/UnitSkeleton";
 async function LessonsContent({ courseId }: { courseId: string }) {
   const Lessons = await GetLessons({ course_id: courseId });
   const LessonsData = Lessons && "data" in Lessons ? Lessons.data : undefined;
-  console.log("LessonsData", LessonsData);
   return (
     <section>
       <Tabs dir="rtl" defaultValue="all" className="w-full my-8">

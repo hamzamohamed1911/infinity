@@ -136,3 +136,18 @@ declare type UnitsD = {
   exams_count: number;
   homeworks_count: number;
 };
+declare type BundleDetails = {
+  id: number;
+  name: string;
+  booking_status: number;
+  price: string;
+  lessons: Lesson[];
+  books: Book[];
+  description: string | null;
+  lessons_count: number;
+  image: string | null;
+  exams: exam[];
+  exams_count: number;
+  homeworks_count: number;
+  thumbnail?: string;
+};

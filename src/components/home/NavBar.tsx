@@ -36,7 +36,13 @@ import { Skeleton } from "../ui/skeleton";
 import { useTheme } from "@/context/theme-context";
 import Search from "./Search";
 
-const Navbar = ({ id }: { id: string }) => {
+const Navbar = ({
+  id,
+  showMenuButton = true, // هنا هتتحكم فى الظهور
+}: {
+  id: string;
+  showMenuButton?: boolean;
+}) => {
   const { logo } = useTheme();
 
   const pathname = usePathname();
@@ -86,13 +92,15 @@ const Navbar = ({ id }: { id: string }) => {
     <>
       <nav className="bg-primary  shadow-md top-0 z-50">
         <div className="xl:max-w-[90%] container max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-20 gap-2">
-            <button
-              className="md:hidden flex items-center text-white text-2xl"
-              onClick={toggleSidebar}
-            >
-              <RxHamburgerMenu />
-            </button>
+          <div className="flex justify-between h-20 gap-6">
+            {showMenuButton && (
+              <button
+                className="md:hidden flex items-center text-white text-2xl"
+                onClick={toggleSidebar}
+              >
+                <RxHamburgerMenu />
+              </button>
+            )}
             {/* User Profile */}
             {isLoading ? (
               <div className="md:flex hidden  h-20 gap-2 items-center">
@@ -159,7 +167,7 @@ const Navbar = ({ id }: { id: string }) => {
             )}
 
             {/* Navigation Links */}
-            <div className="md:flex hidden items-center gap-4">
+            <div className="lg:flex hidden items-center gap-4">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -179,7 +187,7 @@ const Navbar = ({ id }: { id: string }) => {
             <Search />
 
             {/* Logo */}
-            <div className="flex items-center">
+            <div className="flex items-center shrink-0">
               <Link href="/">
                 <Image
                   src={logo}

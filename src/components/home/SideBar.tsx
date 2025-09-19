@@ -75,7 +75,7 @@ const SideBar = ({ id }: { id: string }) => {
   return (
     <>
       {/* Desktop Sidebar ثابت */}
-      <aside className="hidden md:block md:w-72 shrink-0 border-[1px] border-[#E8E8E8] bg-white my-8 rounded-2xl overflow-auto ">
+      <aside className="hidden lg:block md:w-72 shrink-0 border-[1px] border-[#E8E8E8] bg-white my-8 rounded-2xl overflow-auto ">
         {SideBarItems.map((item) => (
           <Link
             key={item.href}

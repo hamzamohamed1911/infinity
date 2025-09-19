@@ -5,15 +5,15 @@ import { BiBookContent } from "react-icons/bi";
 import { Card } from "@/components/ui/card";
 
 import { ChevronRight } from "lucide-react";
-import { GetCourse } from "@/lib/apis/course.api";
 import UnitSkeleton from "@/components/UnitSkeleton";
 import { Suspense } from "react";
 import Link from "next/link";
 import NoDataMessage from "@/components/NoDataMessage";
 import { placeholder } from "../../../../../public";
+import { GetBundle } from "@/lib/apis/course.api";
 async function CourseContent({ id }: { id: string }) {
-  const Unit = await GetCourse({ course_id: id });
-  const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
+  const bundle = await GetBundle({ bundle_id: id });
+  const UnitData = bundle && "data" in bundle ? bundle.data : undefined;
 
   return (
     <section className="flex flex-col gap-4 w-full p-4">
@@ -44,19 +44,13 @@ async function CourseContent({ id }: { id: string }) {
               <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <MdEditNote size={30} />
                 <p className="whitespace-nowrap">
-                  {UnitData?.quizzes.length || "لا توجد بيانات"} إمتحانات
+                  {UnitData?.lessons.length || "لا توجد بيانات"} دروس
                 </p>
               </span>
               <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <BiBookContent size={30} />
                 <p className="whitespace-nowrap">
-                  {UnitData?.bundles.length || "لا توجد بيانات"} وحده
-                </p>
-              </span>
-              <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
-                <BiBookContent size={30} />
-                <p className="whitespace-nowrap">
-                  {UnitData?.quizzes.length || "لا توجد بيانات"} إمتحانات
+                  {UnitData?.exams.length || "لا توجد بيانات"} إمتحانات
                 </p>
               </span>
             </div>

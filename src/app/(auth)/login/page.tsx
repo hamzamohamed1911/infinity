@@ -42,7 +42,7 @@ const Login = () => {
       const result = await signIn("credentials", {
         phone: data.phone,
         password: data.password,
-        redirect: false,
+        callbackUrl: "/my-courses",
       });
 
       if (result?.error) {

@@ -27,11 +27,10 @@ const SearchBox = () => {
   const debouncedKeyword = useDebounce(keyword, 500);
 
   const { data, isLoading, isError } = useSearch(teacher_id, debouncedKeyword);
-  console.log("search data", data);
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <div className="flex items-center">
-        <div className="relative w-full md:w-80">
+      <div className="flex items-center   w-full md:w-80">
+        <div className="relative w-full">
           {/* Input */}
           <div className="relative w-full">
             <PopoverTrigger asChild>
@@ -55,7 +54,7 @@ const SearchBox = () => {
           {/* Results */}
           <PopoverContent
             onOpenAutoFocus={(e) => e.preventDefault()}
-            className="w-80 p-0 max-h-96 overflow-y-auto"
+            className="w-full lg:w-80 p-0 max-h-96 overflow-y-auto"
           >
             {isLoading && (
               <p className="p-3 text-gray-500 text-sm">جاري التحميل...</p>
@@ -127,7 +126,7 @@ const SearchBox = () => {
                 {/* الباقات */}
                 {data.data.bundles.length > 0 && (
                   <div className="p-3">
-                    <p className="font-semibold mb-2 text-gray-700">الباقات</p>
+                    <p className="font-semibold mb-2 text-gray-700">الكورسات</p>
                     <div className="space-y-2">
                       {data.data.bundles.map((bundle: Bundle) => (
                         <div key={bundle.id}>

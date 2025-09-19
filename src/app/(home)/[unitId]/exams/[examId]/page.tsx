@@ -18,7 +18,6 @@ async function UnitContent({
   const ExamData = Exam && "data" in Exam ? Exam.data : undefined;
   const Unit = await GetUnit({ unit_id: unitId });
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
-  console.log("ExamData", ExamData);
   // دالة لتنسيق التاريخ والوقت
   function formatDateTime(dateTimeString: string) {
     const dateObj = new Date(dateTimeString);

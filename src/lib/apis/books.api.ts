@@ -34,3 +34,23 @@ export async function GetBooks({
 
   return payload;
 }
+export async function GetBook({ id }: { id: string }) {
+  const token = await getAuthToken();
+  const url = `${API_URL}api/v1/get-book/${id}`;
+
+  const response = await fetch(url, {
+    method: "GET",
+    cache: "no-cache",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`HTTP Error: ${response.status}`);
+  }
+
+  const payload = await response.json();
+
+  return payload;
+}

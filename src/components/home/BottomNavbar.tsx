@@ -8,19 +8,17 @@ import { IoGridOutline } from "react-icons/io5";
 import { GrHelpBook } from "react-icons/gr";
 import { motion } from "framer-motion";
 
-
-
-export default function BottomNavbar({id}:{id:string}) {
+export default function BottomNavbar({ id }: { id: string }) {
   const navItems = [
-  { href: "/profile", icon: User, label: "الملف الشخصى" },
-  { href: `/my-purchases/${id}`, icon: IoGridOutline, label: "مشترياتى" },
-  { href: `/store/${id}`, icon: BiStore, label: "المتجر" },
-  { href: "/questions-bank", icon: GrHelpBook, label: "بنك الاسئلة" },
-];
+    { href: "/profile", icon: User, label: "الملف الشخصى" },
+    { href: `/my-purchases/${id}`, icon: IoGridOutline, label: "مشترياتى" },
+    { href: `/store/${id}`, icon: BiStore, label: "المتجر" },
+    { href: "/questions-bank", icon: GrHelpBook, label: "بنك الاسئلة" },
+  ];
   const pathname = usePathname();
 
   return (
-    <nav className="fixed md:hidden bottom-0 left-0 right-0 bg-primary shadow-md rounded-lg z-[9999]">
+    <nav className="fixed lg:hidden bottom-0 left-0 right-0 bg-primary shadow-md rounded-lg z-[9999]">
       <div className="flex justify-around items-center py-1">
         {navItems.map((item, index) => {
           const Icon = item.icon;

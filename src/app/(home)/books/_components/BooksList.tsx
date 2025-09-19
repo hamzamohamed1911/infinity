@@ -4,7 +4,7 @@ import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { GetBooks } from "@/lib/apis/books.api";
-import { placeholder } from "../../../../public";
+import { placeholder } from "../../../../../public";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function BooksList() {
