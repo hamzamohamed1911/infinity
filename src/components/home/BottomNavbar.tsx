@@ -22,7 +22,18 @@ export default function BottomNavbar({ id }: { id: string }) {
       <div className="flex justify-around items-center py-1">
         {navItems.map((item, index) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href;
+
+          // هنا بقى الشرط
+          let isActive = false;
+          if (item.href.startsWith("/my-purchases")) {
+            isActive = pathname.startsWith("/my-purchases");
+          } else if (item.href.startsWith("/store")) {
+            isActive = pathname.startsWith("/store");
+          } else if (item.href.startsWith("/profile")) {
+            isActive = pathname.startsWith("/profile");
+          } else {
+            isActive = pathname === item.href;
+          }
 
           return (
             <motion.div

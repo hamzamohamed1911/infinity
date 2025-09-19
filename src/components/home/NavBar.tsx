@@ -168,20 +168,26 @@ const Navbar = ({
 
             {/* Navigation Links */}
             <div className="lg:flex hidden items-center gap-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center gap-4 px-3 h-12 justify-center rounded-md text-md font-medium transition-colors whitespace-nowrap ${
-                    pathname === item.href
-                      ? "bg-white text-primary"
-                      : "hover:bg-white hover:text-primary text-white"
-                  }`}
-                >
-                  {item.icon}
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const isActive = item.href.startsWith("/my-purchases")
+                  ? pathname.startsWith("/my-purchases")
+                  : pathname === item.href;
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center gap-4 px-3 h-12 justify-center rounded-md text-md font-medium transition-colors whitespace-nowrap ${
+                      isActive
+                        ? "bg-white text-primary"
+                        : "hover:bg-white hover:text-primary text-white"
+                    }`}
+                  >
+                    {item.icon}
+                    {item.label}
+                  </Link>
+                );
+              })}
             </div>
             {/* Search */}
             <Search />
