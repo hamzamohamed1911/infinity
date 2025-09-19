@@ -19,9 +19,9 @@ export async function GetExam({
   });
 
   const payload = await response.json();
-   if (payload?.message === "Unauthenticated.") {
-      redirect("/logout");
-    }
+  if (payload?.message === "Unauthenticated.") {
+    redirect("/logout");
+  }
   return payload;
 }
 export async function joinExam({
@@ -64,7 +64,7 @@ export async function saveAnswer(
 ) {
   try {
     const token = await getAuthToken();
-    console.log("payload save answer" , payload)
+    console.log("payload save answer", payload);
     const res = await fetch(`${API_URL}api/v1/exams/save-answer/${examId}`, {
       method: "POST",
       headers: {
@@ -98,7 +98,7 @@ export async function submitAnswer(
       ...(a.question_type !== "radio" && { url: a.url || "" }),
     })),
   };
-    console.log("payload submit answer" , payload)
+  console.log("payload submit answer", payload);
 
   const res = await fetch(`${API_URL}api/v1/exams/submit/${examId}`, {
     method: "POST",
@@ -118,7 +118,7 @@ export async function submitAnswer(
 }
 export async function GetExams({
   course_id,
-  assessment_type=1,
+  assessment_type = 1,
 }: {
   course_id: string;
   assessment_type: number;
@@ -137,7 +137,7 @@ export async function GetExams({
 
   const payload = await response.json();
   if (payload?.message === "Unauthenticated.") {
-      redirect("/logout");
-    }
+    redirect("/logout");
+  }
   return payload;
 }

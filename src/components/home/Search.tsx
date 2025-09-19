@@ -176,37 +176,42 @@ const SearchBox = () => {
                     </p>
                     <div className="space-y-2">
                       {data.data.exams.map((exam: Exam) => (
-                        <div
-                          key={exam.id}
-                          className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
-                        >
-                          {exam.image ? (
-                            <div className="w-12 h-12 rounded-md overflow-hidden">
+                        <div key={exam.id}>
+                          <Link
+                            className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 cursor-pointer border"
+                            href={`/${exam?.section_id}/exams/${exam.id}`}
+                          >
+                            {exam.image ? (
+                              <div className="w-12 h-12 rounded-md overflow-hidden">
+                                <Image
+                                  src={exam.image ?? exam.image ?? placeholder}
+                                  alt={exam.name ?? "Lesson"}
+                                  width={50}
+                                  height={50}
+                                  className="object-cover"
+                                />
+                              </div>
+                            ) : (
                               <Image
-                                src={exam.image}
+                                src={placeholder}
                                 alt={exam.name}
                                 width={50}
                                 height={50}
-                                className="object-cover"
+                                className="rounded-md object-cover"
                               />
+                            )}
+
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-800">
+                                {exam.name}
+                              </p>
+                              {exam.description && (
+                                <p className="text-xs text-gray-500">
+                                  {truncate(exam.description)}
+                                </p>
+                              )}
                             </div>
-                          ) : (
-                            <Image
-                              src={placeholder}
-                              alt={exam.name}
-                              width={50}
-                              height={50}
-                              className="rounded-md object-cover"
-                            />
-                          )}
-                          <div className="flex-1">
-                            <p className="font-medium text-gray-800">
-                              {exam.name}
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              {truncate(exam.description ?? "")}
-                            </p>
-                          </div>
+                          </Link>
                         </div>
                       ))}
                     </div>

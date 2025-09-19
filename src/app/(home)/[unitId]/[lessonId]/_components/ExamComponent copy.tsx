@@ -9,12 +9,11 @@ import { ChevronLeft, ChevronRight, Clock, X } from "lucide-react";
 import Image from "next/image";
 import { placeholder } from "../../../../../../public";
 import { Textarea } from "@/components/ui/textarea";
+import { saveAnswer, submitAnswer } from "@/lib/apis/exams.api";
 import { useMutation } from "@tanstack/react-query";
 import ConfirmSubmitDialog from "./ConfirmSubmitDialog";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import { useSession } from "next-auth/react";
-import { saveAnswer, submitAnswer } from "@/lib/apis/submit-exam.api";
 
 export default function ExamComponent({
   examData,
@@ -23,18 +22,25 @@ export default function ExamComponent({
   examData: ExamDetails;
   examId: string;
 }) {
-  const { data: session } = useSession();
-  const token = session?.user?.token;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string | number>>({});
-  const [imageFiles, setImageFiles] = useState<Record<number, File | null>>({});
   const [timeRemaining, setTimeRemaining] = useState(examData.period * 60);
   const [openDialog, setOpenDialog] = useState(false);
-  const [imagePreviews, setImagePreviews] = useState<Record<number, string>>(
-    {}
+  const [imagePreview, setImagePreview] = useState<string | undefined>(
+    undefined
   );
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
 
-  // المؤقت
+  const confirmSubmitExam = async () => {
+    await handleSubmitExam();
+    setOpenDialog(false);
+  };
+  // Timer effect
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeRemaining((prev) => {
@@ -45,9 +51,11 @@ export default function ExamComponent({
         return prev - 1;
       });
     }, 1000);
+
     return () => clearInterval(timer);
   }, []);
 
+  // Format time display
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -56,22 +64,63 @@ export default function ExamComponent({
       .toString()
       .padStart(2, "0")}`;
   };
-
   const currentQuestion = examData.questions[currentQuestionIndex];
   const totalQuestions = examData.questions.length;
 
-  // mutations
   const mutation = useMutation({
-    mutationFn: (formData: FormData) =>
-      saveAnswer(formData, examData.id || examId, token ?? ""),
-    onError: (error) => console.error("Error saving answer:", error),
+    mutationFn: (payload: SaveAnswerPayload) =>
+      saveAnswer(payload, examData.id || examId),
+    onSuccess: () => {},
+    onError: (error) => {
+      console.error("Error saving answer:", error);
+    },
   });
-
   const submitMutation = useMutation({
-    mutationFn: (formData: FormData) =>
-      submitAnswer(examData.id || examId, formData, token ?? ""),
-    onError: (error) => console.error("Error submitting exam:", error),
+    mutationFn: (answersPayload: QuestionAnswer[]) =>
+      submitAnswer(examData.id || examId, answersPayload),
+    onSuccess: () => {},
+    onError: (error) => {
+      console.error("Error submitting exam:", error);
+    },
   });
+  const buildAnswersPayload = (): QuestionAnswer[] => {
+    return examData.questions.map((q) => {
+      const answerValue = answers[q.id] ?? "";
+
+      const baseAnswer: QuestionAnswer = {
+        question_id: q.id,
+        question_type: q.type_id,
+        answer: answerValue,
+      };
+
+      if (q.type_id !== "radio") {
+        baseAnswer.url = "";
+      }
+
+      return baseAnswer;
+    });
+  };
+
+  const handleSubmitExam = async () => {
+    const payload = buildAnswersPayload();
+    await submitMutation.mutateAsync(payload);
+  };
+  const submitCurrentAnswer = async () => {
+    const currentQ = currentQuestion;
+    const answerValue = answers[currentQ.id];
+
+    if (answerValue !== undefined) {
+      const payload: SaveAnswerPayload = {
+        answer: {
+          question_id: currentQ.id,
+          question_type: currentQ.type_id,
+          answer: answerValue,
+          ...(currentQ.type_id !== "radio" && { url: "" }),
+        },
+      };
+      await mutation.mutateAsync(payload);
+    }
+  };
 
   const handleAnswerChange = (
     questionId: number,
@@ -84,94 +133,14 @@ export default function ExamComponent({
     }));
   };
 
-  // التعامل مع رفع صورة
-  const handleImageChange = (
-    questionId: number,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImageFiles((prev) => ({ ...prev, [questionId]: file }));
-      setImagePreviews((prev) => ({
-        ...prev,
-        [questionId]: URL.createObjectURL(file),
-      }));
-    }
-  };
-
-  // مسح الصورة
-  const removeImage = (questionId: number) => {
-    setImageFiles((prev) => ({ ...prev, [questionId]: null }));
-    setImagePreviews((prev) => {
-      const updated = { ...prev };
-      delete updated[questionId];
-      return updated;
-    });
-  };
-
-  // بناء الـ FormData لإجابة السؤال الحالي
-  const buildCurrentAnswerFormData = (): FormData | null => {
-    const currentQ = currentQuestion;
-    const answerValue = answers[currentQ.id];
-
-    if (answerValue === undefined) return null;
-
-    const formData = new FormData();
-    // استعمل answer[...] بدل answers[0][...]
-    formData.append("answer[question_id]", currentQ.id.toString());
-    formData.append("answer[question_type]", currentQ.type_id);
-    formData.append("answer[answer]", answerValue.toString());
-
-    if (currentQ.type_id !== "radio") {
-      const file = imageFiles[currentQ.id];
-      if (file) {
-        formData.append("answers[0][url]", file);
-      }
-    }
-
-    return formData;
-  };
-
-  // إرسال الإجابة الحالية
-  const submitCurrentAnswer = async () => {
-    const formData = buildCurrentAnswerFormData();
-    if (formData) {
-      await mutation.mutateAsync(formData);
-    }
-  };
-
-  // إرسال كل الامتحان
-  const handleSubmitExam = async () => {
-    const formData = new FormData();
-    examData.questions.forEach((q, index) => {
-      const answerValue = answers[q.id] ?? "";
-
-      formData.append(`answers[${index}][question_id]`, q.id.toString());
-      formData.append(`answers[${index}][question_type]`, q.type_id);
-      formData.append(`answers[${index}][answer]`, answerValue.toString());
-
-      if (q.type_id !== "radio") {
-        const file = imageFiles[q.id];
-        if (file) {
-          formData.append(`answers[${index}][url]`, file);
-        }
-      }
-    });
-
-    await submitMutation.mutateAsync(formData);
-  };
-
-  const confirmSubmitExam = async () => {
-    await handleSubmitExam();
-    setOpenDialog(false);
-  };
-
-  // تنقل بين الأسئلة
   const goToNextQuestion = async () => {
     await submitCurrentAnswer();
+
     if (currentQuestionIndex < examData.questions_count - 1) {
+      // لسه فيه أسئلة → نروح للسؤال اللي بعده
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
+      // ده آخر سؤال → افتح الـ dialog بعد الحفظ
       setOpenDialog(true);
     }
   };
@@ -189,8 +158,10 @@ export default function ExamComponent({
   return (
     <>
       <div className="lg:px-6 md:px-4 px-2">
+        {/* Question Card */}
         <Card className="mb-6">
           <CardContent className="lg:p-8 p-4 flex flex-col md:gap-6 gap-4">
+            {/* End Exam Button */}
             <div className="text-center mb-6">
               <div
                 onClick={() => setOpenDialog(true)}
@@ -207,8 +178,8 @@ export default function ExamComponent({
               </span>
             </div>
 
-            {/* الخطوات */}
-            <div className="flex items-center gap-2 overflow-x-auto justify-between pb-2 pt-6">
+            {/* Progress Steps */}
+            <div className="flex items-center gap-2 overflow-x-auto  justify-between pb-2 pt-6">
               <ChevronRight
                 onClick={goToPreviousQuestion}
                 className="w-6 h-6 text-gray-400 cursor-pointer shrink-0"
@@ -233,9 +204,7 @@ export default function ExamComponent({
                 className="w-6 h-6 text-gray-400 cursor-pointer shrink-0"
               />
             </div>
-
-            {/* السؤال */}
-            <div className="text-start">
+            <div className="text-start ">
               <div className="text-sm text-gray-500 mb-2">
                 السؤال {currentQuestionIndex + 1} من {totalQuestions}
               </div>
@@ -255,8 +224,9 @@ export default function ExamComponent({
                 </div>
               )}
             </div>
+            {/* Answer Options */}
 
-            {/* نوع الإجابة */}
+            {/* text */}
             {currentQuestion.type_id === "text" && (
               <div className="flex flex-col gap-4 w-full">
                 <Textarea
@@ -268,20 +238,19 @@ export default function ExamComponent({
                     handleAnswerChange(currentQuestion.id, null, e.target.value)
                   }
                 />
-
-                <div className="mb-4 rounded-3xl flex w-full flex-col md:justify-start justify-center">
-                  {imagePreviews[currentQuestion.id] ? (
+                <div className="mb-4 rounded-3xl flex w-full  flex-col md:justify-start justify-center">
+                  {imagePreview ? (
                     <div className="relative size-52 rounded-3xl">
                       <Image
-                        src={imagePreviews[currentQuestion.id]}
+                        src={imagePreview}
                         alt="image"
                         width={100}
                         height={100}
                         className="size-52 object-cover rounded-3xl"
                       />
                       <button
-                        onClick={() => removeImage(currentQuestion.id)}
-                        className="absolute top-2 left-2 text-red-700 text-3xl hover:text-red-500 transition"
+                        onClick={() => setImagePreview(undefined)}
+                        className="absolute top-2 left-2 text-red-700  text-3xl  hover:text-red-500 transition"
                         aria-label="حذف الصورة"
                         type="button"
                       >
@@ -294,26 +263,27 @@ export default function ExamComponent({
                     </div>
                   )}
 
+                  {/* زرار رفع الصورة تحت الصورة */}
                   <label
-                    htmlFor={`imageUpload-${currentQuestion.id}`}
-                    className="mt-3 flex gap-2 bg-primary text-white px-6 py-3 rounded-md justify-center items-center cursor-pointer md:w-fit w-full"
+                    htmlFor="imageUpload"
+                    className="mt-3 flex gap-2  bg-primary text-white px-6 py-3 rounded-md justify-center items-center cursor-pointer  md:w-fit w-full"
                   >
                     <AiOutlineCloudDownload size={25} />
                     اختر صورة
                   </label>
 
                   <input
-                    key={currentQuestion.id}
-                    id={`imageUpload-${currentQuestion.id}`}
+                    id="imageUpload"
                     type="file"
                     accept="image/*"
-                    onChange={(e) => handleImageChange(currentQuestion.id, e)}
+                    onChange={handleImageChange}
                     className="hidden"
                   />
                 </div>
               </div>
             )}
 
+            {/* radio */}
             {currentQuestion.type_id === "radio" && (
               <RadioGroup
                 value={answers[currentQuestion.id]?.toString() || ""}
@@ -321,10 +291,10 @@ export default function ExamComponent({
                   handleAnswerChange(currentQuestion.id, parseInt(value))
                 }
                 dir="rtl"
-                className="flex flex-col gap-6"
+                className="flex flex-col gap-6 "
               >
                 {currentQuestion.options?.map((option) => (
-                  <div key={option.id} className="flex items-start gap-3">
+                  <div key={option.id} className="flex items-start gap-3 ">
                     <RadioGroupItem
                       value={option.id.toString()}
                       id={option.id.toString()}
@@ -358,7 +328,7 @@ export default function ExamComponent({
                 ))}
               </RadioGroup>
             )}
-
+            {/* Navigation and Timer */}
             <div className="flex md:flex-row flex-col gap-4 items-center justify-between w-full">
               <Button
                 onClick={goToPreviousQuestion}
@@ -372,7 +342,7 @@ export default function ExamComponent({
 
               <Button
                 onClick={goToNextQuestion}
-                className="flex items-center gap-2 text-white bg-primary-500 hover:bg-primary-400 h-12 md:w-auto w-full"
+                className="flex items-center gap-2 text-white bg-primary-500 hover:bg-primary-400 h-12  md:w-auto w-full"
               >
                 {currentQuestionIndex < examData.questions_count - 1 ? (
                   <>
@@ -390,7 +360,6 @@ export default function ExamComponent({
           </CardContent>
         </Card>
       </div>
-
       <ConfirmSubmitDialog
         open={openDialog}
         onClose={() => setOpenDialog(false)}

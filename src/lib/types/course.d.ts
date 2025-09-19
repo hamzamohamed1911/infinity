@@ -65,6 +65,7 @@ declare type Exam = {
   user_exams_retries: unknown[];
   answers: unknown[];
   is_new_homework?: boolean;
+  section_id?: number;
 };
 
 declare type Bundle = {

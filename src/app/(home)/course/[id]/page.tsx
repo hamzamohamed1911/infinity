@@ -71,7 +71,7 @@ async function CourseContent({ id }: { id: string }) {
             {UnitData.lessons.map((lesson) => (
               <Link
                 key={lesson.id}
-                href={`${id}/${lesson.id}`}
+                href={`/${id}/${lesson.id}`}
                 className="group w-full flex justify-between items-center py-5 px-4 rounded-lg border cursor-pointer transition-all hover:border-primary hover:text-primary"
               >
                 <span className="text-lg font-medium">{lesson.name}</span>
