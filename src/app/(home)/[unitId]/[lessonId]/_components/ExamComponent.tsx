@@ -132,7 +132,6 @@ export default function ExamComponent({
     return formData;
   };
 
-  // إرسال الإجابة الحالية
   const submitCurrentAnswer = async () => {
     const formData = buildCurrentAnswerFormData();
     if (formData) {
@@ -140,7 +139,6 @@ export default function ExamComponent({
     }
   };
 
-  // إرسال كل الامتحان
   const handleSubmitExam = async () => {
     const formData = new FormData();
     examData.questions.forEach((q, index) => {

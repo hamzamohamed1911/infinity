@@ -35,19 +35,19 @@ async function CourseContent({ id }: { id: string }) {
               في الكورس هتلاقي
             </h2>
             <div className="text-[#606060] flex  flex-wrap lg:gap-6 gap-4">
-              <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
+              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <RiBookMarkedLine size={30} />
                 <p className="whitespace-nowrap">
                   {UnitData?.books.length || "لا توجد بيانات"} كتاب
                 </p>
               </span>
-              <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
+              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <MdEditNote size={30} />
                 <p className="whitespace-nowrap">
                   {UnitData?.lessons.length || "لا توجد بيانات"} دروس
                 </p>
               </span>
-              <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
+              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <BiBookContent size={30} />
                 <p className="whitespace-nowrap">
                   {UnitData?.exams.length || "لا توجد بيانات"} إمتحانات

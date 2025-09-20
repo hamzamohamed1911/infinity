@@ -37,19 +37,19 @@ async function UnitContent({ unitId }: { unitId: string }) {
               في الوحدة هتلاقي
             </h2>
             <div className="text-[#606060] flex  flex-wrap lg:gap-6 gap-4">
-              <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
+              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <RiBookMarkedLine size={30} />
                 <p className="whitespace-nowrap">
                   {UnitData?.lessons_count || "لا توجد بيانات"} فيديو
                 </p>
               </span>
-              <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
+              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <MdEditNote size={30} />
                 <p className="whitespace-nowrap">
                   {UnitData?.exams_count || "لا توجد بيانات"} إمتحانات
                 </p>
               </span>
-              <span className="flex gap-2 items-center hover:bg-[#509319] md:hover:p-4 hover:p-2 hover:text-white rounded-md">
+              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <BiBookContent size={30} />
                 <p className="whitespace-nowrap">
                   {UnitData?.homeworks_count || "لا توجد بيانات"} واجبات

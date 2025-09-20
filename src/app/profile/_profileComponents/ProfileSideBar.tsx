@@ -9,7 +9,7 @@ import { BiBookContent } from "react-icons/bi";
 import { useSidebar } from "@/lib/context/SidebarContext";
 import { FaArrowLeft } from "react-icons/fa6";
 import { MdInsertChartOutlined } from "react-icons/md";
-import { Receipt } from 'lucide-react';
+import { Receipt } from "lucide-react";
 
 const ProfileSideBar = () => {
   const pathname = usePathname();
@@ -41,7 +41,7 @@ const ProfileSideBar = () => {
       label: "واجبات",
       icon: <BiBookContent className="text-2xl" />,
     },
-     {
+    {
       href: "/profile/invoices",
       label: "الفواتير",
       icon: <Receipt className="text-2xl" />,
@@ -70,8 +70,8 @@ const ProfileSideBar = () => {
           href={item.href}
           className={`flex items-center gap-2 my-5 rounded-md text-xl font-medium transition-colors ${
             pathname === item.href
-              ? "bg-[#509319] text-white my-5 ps-2 h-[68px]"
-              : "transition-all duration-600 hover:text-white hover:bg-[#509319] ps-4 hover:ps-2 h-[56px] hover:h-[68px] hover:text-2xl text-[#606060]"
+              ? "bg-secondary-500 text-white my-5 ps-2 h-[68px]"
+              : "transition-all duration-600 hover:text-white hover:bg-secondary-500 ps-4 hover:ps-2 h-[56px] hover:h-[68px] hover:text-2xl text-[#606060]"
           }`}
         >
           {item.icon}

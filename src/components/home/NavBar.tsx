@@ -127,7 +127,7 @@ const Navbar = ({
                         </p>
                         <span>
                           نظام :{" "}
-                          <span className="text-[#B3EA86] text-lg">
+                          <span className="text-secondary-600 text-lg">
                             {profile?.status === "1"
                               ? "أونلاين"
                               : profile?.status === "2"
