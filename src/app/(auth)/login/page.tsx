@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-//login
 "use client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -9,7 +7,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LoginFormData, loginSchema } from "@/lib/schemas/authSchema";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 const Login = () => {
   const [error, setError] = useState<string | null>(null);
@@ -28,8 +25,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
 
     formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
@@ -42,7 +37,7 @@ const Login = () => {
       const result = await signIn("credentials", {
         phone: data.phone,
         password: data.password,
-        callbackUrl: "/my-courses",
+        redirect: false,
       });
 
       if (result?.error) {
@@ -66,14 +61,6 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-4 max-w-lg mx-auto">
           <div className="flex flex-col gap-3 text-[#606060]">
-            <label className="text-lg font-medium">رقم التليفون</label>
-            {/* <PhoneInput
-  defaultCountry="EG"
-  value={watch("phone") || ""}
-  onChange={(phone) => setValue("phone", phone)}
-  className="flex items-center gap-2 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-primary border text-start"
-  inputClassName="flex-1 bg-transparent outline-none border-none text-start"
-/> */}
             <input
               {...register("phone")}
               name="phone"
