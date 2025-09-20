@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { useForm, UseFormRegister } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
@@ -18,7 +18,7 @@ import {
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { FieldErrorsImpl } from "react-hook-form";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; 
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface PasswordFormData {
   password: string;
@@ -57,7 +57,7 @@ const passwordSchema = z
     message: "كلمة المرور وتأكيدها غير متطابقتين",
     path: ["confirmPassword"],
   });
-  
+
 // Step 1: Phone Input
 const PhoneForm: React.FC<{
   register: UseFormRegister<PhoneFormData>;
@@ -78,7 +78,7 @@ const PhoneForm: React.FC<{
     <button
       type="submit"
       disabled={isSubmitting}
-            className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
+      className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
     >
       {isSubmitting ? "جاري المعالجة..." : "إعادة تعيين كلمة المرور"}
     </button>
@@ -152,7 +152,7 @@ const CodeForm: React.FC<{
       <button
         type="submit"
         disabled={isSubmitting}
-            className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
+        className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
       >
         {isSubmitting ? "جاري المعالجة..." : "التحقق من الكود"}
       </button>
@@ -240,7 +240,7 @@ const PasswordForm: React.FC<{
       <button
         type="submit"
         disabled={isSubmitting}
-            className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
+        className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
       >
         {isSubmitting ? "جاري المعالجة..." : "تحديث كلمة المرور"}
       </button>

@@ -12,22 +12,39 @@ import { placeholder } from "../../../../public";
 // } from "@/components/ui/dialog";
 import { Suspense } from "react";
 import CardSkeleton from "@/components/CardSkeleton";
-import { GetClassesData } from "@/lib/apis/profile.api";
+import { GetClassesData, GetProfileData } from "@/lib/apis/profile.api";
 import { fetchTeachers } from "../../api/register";
 import StartCourseButton from "@/components/StartCourseButton";
 import AuthNavBar from "@/app/(auth)/_authComponent/AuthNavBar";
 import NoDataMessage from "@/components/NoDataMessage";
+import Subscription from "./_components/subscription";
 // import { DialogTrigger } from "@radix-ui/react-dialog";
 
 async function MyClassesContent() {
+  const Profile = await GetProfileData();
+  const profileData =
+    Profile && "data" in Profile ? Profile?.data?.profile : undefined;
+
   const teachersResponse = await fetchTeachers();
   const teachers = teachersResponse?.data || [];
   const actualTeacher = teachers.length === 1 ? teachers[0].id : undefined;
+  if (profileData?.status === "-") {
+    console.log("teachers", teachersResponse);
+
+    return (
+      <section className="container mx-auto xl:max-w-[90%] max-w-full flex w-full p-4">
+        <div className="lg:m-6 md:m-4 m-2 w-full">
+          <Subscription profileData={profileData} teachers={teachers || []} />
+        </div>
+      </section>
+    );
+  }
   if (!actualTeacher) {
     return <p className="text-red-500">لا يوجد مدرس محدد.</p>;
   }
   const classes = await GetClassesData({ teacherId: actualTeacher });
   const ClassesData = classes && "data" in classes ? classes.data : undefined;
+  console.log("teachers", teachersResponse);
 
   return (
     <>
@@ -35,7 +52,7 @@ async function MyClassesContent() {
         <div className="container mx-auto xl:max-w-[90%] max-w-full flex w-full p-4">
           <div className=" lg:m-6 md:m-4 m-2  flex flex-col gap-4 w-full">
             <h2 className="text-[#606060]  lg:text-3xl md:text-2xl text-xl font-[500]">
-              صفوف انت منضم إليها
+              الصفوف الدراسيه
             </h2>
             {(!ClassesData || ClassesData.length === 0) && (
               <NoDataMessage text="لا توجد صفوف متاحة حاليًا." />
