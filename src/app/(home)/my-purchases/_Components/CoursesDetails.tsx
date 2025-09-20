@@ -1,13 +1,9 @@
 import { placeholder } from "../../../../../public";
-import { GetProfileData } from "@/lib/apis/profile.api";
 import { GetCourse } from "@/lib/apis/course.api";
 import Image, { StaticImageData } from "next/image";
 import Ads from "./Ads";
 
 const CoursesDetails = async ({ id }: { id: string }) => {
-  const Profile = await GetProfileData();
-  const profileData =
-  Profile && "data" in Profile ? Profile?.data?.profile : undefined;
   const course = await GetCourse({ course_id: id });
   const courseData = course && "data" in course ? course.data : undefined;
   const imageSrc: string | StaticImageData = courseData?.image || placeholder;
@@ -15,7 +11,7 @@ const CoursesDetails = async ({ id }: { id: string }) => {
   return (
     <div className="flex flex-col gap-6 my-6 w-full">
       <h1 className="font-bold lg:text-3xl text-2xl text-[#606060] ">
-        {profileData?.classroom_name}
+        {courseData?.name}
       </h1>
       <Ads />
       <div className="grid md:grid-cols-2 grid-cols-1 justify-center items-center gap-4 2xl:min-h-72  min-h-60">
