@@ -14,6 +14,7 @@ import { GetBundle } from "@/lib/apis/course.api";
 async function CourseContent({ id }: { id: string }) {
   const bundle = await GetBundle({ bundle_id: id });
   const UnitData = bundle && "data" in bundle ? bundle.data : undefined;
+  console.log(UnitData);
 
   return (
     <section className="flex flex-col gap-4 w-full p-4">
@@ -71,7 +72,7 @@ async function CourseContent({ id }: { id: string }) {
             {UnitData.lessons.map((lesson) => (
               <Link
                 key={lesson.id}
-                href={`/${id}/${lesson.id}`}
+                href={`/${lesson.section_id || "undefined"}/${lesson.id}`}
                 className="group w-full flex justify-between items-center py-5 px-4 rounded-lg border cursor-pointer transition-all hover:border-primary hover:text-primary"
               >
                 <span className="text-lg font-medium">{lesson.name}</span>

@@ -82,7 +82,8 @@ export async function GetUnit({
   const response = await fetch(`${API_URL}api/v1/get-unit/${unit_id}`, {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      type: "web",
+      Accept: "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
