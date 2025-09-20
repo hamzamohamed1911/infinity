@@ -267,7 +267,6 @@ async function LessonContent({
             </Card>
           ) : (
             <div className="h-[30vh] flex justify-center items-center">
-              {" "}
               <p className="text-xl text-[#8E8E8E]">
                 عذرا لا توجد دروس متاحه حاليا
               </p>
