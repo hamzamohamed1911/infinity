@@ -1,11 +1,9 @@
 import { Suspense } from "react";
 import { GetBook } from "@/lib/apis/books.api";
 import UnitSkeleton from "@/components/UnitSkeleton";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
-import { placeholder } from "../../../../../public";
 
 async function BookContent({ id }: { id: string }) {
   const Book = await GetBook({ id: id });
@@ -56,32 +54,6 @@ async function BookContent({ id }: { id: string }) {
             />
           </div>
         </div>
-
-        <Card className="border-none bg-white dark:bg-gray-800">
-          <CardHeader>
-            <CardTitle className="text-2xl font-semibold text-gray-900 dark:text-white">
-              عن المدرس
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center gap-6">
-            <div className="relative w-20 h-20 flex-shrink-0">
-              <Image
-                src={item.teacher.image || placeholder}
-                alt={item.teacher.name}
-                fill
-                className="object-cover rounded-full border-2 border-gray-200 dark:border-gray-700"
-              />
-            </div>
-            <div className="space-y-2">
-              <p className="text-lg font-medium text-gray-900 dark:text-white">
-                {item.teacher.name}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                رقم الهاتف {item.teacher.phone}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </section>
   );

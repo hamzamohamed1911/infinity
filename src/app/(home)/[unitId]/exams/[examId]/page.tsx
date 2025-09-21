@@ -81,7 +81,15 @@ async function UnitContent({
             </p>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-10 lg:gap-8 md:gap-6 gap-4">
               {ExamData?.user_exams_retries.map((exam) => {
+                const start_date = new Date(exam.started_at);
                 const examDate = new Date(exam.ended_at);
+                const startdatestring = start_date.toLocaleDateString("ar-EG", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                });
+
                 const dateString = examDate.toLocaleDateString("ar-EG", {
                   weekday: "long",
                   year: "numeric",
@@ -96,15 +104,27 @@ async function UnitContent({
                   >
                     <div className="flex items-center gap-2 flex-wrap text-gray-700">
                       <span className="text-[#A4A4A4] font-semibold text-md">
-                        تاريخ
+                        تاريخ البداية
                       </span>
                       <span className="text-secondary-900 text-sm">
+                        {startdatestring.split(" ")[0]}
+                      </span>
+                      <span className="text-secondary-900 text-sm">
+                        {startdatestring.split(" ")[1]}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 flex-wrap text-gray-700 ">
+                      <span className="text-[#A4A4A4] font-semibold text-md">
+                        تاريخ النهاية
+                      </span>
+                      <span className="text-secondary-900 text-nowrap text-sm">
                         {dateString.split(" ")[0]}
                       </span>
-                      <span className="text-secondary-900 text-sm">
+                      <span className="text-secondary-900 text-nowrap  text-sm">
                         {dateString.split(" ")[1]}
                       </span>
                     </div>
+
                     <div className="flex items-center gap-2">
                       <span className="text-[#A4A4A4] text-md">الدرجة</span>
                       <span className="text-secondary-900 text-sm">

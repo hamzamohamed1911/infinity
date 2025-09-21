@@ -60,9 +60,9 @@ async function CourseContent({ id }: { id: string }) {
         <div className=" w-full h-full relative 2xl:min-h-96  min-h-72 col-span-7 ">
           <Image
             alt={UnitData?.name || "unit background"}
-            src={UnitData?.image || placeholder}
+            src={UnitData?.thumbnail || placeholder}
             fill
-            className="object-cover rounded-lg"
+            className="object-contain rounded-lg"
           />
         </div>
       </div>

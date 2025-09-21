@@ -43,9 +43,11 @@ async function LessonContent({
 
   const UnitData = Unit?.data;
   const LessonData = lesson?.data;
+  console.log("LessonData", LessonData);
+
   if (!LessonData) {
     const preRequisites = lesson?.preRequisites || [];
-
+    console.log("LessonData", LessonData);
     if (preRequisites.length > 0) {
       return (
         <div className="text-center h-screen max-w-xl mx-auto flex flex-col gap-4 justify-center items-center">
@@ -241,21 +243,21 @@ async function LessonContent({
                         >
                           <div className="flex gap-2">
                             <MdOndemandVideo size={24} />{" "}
-                            <span> الدرس {lesson.name} </span>
+                            <span> {lesson.name} </span>
                           </div>
                           <Checkbox checked={lesson.is_viewed} />
                         </Link>
                         <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
                           <div className="flex gap-2">
                             <BiBookContent size={24} />{" "}
-                            <span> واجب الدرس {lesson.name} </span>
+                            <span> {lesson.name} </span>
                           </div>
                           <Checkbox />
                         </div>
                         <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
                           <div className="flex gap-2">
                             <MdEditNote size={24} />{" "}
-                            <span> امتحان الدرس {lesson.name} </span>
+                            <span> {lesson.name} </span>
                           </div>
                           <Checkbox />
                         </div>
@@ -266,11 +268,7 @@ async function LessonContent({
               </Accordion>
             </Card>
           ) : (
-            <div className="h-[30vh] flex justify-center items-center">
-              <p className="text-xl text-[#8E8E8E]">
-                عذرا لا توجد دروس متاحه حاليا
-              </p>
-            </div>
+            <div className="h-[30vh] flex justify-center items-center"></div>
           )}
         </div>
       </div>

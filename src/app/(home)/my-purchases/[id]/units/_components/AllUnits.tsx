@@ -10,7 +10,7 @@ const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
       {UnitsData.map((unit: CourseDetails) => (
         <Card key={unit.id} className="overflow-hidden shadow-none border-none">
           <Image
-            src={unit.image || placeholder}
+            src={unit.image || unit.thumbnail || placeholder}
             alt={unit.name}
             width={600}
             height={600}

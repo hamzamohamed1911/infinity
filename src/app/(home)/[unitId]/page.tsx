@@ -2,8 +2,7 @@ import { BreadCrumb } from "@/components/BreadCrumb";
 import Image from "next/image";
 import { placeholder } from "../../../../public";
 import { RiBookMarkedLine } from "react-icons/ri";
-import { MdEditNote } from "react-icons/md";
-import { BiBookContent } from "react-icons/bi";
+
 import { Card } from "@/components/ui/card";
 
 import { ChevronRight } from "lucide-react";
@@ -43,25 +42,13 @@ async function UnitContent({ unitId }: { unitId: string }) {
                   {UnitData?.lessons_count || "لا توجد بيانات"} فيديو
                 </p>
               </span>
-              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
-                <MdEditNote size={30} />
-                <p className="whitespace-nowrap">
-                  {UnitData?.exams_count || "لا توجد بيانات"} إمتحانات
-                </p>
-              </span>
-              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
-                <BiBookContent size={30} />
-                <p className="whitespace-nowrap">
-                  {UnitData?.homeworks_count || "لا توجد بيانات"} واجبات
-                </p>
-              </span>
             </div>
           </div>
         </div>
         <div className=" w-full h-full relative 2xl:min-h-96  min-h-72 col-span-7 ">
           <Image
             alt={UnitData?.name || "unit background"}
-            src={UnitData?.image || placeholder}
+            src={UnitData?.image || UnitData?.thumbnail || placeholder}
             fill
             className="object-cover rounded-lg"
           />
