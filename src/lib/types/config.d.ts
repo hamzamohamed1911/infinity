@@ -5,4 +5,6 @@ declare type Theme = {
   logo: string;
   teacherImage: string;
   appName: string;
+  phoneLabel: string;
+  WelcomeMsg: string;
 };

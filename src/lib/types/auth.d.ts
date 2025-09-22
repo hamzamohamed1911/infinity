@@ -1,4 +1,4 @@
- interface Teacher {
+interface Teacher {
   id: number;
   name: string;
   email: string;
@@ -12,6 +12,7 @@
   subscribed: boolean;
   subscrip_status: number;
   subscrip_type: number;
+  welcome_message: string;
   features: {
     platform: boolean;
     center: boolean;
@@ -21,7 +22,7 @@
     [key: string]: boolean;
   };
 }
- interface TeachersResponse {
+interface TeachersResponse {
   data: Teacher[];
   success: boolean;
   status: number;

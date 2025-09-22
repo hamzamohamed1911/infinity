@@ -25,7 +25,7 @@ async function UnitsContent({ courseId }: { courseId: string }) {
             value="recent"
             className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-3"
           >
-            آخر المشاهدات
+            كورساتى
           </TabsTrigger>
           <TabsTrigger
             value="ending"

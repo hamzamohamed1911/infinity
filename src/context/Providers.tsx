@@ -40,8 +40,10 @@ function ThemeLoader({ children }: { children: ReactNode }) {
       data.data.mobile_config.background_color ?? "0xffffffff"
     ),
     logo: data.data.mobile_config?.academy_logo,
+    phoneLabel: data.data.mobile_config?.another_phone_label,
     teacherImage: data.data.mobile_config.teacher_image,
     appName: data.data.mobile_config.app_name,
+    WelcomeMsg: data.data.mobile_config.welcome_message,
   };
   const primaryShades = generateColorShades(theme.primaryColor);
   const secondaryShades = generateColorShades(theme.secondaryColor);
@@ -56,8 +58,8 @@ function ThemeLoader({ children }: { children: ReactNode }) {
   Object.entries(secondaryShades).forEach(([key, value]) => {
     root.style.setProperty(`--secondary-${key}`, value);
   });
-  root.style.setProperty("--primary-color", theme.primaryColor); 
-  root.style.setProperty("--secondary-color", theme.primaryColor); 
+  root.style.setProperty("--primary-color", theme.primaryColor);
+  root.style.setProperty("--secondary-color", theme.primaryColor);
 
   root.style.setProperty("--background-color", theme.backgroundColor);
 

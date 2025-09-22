@@ -44,7 +44,6 @@ async function MyClassesContent() {
   }
   const classes = await GetClassesData({ teacherId: actualTeacher });
   const ClassesData = classes && "data" in classes ? classes.data : undefined;
-  console.log("teachers", teachersResponse);
 
   return (
     <>

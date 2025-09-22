@@ -24,6 +24,7 @@ import { Dropdown } from "@/components/Dropdown";
 import { GetClassroomsList, GetStateList } from "@/lib/apis/auth";
 import "react-international-phone/style.css";
 import OtpDialog from "../_authComponent/OtpDialog";
+import { useTheme } from "@/context/theme-context";
 type ApiError = {
   message: string;
   errors?: string[];
@@ -32,6 +33,7 @@ const Register = () => {
   const [errors, setErrors] = useState<string[]>([]);
   const [openDialog, setOpenDialog] = useState(false); // هنا
   const [activeStep, setActiveStep] = useState(1);
+  const theme = useTheme();
 
   const [showAlternateContent, setShowAlternateContent] = useState(false);
   const { data: statesResponse } = useQuery({
@@ -138,6 +140,8 @@ const Register = () => {
           registerMutation.mutate({
             ...data,
             email: data.email ?? "",
+            phone: "+2" + data.phone,
+            parent_phone: "+2" + data.parent_phone,
           });
         }
       } else {
@@ -163,6 +167,8 @@ const Register = () => {
             registerWithSubscribeMutation.mutate({
               ...data,
               email: data.email ?? "",
+              phone: "+2" + data.phone,
+              parent_phone: "+2" + data.parent_phone,
             });
           }
         }
@@ -298,7 +304,7 @@ const Register = () => {
 
                       <div className="flex flex-col gap-3 text-[#606060] w-full">
                         <Label className="text-lg font-medium">
-                          رقم هاتف ولي الأمر
+                          {theme.phoneLabel}
                         </Label>
                         <Input
                           type="text"
@@ -462,7 +468,7 @@ const Register = () => {
                 )}
               </div>
               {errors.length > 0 && (
-                <ul className="text-red-500 mt-2">
+                <ul className="text-red-500 my-2">
                   {errors.map((err, idx) => (
                     <li key={idx}>{err}</li>
                   ))}

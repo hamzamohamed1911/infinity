@@ -2,8 +2,6 @@
 "use client";
 
 import {
-  Dialog,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -76,7 +74,7 @@ const ChangeOnlineDialog = () => {
   const mutation = useMutation({
     mutationFn: subscribeTeacher,
     onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: ['profile'] });
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
       toast.success("تم الاشتراك بنجاح فى نظام السنتر بنجاح", {
         className: "!bg-primary !text-white ",
       });
@@ -100,127 +98,122 @@ const ChangeOnlineDialog = () => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button className="text-[#2087EE] underline">السنتر</button>
-      </DialogTrigger>
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-start text-[#8E8E8E] mt-2">
-            خد بالك!
-          </DialogTitle>
-        </DialogHeader>
+    <DialogContent className="max-w-md">
+      <DialogHeader>
+        <DialogTitle className="text-xl font-semibold text-start text-[#8E8E8E] mt-2">
+          خد بالك!
+        </DialogTitle>
+      </DialogHeader>
 
-        <div className="my-2 text-center">
-          <p className="text-[#8E8E8E] text-md font-medium text-start flex gap-2">
-            <span>انت دلوقتي هتغير نظامك من</span>
-            <span className="text-secondary-800">اونلاين</span> 
-            <span>لنظام</span>
-            <span className="text-secondary-800">السنتر</span>
-          </p>
+      <div className="my-2 text-center">
+        <p className="text-[#8E8E8E] text-md font-medium text-start flex gap-2">
+          <span>انت دلوقتي هتغير نظامك من</span>
+          <span className="text-secondary-800">اونلاين</span>
+          <span>لنظام</span>
+          <span className="text-secondary-800">السنتر</span>
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+        <div className="flex flex-col gap-3 text-[#8E8E8E]">
+          <label className="text-md font-medium">رقم هاتف ولي الأمر</label>
+          <input
+            {...register("parent_phone")}
+            name="parent_phone"
+            type="tel"
+            className="py-3 px-4 rounded-lg border-[1px] focus:ring-primary"
+          />
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-          <div className="flex flex-col gap-3 text-[#8E8E8E]">
-            <label className="text-md font-medium">رقم هاتف ولي الأمر</label>
-            <input
-              {...register("parent_phone")}
-              name="parent_phone"
-              type="tel"
-              className="py-3 px-4 rounded-lg border-[1px] focus:ring-primary"
-            />
-          </div>
-
-          <div className="flex gap-2">
-            <Controller
-              control={control}
-              name="state"
-              render={({ field }) => (
-                <Dropdown
-                  label="المدينة"
-                  placeholder="اختر المدينة"
-                  data={states ?? []}
-                  value={field.value}
-                  onChange={field.onChange}
-                  loading={loadingstates}
-                />
-              )}
-            />
-
-            <Controller
-              control={control}
-              name="center"
-              render={({ field }) => (
-                <Dropdown
-                  label="السنتر"
-                  placeholder="اختر السنتر"
-                  data={centers ?? []}
-                  value={field.value}
-                  onChange={field.onChange}
-                  loading={
-                    typeof actualTeacherId === "number" &&
-                    centersResponse === undefined
-                  }
-                  feedback={
-                    typeof actualTeacherId !== "number"
-                      ? "يرجى اختيار المدرس أولاً"
-                      : undefined
-                  }
-                />
-              )}
-            />
-          </div>
-
-          <div className="flex gap-2">
-            <Controller
-              control={control}
-              name="group"
-              render={({ field }) => (
-                <Dropdown
-                  label="المجموعة"
-                  placeholder="اختر المجموعة"
-                  data={groups ?? []}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-
-            {/* ✅ فقط أظهر Dropdown لو فيه أكثر من مدرس */}
-            {teachers.length > 1 && (
-              <Controller
-                control={control}
-                name="teacher"
-                render={({ field }) => (
-                  <Dropdown
-                    label="المدرسين"
-                    placeholder="اختر المدرس"
-                    data={teachers}
-                    value={field.value}
-                    onChange={field.onChange}
-                  />
-                )}
+        <div className="flex gap-2">
+          <Controller
+            control={control}
+            name="state"
+            render={({ field }) => (
+              <Dropdown
+                label="المدينة"
+                placeholder="اختر المدينة"
+                data={states ?? []}
+                value={field.value}
+                onChange={field.onChange}
+                loading={loadingstates}
               />
             )}
-          </div>
+          />
 
-          <DialogFooter className="w-full flex gap-2">
-            <DialogClose asChild>
-              <Button variant="outline" className="!text-primary w-full h-10">
-                إلغاء
-              </Button>
-            </DialogClose>
-            <Button
-              type="submit"
-              className="text-white w-full hover:bg-primary-400 h-10 shadow-md  hover:shadow-lg text-xl"
-              disabled={mutation.isPending}
-            >
-              {mutation.isPending ? "جاري الحفظ..." : "متابعة"}
+          <Controller
+            control={control}
+            name="center"
+            render={({ field }) => (
+              <Dropdown
+                label="السنتر"
+                placeholder="اختر السنتر"
+                data={centers ?? []}
+                value={field.value}
+                onChange={field.onChange}
+                loading={
+                  typeof actualTeacherId === "number" &&
+                  centersResponse === undefined
+                }
+                feedback={
+                  typeof actualTeacherId !== "number"
+                    ? "يرجى اختيار المدرس أولاً"
+                    : undefined
+                }
+              />
+            )}
+          />
+        </div>
+
+        <div className="flex gap-2">
+          <Controller
+            control={control}
+            name="group"
+            render={({ field }) => (
+              <Dropdown
+                label="المجموعة"
+                placeholder="اختر المجموعة"
+                data={groups ?? []}
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
+
+          {/* ✅ فقط أظهر Dropdown لو فيه أكثر من مدرس */}
+          {teachers.length > 1 && (
+            <Controller
+              control={control}
+              name="teacher"
+              render={({ field }) => (
+                <Dropdown
+                  label="المدرسين"
+                  placeholder="اختر المدرس"
+                  data={teachers}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+          )}
+        </div>
+
+        <DialogFooter className="w-full flex gap-2">
+          <DialogClose asChild>
+            <Button variant="outline" className="!text-primary w-full h-10">
+              إلغاء
             </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+          </DialogClose>
+          <Button
+            type="submit"
+            className="text-white w-full hover:bg-primary-400 h-10 shadow-md  hover:shadow-lg text-xl"
+            disabled={mutation.isPending}
+          >
+            {mutation.isPending ? "جاري الحفظ..." : "متابعة"}
+          </Button>
+        </DialogFooter>
+      </form>
+    </DialogContent>
   );
 };
 

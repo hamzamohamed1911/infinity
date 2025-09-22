@@ -9,6 +9,8 @@ export type ThemeConfig = {
   logo: string;
   teacherImage: string;
   appName: string;
+  phoneLabel: string;
+  WelcomeMsg: string;
 };
 
 const ThemeContext = createContext<ThemeConfig | null>(null);
@@ -26,5 +28,7 @@ export const ThemeProvider = ({
   value: ThemeConfig;
   children: React.ReactNode;
 }) => {
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
 };

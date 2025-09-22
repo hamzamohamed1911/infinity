@@ -7,6 +7,7 @@ import BarcodeDialog from "./_profileComponents/BarcodeDialog";
 import ChangeOnlineDialog from "./_profileComponents/ChangeOnlineDialog";
 import UnsubscripDialog from "./_profileComponents/UnsubscripDialog";
 import UpdateImage from "./_profileComponents/UpdateImage";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 
 async function ProfileContent() {
   const Profile = await GetProfileData();
@@ -41,8 +42,22 @@ async function ProfileContent() {
                 : "اختر نظامك"}
               {profileData?.status === "-" ? (
                 <>
-                  <ChangeOnlineDialog />
-                  <ChangeSystemDialog />
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button className="text-[#2087EE] underline">
+                        السنتر
+                      </button>
+                    </DialogTrigger>
+                    <ChangeOnlineDialog />
+                  </Dialog>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button className="text-[#2087EE] underline">
+                        الأونلاين
+                      </button>
+                    </DialogTrigger>
+                    <ChangeSystemDialog />
+                  </Dialog>
                 </>
               ) : profileData?.status === "1" || profileData?.status === "2" ? (
                 <UnsubscripDialog />

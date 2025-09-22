@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const baseSchema = z.object({
   name: z.string().min(2, "الاسم يجب أن يكون أكثر من حرفين"),
-  email: z.string().email("البريد الإلكتروني غير صالح").optional(),
+  email: z.string().email("البريد الإلكتروني غير صالح").or(z.literal("")),
   phone: z.string().min(10, "رقم الهاتف غير صالح"),
   parent_phone: z.string().min(10, "رقم هاتف ولي الأمر غير صالح"),
   password: z.string().min(6, "كلمة المرور يجب أن تكون 6 أحرف على الأقل"),
@@ -11,7 +11,6 @@ export const baseSchema = z.object({
   classroom_id: z.string().min(1, "الصف مطلوب"),
 });
 
-// Define basic schema with password confirmation refinement
 export const basicSchema = baseSchema.refine(
   (data) => data.password === data.password_confirmation,
   {
@@ -20,7 +19,6 @@ export const basicSchema = baseSchema.refine(
   }
 );
 
-// Define subscribe schema by extending base schema
 export const subscribeSchema = baseSchema
   .extend({
     teacher_id: z.string().min(1, "المدرس مطلوب"),
