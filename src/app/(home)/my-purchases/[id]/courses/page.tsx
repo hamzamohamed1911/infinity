@@ -37,7 +37,7 @@ async function UnitsContent({ courseId }: { courseId: string }) {
 
         <div className="mt-6">
           <TabsContent value="all">
-            <AllCourses type="bundle" CoursesData={ClassesData ?? []} />
+            <AllCourses CoursesData={ClassesData ?? []} />
           </TabsContent>
           <TabsContent value="ending">ending</TabsContent>
           <TabsContent value="recent">recent</TabsContent>

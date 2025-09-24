@@ -5,17 +5,8 @@ import { placeholder } from "../../../../../../../public";
 import Link from "next/link";
 import { MdEditNote, MdOndemandVideo } from "react-icons/md";
 import { LuBook } from "react-icons/lu";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import PaymentDialog from "@/app/(home)/[unitId]/payments/_components/PaymentDialog";
 
-const AllCourses = ({
-  CoursesData,
-  type,
-}: {
-  CoursesData: CourseType[];
-  type: string;
-}) => {
+const AllCourses = ({ CoursesData }: { CoursesData: CourseType[] }) => {
   console.log("CoursesData", CoursesData);
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -84,22 +75,16 @@ const AllCourses = ({
                 />
               </Link>
             ) : (
-              <Dialog key={course.id}>
-                <DialogTrigger asChild>
-                  <Button className="group flex items-center justify-center gap-2 w-full h-12 rounded-lg bg-primary text-white hover:bg-primary-700 transition-all duration-300">
-                    اشترى الآن
-                    <IoIosArrowBack
-                      size={20}
-                      className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
-                    />
-                  </Button>
-                </DialogTrigger>
-                <PaymentDialog
-                  name={course.name}
-                  model_type={type}
-                  model_id={course.id}
+              <Link
+                href={`/course/${course.id}`}
+                className="group flex items-center justify-center gap-2 w-full h-12 rounded-lg bg-primary text-white hover:bg-primary-700 transition-all duration-300"
+              >
+                عرض التفاصيل
+                <IoIosArrowBack
+                  size={20}
+                  className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
                 />
-              </Dialog>
+              </Link>
             )}
           </CardContent>
         </Card>
