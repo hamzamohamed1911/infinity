@@ -84,6 +84,8 @@ declare type Bundle = {
 
 declare type CourseType = {
   id: number;
+  discount?: number;
+  price?: number;
   name: string;
   featured: number;
   sticky: unknown;
@@ -151,4 +153,21 @@ declare type BundleDetails = {
   exams_count: number;
   homeworks_count: number;
   thumbnail?: string;
+};
+declare type LiveItem = {
+  id: number;
+  name: string;
+  booking_status: number;
+  price: number;
+  discount: number;
+  section_id: number;
+  section_name: string;
+  description?: string | null;
+  attachments: unknown[];
+  display_mode: string;
+  is_purchased_before: boolean;
+  is_viewed: boolean;
+  live_link: string;
+  image: string;
+  thumbnail: string;
 };

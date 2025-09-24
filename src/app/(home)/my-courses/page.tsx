@@ -1,15 +1,6 @@
 import Image from "next/image";
 import { placeholder } from "../../../../public";
-// import {
-//   Dialog,
-//   DialogClose,
-//   DialogContent,
-//   DialogDescription,
-//   DialogFooter,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger,
-// } from "@/components/ui/dialog";
+
 import { Suspense } from "react";
 import CardSkeleton from "@/components/CardSkeleton";
 import { GetClassesData, GetProfileData } from "@/lib/apis/profile.api";
@@ -18,7 +9,6 @@ import StartCourseButton from "@/components/StartCourseButton";
 import AuthNavBar from "@/app/(auth)/_authComponent/AuthNavBar";
 import NoDataMessage from "@/components/NoDataMessage";
 import Subscription from "./_components/subscription";
-// import { DialogTrigger } from "@radix-ui/react-dialog";
 
 async function MyClassesContent() {
   const Profile = await GetProfileData();

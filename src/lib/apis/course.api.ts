@@ -138,7 +138,6 @@ export async function GetLesson({
   }
   return payload;
 }
-
 export async function GetBundle({
   bundle_id,
 }: {
@@ -153,6 +152,33 @@ export async function GetBundle({
       Authorization: `Bearer ${token}`,
     },
   });
+
+  const payload = await response.json();
+
+  if (!payload || !payload.data) {
+    throw new Error("فشل في جلب البيانات");
+  }
+
+  return payload;
+}
+export async function GetLive({
+  class_id,
+}: {
+  class_id: string;
+}): Promise<APIResponse<LiveItem>> {
+  const token = await getAuthToken();
+  console.log("token", token);
+  const response = await fetch(
+    `${API_URL}api/v1/course-live-lessons/${class_id}`,
+    {
+      method: "GET",
+      headers: {
+        type: "web",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
   const payload = await response.json();
 

@@ -43,6 +43,7 @@ const Login = () => {
       if (result?.error) {
         setError(result.error);
       } else {
+        router.refresh();
         router.push("/my-courses");
       }
     } catch (error: unknown) {

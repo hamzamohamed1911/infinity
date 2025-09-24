@@ -5,8 +5,18 @@ import { placeholder } from "../../../../../../../public";
 import Link from "next/link";
 import { MdEditNote, MdOndemandVideo } from "react-icons/md";
 import { LuBook } from "react-icons/lu";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import PaymentDialog from "@/app/(home)/[unitId]/payments/_components/PaymentDialog";
 
-const AllCourses = ({ CoursesData }: { CoursesData: CourseType[] }) => {
+const AllCourses = ({
+  CoursesData,
+  type,
+}: {
+  CoursesData: CourseType[];
+  type: string;
+}) => {
+  console.log("CoursesData", CoursesData);
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {CoursesData.map((course: CourseType) => (
@@ -44,17 +54,53 @@ const AllCourses = ({ CoursesData }: { CoursesData: CourseType[] }) => {
                 <span>دروس</span>
               </div>
             </div>
-
-            <Link
-              href={`/course/${course.id}`}
-              className="group flex items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
-            >
-              إبدأ التعلم
-              <IoIosArrowBack
-                size={25}
-                className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
-              />
-            </Link>
+            <div className="flex justify-end items-end">
+              {course?.price && course.price > 0 && (
+                <div className=" text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
+                  {course?.discount && course.discount > 0 ? (
+                    <>
+                      <span className="line-through text-red-500">
+                        {course.price} ج.م
+                      </span>{" "}
+                      <span className="text-green-600">
+                        {(course.price ?? 0) - (course.discount ?? 0)} ج.م
+                      </span>
+                    </>
+                  ) : (
+                    <span>{course.price} ج.م</span>
+                  )}
+                </div>
+              )}
+            </div>
+            {course.price === 0 ? (
+              <Link
+                href={`/course/${course.id}`}
+                className="group flex items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
+              >
+                إبدأ التعلم
+                <IoIosArrowBack
+                  size={25}
+                  className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
+                />
+              </Link>
+            ) : (
+              <Dialog key={course.id}>
+                <DialogTrigger asChild>
+                  <Button className="group flex items-center justify-center gap-2 w-full h-12 rounded-lg bg-primary text-white hover:bg-primary-700 transition-all duration-300">
+                    اشترى الآن
+                    <IoIosArrowBack
+                      size={20}
+                      className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
+                    />
+                  </Button>
+                </DialogTrigger>
+                <PaymentDialog
+                  name={course.name}
+                  model_type={type}
+                  model_id={course.id}
+                />
+              </Dialog>
+            )}
           </CardContent>
         </Card>
       ))}

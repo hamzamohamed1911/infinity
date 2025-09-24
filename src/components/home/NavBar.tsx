@@ -65,6 +65,7 @@ const Navbar = ({
       await logout();
       await signOut({ redirect: false });
       setIsLogoutModalOpen(false);
+      router.refresh();
       router.push("/login");
     } catch (err) {
       setError(err instanceof Error ? err.message : "خطأ غير معروف");

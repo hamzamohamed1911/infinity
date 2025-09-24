@@ -1,10 +1,5 @@
-
 const page = () => {
-  return (
-    <div>
-      Live page
-    </div>
-  )
-}
+  return <div>Live page</div>;
+};
 
-export default page
+export default page;
