@@ -5,12 +5,12 @@ import ProfileSideBar from "./_profileComponents/ProfileSideBar";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export default function ProfileLayout({
+export default async function ProfileLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
   if (!selectedId || selectedId === "undefined") {
     redirect("/my-courses");

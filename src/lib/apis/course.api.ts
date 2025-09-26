@@ -15,13 +15,16 @@ export async function GetCourse({
   const response = await fetch(`${API_URL}api/v1/get-course/${course_id}`, {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      type: "web",
+      Accept: "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
 
   const payload = await response.json();
-
+  if (payload?.message === "Unauthenticated.") {
+    redirect("/logout");
+  }
   if (!payload || !payload.data) {
     throw new Error("فشل في جلب البيانات");
   }
@@ -59,7 +62,8 @@ export async function GetUnits({
   const response = await fetch(`${API_URL}api/v1/units/${course_id}`, {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      type: "web",
+      Accept: "application/json",
       Authorization: `Bearer ${token}`,
     },
   });

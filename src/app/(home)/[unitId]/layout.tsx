@@ -3,12 +3,12 @@ import BottomNavbar from "@/components/home/BottomNavbar";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export default function LessonLayout({
+export default async function LessonLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
   if (!selectedId || selectedId === "undefined") {
     redirect("/my-courses");

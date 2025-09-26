@@ -51,10 +51,17 @@ async function UnitsContent({ courseId }: { courseId: string }) {
   );
 }
 
-export default function page({ params }: { params: { id: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  // فك الـPromise بتاع params
+  const { id } = await params;
+
   return (
     <Suspense fallback={<UnitSkeleton />}>
-      <UnitsContent courseId={params.id} />
+      <UnitsContent courseId={id} />
     </Suspense>
   );
 }

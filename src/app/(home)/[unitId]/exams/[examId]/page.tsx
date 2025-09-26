@@ -153,14 +153,16 @@ async function UnitContent({
   );
 }
 
-export default function Page({
+export default async function Page({
   params,
 }: {
-  params: { unitId: string; examId: string };
+  params: Promise<{ unitId: string; examId: string }>;
 }) {
+  const { unitId, examId } = await params; // لازم await هنا
+
   return (
     <Suspense fallback={<AssignmentSkeleton />}>
-      <UnitContent examId={params.examId} unitId={params.unitId} />
+      <UnitContent examId={examId} unitId={unitId} />
     </Suspense>
   );
 }

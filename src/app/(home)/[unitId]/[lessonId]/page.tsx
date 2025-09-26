@@ -275,14 +275,16 @@ async function LessonContent({
     </section>
   );
 }
-export default function Page({
+export default async function Page({
   params,
 }: {
-  params: { unitId: string; lessonId: string };
+  params: Promise<{ unitId: string; lessonId: string }>;
 }) {
+  const { unitId, lessonId } = await params; // لازم await هنا
+
   return (
     <Suspense fallback={<LessonSkeleton />}>
-      <LessonContent lessonId={params.lessonId} unitId={params.unitId} />
+      <LessonContent lessonId={lessonId} unitId={unitId} />
     </Suspense>
   );
 }

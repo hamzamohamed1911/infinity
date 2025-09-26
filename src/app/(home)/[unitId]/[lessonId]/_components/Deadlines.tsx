@@ -13,7 +13,7 @@ type ExamButtonProps = {
 };
 
 const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
 
   if (!selectedId || selectedId === "undefined") {

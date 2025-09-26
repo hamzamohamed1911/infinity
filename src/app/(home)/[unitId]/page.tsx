@@ -75,10 +75,16 @@ async function UnitContent({ unitId }: { unitId: string }) {
     </section>
   );
 }
-export default function Page({ params }: { params: { unitId: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ unitId: string }>;
+}) {
+  const { unitId } = await params;
+
   return (
     <Suspense fallback={<UnitSkeleton />}>
-      <UnitContent unitId={params.unitId} />
+      <UnitContent unitId={unitId} />
     </Suspense>
   );
 }

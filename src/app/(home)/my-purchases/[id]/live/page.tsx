@@ -16,10 +16,15 @@ async function UnitsContent({ classId }: { classId: string }) {
   );
 }
 
-export default function page({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function Page({ params }: PageProps) {
+  const { id } = await params; // لازم await هنا
   return (
     <Suspense fallback={<UnitSkeleton />}>
-      <UnitsContent classId={params.id} />
+      <UnitsContent classId={id} />
     </Suspense>
   );
 }

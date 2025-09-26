@@ -5,12 +5,7 @@ import { Card } from "@/components/ui/card";
 import ExamButton from "@/app/(home)/[unitId]/[lessonId]/_components/ExamButton";
 import Deadlines from "@/app/(home)/[unitId]/[lessonId]/_components/Deadlines";
 
-
-async function UnitContent({
-  examId,
-}: {
-  examId: string;
-}) {
+async function UnitContent({ examId }: { examId: string }) {
   const Exam = await GetExam({ exam_id: examId });
   const ExamData = Exam && "data" in Exam ? Exam.data : undefined;
 
@@ -31,7 +26,6 @@ async function UnitContent({
 
   return (
     <section className="flex flex-col gap-4 w-full">
-   
       <Card className="w-full lg:p-8 md:p-6 p-4 flex flex-col lg:gap-6 gap-4">
         {/* عرض معلومات الامتحان */}
         {ExamData && (
@@ -114,23 +108,23 @@ async function UnitContent({
           <span className="text-primary font-bold">{ExamData?.retries}</span>
         </div>
 
-        {ExamData && (
-          <ExamButton examId={examId} ExamData={ExamData} />
-        )}
+        {ExamData && <ExamButton examId={examId} ExamData={ExamData} />}
       </Card>
-      <Deadlines examType={1}  examId={examId} />
+      <Deadlines examType={1} examId={examId} />
     </section>
   );
 }
 
-export default function Page({
+export default async function Page({
   params,
 }: {
-  params: { examId: string };
+  params: Promise<{ examId: string }>;
 }) {
+  const { examId } = await params; // لازم await هنا
+
   return (
     <Suspense fallback={<UnitSkeleton />}>
-      <UnitContent examId={params.examId}  />
+      <UnitContent examId={examId} />
     </Suspense>
   );
 }

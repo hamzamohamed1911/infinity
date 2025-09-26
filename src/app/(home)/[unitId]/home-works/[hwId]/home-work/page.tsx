@@ -17,14 +17,16 @@ async function Exam({ hwId }: { hwId: string }) {
     </section>
   );
 }
-export default function Page({
+export default async function Page({
   params,
 }: {
-  params: { unitId: string; hwId: string };
+  params: Promise<{ unitId: string; hwId: string }>;
 }) {
+  const { hwId } = await params;
+
   return (
     <Suspense fallback={<UnitSkeleton />}>
-      <Exam hwId={params.hwId} />
+      <Exam hwId={hwId} />
     </Suspense>
   );
 }

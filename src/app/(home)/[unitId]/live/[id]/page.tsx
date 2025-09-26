@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 async function LessonContent() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
   if (!selectedId || selectedId === "undefined") {
     redirect("/my-courses");

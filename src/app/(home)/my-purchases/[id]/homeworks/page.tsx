@@ -69,10 +69,17 @@ async function HomeWorksContent({ courseId }: { courseId: string }) {
   );
 }
 
-export default function page({ params }: { params: { id: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  // نفك الـPromise
+  const { id } = await params;
+
   return (
     <Suspense fallback={<UnitSkeleton />}>
-      <HomeWorksContent courseId={params.id} />
+      <HomeWorksContent courseId={id} />
     </Suspense>
   );
 }

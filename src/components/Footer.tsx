@@ -1,3 +1,4 @@
+"use client";
 import {
   FaFacebookF,
   FaXTwitter,
@@ -75,9 +76,7 @@ const Footer = () => {
         {/* Left Side: Support */}
         <div className="flex flex-col items-center md:items-end gap-2">
           <span className="text-lg text-white flex flex-col gap-2">
-         <h3>
-             تواصل مع الدعم الفني للمنصة
-         </h3>
+            <h3>تواصل مع الدعم الفني للمنصة</h3>
             <a
               href="#"
               className="text-white underline md:text-start text-center w-full md:w-auto  block"
