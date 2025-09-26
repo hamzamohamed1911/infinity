@@ -2,9 +2,9 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { heroImg } from "../../../public";
+import { Academy } from "@/lib/types/landing";
 
-const HeroSection = () => {
+const HeroSection = ({ hero }: { hero: Academy }) => {
   return (
     <section
       id="home"
@@ -27,11 +27,11 @@ const HeroSection = () => {
         }}
       >
         <Image
-          src={heroImg}
+          src={hero.logo}
           alt="المدرس"
-          width={600}
-          height={600}
-          className="rounded-full border-4 border-[#831AD3] mx-auto"
+          width={550}
+          height={550}
+          className="rounded-full border-4 border-primary mx-auto"
         />
       </motion.div>
       <motion.div
@@ -40,10 +40,11 @@ const HeroSection = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
       >
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">م/ حسام دكروني</h1>
+        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          {hero.web_config?.hero?.title}
+        </h1>
         <p className="text-xl md:text-2xl text-white mb-6 leading-10">
-          يلا انضم لينا دلوقتي وابدأ رحلة تعليمية مختلفة فيها الشرح المبسط . هنا
-          مش هتتعلم لغة عربية وبس، دي كمان بتفهمها وتقفلها بكل سهولة
+          {hero.web_config?.hero?.desc}
         </p>
         <div className="w-full flex md:justify-start justify-center">
           <Link

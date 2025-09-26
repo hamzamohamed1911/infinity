@@ -1,3 +1,4 @@
+// app/page.tsx
 import Footer from "@/components/Footer";
 import Courses from "@/components/landingPage/Courses";
 import LastCourses from "@/components/landingPage/LastCourses";
@@ -8,8 +9,32 @@ import PromoVideo from "@/components/landingPage/PromoVideo";
 import NavBarLanding from "@/components/landingPage/NavBarLanding";
 import HeroSection from "@/components/landingPage/HeroSection";
 import AboutSection from "@/components/landingPage/AboutSection";
+import { getLandingPage } from "@/lib/apis/webconfig.api";
 
-export default function Home() {
+export async function generateMetadata() {
+  try {
+    const landingData = await getLandingPage();
+    return {
+      title: landingData?.data?.academy.name,
+      description:
+        landingData?.data?.academy.desc ||
+        "مرحبًا بك في أكاديميتنا عبر الإنترنت، مكانك المثالي لاكتساب المعرفة وتطوير مهاراتك.",
+    };
+  } catch {
+    return {
+      title: "أكاديمية أونلاين",
+      description:
+        "مرحبًا بك في أكاديميتنا عبر الإنترنت، مكانك المثالي لاكتساب المعرفة وتطوير مهاراتك.",
+    };
+  }
+}
+
+export default async function Home() {
+  const landingData = await getLandingPage();
+  if (!landingData) {
+    return <p className="text-center text-white mt-20">فشل تحميل البيانات</p>;
+  }
+
   return (
     <div
       className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white font-sans overflow-hidden"
@@ -17,22 +42,31 @@ export default function Home() {
     >
       {/* Header */}
       <NavBarLanding />
+
       {/* Hero Section */}
-      <HeroSection />
+      <HeroSection hero={landingData.data.academy} />
+
       {/* About Section */}
-      <AboutSection />
+      <AboutSection data={landingData.data.academy} />
+
       {/* Courses Section */}
       <Courses />
-      {/* Promo video Section */}
-      <PromoVideo />
+
+      {/* Promo Video Section */}
+      <PromoVideo data={landingData.data.academy} />
+
       {/* Last Courses Section */}
       <LastCourses />
-      {/* Store */}
+
+      {/* Store Section */}
       <Store />
-      {/* Download Section */}
+
+      {/* Download App Section */}
       <DownloadAppSection />
-      {/* scroll button */}
+
+      {/* Scroll to Top Button */}
       <ScrollToTopButton />
+
       {/* Footer */}
       <Footer />
     </div>

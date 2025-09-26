@@ -1,8 +1,10 @@
 "use client";
 
+import { Academy } from "@/lib/types/landing";
 import { motion } from "framer-motion";
 
-const AboutSection = () => {
+const AboutSection = ({ data }: { data: Academy }) => {
+  console.log(data);
   return (
     <section
       id="about"
@@ -15,7 +17,7 @@ const AboutSection = () => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        عن فضاء التعليم
+        {data?.web_config?.about?.title}
       </motion.h2>
       <motion.p
         className="text-lg text-white max-w-2xl mx-auto"
@@ -24,8 +26,7 @@ const AboutSection = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
         viewport={{ once: true }}
       >
-        فضاء التعليم هو بوابتك إلى تعليم نجمي. يقدم مدرسونا الخبراء دروسًا
-        مخصصة، لمساعدتك على استكشاف عالم المعرفة بسهولة وثقة.
+        {data?.web_config?.about?.desc}
       </motion.p>
     </section>
   );
