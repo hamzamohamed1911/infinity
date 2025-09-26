@@ -119,7 +119,6 @@ declare type CourseDetails = {
   section_id: number;
   name: string;
   booking_status: number;
-  price: string;
   lessons: Lesson[];
   description: string | null;
   lessons_count: number;
@@ -127,6 +126,10 @@ declare type CourseDetails = {
   exams_count: number;
   homeworks_count: number;
   thumbnail?: string;
+  price: number;
+  price2: number;
+  discount: number;
+  available_today: boolean;
 };
 declare type UnitsD = {
   id: number;

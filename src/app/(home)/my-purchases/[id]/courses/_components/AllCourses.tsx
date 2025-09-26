@@ -77,7 +77,7 @@ const AllCourses = ({ CoursesData }: { CoursesData: CourseType[] }) => {
             ) : (
               <Link
                 href={`/course/${course.id}`}
-                className="group flex items-center justify-center gap-2 w-full h-12 rounded-lg bg-primary text-white hover:bg-primary-700 transition-all duration-300"
+                className="group flex items-center justify-center gap-2 w-full h-12 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
               >
                 عرض التفاصيل
                 <IoIosArrowBack

@@ -5,6 +5,7 @@ import { placeholder } from "../../../../../../../public";
 import Link from "next/link";
 
 const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
+  console.log("UnitsData", UnitsData);
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {UnitsData.map((unit: CourseDetails) => (
@@ -20,6 +21,9 @@ const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
             <h3 className="text-lg font-semibold text-[#606060]">
               {unit.name}
             </h3>
+            <p className="text-sm font-medium text-[#606060] line-clamp-2">
+              {unit.description}
+            </p>
             <Link
               href={`/${unit.id}`}
               className="group flex items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"

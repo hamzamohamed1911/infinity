@@ -40,7 +40,6 @@ async function UnitsContent({ courseId }: { courseId: string }) {
             <AllUnits UnitsData={UnitsData ?? []} />
           </TabsContent>
           <TabsContent value="ending">
-            {" "}
             <AllUnits UnitsData={UnitsData ?? []} />
           </TabsContent>
           <TabsContent value="recent">

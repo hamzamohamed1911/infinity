@@ -28,7 +28,7 @@ const CoursesDetails = async ({ id }: { id: string }) => {
             alt={courseData?.name || "صورة الكورس"}
             src={imageSrc}
             fill
-            className="object-cover rounded-lg"
+            className="object-contain rounded-lg"
           />
         </div>
       </div>

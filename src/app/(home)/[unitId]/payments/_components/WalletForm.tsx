@@ -46,7 +46,7 @@ const WalletForm = ({ model_type, model_id }: FawryFormProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {error && (
-        <p className="text-red-600 text-sm">{(error as Error).message}</p>
+        <p className="text-red-600 text-sm my-2">{(error as Error).message}</p>
       )}
       <div className="flex flex-col gap-6">
         <Button

@@ -22,9 +22,10 @@ const PaymentDialog = ({ model_type, model_id, name }: DialogTabsProps) => {
     <DialogContent className="md:max-w-3xl max-w-[90%]">
       <DialogHeader className="text-center w-full flex justify-center items-center gap-4">
         <DialogTitle>اختيار وسيلة الدفع</DialogTitle>
-        <DialogDescription>
-          <p>النوع: {model_type}</p>
-          {name || model_id}
+        <DialogDescription className="flex flex-col gap-2 ">
+          {model_type && <p className="text-center">النوع: {model_type}</p>}
+
+          <p className="truncate">{name || model_id}</p>
         </DialogDescription>
       </DialogHeader>
 

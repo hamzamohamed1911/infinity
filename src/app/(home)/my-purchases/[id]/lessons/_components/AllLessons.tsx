@@ -3,33 +3,85 @@ import { IoIosArrowBack } from "react-icons/io";
 import Image from "next/image";
 import { placeholder } from "../../../../../../../public";
 import Link from "next/link";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import PaymentDialog from "@/app/(home)/[unitId]/payments/_components/PaymentDialog";
+import { Button } from "@/components/ui/button";
 
 const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {UnitsData.map((unit: CourseDetails) => (
-        <Card key={unit.id} className="overflow-hidden shadow-none border-none">
+        <Card
+          key={unit.id}
+          className="overflow-hidden shadow-none border-none h-full"
+        >
           <Image
             src={unit.thumbnail || unit.image || placeholder}
             alt={unit.name}
             width={600}
             height={600}
-            className="w-full h-80 object-cover"
+            className="w-full h-80 object-contain"
           />
-          <CardContent className="p-2 space-y-3 text-start">
-            <h3 className="text-lg font-semibold text-[#606060]">
-              {unit.name}
-            </h3>
-            <Link
-              href={`/${unit?.section_id}/${unit.id}`}
-              className="group flex items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
-            >
-              شوف الدرس
-              <IoIosArrowBack
-                size={25}
-                className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
-              />
-            </Link>
+          <CardContent className="p-2 flex flex-col h-36 justify-between gap-3 text-start">
+            <div>
+              <h3 className="text-lg font-semibold text-[#606060]">
+                {unit.name}
+              </h3>
+              <div className="flex justify-end items-end">
+                {unit.price > 0 && unit.booking_status !== 1 && (
+                  <div className="text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
+                    {unit.discount > 0 ? (
+                      <>
+                        <span className="line-through text-white">
+                          {unit.price} ج.م
+                        </span>{" "}
+                        <span className="text-green-400">
+                          {unit.price - unit.discount} ج.م
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-white">{unit.price} ج.م</span>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+            {unit.available_today ? (
+              unit.booking_status || unit.price === 0 ? (
+                // مشاهدة مباشرة
+                <Link
+                  href={`/${unit?.section_id}/${unit.id}`}
+                  className="group mt-auto flex items-center justify-center gap-2 w-full h-12 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+                >
+                  شوف الدرس
+                  <IoIosArrowBack
+                    size={20}
+                    className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
+                  />
+                </Link>
+              ) : (
+                <Dialog key={unit.id}>
+                  <DialogTrigger asChild>
+                    <Button className="group mt-auto flex items-center justify-center gap-2 w-full h-12 rounded-lg bg-primary text-white hover:bg-primary-700 transition-all duration-300">
+                      اشترى الآن
+                    </Button>
+                  </DialogTrigger>
+                  <PaymentDialog
+                    name={unit.name}
+                    model_type="lesson"
+                    model_id={unit.id}
+                  />
+                </Dialog>
+              )
+            ) : (
+              // غير متاح
+              <Button
+                disabled
+                className="group mt-auto flex items-center justify-center gap-2 w-full h-12 rounded-lg bg-gray-400 text-white"
+              >
+                غير متاح
+              </Button>
+            )}
           </CardContent>
         </Card>
       ))}

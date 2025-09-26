@@ -64,7 +64,7 @@ export default function BooksList() {
         {allBooks.map((book: Book) => (
           <div
             key={book.id}
-            className="bg-white rounded-2xl shadow-md p-4 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 h-[60vh]"
+            className="bg-white rounded-2xl shadow-md p-4 flex flex-col justify-between  h-[60vh]"
           >
             <div className="relative w-full h-56 mb-3">
               <Image

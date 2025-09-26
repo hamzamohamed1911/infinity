@@ -69,7 +69,9 @@ const CodeForm = ({ model_type, model_id }: FawryFormProps) => {
 
         {/* ✅ Errors من السيرفر */}
         {error && (
-          <p className="text-red-600 text-sm">{(error as Error).message}</p>
+          <p className="text-red-600 text-sm my-2">
+            {(error as Error).message}
+          </p>
         )}
 
         <Button
