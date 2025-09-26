@@ -108,7 +108,6 @@ const Register = () => {
       setOpenDialog(true);
     },
     onError: (error: ApiError) => {
-      console.error("Registration failed:", error);
       setErrors(error.errors || [error.message || "حدث خطأ"]);
     },
   });
@@ -120,7 +119,6 @@ const Register = () => {
       setActiveStep(2); // Move to confirmation step
     },
     onError: (error: ApiError) => {
-      console.error("Registration with subscribe failed:", error);
       setErrors(error.errors || [error.message || "حدث خطأ"]);
     },
   });

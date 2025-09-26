@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Error({
@@ -11,11 +10,6 @@ export default function Error({
   reset: () => void;
 }) {
   const router = useRouter();
-
-  useEffect(() => {
-    // Log the error for debugging
-    console.error("Error in /auth:", error);
-  }, [error]);
 
   return (
     <div className="h-screen bg-backgroundColor flex items-center justify-center p-4">

@@ -1,16 +1,20 @@
 import { GetLive } from "@/lib/apis/course.api";
 import { Suspense } from "react";
-import UnitSkeleton from "@/components/UnitSkeleton";
 import AllLive from "./_components/AllLive";
+import PurchasesSkeleton from "../../_Components/PurchasesSkeleton";
+import NoDataMessage from "@/components/NoDataMessage";
 
 async function UnitsContent({ classId }: { classId: string }) {
   const live = await GetLive({ class_id: classId });
   const liveData: LiveItem[] = Array.isArray(live?.data) ? live.data : [];
-
   return (
     <section>
       <div className="mt-6">
-        <AllLive liveData={liveData ?? []} />
+        {liveData.length === 0 ? (
+          <NoDataMessage text="لا توجد دروس اونلاين متاحة حالياً" />
+        ) : (
+          <AllLive liveData={liveData} />
+        )}
       </div>
     </section>
   );
@@ -21,9 +25,9 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
-  const { id } = await params; // لازم await هنا
+  const { id } = await params;
   return (
-    <Suspense fallback={<UnitSkeleton />}>
+    <Suspense fallback={<PurchasesSkeleton />}>
       <UnitsContent classId={id} />
     </Suspense>
   );

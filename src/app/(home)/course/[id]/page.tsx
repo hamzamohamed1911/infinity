@@ -4,17 +4,20 @@ import { MdEditNote } from "react-icons/md";
 import { BiBookContent } from "react-icons/bi";
 import { Card } from "@/components/ui/card";
 
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ExternalLink } from "lucide-react";
 import UnitSkeleton from "@/components/UnitSkeleton";
 import { Suspense } from "react";
 import Link from "next/link";
 import NoDataMessage from "@/components/NoDataMessage";
 import { placeholder } from "../../../../../public";
 import { GetBundle } from "@/lib/apis/course.api";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import PaymentDialog from "../../[unitId]/payments/_components/PaymentDialog";
 async function CourseContent({ id }: { id: string }) {
   const bundle = await GetBundle({ bundle_id: id });
   const UnitData = bundle && "data" in bundle ? bundle.data : undefined;
-  console.log(UnitData);
+  console.log("UnitData", UnitData);
 
   return (
     <section className="flex flex-col gap-4 w-full p-4">
@@ -56,7 +59,30 @@ async function CourseContent({ id }: { id: string }) {
               </span>
             </div>
           </div>
+          {UnitData && Number(UnitData.price || 0) > 0 && (
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className="w-full h-full flex justify-end items-end">
+                  <Button
+                    className="bg-primary text-white px-6 py-4 rounded-full hover:bg-primary-400    transition-all duration-300"
+                    asChild
+                  >
+                    <a href="#purchase" className="flex items-center gap-2">
+                      اشترى الان
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
+              </DialogTrigger>
+              <PaymentDialog
+                name={UnitData.name}
+                model_type={UnitData.type ? UnitData.type : "bundle"}
+                model_id={UnitData.id}
+              />
+            </Dialog>
+          )}
         </div>
+
         <div className=" w-full h-full relative 2xl:min-h-96  min-h-72 col-span-7 ">
           <Image
             alt={UnitData?.name || "unit background"}
@@ -66,6 +92,7 @@ async function CourseContent({ id }: { id: string }) {
           />
         </div>
       </div>
+
       {UnitData?.lessons && UnitData.lessons.length > 0 ? (
         <Card className="w-full p-4">
           <div className="space-y-3">

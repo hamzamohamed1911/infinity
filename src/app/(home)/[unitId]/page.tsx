@@ -5,15 +5,19 @@ import { RiBookMarkedLine } from "react-icons/ri";
 
 import { Card } from "@/components/ui/card";
 
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ExternalLink } from "lucide-react";
 import { GetUnit } from "@/lib/apis/course.api";
 import UnitSkeleton from "@/components/UnitSkeleton";
 import { Suspense } from "react";
 import Link from "next/link";
 import NoDataMessage from "@/components/NoDataMessage";
+import PaymentDialog from "./payments/_components/PaymentDialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 async function UnitContent({ unitId }: { unitId: string }) {
   const Unit = await GetUnit({ unit_id: unitId });
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
+  console.log("UnitData:", UnitData);
 
   return (
     <section className="flex flex-col gap-4 w-full p-4">
@@ -44,6 +48,28 @@ async function UnitContent({ unitId }: { unitId: string }) {
               </span>
             </div>
           </div>
+          {UnitData && Number(UnitData.price || 0) > 0 && (
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className="w-full h-full flex justify-end items-end">
+                  <Button
+                    className="bg-primary text-white px-6 py-4 rounded-full hover:bg-primary-400    transition-all duration-300"
+                    asChild
+                  >
+                    <a href="#purchase" className="flex items-center gap-2">
+                      اشترى الان
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
+              </DialogTrigger>
+              <PaymentDialog
+                name={UnitData.name}
+                model_type={UnitData.type ? UnitData.type : "lecture"}
+                model_id={UnitData.id}
+              />
+            </Dialog>
+          )}
         </div>
         <div className=" w-full h-full relative 2xl:min-h-96  min-h-72 col-span-7 ">
           <Image

@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { Menu, X } from "lucide-react";
 
 const NavBarLanding = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,13 +25,13 @@ const NavBarLanding = () => {
   return (
     <>
       <motion.header
-        className="fixed top-0 left-0 right-0 z-20 flex justify-between items-center p-6  bg-[#831AD3]/10 backdrop-blur-sm"
+        className="fixed top-0 left-0 right-0 z-20 flex justify-between items-center p-4  bg-[#831AD3]/10 backdrop-blur-sm"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <Link href="/" className="flex-shrink-0 ">
-          <Image src={logo} alt="main logo" width={80} height={40} priority />
+          <Image src={logo} alt="main logo" width={60} height={60} priority />
         </Link>
         <nav className="hidden md:flex gap-4 text-xl">
           <Link
@@ -66,14 +67,14 @@ const NavBarLanding = () => {
           className="md:hidden text-3xl focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {isMenuOpen ? "×" : "☰"}
+          {isMenuOpen ? <X /> : <Menu />}
         </button>
       </motion.header>
       {/* Mobile Menu */}
       <motion.div
         className={`md:hidden ${
           isMenuOpen ? "block" : "hidden"
-        } bg-gray-900/90 bgt p-6 fixed top-20 right-0 w-full z-10 backdrop-blur-sm`}
+        } bg-gray-900/90 bgt p-6 fixed top-28 right-0 w-full z-10 backdrop-blur-sm`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: isMenuOpen ? 1 : 0, y: isMenuOpen ? 0 : -20 }}
         transition={{ duration: 0.3 }}

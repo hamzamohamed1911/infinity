@@ -116,6 +116,7 @@ declare type Lesson = {
 
 declare type CourseDetails = {
   id: number;
+  type?: string;
   section_id: number;
   name: string;
   booking_status: number;
@@ -156,6 +157,7 @@ declare type BundleDetails = {
   exams_count: number;
   homeworks_count: number;
   thumbnail?: string;
+  type: string;
 };
 declare type LiveItem = {
   id: number;

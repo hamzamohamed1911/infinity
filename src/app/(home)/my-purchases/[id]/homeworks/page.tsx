@@ -1,8 +1,8 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Suspense } from "react";
-import UnitSkeleton from "@/components/UnitSkeleton";
 import ExamsComponent from "../../_Components/ExamsComponent";
 import { GetExams } from "@/lib/apis/exams.api";
+import PurchasesSkeleton from "../../_Components/PurchasesSkeleton";
 
 async function HomeWorksContent({ courseId }: { courseId: string }) {
   const HomeWorks = await GetExams({ course_id: courseId, assessment_type: 2 });
@@ -78,7 +78,7 @@ export default async function Page({
   const { id } = await params;
 
   return (
-    <Suspense fallback={<UnitSkeleton />}>
+    <Suspense fallback={<PurchasesSkeleton />}>
       <HomeWorksContent courseId={id} />
     </Suspense>
   );

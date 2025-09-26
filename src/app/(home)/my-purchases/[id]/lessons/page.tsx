@@ -2,7 +2,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import AllLessons from "./_components/AllLessons";
 import { GetLessons } from "@/lib/apis/course.api";
 import { Suspense } from "react";
-import UnitSkeleton from "@/components/UnitSkeleton";
+import PurchasesSkeleton from "../../_Components/PurchasesSkeleton";
 
 async function LessonsContent({ courseId }: { courseId: string }) {
   const Lessons = await GetLessons({ course_id: courseId });
@@ -59,7 +59,7 @@ export default async function Page({
   const { id } = await params;
 
   return (
-    <Suspense fallback={<UnitSkeleton />}>
+    <Suspense fallback={<PurchasesSkeleton />}>
       <LessonsContent courseId={id} />
     </Suspense>
   );
