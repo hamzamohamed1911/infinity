@@ -33,6 +33,9 @@ export default function ExamComponent({
   const [imagePreviews, setImagePreviews] = useState<Record<number, string>>(
     {}
   );
+  const [visitedQuestions, setVisitedQuestions] = useState<Set<number>>(
+    new Set()
+  );
 
   // المؤقت
   useEffect(() => {
@@ -167,6 +170,8 @@ export default function ExamComponent({
   // تنقل بين الأسئلة
   const goToNextQuestion = async () => {
     await submitCurrentAnswer();
+    setVisitedQuestions((prev) => new Set(prev).add(currentQuestionIndex));
+
     if (currentQuestionIndex < examData.questions_count - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
@@ -181,6 +186,7 @@ export default function ExamComponent({
   };
 
   const goToQuestion = async (index: number) => {
+    setVisitedQuestions((prev) => new Set(prev).add(currentQuestionIndex));
     setCurrentQuestionIndex(index);
   };
 
@@ -214,7 +220,7 @@ export default function ExamComponent({
               {Array.from({ length: totalQuestions }, (_, index) => {
                 const isCurrent = index === currentQuestionIndex;
                 const hasAnswer = !!answers[examData.questions[index].id];
-                const isVisited = index < currentQuestionIndex; // عدّيت عليه قبل كده
+                const isVisited = visitedQuestions.has(index); // بدّلها كده
 
                 let styles = "";
 

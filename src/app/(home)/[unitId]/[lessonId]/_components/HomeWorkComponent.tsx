@@ -28,6 +28,10 @@ export default function HomeWorkComponent({
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     undefined
   );
+  const [visitedQuestions, setVisitedQuestions] = useState<Set<number>>(
+    new Set()
+  );
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -113,6 +117,7 @@ export default function HomeWorkComponent({
 
   const goToNextQuestion = async () => {
     await submitCurrentAnswer();
+    setVisitedQuestions((prev) => new Set(prev).add(currentQuestionIndex));
 
     if (currentQuestionIndex < examData.questions_count - 1) {
       // لسه فيه أسئلة → نروح للسؤال اللي بعده
@@ -130,6 +135,8 @@ export default function HomeWorkComponent({
   };
 
   const goToQuestion = async (index: number) => {
+    setVisitedQuestions((prev) => new Set(prev).add(currentQuestionIndex));
+
     setCurrentQuestionIndex(index);
   };
 
@@ -158,7 +165,7 @@ export default function HomeWorkComponent({
               {Array.from({ length: totalQuestions }, (_, index) => {
                 const isCurrent = index === currentQuestionIndex;
                 const hasAnswer = !!answers[examData.questions[index].id];
-                const isVisited = index < currentQuestionIndex; // عدّيت عليه قبل كده
+                const isVisited = visitedQuestions.has(index); // بدّلها كده
 
                 let styles = "";
 
@@ -183,7 +190,6 @@ export default function HomeWorkComponent({
                   </button>
                 );
               })}
-
               <ChevronLeft
                 onClick={goToNextQuestion}
                 className="w-6 h-6 text-gray-400 cursor-pointer shrink-0"
