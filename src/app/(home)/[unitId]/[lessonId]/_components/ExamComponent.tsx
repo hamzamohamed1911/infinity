@@ -225,7 +225,7 @@ export default function ExamComponent({
                 let styles = "";
 
                 if (isCurrent) {
-                  styles = "bg-secondary-900 text-white border-secondary-900";
+                  styles = "bg-secondary-800 text-white border-secondary-900";
                 } else if (hasAnswer) {
                   styles = "border-green-500 bg-green-100 text-green-700";
                 } else if (isVisited) {

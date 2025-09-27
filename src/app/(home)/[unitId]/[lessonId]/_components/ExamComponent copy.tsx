@@ -190,7 +190,7 @@ export default function ExamComponent({
                   onClick={() => goToQuestion(index)}
                   className={`w-10 h-10 rounded-full shrink-0 border-2 flex items-center justify-center text-sm font-medium transition-colors ${
                     index === currentQuestionIndex
-                      ? "bg-secondary-900 text-white border-secondary-900"
+                      ? "bg-secondary-800 text-white border-secondary-900"
                       : answers[examData.questions[index].id]
                       ? "bg-gray-200 text-gray-700 border-gray-300"
                       : "bg-white text-gray-500 border-gray-300 hover:border-gray-400"

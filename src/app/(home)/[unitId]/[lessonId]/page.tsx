@@ -209,14 +209,14 @@ async function LessonContent({
             <div className="flex justify-between md:gap-4 gap-2 w-full">
               <Button
                 variant="ghost"
-                className="group flex items-center justify-center font-semibold shadow-md lg:text-lg md:text-md text-xs lg:gap-2 gap-1 text-secondary-900  hover:bg-secondary-900 hover:text-white w-full lg:h-14 h-12 rounded-lg transition-all duration-300"
+                className="group flex items-center justify-center font-semibold shadow-md lg:text-lg md:text-md text-xs lg:gap-2 gap-1 text-secondary-900  hover:bg-secondary-800 hover:text-white w-full lg:h-14 h-12 rounded-lg transition-all duration-300"
               >
                 <FaArrowRight className="transform transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" />
                 المحاضرة السابقة
               </Button>
               <Button
                 variant="ghost"
-                className="group flex items-center justify-center font-semibold shadow-md lg:text-lg md:text-md text-xs lg:gap-2 gap-1 text-secondary-900  hover:bg-secondary-900 hover:text-white w-full lg:h-14 h-12 rounded-lg transition-all duration-300"
+                className="group flex items-center justify-center font-semibold shadow-md lg:text-lg md:text-md text-xs lg:gap-2 gap-1 text-secondary-900  hover:bg-secondary-800 hover:text-white w-full lg:h-14 h-12 rounded-lg transition-all duration-300"
               >
                 المحاضرة التالية
                 <FaArrowLeft className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110" />
