@@ -11,16 +11,48 @@ interface MobileConfig {
   logo: string;
   privacy_policy: string;
 }
+export type HeaderConfig = {
+  email: string | null;
+  phone: string | null;
+  active: "on" | "off";
+  book_store: "on" | "off";
+  twitter_link: string | null;
+  youtube_link: string | null;
+  facebook_link: string | null;
+  linkedin_link: string | null;
+  instagram_link: string | null;
+};
+export type HeaderConfig = {
+  email: string | null;
+  phone: string | null;
+  active: "on" | "off";
+  book_store: "on" | "off";
+  twitter_link: string | null;
+  youtube_link: string | null;
+  facebook_link: string | null;
+  linkedin_link: string | null;
+  instagram_link: string | null;
+};
+
+export interface WebConfig {
+  hero: HeroConfig;
+  about: AboutConfig;
+  theme: string;
+  video: VideoConfig;
+  footer: FooterConfig;
+  header: HeaderConfig;
+}
 
 // الأكاديمية
-interface Academy {
+declare type Academy = {
   id: number;
   name: string;
   subdomain: string;
   logo: string;
   desc: string;
   mobile_config: MobileConfig;
-}
+  web_config: WebConfig;
+};
 
 // الـ Features
 interface Features {

@@ -25,7 +25,7 @@ const NavBarLanding = () => {
   return (
     <>
       <motion.header
-        className="fixed top-0 left-0 right-0 z-20 flex justify-between items-center p-4  bg-backgroundColor/10 backdrop-blur-sm"
+        className="fixed top-0 left-0 right-0 z-20 flex justify-between items-center p-4  bg-backgroundColor/20 backdrop-blur-md"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -37,28 +37,28 @@ const NavBarLanding = () => {
           <Link
             href="#home"
             onClick={(e) => handleNavClick(e, "home")}
-            className="hover:text-primary-300 transition-colors"
+            className="hover:text-primary-400 transition-colors"
           >
             الرئيسية
           </Link>
           <Link
             href="#about"
             onClick={(e) => handleNavClick(e, "about")}
-            className="hover:text-primary-300 transition-colors"
+            className="hover:text-primary-400 transition-colors"
           >
             من نحن
           </Link>
           <Link
             href="#courses"
             onClick={(e) => handleNavClick(e, "courses")}
-            className="hover:text-primary-300 transition-colors"
+            className="hover:text-primary-400 transition-colors"
           >
             الدورات
           </Link>
           <Link
             href="#contact"
             onClick={(e) => handleNavClick(e, "contact")}
-            className="hover:text-primary-300 transition-colors"
+            className="hover:text-primary-400 transition-colors"
           >
             اتصل بنا
           </Link>
@@ -74,7 +74,7 @@ const NavBarLanding = () => {
       <motion.div
         className={`md:hidden ${
           isMenuOpen ? "block" : "hidden"
-        } bg-gray-900/90 bgt p-6 fixed top-28 right-0 w-full z-10 backdrop-blur-sm`}
+        } bg-backgroundColor/40  p-6 fixed top-20 right-0 w-full z-10 backdrop-blur-lg`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: isMenuOpen ? 1 : 0, y: isMenuOpen ? 0 : -20 }}
         transition={{ duration: 0.3 }}
@@ -83,28 +83,28 @@ const NavBarLanding = () => {
           <Link
             href="#home"
             onClick={(e) => handleNavClick(e, "home")}
-            className="hover:text-primary-300 transition-colors"
+            className="hover:text-primary-400 transition-colors"
           >
             الرئيسية
           </Link>
           <Link
             href="#about"
             onClick={(e) => handleNavClick(e, "about")}
-            className="hover:text-primary-300 transition-colors"
+            className="hover:text-primary-400 transition-colors"
           >
             من نحن
           </Link>
           <Link
             href="#courses"
             onClick={(e) => handleNavClick(e, "courses")}
-            className="hover:text-primary-300 transition-colors"
+            className="hover:text-primary-400 transition-colors"
           >
             الدورات
           </Link>
           <Link
             href="#contact"
             onClick={(e) => handleNavClick(e, "contact")}
-            className="hover:text-primary-300 transition-colors"
+            className="hover:text-primary-400 transition-colors"
           >
             اتصل بنا
           </Link>

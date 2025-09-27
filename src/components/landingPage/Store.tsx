@@ -4,73 +4,10 @@ import { placeholder } from "../../../public";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { ShoppingBag } from "lucide-react";
+import { Badge } from "../ui/badge";
+import { Product } from "@/lib/types/landing";
 
-const dummyCourses = [
-  {
-    id: 1,
-    title: "كورس المراجعة الخامسة",
-    description: "شرح شامل لمنهج أولى ثانوي مع تدريبات تفاعلية وقطع ترجمة.",
-    price: 200,
-    image: placeholder,
-  },
-  {
-    id: 2,
-    title: "كورس المراجعة الولى",
-    description:
-      "شرح قواعد واستيعاب المقروء لمنهج تانية ثانوي بالتفصيل مع تدريبات.",
-    price: 100,
-    image: placeholder,
-  },
-  {
-    id: 3,
-    title: "كورس المراجعة التالته",
-    description:
-      "مراجعة نهائية لمنهج الإنجليزي لتالتة ثانوي مع تدريبات على أسئلة الامتحانات.",
-    price: 500,
-
-    image: placeholder,
-  },
-  {
-    id: 4,
-    title: "الإنجليزي -  اعدادى",
-    description: "شرح مبسط لمنهج اللغة الإنجليزية للإعدادي مع تدريبات تفاعلية.",
-    price: 1000,
-    image: placeholder,
-  },
-  {
-    id: 5,
-    title: "كورس المراجعة الخامسة",
-    description: "شرح شامل لمنهج أولى ثانوي مع تدريبات تفاعلية وقطع ترجمة.",
-    price: 200,
-    image: placeholder,
-  },
-  {
-    id: 6,
-    title: "كورس المراجعة الولى",
-    description:
-      "شرح قواعد واستيعاب المقروء لمنهج تانية ثانوي بالتفصيل مع تدريبات.",
-    price: 100,
-    image: placeholder,
-  },
-  {
-    id: 7,
-    title: "كورس المراجعة التالته",
-    description:
-      "مراجعة نهائية لمنهج الإنجليزي لتالتة ثانوي مع تدريبات على أسئلة الامتحانات.",
-    price: 500,
-
-    image: placeholder,
-  },
-  {
-    id: 8,
-    title: "الإنجليزي -  اعدادى",
-    description: "شرح مبسط لمنهج اللغة الإنجليزية للإعدادي مع تدريبات تفاعلية.",
-    price: 1000,
-    image: placeholder,
-  },
-];
-
-const Store = () => {
+const Store = ({ data }: { data: Product[] }) => {
   return (
     <section id="courses" className="py-16 px-6 md:px-12 ">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-primary">
@@ -78,7 +15,7 @@ const Store = () => {
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {dummyCourses.map((course) => (
+        {data.map((course) => (
           <Card
             key={course.id}
             className="overflow-hidden text-right bg-white rounded-2xl group relative cursor-pointer"
@@ -86,8 +23,8 @@ const Store = () => {
             {/* الصورة */}
             <div className="w-full h-96 relative">
               <Image
-                src={course.image}
-                alt={course.title}
+                src={course.image || course.image || placeholder}
+                alt={course.name}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
@@ -95,16 +32,22 @@ const Store = () => {
 
             {/* المحتوى يظهر عند الـ hover */}
             <div
-              className="absolute bottom-0 left-0 w-full h-1/2 bg-black/70 
+              className="absolute bottom-0 left-0 w-full h-3/4 bg-black/70 
     translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 
-    transition-all duration-500 ease-in-out p-4 text-white flex flex-col justify-end"
+    transition-all duration-500 ease-in-out p-4 text-white flex flex-col justify-between"
             >
-              <div className="text-center">
-                <h3 className="text-lg font-bold mb-1">{course.title}</h3>
-                <p className="text-sm mb-2">{course.description}</p>
-                <p className="text-md font-semibold mb-4 text-white">
-                  {course.price} جنيه
+              <div className="text-center space-y-2">
+                <h3 className="text-lg font-bold mb-1">{course.name}</h3>
+                <p className="text-sm mb-2 line-clamp-3">
+                  {course.description}
                 </p>
+                {course?.price !== null &&
+                  typeof course.price === "number" &&
+                  course.price > 0 && (
+                    <Badge className="bg-primary text-white text-sm px-3 py-1 rounded-md shadow-md">
+                      {course.price} ج.م
+                    </Badge>
+                  )}
               </div>
 
               <div className="flex gap-2 justify-center items-center w-full group/card">

@@ -56,10 +56,10 @@ export default async function Home() {
       <PromoVideo data={landingData.data.academy} />
 
       {/* Last Courses Section */}
-      <LastCourses />
+      <LastCourses data={landingData.data.courses} />
 
       {/* Store Section */}
-      <Store />
+      <Store data={landingData.data.products} />
 
       {/* Download App Section */}
       <DownloadAppSection />
@@ -68,7 +68,7 @@ export default async function Home() {
       <ScrollToTopButton />
 
       {/* Footer */}
-      <Footer />
+      <Footer data={landingData.data.academy} />
     </div>
   );
 }
