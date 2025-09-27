@@ -9,7 +9,7 @@ async function Exam({ examId }: { examId: string }) {
 
   return (
     <section className="flex flex-col gap-4 w-full">
-      <p className="text-[#606060]  lg:text-xl md:text-lg text-md font-semibold py-2 px-4">
+      <p className="text-neural-800  lg:text-xl md:text-lg text-md font-semibold py-2 px-4">
         إمتحان {ExamData?.name}
       </p>
 

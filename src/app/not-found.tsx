@@ -10,11 +10,11 @@ export default async function NotFound() {
         404
       </Link>
 
-      <h2 className=" lg:text-4xl text-3xl font-bold text-[#606060] ">
+      <h2 className=" lg:text-4xl text-3xl font-bold text-neural-800 ">
         الصفحة غير موجودة
       </h2>
 
-      <p className="text-[#606060] font-medium text-lg max-w-md ">
+      <p className="text-neural-800 font-medium text-lg max-w-md ">
         عذرًا، الصفحة التي تبحث عنها غير موجودة أو تم نقلها.
       </p>
 

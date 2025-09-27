@@ -63,12 +63,15 @@ const ProfileCharts = ({
         >
           {completed} {type}
         </span>
-        <span style={{ color: color }} className=" rounded-3xl bg-transparent h-full w-1/2 flex justify-center items-center px-4 whitespace-nowrap">
+        <span
+          style={{ color: color }}
+          className=" rounded-3xl bg-transparent h-full w-1/2 flex justify-center items-center px-4 whitespace-nowrap"
+        >
           من {total}
         </span>
       </div>
 
-      <p className="text-base font-medium  text-[#606060]">{label}</p>
+      <p className="text-base font-medium  text-neural-800">{label}</p>
     </div>
   );
 };

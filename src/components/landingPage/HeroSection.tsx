@@ -8,7 +8,7 @@ const HeroSection = ({ hero }: { hero: Academy }) => {
   return (
     <section
       id="home"
-      className="flex flex-col md:flex-row-reverse items-center justify-center min-h-screen px-6 md:px-12 pt-20 bg-[#831AD3]/10"
+      className="flex flex-col md:flex-row-reverse items-center justify-center min-h-screen px-6 md:px-12 pt-20 "
     >
       <motion.div
         className="md:w-1/2 mt-8 md:mt-0"
@@ -40,15 +40,15 @@ const HeroSection = ({ hero }: { hero: Academy }) => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
       >
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+        <h1 className="text-4xl md:text-6xl text-primary font-bold mb-4">
           {hero.web_config?.hero?.title}
         </h1>
-        <p className="text-xl md:text-2xl text-white mb-6 leading-10">
+        <p className="text-xl md:text-2xl text-secondary mb-6 leading-10">
           {hero.web_config?.hero?.desc}
         </p>
         <div className="w-full flex md:justify-start justify-center">
           <Link
-            href="/my-courses"
+            href="/my-classes"
             className="btn-link bg-primary-500 rounded-md group "
           >
             <svg

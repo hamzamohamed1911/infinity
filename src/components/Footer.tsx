@@ -15,10 +15,7 @@ const Footer = () => {
   const { logo } = useTheme();
 
   return (
-    <footer
-      id="contact"
-      className="py-16 px-6 md:px-12 bg-[#831AD3]/10 text-white"
-    >
+    <footer id="contact" className="py-16 px-6 md:px-12 ">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-right items-start">
         {/* Right Side: Logo & Description */}
         <div className="flex flex-col items-center md:items-start gap-4 md:gap-6">
@@ -31,12 +28,13 @@ const Footer = () => {
 
         {/* Center: Social Media */}
         <div className="flex flex-col items-center gap-4 md:gap-6">
-          <h3 className="text-lg text-white">تواصل مع المُدرس</h3>
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8">
+          <h3 className="text-lg text-primary">تواصل مع المُدرس</h3>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8 ">
             <a
               href="https://wa.me/your-number"
               target="_blank"
               aria-label="WhatsApp"
+              className="text-primary hover:text-primary-400"
             >
               <FaWhatsapp size={25} />
             </a>
@@ -44,16 +42,23 @@ const Footer = () => {
               href="https://facebook.com"
               target="_blank"
               aria-label="Facebook"
+              className="text-primary hover:text-primary-400"
             >
               <FaFacebookF size={25} />
             </a>
-            <a href="https://x.com" target="_blank" aria-label="X Twitter">
+            <a
+              href="https://x.com"
+              target="_blank"
+              aria-label="X Twitter"
+              className="text-primary hover:text-primary-400"
+            >
               <FaXTwitter size={25} />
             </a>
             <a
               href="https://t.me/your-telegram"
               target="_blank"
               aria-label="Telegram"
+              className="text-primary hover:text-primary-400"
             >
               <FaTelegram size={25} />
             </a>
@@ -61,13 +66,24 @@ const Footer = () => {
               href="https://instagram.com"
               target="_blank"
               aria-label="Instagram"
+              className="text-primary hover:text-primary-400"
             >
               <FaInstagram size={25} />
             </a>
-            <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+            <a
+              href="https://tiktok.com"
+              target="_blank"
+              aria-label="TikTok"
+              className="text-primary hover:text-primary-400"
+            >
               <FaTiktok size={25} />
             </a>
-            <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              aria-label="YouTube"
+              className="text-primary hover:text-primary-400"
+            >
               <FaYoutube size={25} />
             </a>
           </div>
@@ -75,11 +91,11 @@ const Footer = () => {
 
         {/* Left Side: Support */}
         <div className="flex flex-col items-center md:items-end gap-2">
-          <span className="text-lg text-white flex flex-col gap-2">
+          <span className="text-lg text-primary flex flex-col gap-2">
             <h3>تواصل مع الدعم الفني للمنصة</h3>
             <a
               href="#"
-              className="text-white underline md:text-start text-center w-full md:w-auto  block"
+              className="text-primary hover:text-primary-400 underline md:text-start text-center w-full md:w-auto  block"
             >
               تقديم شكوى
             </a>
@@ -88,7 +104,7 @@ const Footer = () => {
       </div>
 
       {/* Footer Bottom Text */}
-      <p className="mt-12 text-md md:text-lg tracking-wide text-center text-white">
+      <p className="mt-12 text-md md:text-lg tracking-wide text-center text-secondary">
         جميع الحقوق محفوظة.{" "}
         <span className="text-primary font-semibold">انفنتي</span> © 2025
       </p>

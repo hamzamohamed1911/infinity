@@ -11,7 +11,7 @@ export default async function CourseLayout({
   const cookieStore = await cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
   if (!selectedId || selectedId === "undefined") {
-    redirect("/my-courses");
+    redirect("/my-classes");
   }
   return (
     <>

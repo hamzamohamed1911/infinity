@@ -12,19 +12,19 @@ const PromoVideo = ({ data }: { data: Academy }) => {
   }
 
   return (
-    <section id="promo-video" className="py-16 px-6 md:px-12 bg-[#831AD3]/10 ">
+    <section id="promo-video" className="py-16 px-6 md:px-12  ">
       <div className="mx-auto container 2xl:max-w-[90%] max-w-full h-full">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start justify-start">
           <div className="text-right flex flex-col lg:gap-6 gap-4 col-span-2 justify-start">
-            <h2 className=" md:text-4xl text-3xl font-bold text-white !leading-relaxed ">
+            <h2 className=" md:text-4xl text-3xl font-bold text-primary !leading-relaxed ">
               {data?.web_config?.video.title}
             </h2>
-            <p className="text-white lg:text-xl md:text-lg text-md leading-relaxed">
+            <p className="text-secondary lg:text-xl md:text-lg text-md leading-relaxed">
               {data?.web_config?.video.desc}
             </p>
             <div className="w-full flex md:justify-start justify-center">
               <Link
-                href="/my-courses"
+                href="/my-classes"
                 className="btn-link bg-primary-500 rounded-md group  "
               >
                 <svg

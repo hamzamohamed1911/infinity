@@ -34,7 +34,7 @@ const ExamsComponent = ({
             className="w-full h-80 object-cover"
           />
           <CardContent className="p-2 space-y-3 text-start ">
-            <h3 className="text-lg font-semibold text-[#606060]">
+            <h3 className="text-lg font-semibold text-neural-800">
               {exam.name}
             </h3>
             {exam.is_attempted && (
@@ -50,7 +50,7 @@ const ExamsComponent = ({
               </>
             )}
 
-            <div className="flex flex-wrap gap-2 justify-between items-center text-[#606060] text-sm">
+            <div className="flex flex-wrap gap-2 justify-between items-center text-neural-800 text-sm">
               <div className="flex items-center gap-2  ">
                 <MdEditNote size={20} />
                 <div className="flex items-center gap-1 ">

@@ -149,13 +149,13 @@ async function LessonContent({
                 تفاصيل الدورة
               </h2>
 
-              <p className="text-[#606060] lg:text-xl md:text-lg text-md">
+              <p className="text-neural-800 lg:text-xl md:text-lg text-md">
                 {LessonData?.description || "لا توجد بيانات"}
               </p>
             </div>
             <div className="flex flex-col lg:gap-8 md:gap-6 gap-4">
               {/* عدد المشاهدات */}
-              <div className="text-[#606060] whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">
+              <div className="text-neural-800 whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">
                 عدد المشاهدات المتبقية:
                 <span className="text-primary font-bold">
                   {LessonData?.remaining_views}

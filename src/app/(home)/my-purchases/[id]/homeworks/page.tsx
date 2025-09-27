@@ -32,19 +32,19 @@ async function HomeWorksContent({ courseId }: { courseId: string }) {
         >
           <TabsTrigger
             value="all"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-3"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
           >
             الكل
           </TabsTrigger>
           <TabsTrigger
             value="Deadlines"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-3"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
           >
             ديدلاينز
           </TabsTrigger>
           <TabsTrigger
             value="Solved"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-3"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
           >
             تم حلها
           </TabsTrigger>

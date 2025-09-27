@@ -43,7 +43,7 @@ async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
           {ExamData && (
             <div className="mt-6">
               <div className="flex items-center gap-2 mb-4">
-                <p className="text-[#606060]  lg:text-xl md:text-lg text-md ">
+                <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
                   تفاصيل الواجب
                 </p>
               </div>
@@ -62,7 +62,7 @@ async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
           )}
 
           <div className="flex flex-col lg:gap-6 gap-4 mt-6">
-            <p className="text-[#606060]  lg:text-xl md:text-lg text-md ">
+            <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
               محاولاتك السابقة
             </p>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-10 lg:gap-8 md:gap-6 gap-4">
@@ -104,7 +104,7 @@ async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
           </div>
 
           <div className="whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">
-            <p className="text-[#606060]  ">محاولاتك المتبقية :</p>
+            <p className="text-neural-800  ">محاولاتك المتبقية :</p>
             <span className="text-primary font-bold">{ExamData?.retries}</span>
           </div>
 

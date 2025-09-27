@@ -94,7 +94,7 @@ const ChangePasswordDialog = () => {
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-4 ">
-            <div className="flex flex-col gap-3 text-[#606060] my-4 ">
+            <div className="flex flex-col gap-3 text-neural-800 my-4 ">
               <div>
                 <label className="text-lg font-medium block my-2">
                   كلمة المرور القديمة

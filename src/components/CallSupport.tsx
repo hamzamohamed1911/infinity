@@ -24,7 +24,7 @@ const CallSupport = () => {
         <div className="grid grid-cols-2 2xl:gap-8 md:gap-6 gap-4">
           <div className="flex flex-col items-start justify-start gap-4 py-4 ">
             <h2 className="text-lg font-bold  text-[#8E8E8E]">دعم المدرس</h2>
-            <p className=" text-md font-semibold  text-[#606060]">
+            <p className=" text-md font-semibold  text-neural-800">
               ممكن تتواصل مع المدرس من هنا!
             </p>
             <a
@@ -66,7 +66,7 @@ const CallSupport = () => {
           <div className="flex flex-col items-start justify-start gap-4 py-4 ">
             <h2 className="text-lg font-bold  text-[#8E8E8E]">تيم السنتر</h2>
 
-            <p className=" text-md font-semibold  text-[#606060]">
+            <p className=" text-md font-semibold  text-neural-800">
               كلم تيم السنتر من هنا
             </p>
             <a
@@ -111,7 +111,7 @@ const CallSupport = () => {
             <h2 className="text-lg font-bold  text-[#8E8E8E]">
               دعم الفني للمنصة
             </h2>
-            <p className=" text-md font-semibold  text-[#606060]">
+            <p className=" text-md font-semibold  text-neural-800">
               لو عندك مشكلة فنية تقدر تتواصل مع الفريق التقني من هنا
             </p>
             <a
@@ -154,7 +154,7 @@ const CallSupport = () => {
             <h2 className="text-lg font-bold  text-[#8E8E8E]">
               فريق الاونلاين
             </h2>
-            <p className=" text-md font-semibold  text-[#606060]">
+            <p className=" text-md font-semibold  text-neural-800">
               ممكن تتواصل مع فريق الاونلاين من هنا!
             </p>
             <a

@@ -71,25 +71,25 @@ export default function PurchasesTabs() {
         <TabsList className="w-full bg-transparent gap-2 grid-cols-4 lg:grid sm:flex overflo-x-auto  whitespace-nowrap">
           <TabsTrigger
             value="all"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-2"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-2"
           >
             الكل
           </TabsTrigger>
           <TabsTrigger
             value="recent"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-2"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-2"
           >
             آخر المشاهدات
           </TabsTrigger>
           <TabsTrigger
             value="ending"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-2"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-2"
           >
             هتخلص قريب
           </TabsTrigger>
           <TabsTrigger
             value="deadlines"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-2"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-2"
           >
             ديدلاينز
           </TabsTrigger>

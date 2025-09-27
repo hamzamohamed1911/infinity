@@ -9,7 +9,7 @@ async function Exam({ hwId }: { hwId: string }) {
 
   return (
     <section className="flex flex-col gap-4 w-full">
-      <p className="text-[#606060]  lg:text-xl md:text-lg text-md font-semibold p-4">
+      <p className="text-neural-800  lg:text-xl md:text-lg text-md font-semibold p-4">
         واجب {ExamData?.name}
       </p>
 

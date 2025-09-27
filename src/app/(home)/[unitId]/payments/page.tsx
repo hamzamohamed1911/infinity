@@ -19,25 +19,25 @@ const page = () => {
         >
           <TabsTrigger
             value="fawry"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-3"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
           >
             فورى
           </TabsTrigger>
           <TabsTrigger
             value="visa"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-3"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
           >
             فيزا
           </TabsTrigger>
           <TabsTrigger
             value="code"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-3"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
           >
             اكواد
           </TabsTrigger>
           <TabsTrigger
             value="wallet"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-[#606060] rounded-md py-3"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
           >
             محافظ الكترونية
           </TabsTrigger>

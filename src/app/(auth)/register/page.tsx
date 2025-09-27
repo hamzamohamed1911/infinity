@@ -179,10 +179,10 @@ const Register = () => {
       <div className="flex flex-col justify-between h-full lg:m-8 md:m-6 m-2">
         <header className="flex flex-col gap-6">
           <div className=" text-center flex flex-col gap-2 mt-2">
-            <h2 className=" lg:text-3xl text-2xl font-bold text-[#606060]">
+            <h2 className=" lg:text-3xl text-2xl font-bold text-neural-800">
               سجل معانا دلوقتي
             </h2>
-            <p className="font-medium text-xl text-[#606060 mt-2">
+            <p className="font-medium text-xl text-neural-800 mt-2">
               إبدأ معانا رحلتك في التعلم وتجيب أعلى الدرجات
             </p>
           </div>
@@ -196,8 +196,8 @@ const Register = () => {
             <div className="w-full h-full">
               <div className="w-full">
                 {teacherCount > 1 && showAlternateContent ? (
-                  <div className="flex flex-col gap-3 text-[#606060] my-4">
-                    <div className="flex flex-col gap-3 text-[#606060] my-3">
+                  <div className="flex flex-col gap-3 text-neural-800 my-4">
+                    <div className="flex flex-col gap-3 text-neural-800 my-3">
                       <Label className="text-lg font-medium">المحافظه</Label>
                       <Controller
                         control={subscribeForm.control}
@@ -218,7 +218,7 @@ const Register = () => {
                       )}
                     </div>
 
-                    <div className="flex flex-col gap-3 text-[#606060] w-full my-3">
+                    <div className="flex flex-col gap-3 text-neural-800 w-full my-3">
                       <Label className="text-lg font-medium">المدرس</Label>
                       <Input
                         {...subscribeForm.register("teacher_id")}
@@ -233,7 +233,7 @@ const Register = () => {
                   </div>
                 ) : (
                   <>
-                    <div className="flex flex-col gap-3 text-[#606060] my-4">
+                    <div className="flex flex-col gap-3 text-neural-800 my-4">
                       <Label className="text-lg font-medium">الاسم</Label>
                       <Input
                         {...(teacherCount <= 1
@@ -253,7 +253,7 @@ const Register = () => {
                             </p>
                           )}
                     </div>
-                    <div className="flex flex-col gap-3 text-[#606060] my-4">
+                    <div className="flex flex-col gap-3 text-neural-800 my-4">
                       <Label className="text-lg font-medium">
                         البريد الإلكتروني
                       </Label>
@@ -276,7 +276,7 @@ const Register = () => {
                           )}
                     </div>
                     <div className="flex md:flex-row flex-col gap-2 w-full my-4">
-                      <div className="flex flex-col gap-3 text-[#606060] w-full">
+                      <div className="flex flex-col gap-3 text-neural-800 w-full">
                         <Label className="text-lg font-medium">
                           رقم هاتف الطالب
                         </Label>
@@ -300,7 +300,7 @@ const Register = () => {
                             )}
                       </div>
 
-                      <div className="flex flex-col gap-3 text-[#606060] w-full">
+                      <div className="flex flex-col gap-3 text-neural-800 w-full">
                         <Label className="text-lg font-medium">
                           {theme.phoneLabel}
                         </Label>
@@ -330,7 +330,7 @@ const Register = () => {
                             )}
                       </div>
                     </div>
-                    <div className="flex flex-col gap-3 text-[#606060] w-full my-4 relative">
+                    <div className="flex flex-col gap-3 text-neural-800 w-full my-4 relative">
                       <Label className="text-lg font-medium">كلمة المرور</Label>
 
                       <div className="relative">
@@ -365,7 +365,7 @@ const Register = () => {
                             </p>
                           )}
                     </div>
-                    <div className="flex flex-col gap-3 text-[#606060] w-full my-4">
+                    <div className="flex flex-col gap-3 text-neural-800 w-full my-4">
                       <Label className="text-lg font-medium">
                         تأكيد كلمة المرور
                       </Label>
@@ -416,7 +416,7 @@ const Register = () => {
                     </div>
                     {teacherCount <= 1 && (
                       <>
-                        <div className="flex flex-col gap-3 text-[#606060] w-full my-3">
+                        <div className="flex flex-col gap-3 text-neural-800 w-full my-3">
                           <Label className="text-lg font-medium">المدينة</Label>
                           <Controller
                             control={basicForm.control}
@@ -438,7 +438,7 @@ const Register = () => {
                             </p>
                           )}
                         </div>
-                        <div className="flex flex-col gap-3 text-[#606060] w-full my-3">
+                        <div className="flex flex-col gap-3 text-neural-800 w-full my-3">
                           <Label className="text-lg font-medium">الصف</Label>
                           <Controller
                             control={basicForm.control}
@@ -475,7 +475,7 @@ const Register = () => {
 
               <Button
                 type="submit"
-                className="w-full text-white  hover:bg-primary-400 lg:h-14 h-12  shadow-md  hover:shadow-lg lg:text-xl  rounded-md bg-primary   transition-colors text-lg  font-semibold disabled:opacity-50  "
+                className="w-full my-2 bg-primary-600  hover:bg-primary-500  text-white hover:shadow-lg lg:h-14 h-12  shadow-md   lg:text-xl  rounded-md    transition-colors text-lg  font-semibold disabled:opacity-50  "
                 disabled={
                   registerMutation.isPending ||
                   registerWithSubscribeMutation.isPending
@@ -484,14 +484,14 @@ const Register = () => {
                 {registerMutation.isPending ||
                 registerWithSubscribeMutation.isPending
                   ? "جاري التسجيل..."
-                  : "متابعة"}
+                  : "التسجيل"}
               </Button>
             </div>
           </form>
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="text-center text-[#606060] flex flex-col gap-2 font-normal md:text-xl text-lg my-4">
+          <div className="text-center text-neural-800 flex flex-col gap-2 font-normal md:text-xl text-lg my-4">
             <span className="flex gap-2 justify-center items-center ">
               <p>لديك حساب بالفعل؟</p>
               <Link className="underline text-primary" href="/login">

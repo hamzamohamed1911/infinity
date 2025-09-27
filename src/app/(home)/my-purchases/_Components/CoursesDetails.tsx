@@ -10,7 +10,7 @@ const CoursesDetails = async ({ id }: { id: string }) => {
 
   return (
     <div className="flex flex-col gap-6 my-6 w-full">
-      <h1 className="font-bold lg:text-3xl text-2xl text-[#606060] ">
+      <h1 className="font-bold lg:text-3xl text-2xl text-neural-800 ">
         {courseData?.name}
       </h1>
       <Ads />
@@ -19,7 +19,7 @@ const CoursesDetails = async ({ id }: { id: string }) => {
           <h2 className="text-[#333333] text-xl font-semibold">
             {courseData?.name}
           </h2>
-          <p className="text-[#606060] text-lg">
+          <p className="text-neural-800 text-lg">
             {courseData?.description || "لا توجد بيانات"}
           </p>
         </div>

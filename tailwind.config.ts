@@ -15,8 +15,19 @@ const config: Config = {
         sans: ["var(--font-alexandria)", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primarydark: "#6B14A8",
         backgroundColor: "var(--background-color)",
+        neural: {
+          100: "#FFFFFF",
+          200: "#E8E8E8",
+          300: "#D2D2D2",
+          400: "#BBBBBB",
+          500: "#A4A4A4",
+          600: "#8E8E8E",
+          700: "#777777",
+          800: "#606060",
+          900: "#4A4A4A",
+          1000: "#333333",
+        },
         primary: {
           DEFAULT: "var(--primary-500)",
           50: "var(--primary-50)",
@@ -82,9 +93,9 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-         halfSpin: {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(270deg)' },
+        halfSpin: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(270deg)" },
         },
         "accordion-down": {
           from: {
@@ -103,9 +114,9 @@ const config: Config = {
           },
         },
       },
-       
+
       animation: {
-          halfSpin: 'halfSpin 0.7s ease-in-out',
+        halfSpin: "halfSpin 0.7s ease-in-out",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },

@@ -22,7 +22,7 @@ const AllCourses = ({ CoursesData }: { CoursesData: CourseType[] }) => {
             className="w-full h-80 object-cover"
           />
           <CardContent className="p-2 space-y-3 text-start">
-            <h3 className="text-lg font-semibold text-[#606060]">
+            <h3 className="text-lg font-semibold text-neural-800">
               {course.name}
             </h3>
             <div className="flex justify-between text-[#8E8E8E]">

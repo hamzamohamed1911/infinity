@@ -8,7 +8,7 @@ const AuthNavBar = () => {
   const { logo } = useTheme();
 
   return (
-    <nav className="bg-primary">
+    <nav className="bg-primary-700">
       <div className="xl:max-w-[90%] container max-w-full mx-auto  h-20 w-full flex justify-center items-center ">
         <div className="container mx-auto flex justify-end p-4">
           <Link href="/" className="inline-block">

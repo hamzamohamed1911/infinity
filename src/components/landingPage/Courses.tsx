@@ -36,8 +36,8 @@ const dummyCourses = [
 
 const Courses = () => {
   return (
-    <section id="courses" className="py-16 px-6 md:px-12 bg-[#831AD3]/10">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+    <section id="courses" className="py-16 px-6 md:px-12 ">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-primary">
         الدورات التدريبية
       </h2>
 

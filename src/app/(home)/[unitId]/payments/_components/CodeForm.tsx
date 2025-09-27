@@ -52,7 +52,7 @@ const CodeForm = ({ model_type, model_id }: FawryFormProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-3 text-[#606060]">
+        <div className="flex flex-col gap-3 text-neural-800">
           <label className="text-lg font-medium">ادخل الكود</label>
           <input
             className={`h-12 py-3 rounded-lg border-[1px] focus:ring-primary px-4 ${

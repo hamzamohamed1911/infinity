@@ -11,18 +11,20 @@ export default withAuth(
     }
 
     if (pathname === "/login" && req.nextauth.token) {
-      return NextResponse.redirect(new URL("/my-courses", req.url));
+      return NextResponse.redirect(new URL("/my-classes", req.url));
     }
 
-    // حماية صفحة my-courses
-    if (pathname.startsWith("/my-courses") && !req.nextauth.token) {
+    // حماية صفحة my-classes
+    if (pathname.startsWith("/my-classes") && !req.nextauth.token) {
       return NextResponse.redirect(new URL("/login", req.url));
     }
 
- if (!req.nextauth.token && !["/login", "/register", "/forgot-password"].includes(pathname)) {
-  return NextResponse.redirect(new URL("/login", req.url));
-}
-
+    if (
+      !req.nextauth.token &&
+      !["/login", "/register", "/forgot-password"].includes(pathname)
+    ) {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
 
     return NextResponse.next();
   },
@@ -34,5 +36,5 @@ export default withAuth(
 );
 
 export const config = {
-   matcher: ["/((?!api/decrypt|api|_next|favicon.ico).*)"],
+  matcher: ["/((?!api/decrypt|api|_next|favicon.ico).*)"],
 };

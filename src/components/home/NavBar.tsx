@@ -91,7 +91,7 @@ const Navbar = ({
 
   return (
     <>
-      <nav className="bg-primary  shadow-md top-0 z-50">
+      <nav className="bg-primary-700  shadow-md top-0 z-50">
         <div className="xl:max-w-[90%] container max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 gap-6">
             {showMenuButton && (

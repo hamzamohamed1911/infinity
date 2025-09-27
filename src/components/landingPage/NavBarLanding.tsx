@@ -25,7 +25,7 @@ const NavBarLanding = () => {
   return (
     <>
       <motion.header
-        className="fixed top-0 left-0 right-0 z-20 flex justify-between items-center p-4  bg-[#831AD3]/10 backdrop-blur-sm"
+        className="fixed top-0 left-0 right-0 z-20 flex justify-between items-center p-4  bg-backgroundColor/10 backdrop-blur-sm"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -37,28 +37,28 @@ const NavBarLanding = () => {
           <Link
             href="#home"
             onClick={(e) => handleNavClick(e, "home")}
-            className="hover:text-[#831AD3] transition-colors"
+            className="hover:text-primary-300 transition-colors"
           >
             الرئيسية
           </Link>
           <Link
             href="#about"
             onClick={(e) => handleNavClick(e, "about")}
-            className="hover:text-[#831AD3] transition-colors"
+            className="hover:text-primary-300 transition-colors"
           >
             من نحن
           </Link>
           <Link
             href="#courses"
             onClick={(e) => handleNavClick(e, "courses")}
-            className="hover:text-[#831AD3] transition-colors"
+            className="hover:text-primary-300 transition-colors"
           >
             الدورات
           </Link>
           <Link
             href="#contact"
             onClick={(e) => handleNavClick(e, "contact")}
-            className="hover:text-[#831AD3] transition-colors"
+            className="hover:text-primary-300 transition-colors"
           >
             اتصل بنا
           </Link>
@@ -83,28 +83,28 @@ const NavBarLanding = () => {
           <Link
             href="#home"
             onClick={(e) => handleNavClick(e, "home")}
-            className="hover:text-[#831AD3] transition-colors"
+            className="hover:text-primary-300 transition-colors"
           >
             الرئيسية
           </Link>
           <Link
             href="#about"
             onClick={(e) => handleNavClick(e, "about")}
-            className="hover:text-[#831AD3] transition-colors"
+            className="hover:text-primary-300 transition-colors"
           >
             من نحن
           </Link>
           <Link
             href="#courses"
             onClick={(e) => handleNavClick(e, "courses")}
-            className="hover:text-[#831AD3] transition-colors"
+            className="hover:text-primary-300 transition-colors"
           >
             الدورات
           </Link>
           <Link
             href="#contact"
             onClick={(e) => handleNavClick(e, "contact")}
-            className="hover:text-[#831AD3] transition-colors"
+            className="hover:text-primary-300 transition-colors"
           >
             اتصل بنا
           </Link>

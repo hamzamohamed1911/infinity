@@ -17,7 +17,7 @@ const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
   const selectedId = cookieStore.get("selected_course_id")?.value;
 
   if (!selectedId || selectedId === "undefined") {
-    redirect("/my-courses");
+    redirect("/my-classes");
   }
 
   const examsList = await GetExams({
@@ -47,7 +47,7 @@ const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
 
   return (
     <div className="p-4">
-      <p className="text-[#606060] lg:text-2xl md:text-xl text-lg font-semibold mb-6">
+      <p className="text-neural-800 lg:text-2xl md:text-xl text-lg font-semibold mb-6">
         ديدلاينز
       </p>
 

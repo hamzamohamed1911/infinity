@@ -32,12 +32,12 @@ export async function generateMetadata() {
 export default async function Home() {
   const landingData = await getLandingPage();
   if (!landingData) {
-    return <p className="text-center text-white mt-20">فشل تحميل البيانات</p>;
+    return <p className="text-center text-primary mt-20">فشل تحميل البيانات</p>;
   }
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white font-sans overflow-hidden"
+      className="min-h-screen bg-backgroundColor text-primary font-sans overflow-hidden"
       dir="rtl"
     >
       {/* Header */}

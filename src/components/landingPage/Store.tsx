@@ -72,8 +72,8 @@ const dummyCourses = [
 
 const Store = () => {
   return (
-    <section id="courses" className="py-16 px-6 md:px-12 bg-[#831AD3]/10">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+    <section id="courses" className="py-16 px-6 md:px-12 ">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-primary">
         المتجر
       </h2>
 
@@ -122,7 +122,7 @@ const Store = () => {
 
       <div className="flex justify-center items-center mt-8">
         <Link
-          href="/my-courses"
+          href="/my-classes"
           className="btn-link bg-primary-500 rounded-md group "
         >
           <svg

@@ -24,7 +24,7 @@ const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
           />
           <CardContent className="p-2 flex flex-col h-36 justify-between gap-3 text-start">
             <div>
-              <h3 className="text-lg font-semibold text-[#606060]">
+              <h3 className="text-lg font-semibold text-neural-800">
                 {unit.name}
               </h3>
               <div className="flex justify-end items-end">

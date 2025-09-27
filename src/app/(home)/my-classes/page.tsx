@@ -38,7 +38,7 @@ async function MyClassesContent() {
       <section>
         <div className="container mx-auto xl:max-w-[90%] max-w-full flex w-full p-4">
           <div className=" lg:m-6 md:m-4 m-2  flex flex-col gap-4 w-full">
-            <h2 className="text-[#606060]  lg:text-3xl md:text-2xl text-xl font-[500]">
+            <h2 className="text-neural-800  lg:text-3xl md:text-2xl text-xl font-[500]">
               الصفوف الدراسيه
             </h2>
             {(!ClassesData || ClassesData.length === 0) && (
@@ -67,7 +67,7 @@ async function MyClassesContent() {
                     </h3>
 
                     {course?.description && (
-                      <p className="text-sm text-[#606060]">
+                      <p className="text-sm text-neural-800">
                         <strong>
                           {course.description.length > 60
                             ? course.description.slice(0, 60) + "..."

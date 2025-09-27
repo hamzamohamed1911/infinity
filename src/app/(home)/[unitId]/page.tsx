@@ -27,10 +27,10 @@ async function UnitContent({ unitId }: { unitId: string }) {
             <h2 className="text-[#8E8E8E] text-xl font-semibold">
               تفاصيل الوحدة
             </h2>
-            <h3 className="text-[#606060] text-xl font-semibold">
+            <h3 className="text-neural-800 text-xl font-semibold">
               {UnitData?.name || "لا توجد بيانات"}
             </h3>
-            <p className="text-[#606060] lg:text-xl text-lg">
+            <p className="text-neural-800 lg:text-xl text-lg">
               {UnitData?.description || "لا توجد بيانات"}
             </p>
           </div>
@@ -38,7 +38,7 @@ async function UnitContent({ unitId }: { unitId: string }) {
             <h2 className="text-[#8E8E8E] text-xl font-semibold">
               في الوحدة هتلاقي
             </h2>
-            <div className="text-[#606060] flex  flex-wrap lg:gap-6 gap-4">
+            <div className="text-neural-800 flex  flex-wrap lg:gap-6 gap-4">
               <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
                 <RiBookMarkedLine size={30} />
                 <p className="whitespace-nowrap">

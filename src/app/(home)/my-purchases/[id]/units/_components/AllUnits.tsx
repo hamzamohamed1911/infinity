@@ -25,10 +25,10 @@ const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
               className="w-full h-80 object-cover"
             />
             <CardContent className="p-2 space-y-3 text-start">
-              <h3 className="text-lg font-semibold text-[#606060]">
+              <h3 className="text-lg font-semibold text-neural-800">
                 {unit.name}
               </h3>
-              <p className="text-sm font-medium text-[#606060] line-clamp-2">
+              <p className="text-sm font-medium text-neural-800 line-clamp-2">
                 {unit.description}
               </p>
               <div className="flex justify-between text-[#8E8E8E]">

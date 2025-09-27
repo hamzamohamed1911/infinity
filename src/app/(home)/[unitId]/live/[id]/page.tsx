@@ -8,7 +8,7 @@ async function LessonContent() {
   const cookieStore = await cookies();
   const selectedId = cookieStore.get("selected_course_id")?.value;
   if (!selectedId || selectedId === "undefined") {
-    redirect("/my-courses");
+    redirect("/my-classes");
   }
   const live = await GetLive({ class_id: selectedId });
   const liveData: LiveItem[] = Array.isArray(live?.data) ? live.data : [];

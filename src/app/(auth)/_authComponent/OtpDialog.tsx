@@ -100,7 +100,7 @@ const OtpDialog = ({
         </DialogHeader>
 
         <form onSubmit={codeForm.handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-3 text-[#606060] my-4">
+          <div className="flex flex-col gap-3 text-neural-800 my-4">
             <p className="text-center">
               لقد تم ارسال كود التحقق لهذا الرقم :{" "}
               <span className="text-sm text-primary font-semibold">

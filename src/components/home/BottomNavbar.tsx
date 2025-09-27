@@ -18,7 +18,7 @@ export default function BottomNavbar({ id }: { id: string }) {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed lg:hidden bottom-0 left-0 right-0 bg-primary shadow-md rounded-lg z-[9999]">
+    <nav className="fixed lg:hidden bottom-0 left-0 right-0 bg-primary-700 shadow-md rounded-lg z-[9999]">
       <div className="flex justify-around items-center py-1">
         {navItems.map((item, index) => {
           const Icon = item.icon;

@@ -25,12 +25,12 @@ async function DahsboardContnet() {
       completed: 16,
       color: "#99E35D",
       label: "عدد الاختبارات اللي خلصتها",
-      type:"اختبار"
+      type: "اختبار",
     },
   ];
   return (
     <section className="min-h-screen w-full flex flex-col gap-4">
-      <h1 className="font-bold lg:text-3xl text-2xl text-[#606060] my-4 ">
+      <h1 className="font-bold lg:text-3xl text-2xl text-neural-800 my-4 ">
         لوحة التحكم
       </h1>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 ">

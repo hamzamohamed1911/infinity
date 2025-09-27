@@ -35,7 +35,7 @@ const AllLive = ({ liveData }: { liveData: LiveItem[] }) => {
 
           <CardContent className="p-4 space-y-3 text-start">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-[#606060]">
+              <h3 className="text-lg font-semibold text-neural-800">
                 {live.name}
               </h3>
             </div>
