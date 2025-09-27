@@ -18,7 +18,7 @@ async function UnitContent({
   const ExamData = Exam && "data" in Exam ? Exam.data : undefined;
   const Unit = await GetUnit({ unit_id: unitId });
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
-  console.log("ExamDataExamData", ExamData);
+  // دالة لتنسيق التاريخ والوقت
   // دالة لتنسيق التاريخ والوقت
   function formatDateTime(dateTimeString: string) {
     const dateObj = new Date(dateTimeString);
@@ -34,6 +34,7 @@ async function UnitContent({
     return { date, time };
   }
 
+  console.log(ExamData);
   return (
     <section className="flex flex-col gap-4 w-full p-4">
       {ExamData && UnitData && (
@@ -80,56 +81,65 @@ async function UnitContent({
               محاولاتك السابقة
             </p>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-10 lg:gap-8 md:gap-6 gap-4">
-              {ExamData?.user_exams_retries.map((exam) => {
-                const start_date = new Date(exam.started_at);
-                const examDate = new Date(exam.ended_at);
-                const startdatestring = start_date.toLocaleDateString("ar-EG", {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                });
-
-                const dateString = examDate.toLocaleDateString("ar-EG", {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                });
+              {ExamData?.user_exams_retries.map((exam, index) => {
+                const start = formatDateTime(exam.started_at);
+                const end = formatDateTime(exam.ended_at);
 
                 return (
                   <div
                     key={exam.id}
-                    className="border border-gray-200 rounded-md p-4 flex gap-4 justify-center items-center bg-white shadow-sm font-semibold"
+                    className="border border-gray-200 rounded-md p-4 flex flex-col gap-4 bg-white shadow-sm font-semibold w-full"
                   >
-                    <div className="flex items-center gap-2 flex-wrap text-gray-700">
-                      <span className="text-[#A4A4A4] font-semibold text-md">
-                        تاريخ البداية
-                      </span>
-                      <span className="text-secondary-900 text-sm">
-                        {startdatestring.split(" ")[0]}
-                      </span>
-                      <span className="text-secondary-900 text-sm">
-                        {startdatestring.split(" ")[1]}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 flex-wrap text-gray-700 ">
-                      <span className="text-[#A4A4A4] font-semibold text-md">
-                        تاريخ النهاية
-                      </span>
-                      <span className="text-secondary-900 text-nowrap text-sm">
-                        {dateString.split(" ")[0]}
-                      </span>
-                      <span className="text-secondary-900 text-nowrap  text-sm">
-                        {dateString.split(" ")[1]}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#A4A4A4] text-md">الدرجة</span>
+                    {/* عنوان المحاولة + الدرجة */}
+                    <div className="w-full flex justify-between items-center border-b pb-2">
+                      <p className="text-md text-gray-700 font-semibold">
+                        المحاولة {index + 1}
+                      </p>
                       <span className="text-secondary-900 text-sm">
                         {exam.final_grade}/{ExamData.questions_count}
                       </span>
+                    </div>
+
+                    {/* وقت البداية */}
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[#A4A4A4] font-semibold text-md">
+                        وقت البداية
+                      </span>
+                      <span className="text-secondary-900 text-sm">
+                        {start.date} – {start.time}
+                      </span>
+                    </div>
+
+                    {/* وقت النهاية */}
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[#A4A4A4] font-semibold text-md">
+                        وقت النهاية
+                      </span>
+                      <span className="text-secondary-900 text-sm">
+                        {end.date} – {end.time}
+                      </span>
+                    </div>
+
+                    {/* الحالة */}
+                    {exam.message && (
+                      <div className="flex flex-col gap-1">
+                        <span className="text-[#A4A4A4] font-semibold text-md">
+                          الحالة
+                        </span>
+                        <span className="text-secondary-900 text-sm">
+                          {exam.message}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* الزرار */}
+                    <div className="mt-2 w-full flex justify-end">
+                      <button
+                        type="button"
+                        className="px-4 py-2 rounded-md bg-primary-500 text-white text-sm hover:bg-primary-600 transition"
+                      >
+                        اظهار الإجابات
+                      </button>
                     </div>
                   </div>
                 );

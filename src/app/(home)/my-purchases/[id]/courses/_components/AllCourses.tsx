@@ -7,7 +7,6 @@ import { MdEditNote, MdOndemandVideo } from "react-icons/md";
 import { LuBook } from "react-icons/lu";
 
 const AllCourses = ({ CoursesData }: { CoursesData: CourseType[] }) => {
-  console.log("CoursesData", CoursesData);
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {CoursesData.map((course: CourseType) => (

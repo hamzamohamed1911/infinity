@@ -10,7 +10,6 @@ import PaymentDialog from "../../[unitId]/payments/_components/PaymentDialog";
 async function BookContent({ id }: { id: string }) {
   const Book = await GetBook({ id: id });
   const BookData = Book && "data" in Book ? Book.data : undefined;
-  console.log("BookData", BookData);
   if (!BookData || !BookData.item) {
     return <div className="text-center text-red-500 py-16">Book not found</div>;
   }

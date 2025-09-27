@@ -19,8 +19,6 @@ async function MyClassesContent() {
   const teachers = teachersResponse?.data || [];
   const actualTeacher = teachers.length === 1 ? teachers[0].id : undefined;
   if (profileData?.status === "-") {
-    console.log("teachers", teachersResponse);
-
     return (
       <section className="container mx-auto xl:max-w-[90%] max-w-full flex w-full p-4">
         <div className="lg:m-6 md:m-4 m-2 w-full">

@@ -17,7 +17,6 @@ import PaymentDialog from "../../[unitId]/payments/_components/PaymentDialog";
 async function CourseContent({ id }: { id: string }) {
   const bundle = await GetBundle({ bundle_id: id });
   const UnitData = bundle && "data" in bundle ? bundle.data : undefined;
-  console.log("UnitData", UnitData);
 
   return (
     <section className="flex flex-col gap-4 w-full p-4">

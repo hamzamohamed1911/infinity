@@ -211,21 +211,35 @@ export default function ExamComponent({
                 onClick={goToPreviousQuestion}
                 className="w-6 h-6 text-gray-400 cursor-pointer shrink-0"
               />
-              {Array.from({ length: totalQuestions }, (_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToQuestion(index)}
-                  className={`w-10 h-10 rounded-full shrink-0 border-2 flex items-center justify-center text-sm font-medium transition-colors ${
-                    index === currentQuestionIndex
-                      ? "bg-secondary-900 text-white border-secondary-900"
-                      : answers[examData.questions[index].id]
-                      ? "bg-gray-200 text-gray-700 border-gray-300"
-                      : "bg-white text-gray-500 border-gray-300 hover:border-gray-400"
-                  }`}
-                >
-                  {index + 1}
-                </button>
-              ))}
+              {Array.from({ length: totalQuestions }, (_, index) => {
+                const isCurrent = index === currentQuestionIndex;
+                const hasAnswer = !!answers[examData.questions[index].id];
+                const isVisited = index < currentQuestionIndex; // عدّيت عليه قبل كده
+
+                let styles = "";
+
+                if (isCurrent) {
+                  styles = "bg-secondary-900 text-white border-secondary-900";
+                } else if (hasAnswer) {
+                  styles = "border-green-500 bg-green-100 text-green-700";
+                } else if (isVisited) {
+                  styles = "border-red-500 bg-red-50 text-red-700";
+                } else {
+                  styles =
+                    "bg-white text-gray-500 border-gray-300 hover:border-gray-400";
+                }
+
+                return (
+                  <button
+                    key={index}
+                    onClick={() => goToQuestion(index)}
+                    className={`w-10 h-10 rounded-full shrink-0 border-2 flex items-center justify-center text-sm font-medium transition-colors ${styles}`}
+                  >
+                    {index + 1}
+                  </button>
+                );
+              })}
+
               <ChevronLeft
                 onClick={goToNextQuestion}
                 className="w-6 h-6 text-gray-400 cursor-pointer shrink-0"

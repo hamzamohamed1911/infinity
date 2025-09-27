@@ -12,7 +12,6 @@ async function LessonContent() {
   }
   const live = await GetLive({ class_id: selectedId });
   const liveData: LiveItem[] = Array.isArray(live?.data) ? live.data : [];
-  console.log("liveData", liveData);
 
   // ناخد أول لايف مثلاً
   const firstLive = liveData[0];

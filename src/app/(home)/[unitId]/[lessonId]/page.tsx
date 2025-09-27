@@ -46,7 +46,6 @@ async function LessonContent({
 
   if (!LessonData) {
     const preRequisites = lesson?.preRequisites || [];
-    console.log("LessonData", LessonData);
     if (preRequisites.length > 0) {
       return (
         <div className="text-center h-screen max-w-xl mx-auto flex flex-col gap-4 justify-center items-center">

@@ -7,7 +7,6 @@ import { MdEditNote, MdOndemandVideo } from "react-icons/md";
 import { LuBook } from "react-icons/lu";
 
 const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
-  console.log("UnitsData", UnitsData);
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {UnitsData.map((unit: CourseDetails) => {

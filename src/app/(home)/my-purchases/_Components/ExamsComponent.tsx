@@ -37,14 +37,19 @@ const ExamsComponent = ({
             <h3 className="text-lg font-semibold text-[#606060]">
               {exam.name}
             </h3>
-            <div className="flex gap-2 justify-center items-center ">
-              <Progress
-                indicatorClassName="bg-secondary-600"
-                value={50}
-                className="w-full bg-gray-200  my-2"
-              />
-              <span className="text-secondary-600">50%</span>
-            </div>
+            {exam.is_attempted && (
+              <>
+                <div className="flex gap-2 justify-center items-center ">
+                  <Progress
+                    indicatorClassName="bg-secondary-600"
+                    value={50}
+                    className="w-full bg-gray-200  my-2"
+                  />
+                  <span className="text-secondary-600">50%</span>
+                </div>
+              </>
+            )}
+
             <div className="flex flex-wrap gap-2 justify-between items-center text-[#606060] text-sm">
               <div className="flex items-center gap-2  ">
                 <MdEditNote size={20} />

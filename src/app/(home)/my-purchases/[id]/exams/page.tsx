@@ -21,7 +21,6 @@ async function ExamContent({ courseId }: { courseId: string }) {
       endDate.toDateString() === tomorrow.toDateString()
     );
   });
-
   const SolvedExamsData = ExamsData?.filter((exam) => exam.is_attempted);
   return (
     <section>
