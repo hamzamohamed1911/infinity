@@ -10,13 +10,13 @@ const CoursesDetails = async ({ id }: { id: string }) => {
 
   return (
     <div className="flex flex-col gap-6 my-6 w-full">
-      <h1 className="font-bold lg:text-3xl text-2xl text-neural-800 ">
+      <h1 className="font-bold  md:text-2xl text-xl text-neural-800 ">
         {courseData?.name}
       </h1>
       <Ads />
       <div className="grid md:grid-cols-2 grid-cols-1 justify-center items-center gap-4 2xl:min-h-72  min-h-60">
         <div className="flex flex-col gap-4">
-          <h2 className="text-[#333333] text-xl font-semibold">
+          <h2 className="text-neural-1000 text-xl font-semibold">
             {courseData?.name}
           </h2>
           <p className="text-neural-800 text-lg">

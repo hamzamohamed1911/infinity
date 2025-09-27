@@ -82,8 +82,8 @@ const SideBar = ({ id }: { id: string }) => {
             href={item.href}
             className={`flex items-center gap-2 my-5 rounded-md text-xl font-medium transition-colors ${
               pathname === item.href
-                ? "bg-secondary-500 text-white my-5 ps-2 h-[68px]"
-                : "transition-all duration-600 hover:text-white hover:bg-secondary-500 ps-4 hover:ps-2 h-[56px] hover:h-[68px] hover:text-2xl text-neural-800"
+                ? "bg-secondary-700 text-white my-5 ps-2 h-[68px]"
+                : "transition-all duration-600 hover:text-white hover:bg-secondary-700 ps-4 hover:ps-2 h-[56px] hover:h-[68px] hover:text-2xl text-neural-800"
             }`}
           >
             {item.icon}
@@ -111,8 +111,8 @@ const SideBar = ({ id }: { id: string }) => {
                 onClick={closeSidebar}
                 className={`flex items-center gap-2 my-3 rounded-md text-lg font-medium transition-colors ${
                   pathname === item.href
-                    ? "bg-secondary-800 text-white my-3 ps-2 h-[68px]"
-                    : "transition-all duration-600 hover:text-white hover:bg-secondary-800 ps-4 hover:ps-2 h-[56px] hover:h-[68px] hover:text-2xl text-neural-800"
+                    ? "bg-secondary-900 text-white my-3 ps-2 h-[68px]"
+                    : "transition-all duration-600 hover:text-white hover:bg-secondary-900 ps-4 hover:ps-2 h-[56px] hover:h-[68px] hover:text-2xl text-neural-800"
                 }`}
               >
                 {item.icon}

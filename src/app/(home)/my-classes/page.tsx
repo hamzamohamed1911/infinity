@@ -62,19 +62,9 @@ async function MyClassesContent() {
 
                   {/* المحتوى */}
                   <div className="p-4 flex flex-col gap-3 flex-1">
-                    <h3 className="md:text-xl text-lg font-bold">
+                    <h3 className="md:text-lg text-md text-neural-800 font-bold">
                       {course.name}
                     </h3>
-
-                    {course?.description && (
-                      <p className="text-sm text-neural-800">
-                        <strong>
-                          {course.description.length > 60
-                            ? course.description.slice(0, 60) + "..."
-                            : course.description}
-                        </strong>
-                      </p>
-                    )}
 
                     <div className="mt-auto">
                       <StartCourseButton courseId={course.id} />
