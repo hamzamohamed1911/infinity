@@ -78,14 +78,24 @@ export interface Academy {
   mobile_config: MobileConfig;
   web_config: WebConfig;
 }
-declare type Product = {
+export type Product = {
   id: number;
   name: string;
-  description: string | null;
-  content: string | null;
-  price: string | null | number;
-  image: string | null;
+  description?: string | null;
+  content?: string | null;
+  price?: string | number | null;
+  discount?: string | number | null;
+  image?: string | null;
+  thumbnail?: string | null;
+  type?: string;
 };
+export type ProductsResponse = {
+  lessons: Product[];
+  exams: Product[];
+  bundles: Product[];
+  books: Product[];
+};
+
 declare type LandingPageData = {
   id: number;
   name: string;
@@ -97,9 +107,19 @@ declare type LandingPageData = {
   code: string;
   image: string;
   academy: Academy;
+  classes: classes[];
   courses: CourseDetails[];
-  products: Product[];
+  products: ProductsResponse;
 };
+export interface classes {
+  id: number;
+  name: string;
+  description: string | null;
+  content: string | null;
+  price: string | null | number;
+  image: string | null;
+  thumbnail: string | null;
+}
 export interface LandingPageResponse {
   data: LandingPageData;
   success: boolean;

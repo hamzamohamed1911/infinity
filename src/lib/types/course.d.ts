@@ -101,6 +101,7 @@ declare type CourseType = {
   thumbnail?: string;
   exams?: exam[];
   lessons?: Lesson[];
+  is_purchased_before: boolean;
 };
 declare type Lesson = {
   id: number;
@@ -148,6 +149,7 @@ declare type BundleDetails = {
   name: string;
   booking_status: number;
   price: string;
+  is_purchased_before?: boolean;
   lessons: Lesson[];
   books: Book[];
   description: string | null;

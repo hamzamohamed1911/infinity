@@ -195,14 +195,14 @@ export default function ExamComponent({
       <div className="lg:px-6 md:px-4 px-2">
         <Card className="mb-6">
           <CardContent className="lg:p-8 p-4 flex flex-col md:gap-6 gap-4">
-            <div className="text-center mb-6">
-              <div
+            <div className="text-center mb-6 w-full flex items-center justify-end">
+              <Button
                 onClick={() => setOpenDialog(true)}
-                className="flex items-center justify-end gap-2 text-red-600 text-sm underline cursor-pointer"
+                className=" gap-2 text-white bg-primary-600 hover:bg-primary-500 transition-colors h-12 md:w-auto "
               >
                 <span>إنهاء الامتحان</span>
                 <X className="w-4 h-4" />
-              </div>
+              </Button>
             </div>
             <div className="w-full flex justify-center items-center">
               <span className="w-fit flex items-center gap-2 text-[#DF6100] border border-[#DF6100] rounded-md px-6 h-12 font-medium text-lg shadow-sm">

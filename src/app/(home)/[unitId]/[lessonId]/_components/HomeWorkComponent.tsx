@@ -147,14 +147,14 @@ export default function HomeWorkComponent({
         <Card className="mb-6">
           <CardContent className="lg:p-8 p-4 flex flex-col md:gap-6 gap-4">
             {/* End Exam Button */}
-            <div className="text-center mb-6">
-              <div
+            <div className="text-center mb-6 w-full flex items-center justify-end">
+              <Button
                 onClick={() => setOpenDialog(true)}
-                className="flex items-center justify-end gap-2 text-red-600 text-sm underline cursor-pointer"
+                className=" gap-2 text-white bg-primary-600 hover:bg-primary-500 transition-colors h-12 md:w-auto "
               >
                 <span>إنهاء الواجب</span>
                 <X className="w-4 h-4" />
-              </div>
+              </Button>
             </div>
 
             <div className="flex items-center gap-2 overflow-x-auto justify-between pb-2 pt-6">

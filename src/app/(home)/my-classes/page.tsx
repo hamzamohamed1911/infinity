@@ -6,9 +6,9 @@ import CardSkeleton from "@/components/CardSkeleton";
 import { GetClassesData, GetProfileData } from "@/lib/apis/profile.api";
 import { fetchTeachers } from "../../api/register";
 import StartCourseButton from "@/components/StartCourseButton";
-import AuthNavBar from "@/app/(auth)/_authComponent/AuthNavBar";
 import NoDataMessage from "@/components/NoDataMessage";
 import Subscription from "./_components/subscription";
+import ClassesNavBar from "./_components/ClassesNavBar";
 
 async function MyClassesContent() {
   const Profile = await GetProfileData();
@@ -83,7 +83,7 @@ async function MyClassesContent() {
 export default function page() {
   return (
     <Suspense fallback={<CardSkeleton />}>
-      <AuthNavBar />
+      <ClassesNavBar />
       <MyClassesContent />
     </Suspense>
   );

@@ -7,6 +7,7 @@ import NoDataMessage from "@/components/NoDataMessage";
 async function UnitsContent({ classId }: { classId: string }) {
   const live = await GetLive({ class_id: classId });
   const liveData: LiveItem[] = Array.isArray(live?.data) ? live.data : [];
+  console.log("liveData", liveData);
   return (
     <section>
       <div className="mt-6">

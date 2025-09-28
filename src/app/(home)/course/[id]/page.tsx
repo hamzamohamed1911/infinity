@@ -17,6 +17,7 @@ import PaymentDialog from "../../[unitId]/payments/_components/PaymentDialog";
 async function CourseContent({ id }: { id: string }) {
   const bundle = await GetBundle({ bundle_id: id });
   const UnitData = bundle && "data" in bundle ? bundle.data : undefined;
+  console.log("UnitData", UnitData);
 
   return (
     <section className="flex flex-col gap-4 w-full p-4">
@@ -63,13 +64,13 @@ async function CourseContent({ id }: { id: string }) {
               <DialogTrigger asChild>
                 <div className="w-full h-full flex justify-end items-end">
                   <Button
-                    className="bg-primary text-white px-6 py-4 rounded-full hover:bg-primary-400    transition-all duration-300"
+                    className="bg-primary-600  hover:bg-primary-500 text-white px-6 py-4 rounded-full     transition-all duration-300 cursor-pointer"
                     asChild
                   >
-                    <a href="#purchase" className="flex items-center gap-2">
+                    <span className="flex items-center gap-2">
                       اشترى الان
                       <ExternalLink className="w-4 h-4" />
-                    </a>
+                    </span>
                   </Button>
                 </div>
               </DialogTrigger>
@@ -95,16 +96,26 @@ async function CourseContent({ id }: { id: string }) {
       {UnitData?.lessons && UnitData.lessons.length > 0 ? (
         <Card className="w-full p-4">
           <div className="space-y-3">
-            {UnitData.lessons.map((lesson) => (
-              <Link
-                key={lesson.id}
-                href={`/${lesson.section_id || "undefined"}/${lesson.id}`}
-                className="group w-full flex justify-between items-center py-5 px-4 rounded-lg border cursor-pointer transition-all hover:border-primary hover:text-primary"
-              >
-                <span className="text-lg font-medium">{lesson.name}</span>
-                <ChevronRight className="text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
-              </Link>
-            ))}
+            {UnitData.lessons.map((lesson) =>
+              UnitData.is_purchased_before || Number(UnitData.price) === 0 ? (
+                <Link
+                  key={lesson.id}
+                  href={`/${lesson.section_id || "undefined"}/${lesson.id}`}
+                  className="group w-full flex justify-between items-center py-5 px-4 rounded-lg border cursor-pointer transition-all hover:border-primary hover:text-primary"
+                >
+                  <span className="text-lg font-medium">{lesson.name}</span>
+                  <ChevronRight className="text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
+                </Link>
+              ) : (
+                <div
+                  key={lesson.id}
+                  className="group w-full flex justify-between items-center py-5 px-4 rounded-lg border cursor-not-allowed"
+                >
+                  <span className="text-lg font-medium">{lesson.name}</span>
+                  <ChevronRight className="text-muted-foreground" />
+                </div>
+              )
+            )}
           </div>
         </Card>
       ) : (

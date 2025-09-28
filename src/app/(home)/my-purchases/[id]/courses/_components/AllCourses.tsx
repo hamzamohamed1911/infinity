@@ -7,6 +7,7 @@ import { MdEditNote, MdOndemandVideo } from "react-icons/md";
 import { LuBook } from "react-icons/lu";
 
 const AllCourses = ({ CoursesData }: { CoursesData: CourseType[] }) => {
+  console.log("CoursesData", CoursesData);
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {CoursesData.map((course: CourseType) => (
@@ -45,23 +46,27 @@ const AllCourses = ({ CoursesData }: { CoursesData: CourseType[] }) => {
               </div>
             </div>
             <div className="flex justify-end items-end">
-              {course?.price && course.price > 0 && (
-                <div className=" text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
-                  {course?.discount && course.discount > 0 ? (
-                    <>
-                      <span className="line-through text-red-500">
-                        {course.price} ج.م
-                      </span>{" "}
-                      <span className="text-green-600">
-                        {(course.price ?? 0) - (course.discount ?? 0)} ج.م
-                      </span>
-                    </>
-                  ) : (
-                    <span>{course.price} ج.م</span>
-                  )}
-                </div>
-              )}
+              {/* لو الكورس مدفوع ولسه ما اتشراش */}
+              {course?.price &&
+                course.price > 0 &&
+                !course?.is_purchased_before && (
+                  <div className=" text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
+                    {course?.discount && course.discount > 0 ? (
+                      <>
+                        <span className="line-through text-red-500">
+                          {course.price} ج.م
+                        </span>{" "}
+                        <span className="text-green-600">
+                          {(course.price ?? 0) - (course.discount ?? 0)} ج.م
+                        </span>
+                      </>
+                    ) : (
+                      <span>{course.price} ج.م</span>
+                    )}
+                  </div>
+                )}
             </div>
+
             {course.price === 0 ? (
               <Link
                 href={`/course/${course.id}`}

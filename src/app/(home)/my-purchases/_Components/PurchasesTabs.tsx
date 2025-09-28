@@ -43,6 +43,7 @@ export default function PurchasesTabs() {
     lesson: "درس",
     exam: "امتحان",
     course: "دورة",
+    bundle: "كورس",
   };
   console.log(allpurchase);
   if (isLoading) {
@@ -108,15 +109,15 @@ export default function PurchasesTabs() {
                     className="overflow-hidden  rounded-xl border border-gray-200 "
                   >
                     <Image
-                      src={product.image || product.thumbnail || placeholder}
-                      alt={product.name}
+                      src={product?.image || product?.thumbnail || placeholder}
+                      alt={product?.name || product?.product_name}
                       width={600}
                       height={600}
                       className="w-full h-60 object-cover"
                     />
                     <CardContent className="p-4 space-y-3 text-start">
                       <h3 className="text-lg font-bold text-gray-800">
-                        {product.name}
+                        {product?.name || product?.product_name}
                       </h3>
                       <div className=" w-full flex justify-end items-end ">
                         <Badge className="font-medium text-sm text-white rounded-full px-2 py-1">
@@ -132,7 +133,7 @@ export default function PurchasesTabs() {
                         </span>
                       </p>
                       <Link
-                        href={`/${product.section_id}/${product.id}`}
+                        href={`/${product?.section_id}/${product.id}`}
                         className="group flex items-center justify-center gap-2 w-full h-12 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
                       >
                         اتفرج دلوقتي

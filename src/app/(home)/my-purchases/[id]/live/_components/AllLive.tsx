@@ -25,12 +25,15 @@ const AllLive = ({ liveData }: { liveData: LiveItem[] }) => {
               height={600}
               className="w-full h-60 object-cover"
             />
-            <Link
-              href={`/${live.section_id}/live/${live.id}`}
-              className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
-              <FaPlay className="text-white text-4xl" />
-            </Link>
+
+            {(live.is_purchased_before || live.price === 0) && (
+              <Link
+                href={`/${live.section_id}/live/${live.id}`}
+                className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+                <FaPlay className="text-white text-4xl" />
+              </Link>
+            )}
           </div>
 
           <CardContent className="p-4 space-y-3 text-start">

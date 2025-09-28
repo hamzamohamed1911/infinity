@@ -15,6 +15,7 @@ async function BookContent({ id }: { id: string }) {
   }
 
   const { item } = BookData;
+  console.log("item", item);
 
   return (
     <section className="min-h-screen ">

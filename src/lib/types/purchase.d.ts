@@ -23,6 +23,7 @@ declare type Teacher = {
 declare type Product = {
   id: number;
   name: string;
+  product_name: string;
   description: string | null;
   content: string | null;
   price: number;

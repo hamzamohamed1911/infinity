@@ -53,7 +53,7 @@ export async function GetExamStatistics({
 }
 export async function GetStudentPurchase({
   page = 1,
-  per_page = 12,
+  per_page = 6,
 }: {
   page?: number;
   per_page?: number;

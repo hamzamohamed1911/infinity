@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // app/page.tsx
 import Footer from "@/components/Footer";
-import Courses from "@/components/landingPage/Courses";
+import Classes from "@/components/landingPage/Classes";
 import LastCourses from "@/components/landingPage/LastCourses";
 import ScrollToTopButton from "@/components/landingPage/ScrollToTopButton";
 import DownloadAppSection from "@/components/landingPage/DownloadAppSection";
@@ -50,7 +51,7 @@ export default async function Home() {
       <AboutSection data={landingData.data.academy} />
 
       {/* Courses Section */}
-      <Courses />
+      <Classes data={landingData.data.classes} />
 
       {/* Promo Video Section */}
       <PromoVideo data={landingData.data.academy} />
@@ -59,10 +60,10 @@ export default async function Home() {
       <LastCourses data={landingData.data.courses} />
 
       {/* Store Section */}
-      <Store data={landingData.data.products} />
+      <Store products={landingData.data.products} />
 
       {/* Download App Section */}
-      <DownloadAppSection />
+      {/* <DownloadAppSection /> */}
 
       {/* Scroll to Top Button */}
       <ScrollToTopButton />

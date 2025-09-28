@@ -1,5 +1,6 @@
 "use server";
 
+import { BooksApiResponse } from "../types/books";
 import { getAuthToken } from "../utils/auth-token";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;

@@ -60,7 +60,9 @@ const LastCourses = ({ data }: { data: CourseDetails[] }) => {
               {/* Overlay */}
               <div className="absolute justify-evenly inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col  items-center text-center text-white">
                 <h3 className="text-lg font-bold mb-2">{course.name}</h3>
-                <p className="text-sm mb-4">{course.description}</p>
+                <p className="text-sm mb-4 line-clamp-4">
+                  {course.description}
+                </p>
                 <Button className="w-full  bg-primary-600  hover:bg-primary-500  text-white hover:shadow-lg lg:h-14 h-12  shadow-md   lg:text-xl  rounded-md    transition-colors text-lg  font-semibold disabled:opacity-50  ">
                   عرض الكورس
                 </Button>

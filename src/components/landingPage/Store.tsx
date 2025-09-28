@@ -5,26 +5,47 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { ShoppingBag } from "lucide-react";
 import { Badge } from "../ui/badge";
-import { Product } from "@/lib/types/landing";
+import { ProductsResponse } from "@/lib/types/landing";
 
-const Store = ({ data }: { data: Product[] }) => {
+const Store = ({ products }: { products: ProductsResponse }) => {
+  // ناخد 3 من كل نوع
+  const lessons = (products?.lessons || []).slice(0, 3).map((item) => ({
+    ...item,
+    type: "درس",
+  }));
+  const exams = (products?.exams || []).slice(0, 3).map((item) => ({
+    ...item,
+    type: "امتحان",
+  }));
+  const bundles = (products?.bundles || []).slice(0, 3).map((item) => ({
+    ...item,
+    type: "كورس",
+  }));
+  const books = (products?.books || []).slice(0, 3).map((item) => ({
+    ...item,
+    type: "كتاب",
+  }));
+
+  // دمجهم فى مصفوفة واحدة
+  const allItems = [...lessons, ...exams, ...bundles, ...books];
+
   return (
-    <section id="courses" className="py-16 px-6 md:px-12 ">
+    <section id="courses" className="py-16 px-6 md:px-12">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-primary">
         المتجر
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {data.map((course) => (
+        {allItems.map((item) => (
           <Card
-            key={course.id}
+            key={`${item.type}-${item.id}`}
             className="overflow-hidden text-right bg-white rounded-2xl group relative cursor-pointer"
           >
             {/* الصورة */}
             <div className="w-full h-96 relative">
               <Image
-                src={course.image || course.image || placeholder}
-                alt={course.name}
+                src={item.thumbnail || item.image || placeholder}
+                alt={item.name}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
@@ -32,29 +53,67 @@ const Store = ({ data }: { data: Product[] }) => {
 
             {/* المحتوى يظهر عند الـ hover */}
             <div
-              className="absolute bottom-0 left-0 w-full h-3/4 bg-black/70 
-    translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 
-    transition-all duration-500 ease-in-out p-4 text-white flex flex-col justify-between"
+              className="absolute bottom-0 left-0 w-full h-full bg-black/70 
+              translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 
+              transition-all duration-500 ease-in-out p-4 text-white flex flex-col justify-between"
             >
-              <div className="text-center space-y-2">
-                <h3 className="text-lg font-bold mb-1">{course.name}</h3>
-                <p className="text-sm mb-2 line-clamp-3">
-                  {course.description}
-                </p>
-                {course?.price !== null &&
-                  typeof course.price === "number" &&
-                  course.price > 0 && (
-                    <Badge className="bg-primary text-white text-sm px-3 py-1 rounded-md shadow-md">
-                      {course.price} ج.م
-                    </Badge>
-                  )}
+              <div className="text-center flex flex-col justify-center items-center h-full gap-3">
+                <h3 className="text-lg font-bold mb-1">{item.name}</h3>
+                {item.description && (
+                  <p className="text-sm mb-2 line-clamp-3">
+                    {item.description}
+                  </p>
+                )}
+                {(() => {
+                  const price = Number(item?.price) || 0; // يحول price لرقم
+                  const discount = Number(item?.discount) || 0; // يحول discount لرقم
+
+                  // لو مفيش سعر أصلاً أو السعر <= 0 مش هيعرض أي حاجة خالص
+                  if (price <= 0)
+                    return (
+                      <Badge className="absolute  top-3 left-3 bg-secondary-700 text-white text-sm px-3 py-1 rounded-full shadow-md">
+                        {item.type}
+                      </Badge>
+                    );
+
+                  // لو فيه خصم
+                  if (discount > 0) {
+                    return (
+                      <div className="flex gap-2 absolute top-3 left-3">
+                        <div className=" text-sm font-medium px-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
+                          <Badge className="bg-primary text-white text-sm px-3 py-1 rounded-full shadow-md ">
+                            <span className="line-through">{price} ج.م</span>
+                            <span className="text-secondary ms-2">
+                              {price - discount} ج.م
+                            </span>
+                          </Badge>
+                        </div>
+                        <Badge className=" bg-secondary-700 text-white text-sm px-3 py-1 rounded-full shadow-md">
+                          {item.type}
+                        </Badge>
+                      </div>
+                    );
+                  }
+
+                  // لو مفيش خصم بس فيه سعر
+                  return (
+                    <div className="absolute flex gap-2 top-3 left-3">
+                      <Badge className=" text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white  px-3 py-1 rounded-full shadow-md">
+                        <span>{price} ج.م</span>
+                      </Badge>
+                      <Badge className=" bg-secondary-700 text-white text-sm px-3 py-1 rounded-full shadow-md">
+                        {item.type}
+                      </Badge>
+                    </div>
+                  );
+                })()}
               </div>
 
               <div className="flex gap-2 justify-center items-center w-full group/card">
-                <Button className="text-white w-full md:h-12 h-10 shadow-md text-xl transition-all duration-300 group-hover/card:bg-primary-400 group-hover/card:shadow-lg">
+                <Button className="bg-primary-600  text-white w-full md:h-12 h-10 shadow-md text-xl transition-all duration-300 group-hover/card:bg-primary-500 group-hover/card:shadow-lg">
                   اشترك الآن
                 </Button>
-                <Button className="bg-primary w-12 h-12 text-white shadow-md transition-all duration-300 group-hover/card:bg-primary-400 group-hover/card:shadow-lg flex items-center justify-center">
+                <Button className="bg-primary-600   w-12 h-12 text-white shadow-md transition-all duration-300 group-hover/card:bg-primary-500 group-hover/card:shadow-lg flex items-center justify-center">
                   <ShoppingBag size={28} className="md:size-10 size-8" />
                 </Button>
               </div>
