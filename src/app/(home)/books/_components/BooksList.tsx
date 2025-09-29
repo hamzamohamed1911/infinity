@@ -6,6 +6,7 @@ import Link from "next/link";
 import { GetBooks } from "@/lib/apis/books.api";
 import { placeholder } from "../../../../../public";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Book, BooksApiResponse } from "@/lib/types/books";
 
 export default function BooksList() {
   const {
