@@ -95,6 +95,18 @@ export type ProductsResponse = {
   bundles: Product[];
   books: Product[];
 };
+export interface TopStudent {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  grade: string;
+  teacher_id: number;
+  active: 0 | 1;
+  order: number;
+  created_at: string;
+  updated_at: string;
+}
 
 declare type LandingPageData = {
   id: number;
@@ -106,6 +118,7 @@ declare type LandingPageData = {
   sub_subject_id: string | null;
   code: string;
   image: string;
+  top_student: TopStudent[];
   academy: Academy;
   classes: classes[];
   courses: CourseDetails[];

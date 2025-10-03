@@ -8,31 +8,17 @@ import { Badge } from "../ui/badge";
 import { ProductsResponse } from "@/lib/types/landing";
 
 const Store = ({ products }: { products: ProductsResponse }) => {
-  // ناخد 3 من كل نوع
-  const lessons = (products?.lessons || []).slice(0, 3).map((item) => ({
-    ...item,
-    type: "درس",
-  }));
-  const exams = (products?.exams || []).slice(0, 3).map((item) => ({
-    ...item,
-    type: "امتحان",
-  }));
-  const bundles = (products?.bundles || []).slice(0, 3).map((item) => ({
-    ...item,
-    type: "كورس",
-  }));
-  const books = (products?.books || []).slice(0, 3).map((item) => ({
+  const books = (products?.books || []).slice(0, 12).map((item) => ({
     ...item,
     type: "كتاب",
   }));
 
-  // دمجهم فى مصفوفة واحدة
-  const allItems = [...lessons, ...exams, ...bundles, ...books];
+  const allItems = [...books];
 
   return (
-    <section id="courses" className="py-16 px-6 md:px-12">
+    <section id="store" className="py-16 ">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-primary">
-        المتجر
+        متجر الكتب
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

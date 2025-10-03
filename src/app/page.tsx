@@ -11,6 +11,7 @@ import NavBarLanding from "@/components/landingPage/NavBarLanding";
 import HeroSection from "@/components/landingPage/HeroSection";
 import AboutSection from "@/components/landingPage/AboutSection";
 import { getLandingPage } from "@/lib/apis/webconfig.api";
+import TopStudents from "@/components/landingPage/TopStudents";
 
 export async function generateMetadata() {
   try {
@@ -38,11 +39,10 @@ export default async function Home() {
 
   return (
     <div
-      className="min-h-screen bg-backgroundColor text-primary font-sans overflow-hidden"
+      className="min-h-screen relative bg-backgroundColor text-primary font-sans overflow-hidden container max-w-[90%] mx-auto"
       dir="rtl"
     >
-      {/* Header */}
-      <NavBarLanding />
+      <NavBarLanding data={landingData.data.academy} />
 
       {/* Hero Section */}
       <HeroSection hero={landingData.data.academy} />
@@ -51,8 +51,9 @@ export default async function Home() {
       <AboutSection data={landingData.data.academy} />
 
       {/* Courses Section */}
-      <Classes data={landingData.data.classes} />
-
+      <Classes data={landingData.data.courses} />
+      {/* Top Students */}
+      <TopStudents data={landingData.data.top_student} />
       {/* Promo Video Section */}
       <PromoVideo data={landingData.data.academy} />
 
@@ -63,7 +64,7 @@ export default async function Home() {
       <Store products={landingData.data.products} />
 
       {/* Download App Section */}
-      {/* <DownloadAppSection /> */}
+      <DownloadAppSection />
 
       {/* Scroll to Top Button */}
       <ScrollToTopButton />

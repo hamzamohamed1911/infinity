@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const AboutSection = ({ data }: { data: Academy }) => {
   console.log(data);
   return (
-    <section id="about" className="py-16 px-6 md:px-12 text-center ">
+    <section id="about" className="py-16  text-center ">
       <motion.h2
         className="text-3xl md:text-4xl font-bold mb-8"
         initial={{ opacity: 0 }}

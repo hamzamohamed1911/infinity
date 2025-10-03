@@ -3,13 +3,12 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { placeholder } from "../../../public";
 import { Button } from "../ui/button";
-import { classes } from "@/lib/types/landing";
 
-const Classes = ({ data }: { data: classes[] }) => {
+const Classes = ({ data }: { data: CourseDetails[] }) => {
   return (
-    <section id="courses" className="py-16 px-6 md:px-12 ">
+    <section id="courses" className="py-16  ">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-primary">
-        الصفوف الدراسية
+        الدورات التدريبية
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -31,7 +30,7 @@ const Classes = ({ data }: { data: classes[] }) => {
             {/* المحتوى يظهر عند الـ hover */}
             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-center items-center text-center text-white">
               <h3 className="text-lg font-bold mb-2">{cls.name}</h3>
-              <p className="text-sm mb-4">{cls.description}</p>
+              <p className="text-sm mb-4 line-clamp-6">{cls.description}</p>
               <Button className="text-white w-full hover:bg-primary-400 md:h-12 h-10 shadow-md  hover:shadow-lg text-xl">
                 عرض الدورة
               </Button>

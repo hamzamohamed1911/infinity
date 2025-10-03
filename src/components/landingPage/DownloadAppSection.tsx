@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const DownloadAppSection = () => {
   return (
-    <section id="app" className="py-16 px-6 md:px-12 ">
+    <section id="app" className="py-16  ">
       <motion.h2
         className="text-3xl md:text-4xl font-bold text-center mb-8"
         initial={{ opacity: 0 }}
@@ -18,7 +18,7 @@ const DownloadAppSection = () => {
       <div className="flex flex-col md:flex-row-reverse justify-center md:gap-6 gap-2 items-center">
         <Link
           href="https://play.google.com"
-          className="bg-black px-6 py-3 hover:bg-black/40 transition-colors duration-700 text-white rounded-md w-72 flex justify-center items-center gap-4"
+          className="bg-black px-6 py-3 hover:bg-black/90 transition-colors duration-700 text-white rounded-md w-72 flex justify-center items-center gap-4"
         >
           <FaGooglePlay size={40} />
           <div className="flex flex-col gap-1 text-end">
@@ -29,7 +29,7 @@ const DownloadAppSection = () => {
 
         <Link
           href="https://www.apple.com/app-store/"
-          className="bg-black px-6 py-3 hover:bg-black/40 transition-colors duration-700 text-white rounded-md w-72 flex justify-center items-center gap-4"
+          className="bg-black px-6 py-3 hover:bg-black/90 transition-colors duration-700 text-white rounded-md w-72 flex justify-center items-center gap-4"
         >
           <FaApple size={40} />
           <div className="flex flex-col gap-1 text-end">
