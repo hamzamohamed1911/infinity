@@ -30,37 +30,46 @@ export async function generateMetadata() {
     };
   }
 }
-
 export default async function Home() {
   const landingData = await getLandingPage();
   if (!landingData) {
     return <p className="text-center text-primary mt-20">فشل تحميل البيانات</p>;
   }
+  console.log();
 
   return (
     <div
       className="min-h-screen relative bg-backgroundColor text-primary font-sans overflow-hidden container max-w-[90%] mx-auto"
       dir="rtl"
     >
-      <NavBarLanding data={landingData.data.academy} />
-
+      {/*  header */}
+      {landingData.data.academy.web_config.header.active === "on" && (
+        <NavBarLanding data={landingData.data.academy} />
+      )}
       {/* Hero Section */}
-      <HeroSection hero={landingData.data.academy} />
 
+      {landingData.data.academy.web_config.hero.active === "on" && (
+        <HeroSection hero={landingData.data.academy} />
+      )}
       {/* About Section */}
-      <AboutSection data={landingData.data.academy} />
+
+      {landingData.data.academy.web_config.about.active === "on" && (
+        <AboutSection data={landingData.data.academy} />
+      )}
+      {/* Promo Video Section */}
+      {landingData.data.academy.web_config.video.active === "on" && (
+        <PromoVideo data={landingData.data.academy} />
+      )}
 
       {/* Courses Section */}
       <Classes data={landingData.data.courses} />
       {/* Top Students */}
       <TopStudents data={landingData.data.top_student} />
-      {/* Promo Video Section */}
-      <PromoVideo data={landingData.data.academy} />
 
       {/* Last Courses Section */}
       <LastCourses data={landingData.data.courses} />
 
-      {/* Store Section */}
+      {/* books Store Section */}
       <Store products={landingData.data.products} />
 
       {/* Download App Section */}
@@ -70,7 +79,9 @@ export default async function Home() {
       <ScrollToTopButton />
 
       {/* Footer */}
-      <Footer data={landingData.data.academy} />
+      {landingData.data.academy.web_config.footer.active === "on" && (
+        <Footer data={landingData.data.academy} />
+      )}
     </div>
   );
 }

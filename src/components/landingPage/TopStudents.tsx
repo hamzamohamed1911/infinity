@@ -9,7 +9,7 @@ import { placeholder } from "../../../public";
 const TopStudents = ({ data }: { data: TopStudent[] }) => {
   return (
     <section className="py-16">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-primary mb-12">
+      <h2 className="text-3xl md:text-4xl font-bold  text-center text-primary mb-12">
         الطلاب الأوائل
       </h2>
 
@@ -41,14 +41,9 @@ const TopStudents = ({ data }: { data: TopStudent[] }) => {
                 <h3 className="text-xl font-bold text-primary-800">
                   {student.name}
                 </h3>
-                <p className="text-sm text-secondary-700 leading-relaxed line-clamp-3">
+                <p className="text-sm text-secondary leading-relaxed line-clamp-3">
                   {student.description}
                 </p>
-                <div className="mt-4">
-                  <span className="px-4 py-1 text-sm bg-primary-100 text-primary-700 rounded-full font-medium">
-                    متفوق دائمًا
-                  </span>
-                </div>
               </CardContent>
             </Card>
           </motion.div>

@@ -18,7 +18,7 @@ const PromoVideo = ({ data }: { data: Academy }) => {
           <h2 className=" md:text-4xl text-3xl font-bold text-primary !leading-relaxed ">
             {data?.web_config?.video.title}
           </h2>
-          <p className="text-secondary lg:text-xl md:text-lg text-md leading-relaxed">
+          <p className="text-lg md:text-xl text-secondary mb-6 !leading-8">
             {data?.web_config?.video.desc}
           </p>
           <div className="w-full flex md:justify-start justify-center">

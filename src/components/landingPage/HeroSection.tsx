@@ -41,10 +41,10 @@ const HeroSection = ({ hero }: { hero: Academy }) => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
       >
-        <h1 className="text-4xl md:text-6xl text-primary font-bold mb-4">
+        <h1 className="text-3xl md:text-4xl text-primary font-bold mb-4">
           {hero.web_config?.hero?.title}
         </h1>
-        <p className="text-xl md:text-2xl text-secondary mb-6 !leading-10">
+        <p className="text-lg md:text-xl text-secondary mb-6 !leading-8">
           {hero.web_config?.hero?.desc}
         </p>
         <div className="w-full flex md:justify-start justify-center">
@@ -72,10 +72,10 @@ const HeroSection = ({ hero }: { hero: Academy }) => {
             </span>
           </Link>
         </div>
-        <div className="w-full flex justify-start gap-12">
+        <div className="w-full flex md:justify-start justify-center lg:gap-12 md:gap-8 gap-6">
           {/* Courses Count */}
           <div className="flex flex-col ">
-            <span className="text-primary text-5xl font-bold">
+            <span className="text-primary lg:text-5xl md:text-4xl text-3xl font-bold">
               <Counter to={Number(hero.web_config?.hero?.courses_count) || 0} />
               +
             </span>
@@ -84,7 +84,7 @@ const HeroSection = ({ hero }: { hero: Academy }) => {
 
           {/* Students Count */}
           <div className="flex flex-col ">
-            <span className="text-primary text-5xl font-bold">
+            <span className="text-primary lg:text-5xl md:text-4xl text-3xl font-bold">
               <Counter
                 to={Number(hero.web_config?.hero?.students_count) || 0}
               />

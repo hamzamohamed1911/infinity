@@ -8,7 +8,7 @@ const AboutSection = ({ data }: { data: Academy }) => {
   return (
     <section id="about" className="py-16  text-center ">
       <motion.h2
-        className="text-3xl md:text-4xl font-bold mb-8"
+        className="text-3xl md:text-4xl font-bold mb-8 !leading-relaxed"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -17,7 +17,7 @@ const AboutSection = ({ data }: { data: Academy }) => {
         {data?.web_config?.about?.title}
       </motion.h2>
       <motion.p
-        className="text-lg text-secondary max-w-2xl mx-auto"
+        className="text-lg text-secondary max-w-2xl mx-auto !leading-8"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}

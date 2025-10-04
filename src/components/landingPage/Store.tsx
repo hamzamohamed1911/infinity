@@ -8,7 +8,7 @@ import { Badge } from "../ui/badge";
 import { ProductsResponse } from "@/lib/types/landing";
 
 const Store = ({ products }: { products: ProductsResponse }) => {
-  const books = (products?.books || []).slice(0, 12).map((item) => ({
+  const books = (products?.books || []).slice(0, 8).map((item) => ({
     ...item,
     type: "كتاب",
   }));
@@ -96,9 +96,12 @@ const Store = ({ products }: { products: ProductsResponse }) => {
               </div>
 
               <div className="flex gap-2 justify-center items-center w-full group/card">
-                <Button className="bg-primary-600  text-white w-full md:h-12 h-10 shadow-md text-xl transition-all duration-300 group-hover/card:bg-primary-500 group-hover/card:shadow-lg">
+                <Link
+                  href="/my-classes"
+                  className="bg-primary-600 flex justify-center items-center rounded-md text-center text-white w-full md:h-12 h-10 shadow-md text-xl transition-all duration-300 group-hover/card:bg-primary-500 group-hover/card:shadow-lg"
+                >
                   اشترك الآن
-                </Button>
+                </Link>
                 <Button className="bg-primary-600   w-12 h-12 text-white shadow-md transition-all duration-300 group-hover/card:bg-primary-500 group-hover/card:shadow-lg flex items-center justify-center">
                   <ShoppingBag size={28} className="md:size-10 size-8" />
                 </Button>
