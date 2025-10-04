@@ -34,11 +34,16 @@ const TopStudents = ({ data }: { data: TopStudent[] }) => {
             delay: 2500,
             disableOnInteraction: false,
           }}
+          onSlideChange={(swiper) => {
+            setTimeout(() => {
+              swiper.navigation.update();
+            });
+          }}
           breakpoints={{
             640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 }, // lg
-            1280: { slidesPerView: 4 }, // xl
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
           }}
         >
           {data.map((student, idx) => (
@@ -49,7 +54,10 @@ const TopStudents = ({ data }: { data: TopStudent[] }) => {
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
                 viewport={{ once: true }}
               >
-                <Card className="rounded-2xl overflow-hidden border border-primary/10 shadow-md bg-white">
+                <Card
+                  dir="rtl"
+                  className="rounded-2xl overflow-hidden border h-[430px] border-primary/10 shadow-md bg-white"
+                >
                   <div className="relative w-full h-72">
                     <Image
                       src={

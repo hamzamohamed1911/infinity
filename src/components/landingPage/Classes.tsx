@@ -21,6 +21,7 @@ const Classes = ({ data }: { data: CourseDetails[] }) => {
           modules={[Autoplay, Navigation]}
           spaceBetween={20}
           loop={true}
+          watchOverflow={false}
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
@@ -29,16 +30,21 @@ const Classes = ({ data }: { data: CourseDetails[] }) => {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
           }}
+          onSwiper={(swiper) => {
+            setTimeout(() => {
+              swiper.navigation.init();
+              swiper.navigation.update();
+            });
+          }}
+          onSlideChange={(swiper) => {
+            setTimeout(() => {
+              swiper.navigation.update();
+            });
+          }}
           breakpoints={{
-            0: {
-              slidesPerView: 1,
-            },
-            768: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 3,
-            },
+            0: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
           }}
           className="relative"
         >
