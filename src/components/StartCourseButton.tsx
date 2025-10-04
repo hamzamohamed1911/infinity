@@ -24,7 +24,7 @@ export default function StartCourseButton({ courseId }: { courseId: string }) {
       onClick={handleStart}
       className="w-full flex justify-center items-center border border-primary bg-white text-primary hover:bg-primary hover:text-white py-5 text-lg rounded-lg transition-all duration-500"
     >
-      البدأ
+      ابدأ الان
     </Button>
   );
 }

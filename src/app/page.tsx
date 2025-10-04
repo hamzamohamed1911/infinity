@@ -46,16 +46,17 @@ export default async function Home() {
       {landingData.data.academy.web_config.header.active === "on" && (
         <NavBarLanding data={landingData.data.academy} />
       )}
-      {/* Hero Section */}
 
+      {/* Hero Section */}
       {landingData.data.academy.web_config.hero.active === "on" && (
         <HeroSection hero={landingData.data.academy} />
       )}
-      {/* About Section */}
 
+      {/* About Section */}
       {landingData.data.academy.web_config.about.active === "on" && (
         <AboutSection data={landingData.data.academy} />
       )}
+
       {/* Courses Section */}
       <Classes data={landingData.data.courses} />
 

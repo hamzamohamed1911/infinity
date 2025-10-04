@@ -42,7 +42,7 @@ const SearchBox = () => {
                   setOpen(true); // يفتح أول ما يكتب
                 }}
                 onFocus={() => setOpen(true)}
-                className="pe-10 bg-white rounded-3xl shadow-sm"
+                className="pe-10 bg-white rounded-3xl shadow-sm h-10"
                 placeholder="ابحث هنا..."
               />
             </PopoverTrigger>

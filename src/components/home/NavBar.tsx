@@ -49,8 +49,8 @@ const Navbar = ({
   return (
     <>
       <nav className="bg-primary-700  shadow-md top-0 z-50">
-        <div className="xl:max-w-[90%] container max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-20 gap-6">
+        <div className="xl:max-w-[90%] container max-w-full mx-auto md:px-4 px-2 lg:px-6 xl:px-8">
+          <div className="flex justify-between h-20 lg:gap-6 md:gap-4 gap-2">
             {showMenuButton && (
               <button
                 className="md:hidden flex items-center text-white text-2xl"

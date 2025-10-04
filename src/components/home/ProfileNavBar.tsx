@@ -54,25 +54,28 @@ const ProfileNavBar = () => {
   return (
     <>
       {isLoading ? (
-        <div className="md:flex hidden  h-20 gap-2 items-center">
+        <div className="flex   h-20 gap-2 items-center">
           <Skeleton className="size-10 bg-gray-300 rounded-full animate-pulse" />
         </div>
       ) : (
-        <div className="ml-4 sm:ml-6 md:flex hidden justify-center items-center">
+        <div className="md:ml-4 ml-0 lg:ml-6 flex  justify-center items-center">
           <DropdownMenu>
             <DropdownMenuTrigger
               className="focus:bg-transparent hover:bg-transparent focus:border-none"
               asChild
             >
-              <Button variant="ghost" className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                className="flex items-center gap-4 shrink-0"
+              >
                 <Image
                   src={profile?.avatar || userImage}
                   alt="صورة المستخدم"
                   width={32}
                   height={32}
-                  className="h-10 w-10 rounded-full object-cover"
+                  className="md:h-10 h-8 md:w-10 w-8 rounded-full object-cover"
                 />
-                <span className="text-white text-md flex flex-col gap-1">
+                <span className="hidden md:flex text-white text-md  flex-col gap-1">
                   <p className="text-lg font-medium text-start">
                     {profile?.name || "مستخدم"}
                   </p>

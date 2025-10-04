@@ -10,7 +10,6 @@ import { ProductsResponse } from "@/lib/types/landing";
 const Store = ({ products }: { products: ProductsResponse }) => {
   const books = (products?.books || []).slice(0, 8).map((item) => ({
     ...item,
-    type: "كتاب",
   }));
 
   const allItems = [...books];
@@ -24,7 +23,7 @@ const Store = ({ products }: { products: ProductsResponse }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {allItems.map((item) => (
           <Card
-            key={`${item.type}-${item.id}`}
+            key={`${item.id}`}
             className="overflow-hidden text-right bg-white rounded-2xl group relative cursor-pointer"
           >
             {/* الصورة */}
@@ -55,12 +54,7 @@ const Store = ({ products }: { products: ProductsResponse }) => {
                   const discount = Number(item?.discount) || 0; // يحول discount لرقم
 
                   // لو مفيش سعر أصلاً أو السعر <= 0 مش هيعرض أي حاجة خالص
-                  if (price <= 0)
-                    return (
-                      <Badge className="absolute  top-3 left-3 bg-secondary-700 text-white text-sm px-3 py-1 rounded-full shadow-md">
-                        {item.type}
-                      </Badge>
-                    );
+                  if (price <= 0) return <></>;
 
                   // لو فيه خصم
                   if (discount > 0) {
@@ -87,9 +81,6 @@ const Store = ({ products }: { products: ProductsResponse }) => {
                       <Badge className=" text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white  px-3 py-1 rounded-full shadow-md">
                         <span>{price} ج.م</span>
                       </Badge>
-                      <Badge className=" bg-secondary-700 text-white text-sm px-3 py-1 rounded-full shadow-md">
-                        {item.type}
-                      </Badge>
                     </div>
                   );
                 })()}
@@ -100,7 +91,7 @@ const Store = ({ products }: { products: ProductsResponse }) => {
                   href="/my-classes"
                   className="bg-primary-600 flex justify-center items-center rounded-md text-center text-white w-full md:h-12 h-10 shadow-md text-xl transition-all duration-300 group-hover/card:bg-primary-500 group-hover/card:shadow-lg"
                 >
-                  اشترك الآن
+                  شاهد الآن
                 </Link>
                 <Button className="bg-primary-600   w-12 h-12 text-white shadow-md transition-all duration-300 group-hover/card:bg-primary-500 group-hover/card:shadow-lg flex items-center justify-center">
                   <ShoppingBag size={28} className="md:size-10 size-8" />

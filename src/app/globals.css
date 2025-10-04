@@ -150,3 +150,21 @@ body {
 }
 
 
+/* تعديل أماكن و ألوان الـ pagination */
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 1rem; /* مسافة تحت الصور */
+}
+
+.swiper-pagination-bullet {
+  background: var(--primary-500) !important; /* نفس لون primary */
+  opacity: 0.4 !important;
+  width: 10px;
+  height: 10px;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--primary-500) !important;
+  opacity: 1 !important;
+  transform: scale(1.2);
+}

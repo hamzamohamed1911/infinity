@@ -39,7 +39,7 @@ async function MyClassesContent() {
         <div className="container mx-auto xl:max-w-[90%] max-w-full flex w-full p-4">
           <div className=" lg:m-6 md:m-4 m-2  flex flex-col gap-4 w-full">
             <h2 className="text-neural-800  lg:text-3xl md:text-2xl text-xl font-[500]">
-              الصفوف الدراسيه
+              الدورات التدريبية
             </h2>
             {(!ClassesData || ClassesData.length === 0) && (
               <NoDataMessage text="لا توجد صفوف متاحة حاليًا." />
