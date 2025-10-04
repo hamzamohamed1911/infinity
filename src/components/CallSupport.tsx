@@ -1,6 +1,5 @@
 "use client";
 
-import { LuMessageCircleQuestion } from "react-icons/lu";
 import { FaWhatsapp, FaFacebookF, FaTelegramPlane } from "react-icons/fa";
 import {
   Dialog,
@@ -16,7 +15,7 @@ const CallSupport = () => {
     <Dialog>
       <DialogTrigger asChild>
         <button className="fixed z-50 lg:left-20 md:left-10 left-5 bottom-20 text-primary flex p-4 justify-center items-center text-2xl font-semibold bg-white shadow-xl gap-2 rounded-full transition-all hover:translate-y-1 duration-700">
-          <LuMessageCircleQuestion size={40} />
+          تواصل معنا
         </button>
       </DialogTrigger>
 

@@ -56,21 +56,22 @@ export default async function Home() {
       {landingData.data.academy.web_config.about.active === "on" && (
         <AboutSection data={landingData.data.academy} />
       )}
-      {/* Promo Video Section */}
-      {landingData.data.academy.web_config.video.active === "on" && (
-        <PromoVideo data={landingData.data.academy} />
-      )}
-
       {/* Courses Section */}
       <Classes data={landingData.data.courses} />
-      {/* Top Students */}
-      <TopStudents data={landingData.data.top_student} />
 
       {/* Last Courses Section */}
       <LastCourses data={landingData.data.courses} />
 
       {/* books Store Section */}
       <Store products={landingData.data.products} />
+
+      {/* Top Students */}
+      <TopStudents data={landingData.data.top_student} />
+
+      {/* Promo Video Section */}
+      {landingData.data.academy.web_config.video.active === "on" && (
+        <PromoVideo data={landingData.data.academy} />
+      )}
 
       {/* Download App Section */}
       <DownloadAppSection />
