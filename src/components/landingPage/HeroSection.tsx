@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Academy } from "@/lib/types/landing";
+import Counter from "@/lib/utils/Counter";
 
 const HeroSection = ({ hero }: { hero: Academy }) => {
   return (
@@ -70,6 +71,30 @@ const HeroSection = ({ hero }: { hero: Academy }) => {
               اشترك دلوقتى
             </span>
           </Link>
+        </div>
+        <div className="w-full flex justify-start gap-12">
+          {/* Courses Count */}
+          <div className="flex flex-col ">
+            <span className="text-primary text-5xl font-bold">
+              <Counter to={Number(hero.web_config?.hero?.courses_count) || 0} />
+              +
+            </span>
+            <span className="text-lg text-primary-400 mt-1">عدد الكورسات</span>
+          </div>
+
+          {/* Students Count */}
+          <div className="flex flex-col ">
+            <span className="text-primary text-5xl font-bold">
+              <Counter
+                to={Number(hero.web_config?.hero?.students_count) || 0}
+              />
+              +
+            </span>
+
+            <span className="text-lg text-primary-400 mt-1 text-start">
+              عدد الطلاب
+            </span>
+          </div>
         </div>
       </motion.div>
     </section>
