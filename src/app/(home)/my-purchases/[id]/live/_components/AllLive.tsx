@@ -15,7 +15,7 @@ const AllLive = ({ liveData }: { liveData: LiveItem[] }) => {
       {liveData.map((live) => (
         <Card
           key={live.id}
-          className="overflow-hidden  rounded-xl border border-gray-200 "
+          className="overflow-hidden  rounded-xl border border-gray-200 relative"
         >
           <div className="relative group">
             <Image
@@ -43,8 +43,8 @@ const AllLive = ({ liveData }: { liveData: LiveItem[] }) => {
               </h3>
             </div>
 
-            <p className="text-sm text-gray-500">{live.section_name}</p>
-            <div className="flex justify-end items-end">
+            <p className="text-sm text-neural-800">{live.section_name}</p>
+            <div className="flex absolute top-2 left-2">
               {live.price > 0 && (
                 <div className=" text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
                   {live.discount > 0 ? (

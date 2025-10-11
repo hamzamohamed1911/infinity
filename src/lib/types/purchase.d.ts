@@ -23,10 +23,17 @@ declare type Teacher = {
 declare type Product = {
   id: number;
   name: string;
+  created_at: string;
+  ended_at: string;
+  product_id: number;
+  product_type: string | null;
+  product_section_id: number | null;
   product_name: string;
   description: string | null;
   content: string | null;
   price: number;
+  product_thumbnail: string;
+  product_image: string;
   image: string;
   thumbnail?: string | null;
   teacher: Teacher;
@@ -37,30 +44,15 @@ declare type Product = {
 declare type StudentPurchase = {
   id: number;
   product_id: number;
-  product_type: string;
+  product_type: string | null;
   amount: number | null;
   currency: string | null;
   purchase_date: string;
   product: Product;
 };
-
-// الـ Response كله
-declare type StudentPurchaseResponse = {
-  current_page: number;
-  data: StudentPurchase[];
-  first_page_url: string;
-  from: number;
-  last_page: number;
-  last_page_url: string;
-  links: {
-    url: string | null;
-    label: string;
-    active: boolean;
-  }[];
-  next_page_url: string | null;
-  path: string;
-  per_page: number;
-  prev_page_url: string | null;
-  to: number;
-  total: number;
+declare type MyPurchases = {
+  lesson: Product[];
+  bundle: Product[];
+  exam: Product[];
+  book: Product[];
 };

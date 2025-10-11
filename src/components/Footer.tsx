@@ -17,21 +17,21 @@ const Footer = ({ data }: { data: Academy }) => {
         {/* Right Side: Logo & Description */}
         <div className="flex flex-col items-center md:items-start gap-4 md:gap-6">
           <Image src={data.logo} alt="Logo" width={100} height={100} />
-          <p className="text-sm md:text-base !leading-relaxed text-secondary">
+          <p className="text-sm md:text-base !leading-relaxed text-landing-primary">
             {data.desc}
           </p>
         </div>
 
         {/* Center: Social Media */}
         <div className="flex flex-col items-center gap-4 md:gap-6">
-          <h3 className="text-lg text-primary">تواصل مع المُدرس</h3>
+          <h3 className="text-lg text-landing-primary">تواصل مع المُدرس</h3>
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8 ">
             {data.web_config.header.phone && (
               <a
                 href={data.web_config.header.phone}
                 target="_blank"
                 aria-label="WhatsApp"
-                className="text-primary hover:text-primary-400"
+                className="text-landing-primary hover:text-landing-primary-400"
               >
                 <FaWhatsapp size={25} />
               </a>
@@ -41,7 +41,7 @@ const Footer = ({ data }: { data: Academy }) => {
                 href={data.web_config.header.facebook_link || ""}
                 target="_blank"
                 aria-label="Facebook"
-                className="text-primary hover:text-primary-400"
+                className="text-landing-primary hover:text-landing-primary-400"
               >
                 <FaFacebookF size={25} />
               </a>
@@ -51,7 +51,7 @@ const Footer = ({ data }: { data: Academy }) => {
                 href={data.web_config.header.twitter_link || ""}
                 target="_blank"
                 aria-label="X Twitter"
-                className="text-primary hover:text-primary-400"
+                className="text-landing-primary hover:text-landing-primary-400"
               >
                 <FaXTwitter size={25} />
               </a>
@@ -61,7 +61,7 @@ const Footer = ({ data }: { data: Academy }) => {
               href="https://t.me/your-telegram"
               target="_blank"
               aria-label="Telegram"
-              className="text-primary hover:text-primary-400"
+              className="text-landing-primary hover:text-landing-primary-400"
             >
               <FaTelegram size={25} />
             </a>
@@ -70,7 +70,7 @@ const Footer = ({ data }: { data: Academy }) => {
                 href={data.web_config.header.instagram_link || ""}
                 target="_blank"
                 aria-label="Instagram"
-                className="text-primary hover:text-primary-400"
+                className="text-landing-primary hover:text-landing-primary-400"
               >
                 <FaInstagram size={25} />
               </a>
@@ -80,7 +80,7 @@ const Footer = ({ data }: { data: Academy }) => {
               href="https://tiktok.com"
               target="_blank"
               aria-label="TikTok"
-              className="text-primary hover:text-primary-400"
+              className="text-landing-primary hover:text-landing-primary-400"
             >
               <FaTiktok size={25} />
             </a>
@@ -89,7 +89,7 @@ const Footer = ({ data }: { data: Academy }) => {
                 href={data.web_config.header.youtube_link || ""}
                 target="_blank"
                 aria-label="YouTube"
-                className="text-primary hover:text-primary-400"
+                className="text-landing-primary hover:text-landing-primary-400"
               >
                 <FaYoutube size={25} />
               </a>
@@ -99,11 +99,11 @@ const Footer = ({ data }: { data: Academy }) => {
 
         {/* Left Side: Support */}
         <div className="flex flex-col items-center md:items-end gap-2">
-          <span className="text-lg text-primary flex flex-col gap-2">
+          <span className="text-lg text-landing-primary flex flex-col gap-2">
             <h3>تواصل مع الدعم الفني للمنصة</h3>
             <a
               href="#"
-              className="text-primary hover:text-primary-400 underline md:text-start text-center w-full md:w-auto  block"
+              className="text-landing-primary hover:text-landing-primary-400 underline md:text-start text-center w-full md:w-auto  block"
             >
               تقديم شكوى
             </a>
@@ -112,9 +112,10 @@ const Footer = ({ data }: { data: Academy }) => {
       </div>
 
       {/* Footer Bottom Text */}
-      <p className="mt-12 text-md md:text-lg tracking-wide text-center text-secondary">
+      <p className="mt-12 text-md md:text-lg tracking-wide text-center text-landing-primary">
         جميع الحقوق محفوظة.
-        <span className="text-primary font-semibold">انفنتي</span> © 2025
+        <span className="text-landing-primary font-semibold">انفنتي</span> ©
+        2025
       </p>
     </footer>
   );

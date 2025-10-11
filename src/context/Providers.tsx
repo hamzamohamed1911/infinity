@@ -54,13 +54,11 @@ function ThemeLoader({ children }: { children: ReactNode }) {
   Object.entries(primaryShades).forEach(([key, value]) => {
     root.style.setProperty(`--primary-${key}`, value);
   });
-
   Object.entries(secondaryShades).forEach(([key, value]) => {
     root.style.setProperty(`--secondary-${key}`, value);
   });
   root.style.setProperty("--primary-color", theme.primaryColor);
   root.style.setProperty("--secondary-color", theme.primaryColor);
-
   root.style.setProperty("--background-color", theme.backgroundColor);
 
   return <ThemeProvider value={theme}>{children}</ThemeProvider>;

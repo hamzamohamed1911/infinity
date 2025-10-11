@@ -108,10 +108,10 @@ const NavBarLanding = ({ data }: { data: Academy }) => {
                 key={link.id}
                 href={`#${link.id}`}
                 onClick={(e) => handleNavClick(e, link.id)}
-                className={`px-4 py-2 rounded-full transition-colors ${
+                className={`px-4 py-2 rounded-full transition-colors text-landing-primary ${
                   activeSection === link.id
-                    ? "bg-primary text-white shadow-md"
-                    : "hover:bg-primary/20"
+                    ? "bg-landing-primary text-white shadow-md"
+                    : "hover:bg-landing-primary/20"
                 }`}
               >
                 {link.label}
@@ -126,7 +126,7 @@ const NavBarLanding = ({ data }: { data: Academy }) => {
                 key={idx}
                 href={social.href}
                 target="_blank"
-                className="p-2 rounded-full text-primary hover:text-primary-400 transition-colors"
+                className="p-2 rounded-full text-landing-primary hover:text-landing-primary-400 transition-colors"
               >
                 {social.icon}
               </Link>
@@ -151,8 +151,8 @@ const NavBarLanding = ({ data }: { data: Academy }) => {
             onClick={(e) => handleNavClick(e, link.id)}
             className={`flex flex-col items-center justify-center text-xs px-2 py-1 rounded-lg transition-colors ${
               activeSection === link.id
-                ? "bg-primary text-white"
-                : "text-muted-foreground hover:bg-primary/10"
+                ? "bg-landing-primary text-white"
+                : "text-muted-foreground hover:bg-landing-primary/10"
             }`}
           >
             {link.icon}

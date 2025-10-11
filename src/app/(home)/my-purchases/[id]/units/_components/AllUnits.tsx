@@ -15,7 +15,7 @@ const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
         return (
           <Card
             key={unit.id}
-            className="overflow-hidden shadow-none border-none"
+            className="overflow-hidden shadow-none border-none relative"
           >
             <Image
               src={unit.image || unit.thumbnail || placeholder}
@@ -50,7 +50,7 @@ const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
                   <span>دروس</span>
                 </div>
               </div>
-              <div className="flex justify-end items-end">
+              <div className="absolute top-2 left-2">
                 {unit?.price && unit.price > 0 && (
                   <div className=" text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
                     {unit?.discount && unit.discount > 0 ? (

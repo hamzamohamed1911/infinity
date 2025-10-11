@@ -9,7 +9,6 @@ import { MdEditNote } from "react-icons/md";
 import { BiBookContent } from "react-icons/bi";
 import { TbBellSchool } from "react-icons/tb";
 import { LuBook } from "react-icons/lu";
-import { FiUsers } from "react-icons/fi";
 import { useSidebar } from "@/lib/context/SidebarContext";
 import { FaArrowLeft } from "react-icons/fa6";
 
@@ -19,7 +18,7 @@ const StoreSideBar = ({ id }: { id: string }) => {
 
   const SideBarItems = [
     {
-      href: `/store/${id}/courses`,
+      href: `/store/${id}`,
       label: "كورسات",
       icon: <FaAward className="text-2xl" />,
     },
@@ -39,22 +38,17 @@ const StoreSideBar = ({ id }: { id: string }) => {
       icon: <MdEditNote className="text-2xl" />,
     },
     {
-      href: ` /store/homeworks/${id}`,
+      href: `/store/${id}/homeworks`,
       label: "واجبات",
       icon: <BiBookContent className="text-2xl" />,
     },
     {
-      href: `/store/live/${id}`,
+      href: `/store/${id}/live`,
       label: "لايف",
       icon: <TbBellSchool className="text-2xl" />,
     },
     {
-      href: `/store/forum/${id}`,
-      label: "منتدى",
-      icon: <FiUsers className="text-2xl" />,
-    },
-    {
-      href: `/store/books/${id}`,
+      href: `/books`,
       label: "كتب",
       icon: <LuBook className="text-2xl" />,
     },

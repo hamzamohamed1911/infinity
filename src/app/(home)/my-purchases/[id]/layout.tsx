@@ -5,10 +5,30 @@ import Navbar from "@/components/home/NavBar";
 import BottomNavbar from "@/components/home/BottomNavbar";
 import CourseDetailsSkeleton from "../_Components/CourseDetailsSkeleton";
 import { Suspense } from "react";
+import { Metadata } from "next";
+import { GetCourse } from "@/lib/apis/course.api";
 
 interface HomeLayoutProps {
   children: React.ReactNode;
   params: Promise<{ id: string }>;
+}
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  const course = await GetCourse({ course_id: id });
+  const courseData = course && "data" in course ? course.data : undefined;
+
+  return {
+    title: courseData?.name || "تفاصيل الدورة",
+    description: courseData?.description || "محتوى الدورة التدريبية",
+    icons: {
+      icon: courseData?.image,
+    },
+  };
 }
 
 export default async function HomeLayout({

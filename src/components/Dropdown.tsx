@@ -23,7 +23,6 @@ interface DropdownProps {
   feedback?: string;
 }
 
-
 export function Dropdown({
   data,
   placeholder = "اختر عنصر",
@@ -55,7 +54,9 @@ export function Dropdown({
 
         <DropdownMenuContent className="w-full !text-start">
           {loading ? (
-            <div className="px-4 py-2 text-gray-500 text-sm">جاري التحميل...</div>
+            <div className="px-4 py-2 text-neural-800 text-sm">
+              جاري التحميل...
+            </div>
           ) : data.length > 0 ? (
             data.map((item) => (
               <DropdownMenuItem
@@ -69,11 +70,12 @@ export function Dropdown({
           ) : feedback ? (
             <div className="px-4 py-2 text-red-500 text-sm">{feedback}</div>
           ) : (
-            <div className="px-4 py-2 text-gray-500 text-sm">لا توجد بيانات متاحة</div>
+            <div className="px-4 py-2 text-neural-800 text-sm">
+              لا توجد بيانات متاحة
+            </div>
           )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
   );
 }
-

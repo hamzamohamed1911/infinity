@@ -3,12 +3,7 @@ import Link from "next/link";
 export default async function NotFound() {
   return (
     <div className="flex flex-col gap-6 items-center justify-center min-h-screen bg-backgroundColor text-center p-6 animate-fadeIn">
-      <Link
-        href="/"
-        className="lg:text-9xl md:text-7xl text-5xl text-primary-100"
-      >
-        404
-      </Link>
+      <h2 className="lg:text-9xl md:text-7xl text-5xl text-primary-500">404</h2>
 
       <h2 className=" lg:text-4xl text-3xl font-bold text-neural-800 ">
         الصفحة غير موجودة

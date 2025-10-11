@@ -52,7 +52,7 @@ const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
       </p>
 
       {filteredExams.length === 0 ? (
-        <p className="text-gray-500">
+        <p className="text-neural-800">
           {examType === 1 ? "لا توجد امتحانات قريبة" : "لا توجد واجبات قريبة"}
         </p>
       ) : (
@@ -97,7 +97,7 @@ const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
                 </div>
 
                 {/* معلومات التاريخ وعدد الأسئلة */}
-                <div className="flex justify-between text-sm text-gray-500 mt-2">
+                <div className="flex justify-between text-sm text-neural-800 mt-2">
                   <span>
                     {new Date(exam.end_date).toLocaleDateString("ar-EG")}
                   </span>

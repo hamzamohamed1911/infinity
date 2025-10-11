@@ -57,7 +57,7 @@ const SearchBox = () => {
             className="w-full lg:w-80 p-0 max-h-96 overflow-y-auto"
           >
             {isLoading && (
-              <p className="p-3 text-gray-500 text-sm">جاري التحميل...</p>
+              <p className="p-3 text-neural-500 text-sm">جاري التحميل...</p>
             )}
             {isError && (
               <p className="p-3 text-red-500 text-sm">
@@ -66,7 +66,7 @@ const SearchBox = () => {
             )}
 
             {data && !data.success && (
-              <p className="p-3 text-gray-500 text-sm">{data.message}</p>
+              <p className="p-3 text-neural-500 text-sm">{data.message}</p>
             )}
 
             {data && data.success && data.data && (
@@ -74,7 +74,7 @@ const SearchBox = () => {
                 {/* الدروس */}
                 {data.data.lessons.length > 0 && (
                   <div className="p-3">
-                    <p className="font-semibold mb-2 text-gray-700">الدروس</p>
+                    <p className="font-semibold mb-2 text-neural-700">الدروس</p>
                     <div className="space-y-2">
                       {data.data.lessons.map((lesson: Lesson) => (
                         <div key={lesson.id}>
@@ -111,7 +111,7 @@ const SearchBox = () => {
                                 {lesson.name}
                               </p>
                               {lesson.description && (
-                                <p className="text-xs text-gray-500">
+                                <p className="text-xs text-neural-500">
                                   {truncate(lesson.description)}
                                 </p>
                               )}
@@ -126,7 +126,9 @@ const SearchBox = () => {
                 {/* الباقات */}
                 {data.data.bundles.length > 0 && (
                   <div className="p-3">
-                    <p className="font-semibold mb-2 text-gray-700">الكورسات</p>
+                    <p className="font-semibold mb-2 text-neural-700">
+                      الكورسات
+                    </p>
                     <div className="space-y-2">
                       {data.data.bundles.map((bundle: Bundle) => (
                         <div key={bundle.id}>
@@ -157,7 +159,7 @@ const SearchBox = () => {
                               <p className="font-medium text-gray-800">
                                 {bundle.name}
                               </p>
-                              <p className="text-xs text-gray-500">
+                              <p className="text-xs text-neural-500">
                                 {truncate(bundle.description ?? "")}
                               </p>
                             </div>
@@ -171,7 +173,7 @@ const SearchBox = () => {
                 {/* الامتحانات */}
                 {data.data.exams.length > 0 && (
                   <div className="p-3">
-                    <p className="font-semibold mb-2 text-gray-700">
+                    <p className="font-semibold mb-2 text-neural-700">
                       الامتحانات
                     </p>
                     <div className="space-y-2">
@@ -206,7 +208,7 @@ const SearchBox = () => {
                                 {exam.name}
                               </p>
                               {exam.description && (
-                                <p className="text-xs text-gray-500">
+                                <p className="text-xs text-neural-500">
                                   {truncate(exam.description)}
                                 </p>
                               )}
@@ -221,7 +223,9 @@ const SearchBox = () => {
                 {/* الوحدات */}
                 {data.data.units.length > 0 && (
                   <div className="p-3">
-                    <p className="font-semibold mb-2 text-gray-700">الوحدات</p>
+                    <p className="font-semibold mb-2 text-neural-700">
+                      الوحدات
+                    </p>
                     <div className="space-y-2">
                       {data.data.units.map((unit: Unit) => (
                         <div key={unit.id}>
@@ -252,7 +256,7 @@ const SearchBox = () => {
                               <p className="font-medium text-gray-800">
                                 {unit.name}
                               </p>
-                              <p className="text-xs text-gray-500">
+                              <p className="text-xs text-neural-500">
                                 {truncate(unit.description)}
                               </p>
                             </div>

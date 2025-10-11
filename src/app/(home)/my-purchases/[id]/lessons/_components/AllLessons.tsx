@@ -13,7 +13,7 @@ const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
       {UnitsData.map((unit: CourseDetails) => (
         <Card
           key={unit.id}
-          className="overflow-hidden shadow-none border-none h-full"
+          className="overflow-hidden shadow-none border-none h-full relative"
         >
           <Image
             src={unit.thumbnail || unit.image || placeholder}
@@ -27,7 +27,7 @@ const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
               <h3 className="text-lg font-semibold text-neural-800">
                 {unit.name}
               </h3>
-              <div className="flex justify-end items-end">
+              <div className="absolute top-2 left-2">
                 {unit.price > 0 && unit.booking_status !== 1 && (
                   <div className="text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
                     {unit.discount > 0 ? (

@@ -102,7 +102,7 @@ const Login = () => {
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
           {error && (
-            <p className="text-red-500 text-sm text-center leading-loose">
+            <p className="text-red-500 text-sm text-start leading-relaxed">
               {error}
             </p>
           )}

@@ -17,7 +17,7 @@ import { placeholder } from "../../../public";
 const TopStudents = ({ data }: { data: TopStudent[] }) => {
   return (
     <section className="py-16">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center text-primary mb-12 relative">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center text-landing-primary mb-12 relative">
         الطلاب الأوائل
       </h2>
       <div className="relative max-w-7xl mx-auto" dir="ltr">
@@ -56,7 +56,7 @@ const TopStudents = ({ data }: { data: TopStudent[] }) => {
               >
                 <Card
                   dir="rtl"
-                  className="rounded-2xl overflow-hidden border h-[430px] border-primary/10 shadow-md bg-white"
+                  className="rounded-2xl overflow-hidden border h-[430px] border-landing-primary/10 shadow-md bg-white"
                 >
                   <div className="relative w-full h-72">
                     <Image
@@ -70,12 +70,12 @@ const TopStudents = ({ data }: { data: TopStudent[] }) => {
                       className="object-cover rounded-t-2xl"
                     />
                     {/* البادج */}
-                    <span className="absolute top-4 left-4 bg-gradient-to-r from-primary to-primary/80 text-white text-sm md:text-base font-semibold px-4 py-2 rounded-full shadow-lg">
+                    <span className="absolute top-4 left-4 bg-gradient-to-r from-landing-primary to-landing-primary/80 text-white text-sm md:text-base font-semibold px-4 py-2 rounded-full shadow-lg">
                       الدرجة: {student.grade}%
                     </span>
                   </div>
                   <CardContent className="p-6 flex flex-col gap-3">
-                    <h3 className="text-xl font-bold text-primary-900">
+                    <h3 className="text-xl font-bold text-landing-primary-900">
                       {student.name}
                     </h3>
                     <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
@@ -88,8 +88,8 @@ const TopStudents = ({ data }: { data: TopStudent[] }) => {
           ))}
         </Swiper>
 
-        <div className="swiper-button-next !text-primary !w-10 !h-10 after:!text-4xl"></div>
-        <div className="swiper-button-prev !text-primary !w-10 !h-10 after:!text-4xl"></div>
+        <div className="swiper-button-next !text-landing-primary !w-10 !h-10 after:!text-4xl"></div>
+        <div className="swiper-button-prev !text-landing-primary !w-10 !h-10 after:!text-4xl"></div>
       </div>
     </section>
   );

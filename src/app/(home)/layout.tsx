@@ -1,3 +1,4 @@
+import CallSupport from "@/components/CallSupport";
 import { SidebarProvider } from "@/lib/context/SidebarContext";
 
 export default function HomeLayout({
@@ -8,9 +9,8 @@ export default function HomeLayout({
   return (
     <>
       <SidebarProvider>
-        <main>
-          {children}
-        </main>
+        <CallSupport />
+        <main>{children}</main>
       </SidebarProvider>
     </>
   );

@@ -9,11 +9,12 @@ const ScrollToTopButton = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const windowHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrolled = (scrollTop / windowHeight) * 100;
-      
+
       setScrollPosition(scrolled);
-      
+
       if (scrollTop > 400) {
         setIsVisible(true);
       } else {
@@ -44,14 +45,14 @@ const ScrollToTopButton = () => {
       }`}
       onClick={scrollToTop}
       style={{
-        background: `conic-gradient(var(--primary-500) ${scrollPosition}%, transparent 0%)`, 
-        borderRadius: "50%", 
-        padding: "6px", 
+        background: `conic-gradient(var(--landing-primary-500) ${scrollPosition}%, transparent 0%)`,
+        borderRadius: "50%",
+        padding: "6px",
       }}
     >
       {/* Inner div with solid white background */}
       <div className="bg-white h-full w-full rounded-full flex items-center justify-center">
-        <FaArrowUp className="text-primary" size={22} />
+        <FaArrowUp className="text-landing-primary" size={22} />
       </div>
     </div>
   );

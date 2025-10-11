@@ -2,7 +2,6 @@
 import { Alexandria } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
-import CallSupport from "@/components/CallSupport";
 import Providers from "@/context/Providers";
 import { Toaster } from "@/components/ui/sonner";
 import { getWebConfig } from "@/lib/apis/webconfig.api";
@@ -16,7 +15,7 @@ const alexandria = Alexandria({
 export async function generateMetadata(): Promise<Metadata> {
   const res = await getWebConfig();
   const logo = res?.data?.mobile_config?.academy_logo;
-  const appName = res?.data?.mobile_config?.app_name ?? "Infinity";
+  const appName = res?.data?.mobile_config?.academy_name ?? "Infinity";
 
   return {
     title: appName,
@@ -40,7 +39,6 @@ export default async function RootLayout({
         <Providers>
           <Toaster />
           {children}
-          <CallSupport />
         </Providers>
       </body>
     </html>

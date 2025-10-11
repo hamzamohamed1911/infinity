@@ -12,7 +12,7 @@ import { Badge } from "../ui/badge";
 const Classes = ({ data }: { data: CourseDetails[] }) => {
   return (
     <section id="courses" className="py-16 relative">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-primary">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-landing-primary">
         الدورات التدريبية
       </h2>
 
@@ -71,7 +71,7 @@ const Classes = ({ data }: { data: CourseDetails[] }) => {
                   <p className="text-sm mb-4 line-clamp-4">
                     {course.description}
                   </p>
-                  <Button className="w-full bg-primary-600 hover:bg-primary-500 text-white hover:shadow-lg lg:h-14 h-12 shadow-md lg:text-xl rounded-md transition-colors text-lg font-semibold disabled:opacity-50">
+                  <Button className="w-full bg-landing-primary-600 hover:bg-landing-primary-500 text-white hover:shadow-lg lg:h-14 h-12 shadow-md lg:text-xl rounded-md transition-colors text-lg font-semibold disabled:opacity-50">
                     عرض الدورة
                   </Button>
                 </div>
@@ -81,8 +81,8 @@ const Classes = ({ data }: { data: CourseDetails[] }) => {
         </Swiper>
 
         {/* 👇 أزرار الـ Navigation */}
-        <div className="swiper-button-next !text-primary !w-10 !h-10 after:!text-4xl"></div>
-        <div className="swiper-button-prev !text-primary !w-10 !h-10 after:!text-4xl"></div>
+        <div className="swiper-button-next !text-landing-primary !w-10 !h-10 after:!text-4xl"></div>
+        <div className="swiper-button-prev !text-landing-primary !w-10 !h-10 after:!text-4xl"></div>
       </div>
     </section>
   );

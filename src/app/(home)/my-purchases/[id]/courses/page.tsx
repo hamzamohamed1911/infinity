@@ -13,7 +13,7 @@ async function UnitsContent({ courseId }: { courseId: string }) {
       <Tabs dir="rtl" defaultValue="all" className="w-full my-8">
         <TabsList
           className="w-full  gap-2 
-            grid-cols-3 lg:grid sm:flex overflo-x-auto  whitespace-nowrap bg-[#F5F5F5] h-18  p-3 rounded-md"
+            grid-cols-3 lg:grid sm:flex overflo-x-auto  whitespace-nowrap h-18  p-3 rounded-md"
         >
           <TabsTrigger
             value="all"

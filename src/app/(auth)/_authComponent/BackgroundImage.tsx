@@ -2,6 +2,7 @@
 
 import { useTheme } from "@/context/theme-context";
 import Image from "next/image";
+import { placeholder } from "../../../../public";
 
 const BackgroundImage = () => {
   const theme = useTheme();
@@ -9,7 +10,7 @@ const BackgroundImage = () => {
   return (
     <div className="w-full lg:col-span-3 col-span-1 h-full">
       <Image
-        src={theme.teacherImage}
+        src={theme.logo || theme.teacherImage || placeholder}
         alt="Student studying"
         width={500}
         height={300}

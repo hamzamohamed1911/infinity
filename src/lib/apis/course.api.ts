@@ -192,3 +192,22 @@ export async function GetLive({
 
   return payload;
 }
+export async function mypurchases(): Promise<APIResponse<MyPurchases>> {
+  const token = await getAuthToken();
+  const response = await fetch(`${API_URL}api/v1/my_purchases`, {
+    method: "GET",
+    headers: {
+      type: "web",
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const payload = await response.json();
+
+  if (!payload || !payload.data) {
+    throw new Error("فشل في جلب البيانات");
+  }
+
+  return payload;
+}

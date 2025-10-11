@@ -79,6 +79,54 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.btn-link-landing {
+  position: relative;
+  display: inline-block;
+  width: 180px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  outline: none;
+  overflow: hidden;
+  background-color: var(--landing-primary-500); /* الزرار بلون من الأول */
+  transition: box-shadow 0.4s ease-in-out;
+}
+
+
+.btn-link-landing:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color:var(--landing-primary-400);
+}
+
+.btn-link-landing svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: stroke-dashoffset 0.8s ease-in-out;
+}
+
+
+.btn-link-landing:hover svg {
+  stroke-dashoffset: -480;
+}
+
+
+.btn-link-landing span {
+  position: relative;
+  display: inline-block;
+  line-height: 60px;
+}
+
+
 .btn-link {
   position: relative;
   display: inline-block;
@@ -157,14 +205,14 @@ body {
 }
 
 .swiper-pagination-bullet {
-  background: var(--primary-500) !important; /* نفس لون primary */
+  background: var(--landing-primary-500) !important; /* نفس لون primary */
   opacity: 0.4 !important;
   width: 10px;
   height: 10px;
 }
 
 .swiper-pagination-bullet-active {
-  background: var(--primary-500) !important;
+  background: var(--landing-primary-500) !important;
   opacity: 1 !important;
   transform: scale(1.2);
 }

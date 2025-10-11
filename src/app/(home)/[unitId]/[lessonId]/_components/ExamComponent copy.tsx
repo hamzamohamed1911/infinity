@@ -193,7 +193,7 @@ export default function ExamComponent({
                       ? "bg-secondary-800 text-white border-secondary-900"
                       : answers[examData.questions[index].id]
                       ? "bg-gray-200 text-gray-700 border-gray-300"
-                      : "bg-white text-gray-500 border-gray-300 hover:border-gray-400"
+                      : "bg-white text-neural-800 border-gray-300 hover:border-gray-400"
                   }`}
                 >
                   {index + 1}
@@ -205,7 +205,7 @@ export default function ExamComponent({
               />
             </div>
             <div className="text-start ">
-              <div className="text-sm text-gray-500 mb-2">
+              <div className="text-sm text-neural-800 mb-2">
                 السؤال {currentQuestionIndex + 1} من {totalQuestions}
               </div>
               <h2

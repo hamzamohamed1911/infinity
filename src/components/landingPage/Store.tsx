@@ -16,7 +16,7 @@ const Store = ({ products }: { products: ProductsResponse }) => {
 
   return (
     <section id="store" className="py-16 ">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-primary">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-landing-primary">
         متجر الكتب
       </h2>
 
@@ -60,8 +60,8 @@ const Store = ({ products }: { products: ProductsResponse }) => {
                   if (discount > 0) {
                     return (
                       <div className="flex gap-2 absolute top-3 left-3">
-                        <div className=" text-sm font-medium px-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
-                          <Badge className="bg-primary text-white text-sm px-3 py-1 rounded-full shadow-md ">
+                        <div className=" text-sm font-medium px-2 w-fit self-end text-end bg-landing-primary-500 text-white rounded-full">
+                          <Badge className="bg-landing-primary text-white text-sm px-3 py-1 rounded-full shadow-md ">
                             <span className="line-through">{price} ج.م</span>
                             <span className="text-secondary ms-2">
                               {price - discount} ج.م
@@ -78,7 +78,7 @@ const Store = ({ products }: { products: ProductsResponse }) => {
                   // لو مفيش خصم بس فيه سعر
                   return (
                     <div className="absolute flex gap-2 top-3 left-3">
-                      <Badge className=" text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white  px-3 py-1 rounded-full shadow-md">
+                      <Badge className=" text-sm font-medium p-2 w-fit self-end text-end bg-landing-primary-500 text-white  px-3 py-1 rounded-full shadow-md">
                         <span>{price} ج.م</span>
                       </Badge>
                     </div>
@@ -89,11 +89,11 @@ const Store = ({ products }: { products: ProductsResponse }) => {
               <div className="flex gap-2 justify-center items-center w-full group/card">
                 <Link
                   href="/my-classes"
-                  className="bg-primary-600 flex justify-center items-center rounded-md text-center text-white w-full md:h-12 h-10 shadow-md text-xl transition-all duration-300 group-hover/card:bg-primary-500 group-hover/card:shadow-lg"
+                  className="bg-landing-primary-600 flex justify-center items-center rounded-md text-center text-white w-full md:h-12 h-10 shadow-md text-xl transition-all duration-300 group-hover/card:bg-landing-primary-500 group-hover/card:shadow-lg"
                 >
                   شاهد الآن
                 </Link>
-                <Button className="bg-primary-600   w-12 h-12 text-white shadow-md transition-all duration-300 group-hover/card:bg-primary-500 group-hover/card:shadow-lg flex items-center justify-center">
+                <Button className="bg-landing-primary-600   w-12 h-12 text-white shadow-md transition-all duration-300 group-hover/card:bg-landing-primary-500 group-hover/card:shadow-lg flex items-center justify-center">
                   <ShoppingBag size={28} className="md:size-10 size-8" />
                 </Button>
               </div>
@@ -105,7 +105,7 @@ const Store = ({ products }: { products: ProductsResponse }) => {
       <div className="flex justify-center items-center mt-8">
         <Link
           href="/my-classes"
-          className="btn-link bg-primary-500 rounded-md group "
+          className="btn-link-landing bg-landing-primary-500 rounded-md group "
         >
           <svg
             width="180"

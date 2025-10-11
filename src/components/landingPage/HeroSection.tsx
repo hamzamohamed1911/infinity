@@ -32,7 +32,7 @@ const HeroSection = ({ hero }: { hero: Academy }) => {
           alt="المدرس"
           width={550}
           height={550}
-          className="rounded-full border-4 border-primary mx-auto"
+          className="rounded-full border-4 border-landing-primary mx-auto"
         />
       </motion.div>
       <motion.div
@@ -41,16 +41,16 @@ const HeroSection = ({ hero }: { hero: Academy }) => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
       >
-        <h1 className="text-3xl md:text-4xl text-primary font-bold mb-4">
+        <h1 className="text-3xl md:text-4xl text-landing-primary font-bold mb-4">
           {hero.web_config?.hero?.title}
         </h1>
-        <p className="text-lg md:text-xl text-secondary mb-6 !leading-8">
+        <p className="text-lg md:text-xl text-landing-primary mb-6 !leading-8">
           {hero.web_config?.hero?.desc}
         </p>
         <div className="w-full flex md:justify-start justify-center">
           <Link
             href="/my-classes"
-            className="btn-link bg-primary-500 rounded-md group "
+            className="btn-link-landing   rounded-md group "
           >
             <svg
               width="180"
@@ -75,23 +75,25 @@ const HeroSection = ({ hero }: { hero: Academy }) => {
         <div className="w-full flex md:justify-start justify-center lg:gap-12 md:gap-8 gap-6">
           {/* Courses Count */}
           <div className="flex flex-col ">
-            <span className="text-primary lg:text-5xl md:text-4xl text-3xl font-bold">
+            <span className="text-landing-primary lg:text-5xl md:text-4xl text-3xl font-bold">
               <Counter to={Number(hero.web_config?.hero?.courses_count) || 0} />
               +
             </span>
-            <span className="text-lg text-primary-400 mt-1">عدد الكورسات</span>
+            <span className="text-lg text-landing-primary-400 mt-1">
+              عدد الكورسات
+            </span>
           </div>
 
           {/* Students Count */}
           <div className="flex flex-col ">
-            <span className="text-primary lg:text-5xl md:text-4xl text-3xl font-bold">
+            <span className="text-landing-primary lg:text-5xl md:text-4xl text-3xl font-bold">
               <Counter
                 to={Number(hero.web_config?.hero?.students_count) || 0}
               />
               +
             </span>
 
-            <span className="text-lg text-primary-400 mt-1 text-start">
+            <span className="text-lg text-landing-primary-400 mt-1 text-start">
               عدد الطلاب
             </span>
           </div>

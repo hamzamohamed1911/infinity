@@ -17,7 +17,7 @@ import ProfileNavBar from "./ProfileNavBar";
 
 const Navbar = ({
   id,
-  showMenuButton = true, // هنا هتتحكم فى الظهور
+  showMenuButton = true,
 }: {
   id: string;
   showMenuButton?: boolean;
@@ -66,6 +66,8 @@ const Navbar = ({
               {navItems.map((item) => {
                 const isActive = item.href.startsWith("/my-purchases")
                   ? pathname.startsWith("/my-purchases")
+                  : item.href.startsWith("/store")
+                  ? pathname.startsWith("/store")
                   : pathname === item.href;
 
                 return (

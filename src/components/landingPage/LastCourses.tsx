@@ -11,7 +11,7 @@ const LastCourses = ({ data }: { data: CourseDetails[] }) => {
   console.log("data courses", data);
   return (
     <section id="courses" className="py-16  ">
-      <h2 className="text-3xl md:text-4xl  !leading-relaxed font-bold mb-12 text-start text-primary">
+      <h2 className="text-3xl md:text-4xl  !leading-relaxed font-bold mb-12 text-start text-landing-primary">
         كورساتنا المتاحة للعام 2025/2026
       </h2>
 
@@ -35,7 +35,7 @@ const LastCourses = ({ data }: { data: CourseDetails[] }) => {
             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-center items-center text-center text-white">
               <h3 className="text-lg font-bold mb-2">{cls.name}</h3>
               <p className="text-sm mb-4 line-clamp-6">{cls.description}</p>
-              <Button className="text-white w-full hover:bg-primary-400 md:h-12 h-10 shadow-md  hover:shadow-lg text-xl">
+              <Button className="text-white w-full bg-landing-primary-600 hover:bg-landing-primary-400 md:h-12 h-10 shadow-md  hover:shadow-lg text-xl">
                 عرض الكورس
               </Button>
             </div>
