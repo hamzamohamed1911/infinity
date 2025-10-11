@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { userImage } from "../../../public";
+import { avatar } from "../../../public";
 import Image from "next/image";
 import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
@@ -69,7 +69,7 @@ const ProfileNavBar = () => {
                 className="flex items-center gap-4 shrink-0"
               >
                 <Image
-                  src={profile?.avatar || userImage}
+                  src={profile?.avatar || avatar}
                   alt="صورة المستخدم"
                   width={32}
                   height={32}

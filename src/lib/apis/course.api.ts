@@ -48,7 +48,7 @@ export async function GetCoursesbundles({
   const payload = await response.json();
 
   if (!payload || !payload.data) {
-    throw new Error("فشل في جلب البيانات");
+    throw payload.message;
   }
 
   return payload;

@@ -25,6 +25,26 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import PaymentDialog from "../payments/_components/PaymentDialog";
 import Image from "next/image";
 import { alertSvg } from "../../../../../public";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lessonId: string }>;
+}): Promise<Metadata> {
+  const { lessonId } = await params;
+
+  const lesson = await GetLesson({ lesson_id: lessonId });
+  const LessonData = lesson?.data;
+
+  return {
+    title: LessonData?.name || "تفاصيل الدورة",
+    description: LessonData?.description || "محتوى الدورة التدريبية",
+    icons: {
+      icon: LessonData?.thumbnail,
+    },
+  };
+}
 
 async function LessonContent({
   unitId,
@@ -44,6 +64,7 @@ async function LessonContent({
   const UnitData = Unit?.data;
   const LessonData = lesson?.data;
 
+  console.log(LessonData);
   if (!LessonData) {
     const preRequisites = lesson?.preRequisites || [];
     if (preRequisites.length > 0) {
@@ -62,7 +83,7 @@ async function LessonContent({
           <p className="text-center !leading-10 text-red-600 lg:text-2xl md:text-xl text-lg font-bold">
             {lesson?.message}
           </p>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 max-h-[80vh] overflow-auto">
             {preRequisites.map((item) => (
               <Dialog key={item.id}>
                 <DialogTrigger asChild>
@@ -231,34 +252,23 @@ async function LessonContent({
                 <div className="space-y-3 ">
                   {LessonData?.sub_lessons.map((lesson: SubLesson) => (
                     <AccordionItem key={lesson.id} value={lesson.id.toString()}>
-                      <AccordionTrigger className="md:text-xl text-lg border px-4 py-4 rounded-lg hover:border-primary hover:text-primary group transition-all">
+                      <AccordionTrigger className="lg:text-lg text-md border px-4 py-4 rounded-lg hover:border-primary hover:text-primary group transition-all">
                         {lesson.name}
                       </AccordionTrigger>
-                      <AccordionContent className="border border-b-0 pb-0 text-primary md:text-xl text-lg">
+                      <AccordionContent className="border border-b-0 pb-0 text-primary lg:text-md text-sm">
                         <Link
                           href={`/${unitId}/${lesson.id}`}
                           className="border-[1px] border-primary p-4 flex justify-between gap-2"
                         >
                           <div className="flex gap-2">
-                            <MdOndemandVideo size={24} />{" "}
+                            <MdOndemandVideo size={24} />
                             <span> {lesson.name} </span>
                           </div>
-                          <Checkbox checked={lesson.is_viewed} />
+                          <Checkbox
+                            className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-white"
+                            checked={lesson.is_viewed}
+                          />
                         </Link>
-                        <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
-                          <div className="flex gap-2">
-                            <BiBookContent size={24} />{" "}
-                            <span> {lesson.name} </span>
-                          </div>
-                          <Checkbox />
-                        </div>
-                        <div className="border-[1px] border-primary p-4 flex justify-between gap-2">
-                          <div className="flex gap-2">
-                            <MdEditNote size={24} />{" "}
-                            <span> {lesson.name} </span>
-                          </div>
-                          <Checkbox />
-                        </div>
                       </AccordionContent>
                     </AccordionItem>
                   ))}

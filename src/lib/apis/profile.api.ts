@@ -133,16 +133,16 @@ export async function UpdateProfilePicture(formData: FormData) {
     const res = await fetch(`${API_URL}api/v1/user/image`, {
       method: "POST",
       headers: {
+        type: "web",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: formData,
     });
-
+    revalidatePath("profile");
     if (!res.ok) {
       const errorText = await res.text();
-      throw new Error(
-        `Failed to update profile picture: ${errorText || res.status}`
-      );
+      throw new Error(` ${errorText || res.status}`);
     }
 
     return await res.json();

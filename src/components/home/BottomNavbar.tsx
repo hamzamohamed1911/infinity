@@ -1,40 +1,41 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { User } from "lucide-react";
-import { BiStore } from "react-icons/bi";
-import { IoGridOutline } from "react-icons/io5";
+import { usePathname, useRouter } from "next/navigation";
+import { BiBookContent, BiStore } from "react-icons/bi";
 import { GrHelpBook } from "react-icons/gr";
+import { MdEditNote } from "react-icons/md";
+import { IoGridOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+
 export default function BottomNavbar({ id }: { id: string }) {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const navItems = [
-    { href: "/profile", icon: User, label: "الملف الشخصى" },
     { href: `/my-purchases/${id}`, icon: IoGridOutline, label: "مشترياتى" },
     { href: `/store/${id}`, icon: BiStore, label: "المتجر" },
     { href: "/questions-bank", icon: GrHelpBook, label: "بنك الاسئلة" },
   ];
-  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href.startsWith("/my-purchases"))
+      return pathname.startsWith("/my-purchases");
+    if (href.startsWith("/store")) return pathname.startsWith("/store");
+    return pathname === href;
+  };
 
   return (
     <nav className="fixed lg:hidden bottom-0 left-0 right-0 bg-primary-700 shadow-md rounded-lg z-[9999]">
-      <div className="flex justify-around items-center py-1">
+      <div className="flex justify-around items-center py-1 relative">
         {navItems.map((item, index) => {
           const Icon = item.icon;
-
-          // هنا بقى الشرط
-          let isActive = false;
-          if (item.href.startsWith("/my-purchases")) {
-            isActive = pathname.startsWith("/my-purchases");
-          } else if (item.href.startsWith("/store")) {
-            isActive = pathname.startsWith("/store");
-          } else if (item.href.startsWith("/profile")) {
-            isActive = pathname.startsWith("/profile");
-          } else {
-            isActive = pathname === item.href;
-          }
-
           return (
             <motion.div
               key={item.href}
@@ -44,25 +45,55 @@ export default function BottomNavbar({ id }: { id: string }) {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <Link
+              <a
                 href={item.href}
                 className={`flex flex-col gap-1 items-center text-xs py-2 ${
-                  isActive
+                  isActive(item.href)
                     ? "text-primary bg-white rounded-md px-4 font-semibold"
                     : "text-white"
                 }`}
               >
-                <motion.div
-                  animate={{ scale: isActive ? 1.2 : 1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Icon size={24} />
-                </motion.div>
+                <Icon size={24} />
                 <span>{item.label}</span>
-              </Link>
+              </a>
             </motion.div>
           );
         })}
+
+        {/* Dropdown for Evaluations */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: navItems.length * 0.1, duration: 0.3 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex flex-col gap-1 items-center text-xs py-2 text-white z-50"
+            >
+              <BiBookContent size={24} />
+              <span>تقييمات</span>
+            </motion.button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent
+            align="center"
+            className="bg-white rounded-xl p-2 min-w-[120px] bottom-full mb-2 md:hidden block"
+          >
+            <DropdownMenuItem
+              onClick={() => router.push(`/my-purchases/${id}/homeworks`)}
+              className="flex items-center gap-2 cursor-pointer z-50"
+            >
+              <BiBookContent /> واجبات
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => router.push(`/my-purchases/${id}/exams`)}
+              className="flex items-center gap-2 cursor-pointer z-50"
+            >
+              <MdEditNote /> امتحانات
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </nav>
   );

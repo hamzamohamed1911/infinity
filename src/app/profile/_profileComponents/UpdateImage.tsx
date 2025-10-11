@@ -7,110 +7,141 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { UpdateProfilePicture } from "@/lib/apis/profile.api";
 import { Camera } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
 
-// ✅ zod schema للتحقق من الملف
-const imageSchema = z.object({
-  image: z
-    .any()
-    .refine(
-      (file) =>
-        file && ["image/jpeg", "image/png", "image/jpg"].includes(file.type),
-      { message: "يجب أن يكون حقل ملفًا من نوع : jpeg, png, jpg." }
-    ),
-});
-
-type ImageForm = z.infer<typeof imageSchema>;
+const avatarList = [
+  { id: "a1", src: "/avatars/avatar.jpg" },
+  { id: "a2", src: "/avatars/avatar2.jpg" },
+  { id: "a3", src: "/avatars/avatar3.jpg" },
+  { id: "a4", src: "/avatars/avatar.jpg" },
+  { id: "a5", src: "/avatars/avatar2.jpg" },
+  { id: "a6", src: "/avatars/avatar3.jpg" },
+  { id: "a7", src: "/avatars/avatar.jpg" },
+  { id: "a8", src: "/avatars/avatar2.jpg" },
+];
 
 const UpdateImage = ({ imgUrl }: { imgUrl: string }) => {
-  const [preview, setPreview] = useState<string | null>(imgUrl || null);
-  const queryClient = useQueryClient();
+  const [preview, setPreview] = useState<string>(imgUrl || avatarList[0].src);
+  const [selectedAvatar, setSelectedAvatar] = useState<{
+    id: string;
+    src: string;
+  } | null>(null);
+  const [open, setOpen] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-    setValue,
-  } = useForm<ImageForm>({
-    resolver: zodResolver(imageSchema),
-    mode: "onChange", // ✅ عشان isValid يشتغل مباشرة عند التغيير
-  });
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: UpdateProfilePicture,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["profile"] });
-      toast.success("تم تحديث الصورة بنجاح ", {
-        className: "!bg-primary !text-white ",
+      toast.success("تم تحديث الصورة بنجاح", {
+        className: "!bg-primary !text-white",
       });
+      setOpen(false);
     },
     onError: (error: Error) => {
-      toast.error(error.message || "خطأ أثناء تحديث الصورة", {
-        className: "!bg-red-500 !text-white ",
+      toast.error(error.message || "حدث خطأ أثناء تحديث الصورة", {
+        className: "!bg-red-500 !text-white",
       });
     },
   });
 
-  const onSubmit = (data: ImageForm) => {
-    const formData = new FormData();
-    formData.append("image", data.image);
-    mutation.mutate(formData);
+  const handleAvatarSelect = (id: string, src: string) => {
+    setSelectedAvatar({ id, src });
+    setPreview(src);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setPreview(URL.createObjectURL(file));
-    setValue("image", file, { shouldValidate: true });
+  const handleSubmit = async () => {
+    if (!selectedAvatar) {
+      toast.error("من فضلك اختر صورة أولاً");
+      return;
+    }
+
+    try {
+      const response = await fetch(selectedAvatar.src);
+      const blob = await response.blob();
+      const file = new File([blob], "avatar.jpg", { type: blob.type });
+      const formData = new FormData();
+      formData.append("image", file);
+      mutation.mutate(formData);
+    } catch (err) {
+      toast.error(`حدث خطأ أثناء تحميل الصورة: ${(err as Error).message}`);
+    }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-start gap-4"
-    >
-      {/* الصورة */}
-      <div className="relative w-32 h-32  ">
-        <div className="w-full h-full  overflow-hidden  ">
+    <div className="flex flex-col items-start gap-4 relative">
+      {/* صورة البروفايل */}
+      <div className="relative lg:w-40 md:w-36 w-32  md:h-48 h-44">
+        <div className="w-full h-full overflow-hidden rounded-md">
           <Image
-            src={preview || "/placeholder.svg"}
+            key={preview}
+            src={preview}
             alt="Profile Picture"
             fill
-            className="object-cover rounded-full"
+            className="object-cover rounded-md"
+            unoptimized
           />
         </div>
 
-        <label
-          htmlFor="profileImage"
-          className="absolute -bottom-3 left-0  z-20 bg-black/60 p-2 rounded-full cursor-pointer text-white text-sm hover:bg-black/80 transition"
-        >
-          <Camera className="w-5 h-5" />
-        </label>
+        {/* Popover لعرض الصور */}
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <button
+              type="button"
+              className="absolute -bottom-3 left-0 z-20 bg-black/60 p-2 rounded-full cursor-pointer text-white text-sm hover:bg-black/80 transition"
+            >
+              <Camera className="w-5 h-5" />
+            </button>
+          </PopoverTrigger>
+
+          <PopoverContent className=" z-50 w-auto ms-4 p-3 bg-white rounded-2xl shadow-lg grid grid-cols-4 gap-3">
+            {avatarList.map((a) => (
+              <motion.button
+                key={a.id}
+                whileHover={{ scale: 1.05 }}
+                onClick={() => handleAvatarSelect(a.id, a.src)}
+                className={`w-14 h-14 rounded-md overflow-hidden border-2 transition ${
+                  selectedAvatar?.id === a.id
+                    ? "border-primary scale-110"
+                    : "border-transparent"
+                }`}
+                type="button"
+              >
+                <Image
+                  src={a.src}
+                  alt={`Avatar ${a.id}`}
+                  width={56}
+                  height={56}
+                  unoptimized
+                  className="object-cover rounded-md"
+                />
+              </motion.button>
+            ))}
+          </PopoverContent>
+        </Popover>
       </div>
 
-      <input
-        id="profileImage"
-        type="file"
-        accept="image/*"
-        className="hidden"
-        {...register("image")}
-        onChange={handleFileChange}
-      />
-
-      <p className="text-red-500 text-sm">
-        {(errors.image?.message as string) || ""}
-      </p>
-
+      {/* زر تأكيد التحديث */}
       <Button
-        type="submit"
-        disabled={!isValid || mutation.isPending}
-        className="text-white w-auto hover:bg-primary-400 h-9 shadow-md hover:shadow-lg text-md disabled:opacity-50 disabled:cursor-not-allowed"
+        type="button"
+        onClick={handleSubmit}
+        disabled={!selectedAvatar || mutation.isPending}
+        className={`text-white w-auto h-9 shadow-md hover:shadow-lg text-md transition 
+          ${
+            !selectedAvatar || mutation.isPending
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-primary-400"
+          }`}
       >
         {mutation.isPending ? "جاري التحديث..." : "تغيير الصورة الشخصية"}
       </Button>
-    </form>
+    </div>
   );
 };
 
