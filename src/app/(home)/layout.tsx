@@ -10,7 +10,7 @@ export default function HomeLayout({
     <>
       <SidebarProvider>
         <CallSupport />
-        <main>{children}</main>
+        <main className="site-scroll">{children}</main>
       </SidebarProvider>
     </>
   );

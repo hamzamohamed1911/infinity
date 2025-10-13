@@ -38,7 +38,7 @@ export default async function Home() {
 
   return (
     <LandingThemeProvider landingData={landingData}>
-      <section className="bg-landing-secondary">
+      <section className="bg-landing-secondary site-scroll-landing ">
         <div
           className="min-h-screen relative  text-white font-sans overflow-hidden container max-w-[90%] mx-auto"
           dir="rtl"
@@ -59,7 +59,10 @@ export default async function Home() {
           )}
 
           {/* Courses Section */}
-          <Classes data={landingData.data.courses} />
+          <Classes
+            label={landingData.data.academy.settings.curriculum_label}
+            data={landingData.data.courses}
+          />
 
           {/* Last Courses Section */}
           <LastCourses data={landingData.data.courses} />

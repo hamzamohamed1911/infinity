@@ -11,6 +11,13 @@ export type ThemeConfig = {
   appName: string;
   phoneLabel: string;
   WelcomeMsg: string;
+  curriculumLabel: string;
+  callSupport: {
+    support_phone: string;
+    center_team_phone: string;
+    online_team_phone: string;
+    scientific_support_phone: string;
+  };
 };
 
 const ThemeContext = createContext<ThemeConfig | null>(null);

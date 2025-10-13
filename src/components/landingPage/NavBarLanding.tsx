@@ -68,6 +68,8 @@ const NavBarLanding = ({ data }: { data: Academy }) => {
   useEffect(() => {
     const handleScroll = () => {
       const sections = navLinks.map((l) => l.id);
+      let foundActive = false;
+
       for (const id of sections) {
         const section = document.getElementById(id);
         if (
@@ -76,9 +78,19 @@ const NavBarLanding = ({ data }: { data: Academy }) => {
           section.offsetTop + section.offsetHeight > window.scrollY
         ) {
           setActiveSection(id);
+          foundActive = true;
+          break;
         }
       }
+
+      if (
+        !foundActive &&
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 10
+      ) {
+        setActiveSection("contact");
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   });

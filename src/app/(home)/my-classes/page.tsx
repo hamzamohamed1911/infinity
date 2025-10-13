@@ -9,6 +9,7 @@ import StartCourseButton from "@/components/StartCourseButton";
 import NoDataMessage from "@/components/NoDataMessage";
 import Subscription from "./_components/subscription";
 import ClassesNavBar from "./_components/ClassesNavBar";
+import { getServerWebConfig } from "@/lib/utils/getServerThemeConfig";
 
 async function MyClassesContent() {
   const Profile = await GetProfileData();
@@ -32,6 +33,7 @@ async function MyClassesContent() {
   }
   const classes = await GetClassesData({ teacherId: actualTeacher });
   const ClassesData = classes && "data" in classes ? classes.data : undefined;
+  const data = await getServerWebConfig();
 
   return (
     <>
@@ -39,7 +41,7 @@ async function MyClassesContent() {
         <div className="container mx-auto xl:max-w-[90%] max-w-full flex w-full p-4">
           <div className=" lg:m-6 md:m-4 m-2  flex flex-col gap-4 w-full">
             <h2 className="text-neural-800  lg:text-3xl md:text-2xl text-xl font-[500]">
-              الدورات التدريبية
+              {data.settings.curriculum_label}
             </h2>
             {(!ClassesData || ClassesData.length === 0) && (
               <NoDataMessage text="لا توجد صفوف متاحة حاليًا." />

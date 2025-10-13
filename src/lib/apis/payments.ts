@@ -28,11 +28,12 @@ export async function chargeCode({
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
+        "Content-Type": "application/json",
         type: "web",
       },
       body: formData,
     });
-     if (!res.ok) {
+    if (!res.ok) {
       let errorMessage = `Failed: ${res.status}`;
       try {
         const errorData = await res.json();

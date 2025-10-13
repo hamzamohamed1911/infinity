@@ -1,4 +1,4 @@
-import { User, Session } from 'next-auth';
+import { User, Session } from "next-auth";
 
 interface MobileConfig {
   academy_name: string;
@@ -13,13 +13,17 @@ interface MobileConfig {
   privacy_policy: string;
 }
 
- export interface Academy {
+export interface Academy {
   id: number;
   name: string;
   subdomain: string;
   logo: string | null;
   desc: string;
   mobile_config: MobileConfig;
+  settings: {
+    curriculum_label: string;
+    another_phone_label?: string;
+  };
 }
 // نوع مخصص للـ User
 export interface CustomUser extends User {
@@ -45,7 +49,6 @@ export interface CustomSession extends Session {
     device_id?: string | null;
     national_id?: string | null;
     token: string;
-    academy?: Academy; 
+    academy?: Academy;
   };
 }
-

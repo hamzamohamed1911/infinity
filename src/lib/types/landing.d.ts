@@ -77,6 +77,10 @@ export interface Academy {
   desc: string;
   mobile_config: MobileConfig;
   web_config: WebConfig;
+  settings: {
+    curriculum_label: string;
+    another_phone_label?: string;
+  };
 }
 export type Product = {
   id: number;

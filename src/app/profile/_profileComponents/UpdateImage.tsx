@@ -14,15 +14,29 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 
-const avatarList = [
-  { id: "a1", src: "/avatars/avatar.jpg" },
-  { id: "a2", src: "/avatars/avatar2.jpg" },
-  { id: "a3", src: "/avatars/avatar3.jpg" },
-  { id: "a4", src: "/avatars/avatar.jpg" },
-  { id: "a5", src: "/avatars/avatar2.jpg" },
-  { id: "a6", src: "/avatars/avatar3.jpg" },
-  { id: "a7", src: "/avatars/avatar.jpg" },
-  { id: "a8", src: "/avatars/avatar2.jpg" },
+export const avatarList = [
+  { id: "a1", src: "/avatars/avatar1.png" },
+  { id: "a2", src: "/avatars/avatar2.png" },
+  { id: "a3", src: "/avatars/avatar3.png" },
+  { id: "a4", src: "/avatars/avatar4.png" },
+  { id: "a5", src: "/avatars/avatar5.png" },
+  { id: "a6", src: "/avatars/avatar6.png" },
+  { id: "a7", src: "/avatars/avatar7.png" },
+  { id: "a8", src: "/avatars/avatar8.png" },
+  { id: "a9", src: "/avatars/avatar9.png" },
+  { id: "a10", src: "/avatars/avatar10.png" },
+  { id: "a11", src: "/avatars/avatar11.png" },
+  { id: "a12", src: "/avatars/avatar12.png" },
+  { id: "a13", src: "/avatars/avatar13.png" },
+  { id: "a14", src: "/avatars/avatar14.png" },
+  { id: "a15", src: "/avatars/avatar15.png" },
+  { id: "a16", src: "/avatars/avatar16.png" },
+  { id: "a17", src: "/avatars/avatar17.png" },
+  { id: "a18", src: "/avatars/avatar18.png" },
+  { id: "a19", src: "/avatars/avatar19.png" },
+  { id: "a20", src: "/avatars/avatar20.png" },
+  { id: "a21", src: "/avatars/avatar21.png" },
+  { id: "a22", src: "/avatars/avatar22.png" },
 ];
 
 const UpdateImage = ({ imgUrl }: { imgUrl: string }) => {

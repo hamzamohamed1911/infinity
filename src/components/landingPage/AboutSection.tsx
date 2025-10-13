@@ -4,7 +4,6 @@ import { Academy } from "@/lib/types/landing";
 import { motion } from "framer-motion";
 
 const AboutSection = ({ data }: { data: Academy }) => {
-  console.log(data);
   return (
     <section id="about" className="py-16  text-center ">
       <motion.h2

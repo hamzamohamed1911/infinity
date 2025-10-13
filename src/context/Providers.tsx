@@ -19,6 +19,7 @@ function ThemeLoader({ children }: { children: ReactNode }) {
     queryKey: ["web-config"],
     queryFn: getWebConfig,
   });
+  const settings = data?.data?.details;
 
   if (isLoading)
     return (
@@ -40,10 +41,17 @@ function ThemeLoader({ children }: { children: ReactNode }) {
       data.data.mobile_config.background_color ?? "0xffffffff"
     ),
     logo: data.data.mobile_config?.academy_logo,
-    phoneLabel: data.data.mobile_config?.another_phone_label,
+    phoneLabel: data.data.settings?.another_phone_label,
     teacherImage: data.data.mobile_config.teacher_image,
     appName: data.data.mobile_config.app_name,
     WelcomeMsg: data.data.mobile_config.welcome_message,
+    curriculumLabel: data.data.settings.curriculum_label,
+    callSupport: {
+      support_phone: settings?.support_phone ?? "",
+      center_team_phone: settings?.center_team_phone ?? "",
+      online_team_phone: settings?.online_team_phone ?? "",
+      scientific_support_phone: settings?.scientific_support_phone ?? "",
+    },
   };
   const primaryShades = generateColorShades(theme.primaryColor);
   const secondaryShades = generateColorShades(theme.secondaryColor);

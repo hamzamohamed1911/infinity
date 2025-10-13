@@ -9,11 +9,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Badge } from "../ui/badge";
 
-const Classes = ({ data }: { data: CourseDetails[] }) => {
+const Classes = ({ data, label }: { data: CourseDetails[]; label: string }) => {
   return (
     <section id="courses" className="py-16 relative">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-landing-primary">
-        الدورات التدريبية
+        {label}
       </h2>
 
       <div dir="ltr" className="relative max-w-7xl mx-auto">
@@ -29,17 +29,6 @@ const Classes = ({ data }: { data: CourseDetails[] }) => {
           navigation={{
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
-          }}
-          onSwiper={(swiper) => {
-            setTimeout(() => {
-              swiper.navigation.init();
-              swiper.navigation.update();
-            });
-          }}
-          onSlideChange={(swiper) => {
-            setTimeout(() => {
-              swiper.navigation.update();
-            });
           }}
           breakpoints={{
             0: { slidesPerView: 1 },
