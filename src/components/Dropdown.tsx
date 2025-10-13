@@ -52,7 +52,10 @@ export function Dropdown({
           </button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="w-full !text-start">
+        <DropdownMenuContent
+          align="start"
+          className="!text-start w-[var(--radix-dropdown-menu-trigger-width)]"
+        >
           {loading ? (
             <div className="px-4 py-2 text-neural-800 text-sm">
               جاري التحميل...

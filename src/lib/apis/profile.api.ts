@@ -151,3 +151,22 @@ export async function UpdateProfilePicture(formData: FormData) {
     throw error;
   }
 }
+export async function GetStatistics(id: string) {
+  const token = await getAuthToken();
+  const response = await fetch(`${API_URL}api/v1/student-analytics/${id}`, {
+    method: "GET",
+    cache: "no-cache",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
+  const payload: APIResponse<statistcsApiData> = await response.json();
+
+  if (!("success" in payload) || !payload.success) {
+    throw new Error("فشل في جلب البيانات");
+  }
+
+  return payload;
+}

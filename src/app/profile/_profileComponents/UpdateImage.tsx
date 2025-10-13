@@ -89,7 +89,7 @@ const UpdateImage = ({ imgUrl }: { imgUrl: string }) => {
   };
 
   return (
-    <div className="flex flex-col items-start gap-4 relative">
+    <div className="lg:col-span-4 col-span-2 flex flex-col items-start gap-4 relative">
       {/* صورة البروفايل */}
       <div className="relative lg:w-40 md:w-36 w-32  md:h-52 h-44">
         <div className="w-full h-full overflow-hidden rounded-md">

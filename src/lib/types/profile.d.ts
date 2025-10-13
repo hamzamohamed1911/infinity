@@ -4,14 +4,14 @@ declare type UserProfile = {
   code: string;
   wallet: number;
   gender: "m" | "f";
-  status:string | undefined;
-  parent_phone:string;
+  status: string | undefined;
+  parent_phone: string;
   email: string;
-  type: string; 
+  type: string;
   phone: string;
   classroom_name: string;
   avatar: string | null;
-}
+};
 
 type ProfileApiData = {
   profile: UserProfile;
@@ -21,12 +21,12 @@ type ProfileApiData = {
   assignments: unknown[];
 };
 declare type Dclasses = {
-  id: string; 
+  id: string;
   name: string;
-  rank: number | null; 
+  rank: number | null;
   description: string | null;
   content: string | null;
-  thumbnail: string | null; 
+  thumbnail: string | null;
   image: string | null;
   date: string | null;
 };
@@ -34,4 +34,17 @@ declare type ChangePasswordPayload = {
   old_password: string;
   new_password: string;
   new_password_confirmation: string;
-}
+};
+
+declare type StatsItem = {
+  total: number;
+  sub: number;
+};
+
+// شكل البيانات اللي جوه data
+declare type statistcsApiData = {
+  exams: StatsItem;
+  lessons: StatsItem;
+  books: StatsItem;
+  courses: StatsItem;
+};

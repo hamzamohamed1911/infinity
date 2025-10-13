@@ -47,7 +47,7 @@ const ProfileCharts = ({
           className="absolute inset-0 flex items-center justify-center text-xl font-bold"
           style={{ color }}
         >
-          {value}%
+          {value.toFixed(1)}%
         </p>
       </div>
 

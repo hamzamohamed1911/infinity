@@ -2,10 +2,10 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { BiBookContent, BiStore } from "react-icons/bi";
-import { GrHelpBook } from "react-icons/gr";
 import { MdEditNote } from "react-icons/md";
 import { IoGridOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
+import { FaAward } from "react-icons/fa";
 
 import {
   DropdownMenu,
@@ -21,7 +21,7 @@ export default function BottomNavbar({ id }: { id: string }) {
   const navItems = [
     { href: `/my-purchases/${id}`, icon: IoGridOutline, label: "مشترياتى" },
     { href: `/store/${id}`, icon: BiStore, label: "المتجر" },
-    { href: "/questions-bank", icon: GrHelpBook, label: "بنك الاسئلة" },
+    { href: `/my-purchases/${id}/courses`, icon: FaAward, label: "كورساتى " },
   ];
 
   const isActive = (href: string) => {
@@ -78,19 +78,21 @@ export default function BottomNavbar({ id }: { id: string }) {
 
           <DropdownMenuContent
             align="center"
-            className="bg-white rounded-xl p-2 min-w-[120px] bottom-full mb-2 md:hidden block"
+            className="bg-white rounded-xl p-2 -w-[140px] bottom-full mb-2 md:hidden block"
           >
             <DropdownMenuItem
               onClick={() => router.push(`/my-purchases/${id}/homeworks`)}
-              className="flex items-center gap-2 cursor-pointer z-50"
+              className="flex justify-between items-center text-lg gap-2 cursor-pointer z-50"
             >
-              <BiBookContent /> واجبات
+              <BiBookContent className="text-primary-600  shrink-0" size={28} />
+              واجبات
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => router.push(`/my-purchases/${id}/exams`)}
-              className="flex items-center gap-2 cursor-pointer z-50"
+              className="flex justify-between items-center text-lg gap-2 cursor-pointer z-50"
             >
-              <MdEditNote /> امتحانات
+              <MdEditNote className="text-primary-600 " size={28} />
+              امتحانات
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -17,29 +17,32 @@ interface Props {
 const BarcodeDialog = ({ code }: Props) => {
   const barcodeRef = useRef<HTMLDivElement>(null);
 
- const downloadBarcode = () => {
-  const svg = barcodeRef.current?.querySelector("svg");
-  if (!svg) return;
+  const downloadBarcode = () => {
+    const svg = barcodeRef.current?.querySelector("svg");
+    if (!svg) return;
 
-  const svgData = new XMLSerializer().serializeToString(svg);
-  const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
-  const url = URL.createObjectURL(svgBlob);
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const svgBlob = new Blob([svgData], {
+      type: "image/svg+xml;charset=utf-8",
+    });
+    const url = URL.createObjectURL(svgBlob);
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "barcode.svg";
-  a.click();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "barcode.svg";
+    a.click();
 
-  URL.revokeObjectURL(url);
-};
-
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="md:w-1/2 flex flex-col gap-2 cursor-pointer hover:underline ">
+        <div className="w-1/2 flex flex-col gap-2 cursor-pointer hover:underline ">
           <label className="text-lg font-medium ">الباركود</label>
-          <p className="font-semibold md:text-xl text-lg text-blue-600">{code}</p>
+          <p className="font-semibold md:text-xl text-lg text-blue-600">
+            {code}
+          </p>
         </div>
       </DialogTrigger>
 
@@ -59,7 +62,7 @@ const BarcodeDialog = ({ code }: Props) => {
         </div>
 
         <Button
-              className="text-white w-full hover:bg-primary-400 h-10 shadow-md  hover:shadow-lg text-xl"
+          className="text-white w-full hover:bg-primary-400 h-10 shadow-md  hover:shadow-lg text-xl"
           onClick={downloadBarcode}
         >
           تحميل الباركود

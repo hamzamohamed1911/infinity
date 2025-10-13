@@ -18,14 +18,12 @@ import { toast } from "sonner";
 import { subscribeTeacher } from "@/lib/apis/profile.api";
 import { useEffect } from "react";
 import { useWatch } from "react-hook-form";
-import { GetStateList } from "@/lib/apis/auth";
 
 interface FormValues {
   state: number;
   center: number;
   group: number;
   teacher: number;
-  parent_phone?: string;
 }
 
 const ChangeOnlineDialog = () => {
@@ -37,7 +35,7 @@ const ChangeOnlineDialog = () => {
 
   const teachers = teachersResponse?.data || [];
 
-  const { handleSubmit, control, register, setValue } = useForm<FormValues>();
+  const { handleSubmit, control, setValue } = useForm<FormValues>();
   const selectedTeacherId = useWatch({ control, name: "teacher" });
 
   const actualTeacherId =
@@ -53,13 +51,7 @@ const ChangeOnlineDialog = () => {
     queryFn: () => GetGroupsList({ center_id: selectedCenterId }),
     enabled: !!selectedCenterId,
   });
-  const { data: statesResponse, isLoading: loadingstates } = useQuery({
-    queryKey: ["states"],
-    queryFn: GetStateList,
-  });
 
-  const states =
-    statesResponse && "data" in statesResponse ? statesResponse.data : [];
   const centers =
     centersResponse && "data" in centersResponse ? centersResponse.data : [];
   const groups =
@@ -93,7 +85,6 @@ const ChangeOnlineDialog = () => {
       type: 2,
       group_id: data.group,
       center_id: data.center,
-      parent_phone: data.parent_phone,
     });
   };
 
@@ -115,88 +106,59 @@ const ChangeOnlineDialog = () => {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-        <div className="flex flex-col gap-3 text-[#8E8E8E]">
-          <label className="text-md font-medium">رقم هاتف ولي الأمر</label>
-          <input
-            {...register("parent_phone")}
-            name="parent_phone"
-            type="tel"
-            className="py-3 px-4 rounded-lg border-[1px] focus:ring-primary"
-          />
-        </div>
-
-        <div className="flex gap-2">
-          <Controller
-            control={control}
-            name="state"
-            render={({ field }) => (
-              <Dropdown
-                label="المدينة"
-                placeholder="اختر المدينة"
-                data={states ?? []}
-                value={field.value}
-                onChange={field.onChange}
-                loading={loadingstates}
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="center"
-            render={({ field }) => (
-              <Dropdown
-                label="السنتر"
-                placeholder="اختر السنتر"
-                data={centers ?? []}
-                value={field.value}
-                onChange={field.onChange}
-                loading={
-                  typeof actualTeacherId === "number" &&
-                  centersResponse === undefined
-                }
-                feedback={
-                  typeof actualTeacherId !== "number"
-                    ? "يرجى اختيار المدرس أولاً"
-                    : undefined
-                }
-              />
-            )}
-          />
-        </div>
-
-        <div className="flex gap-2">
-          <Controller
-            control={control}
-            name="group"
-            render={({ field }) => (
-              <Dropdown
-                label="المجموعة"
-                placeholder="اختر المجموعة"
-                data={groups ?? []}
-                value={field.value}
-                onChange={field.onChange}
-              />
-            )}
-          />
-
-          {/* ✅ فقط أظهر Dropdown لو فيه أكثر من مدرس */}
-          {teachers.length > 1 && (
-            <Controller
-              control={control}
-              name="teacher"
-              render={({ field }) => (
-                <Dropdown
-                  label="المدرسين"
-                  placeholder="اختر المدرس"
-                  data={teachers}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
+        <Controller
+          control={control}
+          name="center"
+          render={({ field }) => (
+            <Dropdown
+              label="السنتر"
+              placeholder="اختر السنتر"
+              data={centers ?? []}
+              value={field.value}
+              onChange={field.onChange}
+              loading={
+                typeof actualTeacherId === "number" &&
+                centersResponse === undefined
+              }
+              feedback={
+                typeof actualTeacherId !== "number"
+                  ? "يرجى اختيار المدرس أولاً"
+                  : undefined
+              }
             />
           )}
-        </div>
+        />
+
+        <Controller
+          control={control}
+          name="group"
+          render={({ field }) => (
+            <Dropdown
+              label="المجموعة"
+              placeholder="اختر المجموعة"
+              data={groups ?? []}
+              value={field.value}
+              onChange={field.onChange}
+            />
+          )}
+        />
+
+        {/* ✅ فقط أظهر Dropdown لو فيه أكثر من مدرس */}
+        {teachers.length > 1 && (
+          <Controller
+            control={control}
+            name="teacher"
+            render={({ field }) => (
+              <Dropdown
+                label="المدرسين"
+                placeholder="اختر المدرس"
+                data={teachers}
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
+        )}
 
         <DialogFooter className="w-full flex gap-2">
           <DialogClose asChild>
