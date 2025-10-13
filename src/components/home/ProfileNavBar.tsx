@@ -73,7 +73,7 @@ const ProfileNavBar = () => {
                   alt="صورة المستخدم"
                   width={32}
                   height={32}
-                  className="md:h-10 h-8 md:w-10 w-8 rounded-full object-cover"
+                  className="md:h-10 h-8 md:w-10 w-8 rounded-full object-top object-cover"
                 />
                 <span className="hidden md:flex text-white text-md  flex-col gap-1">
                   <p className="text-lg font-medium text-start">

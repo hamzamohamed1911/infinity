@@ -91,14 +91,14 @@ const UpdateImage = ({ imgUrl }: { imgUrl: string }) => {
   return (
     <div className="flex flex-col items-start gap-4 relative">
       {/* صورة البروفايل */}
-      <div className="relative lg:w-40 md:w-36 w-32  md:h-48 h-44">
+      <div className="relative lg:w-40 md:w-36 w-32  md:h-52 h-44">
         <div className="w-full h-full overflow-hidden rounded-md">
           <Image
             key={preview}
             src={preview}
             alt="Profile Picture"
             fill
-            className="object-cover rounded-md"
+            className="object-contain rounded-md"
             unoptimized
           />
         </div>
