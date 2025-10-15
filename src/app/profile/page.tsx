@@ -21,7 +21,6 @@ async function ProfileContent() {
     return;
   }
   const Statistics = await GetStatistics(selectedId);
-  console.log(Statistics);
   const dataList = [
     {
       value:
@@ -44,7 +43,7 @@ async function ProfileContent() {
       value: (Statistics.data.exams.sub / Statistics.data.exams.total) * 100,
       total: Statistics.data.exams.total,
       completed: Statistics.data.exams.sub,
-      color: "#99E35D",
+      color: "#F39C12",
       label: "عدد الاختبارات اللي خلصتها",
       type: "اختبار",
     },
@@ -56,6 +55,15 @@ async function ProfileContent() {
       color: "#1ABC9C",
       label: "عدد الكورسات اللي سجلتها",
       type: "كورسات",
+    },
+    {
+      value:
+        (Statistics.data.homeWork.sub / Statistics.data.homeWork.total) * 100,
+      total: Statistics.data.homeWork.total,
+      completed: Statistics.data.homeWork.sub,
+      color: "#1ABC9C",
+      label: "عدد الواجبات اللي سجلتها",
+      type: "واجبات",
     },
   ];
   const Profile = await GetProfileData();

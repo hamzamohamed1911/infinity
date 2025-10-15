@@ -47,4 +47,5 @@ declare type statistcsApiData = {
   lessons: StatsItem;
   books: StatsItem;
   courses: StatsItem;
+  homeWork: StatsItem;
 };
