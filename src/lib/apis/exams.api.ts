@@ -139,3 +139,28 @@ export async function GetExams({
   }
   return payload;
 }
+export async function GetAssignmentRetry({
+  exam_id,
+  retry_id,
+}: {
+  exam_id: string;
+  retry_id: string;
+}): Promise<APIResponse<ExamDetails>> {
+  const token = await getAuthToken();
+  const response = await fetch(
+    `${API_URL}api/v1/exams/${exam_id}?join_exam=true&users_exams_id=${retry_id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  const payload = await response.json();
+  if (payload?.message === "Unauthenticated.") {
+    redirect("/logout");
+  }
+  return payload;
+}

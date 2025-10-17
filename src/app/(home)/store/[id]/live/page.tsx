@@ -14,7 +14,6 @@ async function UnitsContent({ classId }: { classId: string }) {
       item.booking_status === 0
   );
 
-  console.log("liveData", availableLives);
   return (
     <section>
       <div className="mt-6">

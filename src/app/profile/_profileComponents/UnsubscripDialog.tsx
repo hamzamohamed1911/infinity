@@ -15,7 +15,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchTeachers } from "@/app/api/register";
 import { useForm, Controller } from "react-hook-form";
 import { toast } from "sonner";
-import {unsubscrip } from "@/lib/apis/profile.api";
+import { unsubscrip } from "@/lib/apis/profile.api";
 import { useEffect } from "react";
 
 interface FormValues {
@@ -65,7 +65,9 @@ const UnsubscripDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="text-[#2087EE] underline">الغاء الاشتراك</button>
+        <button className="text-[#2087EE] underline whitespace-nowrap">
+          الغاء الاشتراك
+        </button>
       </DialogTrigger>
       <DialogContent className="max-w-md">
         <DialogHeader>

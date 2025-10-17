@@ -61,7 +61,7 @@ async function ProfileContent() {
         (Statistics.data.homeWork.sub / Statistics.data.homeWork.total) * 100,
       total: Statistics.data.homeWork.total,
       completed: Statistics.data.homeWork.sub,
-      color: "#1ABC9C",
+      color: "#00B8D9",
       label: "عدد الواجبات اللي سجلتها",
       type: "واجبات",
     },
@@ -80,7 +80,7 @@ async function ProfileContent() {
       <div className="flex flex-col gap-6  my-8">
         <div className=" grid lg:grid-cols-12 grid-cols-2 gap-4">
           {profileData?.avatar && <UpdateImage imgUrl={profileData?.avatar} />}
-          <div className="lg:col-span-8 col-span-2 flex gap-4">
+          <div className="lg:col-span-8 col-span-2 flex md:flex-row flex-col gap-4">
             <div className="w-full  flex md:flex-col flex-col gap-4 justify-evenly">
               <div className="md:w-1/2 flex flex-col gap-2">
                 <label className="md:text-lg text-base font-medium">
@@ -120,7 +120,7 @@ async function ProfileContent() {
             </div>
           </div>
         </div>
-        <div className="w-full flex  gap-4 justify-between">
+        <div className="w-full flex flex-col md:flex-row gap-4 justify-between">
           <div className="w-1/2 flex flex-col gap-2">
             <div className="lg:text-lg text-base font-medium flex gap-2">
               {profileData?.status === "1" || profileData?.status === "2"

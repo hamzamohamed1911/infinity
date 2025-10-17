@@ -170,7 +170,7 @@ declare type LiveItem = {
   section_id: number;
   section_name: string;
   description?: string | null;
-  attachments: unknown[];
+  attachments?: string[];
   display_mode: string;
   is_purchased_before: boolean;
   is_viewed: boolean;

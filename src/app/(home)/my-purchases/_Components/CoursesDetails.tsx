@@ -12,13 +12,13 @@ const CoursesDetails = async ({ id }: { id: string }) => {
 
   return (
     <div className="flex flex-col gap-6 my-6 w-full">
-      <div className="flex items-center gap-2 text-neural-800 text-sm md:text-base">
+      <div className="flex flex-wrap items-center gap-2 text-neural-800 text-sm md:text-base">
         <Link
           href="/my-classes"
           className="hover:underline flex items-center gap-1"
         >
           الدورات التدريبية
-          <MdChevronRight className="text-neural-500" />
+          <MdChevronRight className="text-neural-500 shrink-0  lg:text-xl text-lg" />
         </Link>
 
         <span className="font-bold md:text-lg text-base">

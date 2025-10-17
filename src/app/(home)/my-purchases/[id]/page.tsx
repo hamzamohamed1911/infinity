@@ -7,7 +7,7 @@ async function LessonsContent() {
   const purchase = await mypurchases();
   const purchaseData =
     purchase && "data" in purchase ? purchase.data : undefined;
-
+  console.log(purchaseData);
   return (
     <section>
       <Suspense fallback={<PurchasesSkeleton />}>

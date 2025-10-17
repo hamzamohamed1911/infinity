@@ -1,9 +1,7 @@
-
-
 // Main Exam type
 declare type ExamDetails = {
-  section_id?:number;
-  lesson_id?:number;
+  section_id?: number;
+  lesson_id?: number;
   id: number;
   name: string;
   description: string | null;
@@ -28,10 +26,11 @@ declare type ExamDetails = {
   questions: Question[];
   questions_count: number;
   user_exams_retries: UserExamRetry[];
-  answers: []; 
+  answers: QuestionAnswer[]; // ✅ هنا التعديل
+  questions: Question[];
   is_attempted: boolean;
-  image?:string;
-}
+  image?: string;
+};
 // السؤال الواحد
 declare type Question = {
   id: number;
@@ -42,7 +41,7 @@ declare type Question = {
   category_id: number | null;
   description: string | null;
   options?: Option[];
-  sub_questions?: Question[]; 
+  sub_questions?: Question[];
 };
 declare type UserExamRetry = {
   id: number;
@@ -56,7 +55,7 @@ declare type Option = {
   id: number;
   title: string;
   is_correct?: boolean;
-   url: string | null;
+  url: string | null;
 };
 type SaveAnswerPayload = {
   answer: {
@@ -69,7 +68,14 @@ type SaveAnswerPayload = {
 
 declare type QuestionAnswer = {
   question_id: number;
-  question_type: "text" | "radio" |string;
+  question_type: "text" | "radio" | string;
   answer: string | number;
   url?: string;
+};
+declare type Question = {
+  id: number;
+  title: string;
+  url?: string;
+  type_id: string;
+  options?: Option[];
 };

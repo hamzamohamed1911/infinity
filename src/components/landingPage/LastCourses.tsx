@@ -8,7 +8,6 @@ import { Button } from "../ui/button";
 import "swiper/css";
 
 const LastCourses = ({ data }: { data: CourseDetails[] }) => {
-  console.log("data courses", data);
   return (
     <section id="courses" className="py-16  ">
       <h2 className="text-3xl md:text-4xl  !leading-relaxed font-bold mb-12 text-start text-landing-primary">
