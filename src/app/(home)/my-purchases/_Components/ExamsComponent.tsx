@@ -72,7 +72,7 @@ const ExamsComponent = ({
                   <span>سؤال</span>
                 </div>
               </div>
-              <div className="flex gap-2 justify-center items-center">
+              <div className="flex gap-2 justify-center items-center ">
                 <span>
                   {type === "homework"
                     ? "ًصلاحية الواجب :"

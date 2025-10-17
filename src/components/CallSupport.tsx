@@ -17,7 +17,7 @@ const CallSupport = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="fixed z-50 lg:left-20 md:left-10 left-5 bottom-20 text-primary flex p-4 justify-center items-center text-2xl font-semibold bg-white shadow-xl gap-2 rounded-full transition-all hover:translate-y-1 duration-700">
+        <button className="fixed z-50 lg:left-20 md:left-10 left-5 lg:bottom-14 md:bottom-16 bottom-20 text-primary flex p-4 justify-center items-center text-2xl font-semibold bg-white shadow-xl gap-2 rounded-full transition-all hover:translate-y-1 duration-700">
           تواصل معنا
         </button>
       </DialogTrigger>

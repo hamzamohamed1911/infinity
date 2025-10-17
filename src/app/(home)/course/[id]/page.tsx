@@ -17,7 +17,6 @@ import PaymentDialog from "../../[unitId]/payments/_components/PaymentDialog";
 async function CourseContent({ id }: { id: string }) {
   const bundle = await GetBundle({ bundle_id: id });
   const UnitData = bundle && "data" in bundle ? bundle.data : undefined;
-
   return (
     <section className="flex flex-col gap-4 w-full p-4">
       <div className="grid md:grid-cols-12 grid-cols-1 justify-center items-center gap-8 2xl:min-h-72  min-h-60 w-full">
@@ -29,7 +28,7 @@ async function CourseContent({ id }: { id: string }) {
             <h3 className="text-neural-800 text-xl font-semibold">
               {UnitData?.name || "لا توجد بيانات"}
             </h3>
-            <p className="text-neural-800 lg:text-xl text-lg">
+            <p className="text-neural-800 lg:text-xl text-lg !leading-relaxed">
               {UnitData?.description || "لا توجد بيانات"}
             </p>
           </div>
@@ -38,24 +37,32 @@ async function CourseContent({ id }: { id: string }) {
               في الكورس هتلاقي
             </h2>
             <div className="text-neural-800 flex  flex-wrap lg:gap-6 gap-4">
-              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
-                <RiBookMarkedLine size={30} />
-                <p className="whitespace-nowrap">
-                  {UnitData?.books.length || "لا توجد بيانات"} كتاب
-                </p>
-              </span>
-              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
-                <MdEditNote size={30} />
-                <p className="whitespace-nowrap">
-                  {UnitData?.lessons.length || "لا توجد بيانات"} دروس
-                </p>
-              </span>
-              <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
-                <BiBookContent size={30} />
-                <p className="whitespace-nowrap">
-                  {UnitData?.exams.length || "لا توجد بيانات"} إمتحانات
-                </p>
-              </span>
+              {(UnitData?.books?.length ?? 0) > 0 && (
+                <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
+                  <RiBookMarkedLine size={30} />
+                  <p className="whitespace-nowrap">
+                    {UnitData?.books?.length ?? 0} كتاب
+                  </p>
+                </span>
+              )}
+
+              {(UnitData?.lessons?.length ?? 0) > 0 && (
+                <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
+                  <MdEditNote size={30} />
+                  <p className="whitespace-nowrap">
+                    {UnitData?.lessons?.length ?? 0} دروس
+                  </p>
+                </span>
+              )}
+
+              {(UnitData?.exams?.length ?? 0) > 0 && (
+                <span className="flex gap-2 items-center hover:bg-secondary-500 md:hover:p-4 hover:p-2 hover:text-white rounded-md">
+                  <BiBookContent size={30} />
+                  <p className="whitespace-nowrap">
+                    {UnitData?.exams?.length ?? 0} إمتحانات
+                  </p>
+                </span>
+              )}
             </div>
           </div>
           {UnitData && Number(UnitData.price || 0) > 0 && (
@@ -96,7 +103,7 @@ async function CourseContent({ id }: { id: string }) {
         <Card className="w-full p-4">
           <div className="space-y-3">
             {UnitData.lessons.map((lesson) =>
-              UnitData.is_purchased_before || Number(UnitData.price) === 0 ? (
+              UnitData.booking_status || Number(UnitData.price) === 0 ? (
                 <Link
                   key={lesson.id}
                   href={`/${lesson.section_id || "undefined"}/${lesson.id}`}

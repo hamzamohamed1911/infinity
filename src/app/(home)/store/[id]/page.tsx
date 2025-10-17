@@ -8,7 +8,6 @@ async function UnitsContent({ courseId }: { courseId: string }) {
   // 📦 جلب البيانات
   const courses = await GetCoursesbundles({ course_id: courseId });
   const ClassesData = courses && "data" in courses ? courses.data : [];
-  console.log("ClassesData", ClassesData);
   const availableCourses =
     ClassesData?.filter(
       (course: CourseType) =>

@@ -32,23 +32,27 @@ const AllUnits = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
                 {unit.description}
               </p>
               <div className="flex justify-between text-[#8E8E8E]">
-                <div className="flex items-center gap-1 text-sm">
-                  <MdEditNote size={20} />
-                  <span>{unit?.exams_count} </span>
-                  <span>امتحان</span>
-                </div>
-
-                <div className="flex items-center gap-1 text-sm">
-                  <LuBook size={20} />
-                  <span>{unit?.homeworks_count} </span>
-                  <span>واجب</span>
-                </div>
-
-                <div className="flex items-center gap-1 text-sm">
-                  <MdOndemandVideo size={20} />
-                  <span>{unit?.lessons?.length} </span>
-                  <span>دروس</span>
-                </div>
+                {unit?.exams_count > 0 && (
+                  <div className="flex items-center gap-1 text-sm">
+                    <MdEditNote size={20} />
+                    <span>{unit?.exams_count} </span>
+                    <span>امتحان</span>
+                  </div>
+                )}
+                {unit?.homeworks_count > 0 && (
+                  <div className="flex items-center gap-1 text-sm">
+                    <LuBook size={20} />
+                    <span>{unit?.homeworks_count} </span>
+                    <span>واجب</span>
+                  </div>
+                )}
+                {unit?.lessons_count > 0 && (
+                  <div className="flex items-center gap-1 text-sm">
+                    <MdOndemandVideo size={20} />
+                    <span>{unit?.lessons_count} </span>
+                    <span>دروس</span>
+                  </div>
+                )}
               </div>
               <div className="absolute top-2 left-2">
                 {unit?.price && unit.price > 0 && (

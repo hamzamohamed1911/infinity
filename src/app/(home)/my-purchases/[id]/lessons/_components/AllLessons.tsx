@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import PaymentDialog from "@/app/(home)/[unitId]/payments/_components/PaymentDialog";
 import { Button } from "@/components/ui/button";
+import { formatDate } from "@/lib/utils/format-date";
 
 const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
   return (
@@ -23,12 +24,19 @@ const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
             className="w-full h-80 object-contain"
           />
           <CardContent className="p-2 flex flex-col h-36 justify-between gap-3 text-start">
-            <div>
+            <div className="flex flex-col gap-2">
               <h3 className="text-lg font-semibold text-neural-800">
                 {unit.name}
               </h3>
+              {unit.end_date && (
+                <div className="flex gap-2 justify-start items-center text-neural-800 text-sm">
+                  <span>صلاحية الدرس :</span>
+                  <p>{formatDate(unit.end_date) || "لا يوجد"} </p>
+                </div>
+              )}
+
               <div className="absolute top-2 left-2">
-                {unit.price > 0 && unit.booking_status !== 1 && (
+                {Number(unit.price) > 0 && unit.booking_status !== 1 && (
                   <div className="text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
                     {unit.discount > 0 ? (
                       <>
@@ -36,7 +44,7 @@ const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
                           {unit.price} ج.م
                         </span>{" "}
                         <span className="text-green-400">
-                          {unit.price - unit.discount} ج.م
+                          {Number(unit.price) - unit.discount} ج.م
                         </span>
                       </>
                     ) : (
@@ -47,7 +55,7 @@ const AllLessons = ({ UnitsData }: { UnitsData: CourseDetails[] }) => {
               </div>
             </div>
             {unit.available_today ? (
-              unit.booking_status || unit.price === 0 ? (
+              unit.booking_status || Number(unit.price) === 0 ? (
                 // مشاهدة مباشرة
                 <Link
                   href={`/${unit?.section_id}/${unit.id}`}

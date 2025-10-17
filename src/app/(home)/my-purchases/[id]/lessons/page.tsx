@@ -6,29 +6,40 @@ import PurchasesSkeleton from "../../_Components/PurchasesSkeleton";
 
 async function LessonsContent({ courseId }: { courseId: string }) {
   const Lessons = await GetLessons({ course_id: courseId });
-  const LessonsData = Lessons && "data" in Lessons ? Lessons.data : undefined;
+  const LessonsData = Lessons && "data" in Lessons ? Lessons.data : [];
+
+  const endingSoon = LessonsData?.filter(
+    (lesson) => lesson.remaining_days <= 3 && lesson.remaining_days >= 0
+  );
+
+  const recentlyWatched = LessonsData?.filter(
+    (lesson) => lesson.views > 0 && lesson.remaining_views < lesson.views
+  );
+
   return (
     <section>
       <Tabs dir="rtl" defaultValue="all" className="w-full my-8">
         <TabsList
-          className="w-full  gap-2 
-            grid-cols-3 lg:grid sm:flex overflo-x-auto  whitespace-nowrap bg-[#F5F5F5] h-18  p-3 rounded-md"
+          className="w-full gap-2 
+            grid-cols-3 lg:grid sm:flex overflow-x-auto whitespace-nowrap bg-[#F5F5F5] h-18 p-3 rounded-md"
         >
           <TabsTrigger
             value="all"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neutral-800 rounded-md py-3"
           >
             الكل
           </TabsTrigger>
+
           <TabsTrigger
-            value="recent"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
+            value="ending"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neutral-800 rounded-md py-3"
           >
             دروس هتخلص قريب
           </TabsTrigger>
+
           <TabsTrigger
-            value="ending"
-            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
+            value="recent"
+            className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neutral-800 rounded-md py-3"
           >
             آخر دروس شوفتها
           </TabsTrigger>
@@ -36,13 +47,15 @@ async function LessonsContent({ courseId }: { courseId: string }) {
 
         <div className="mt-6">
           <TabsContent value="all">
-            <AllLessons UnitsData={LessonsData ?? []} />
+            <AllLessons UnitsData={LessonsData || []} />
           </TabsContent>
+
           <TabsContent value="ending">
-            <AllLessons UnitsData={LessonsData ?? []} />
+            <AllLessons UnitsData={endingSoon || []} />
           </TabsContent>
+
           <TabsContent value="recent">
-            <AllLessons UnitsData={LessonsData ?? []} />
+            <AllLessons UnitsData={recentlyWatched || []} />
           </TabsContent>
         </div>
       </Tabs>

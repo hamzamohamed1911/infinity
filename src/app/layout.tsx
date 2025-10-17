@@ -5,7 +5,6 @@ import type { Metadata } from "next";
 import Providers from "@/context/Providers";
 import { Toaster } from "@/components/ui/sonner";
 import { getWebConfig } from "@/lib/apis/webconfig.api";
-import CallSupport from "@/components/CallSupport";
 
 const alexandria = Alexandria({
   weight: ["400", "700"],
@@ -39,7 +38,6 @@ export default async function RootLayout({
         className={`${alexandria.variable} h-full bg-backgroundColor font-sans relative `}
       >
         <Providers>
-          <CallSupport />
           <Toaster />
           {children}
         </Providers>

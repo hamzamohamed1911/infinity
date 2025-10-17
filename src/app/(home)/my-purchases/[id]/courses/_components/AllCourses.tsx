@@ -25,44 +25,46 @@ const AllCourses = ({ CoursesData }: { CoursesData: CourseType[] }) => {
             <h3 className="text-lg font-semibold text-neural-800">
               {course.name}
             </h3>
-            <div className="flex justify-between text-neural-800">
-              <div className="flex items-center gap-1 text-sm">
-                <MdEditNote size={20} />
-                <span>{course?.exams?.length} </span>
-                <span>امتحان</span>
-              </div>
-
-              <div className="flex items-center gap-1 text-sm">
-                <LuBook size={20} />
-                <span>{course?.books?.length} </span>
-                <span>كتب</span>
-              </div>
-
-              <div className="flex items-center gap-1 text-sm">
-                <MdOndemandVideo size={20} />
-                <span>{course?.lessons?.length} </span>
-                <span>دروس</span>
-              </div>
+            <div className="flex flex-wrap gap-4 text-neural-800">
+              {(course?.exams?.length ?? 0) > 0 && (
+                <div className="flex items-center gap-1 text-sm">
+                  <MdEditNote size={20} />
+                  <span>{course?.exams?.length ?? 0}</span>
+                  <span>امتحان</span>
+                </div>
+              )}
+              {course?.books?.length > 0 && (
+                <div className="flex items-center gap-1 text-sm">
+                  <LuBook size={20} />
+                  <span>{course?.books?.length} </span>
+                  <span>كتب</span>
+                </div>
+              )}
+              {(course?.lessons?.length ?? 0) > 0 && (
+                <div className="flex items-center gap-1 text-sm">
+                  <MdOndemandVideo size={20} />
+                  <span>{course?.lessons?.length ?? 0}</span>
+                  <span>دروس</span>
+                </div>
+              )}
             </div>
             <div className="flex justify-end items-end">
-              {course?.price &&
-                course.price > 0 &&
-                !course?.is_purchased_before && (
-                  <div className="absolute top-2 left-2 text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
-                    {course?.discount && course.discount > 0 ? (
-                      <>
-                        <span className="line-through text-red-500">
-                          {course.price} ج.م
-                        </span>{" "}
-                        <span className="text-green-600">
-                          {(course.price ?? 0) - (course.discount ?? 0)} ج.م
-                        </span>
-                      </>
-                    ) : (
-                      <span>{course.price} ج.م</span>
-                    )}
-                  </div>
-                )}
+              {course?.price && course.price > 0 && !course?.booking_status && (
+                <div className="absolute top-2 left-2 text-sm font-medium p-2 w-fit self-end text-end bg-primary-500 text-white rounded-full">
+                  {course?.discount && course.discount > 0 ? (
+                    <>
+                      <span className="line-through text-red-500">
+                        {course.price} ج.م
+                      </span>{" "}
+                      <span className="text-green-600">
+                        {(course.price ?? 0) - (course.discount ?? 0)} ج.م
+                      </span>
+                    </>
+                  ) : (
+                    <span>{course.price} ج.م</span>
+                  )}
+                </div>
+              )}
             </div>
 
             {course.price === 0 ? (

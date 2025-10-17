@@ -4,7 +4,7 @@ declare type Lesson = {
   id: number;
   name: string;
   booking_status: number;
-  price: number | string | null;
+  price: number | string;
   sticky: string | number | null;
   description: string | null;
   attachments: Attachment[];
@@ -13,6 +13,11 @@ declare type Lesson = {
   thumbnail?: string;
   image?: string;
   section_id?: number;
+  remaining_days: number;
+  views: number;
+  remaining_views: number;
+  discount: number;
+  available_today: boolean;
 };
 
 declare type Section = {
@@ -102,17 +107,7 @@ declare type CourseType = {
   exams?: exam[];
   lessons?: Lesson[];
   is_purchased_before: boolean;
-};
-declare type Lesson = {
-  id: number;
-  name: string;
   booking_status: number;
-  price: number | string | null;
-  discount: number | null;
-  description: string | null;
-  attachments: unknown[];
-  display_mode: string;
-  is_purchased_before: boolean;
 };
 
 declare type CourseDetails = {
@@ -132,6 +127,10 @@ declare type CourseDetails = {
   price2: number;
   discount: number;
   available_today: boolean;
+  remaining_days: number;
+  views: number;
+  end_date: string;
+  remaining_views: number;
 };
 declare type UnitsD = {
   id: number;

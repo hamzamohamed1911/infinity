@@ -7,7 +7,9 @@ import PurchasesSkeleton from "../../_Components/PurchasesSkeleton";
 async function UnitsContent({ courseId }: { courseId: string }) {
   const courses = await GetCoursesbundles({ course_id: courseId });
   const ClassesData = courses && "data" in courses ? courses.data : undefined;
-
+  const myCourses = ClassesData?.filter(
+    (course: CourseType) => course.booking_status === 1
+  );
   return (
     <section>
       <Tabs dir="rtl" defaultValue="all" className="w-full my-8">
@@ -22,7 +24,7 @@ async function UnitsContent({ courseId }: { courseId: string }) {
             الكل
           </TabsTrigger>
           <TabsTrigger
-            value="recent"
+            value="my-courses"
             className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neural-800 rounded-md py-3"
           >
             كورساتى
@@ -39,8 +41,10 @@ async function UnitsContent({ courseId }: { courseId: string }) {
           <TabsContent value="all">
             <AllCourses CoursesData={ClassesData ?? []} />
           </TabsContent>
+          <TabsContent value="my-courses">
+            <AllCourses CoursesData={myCourses ?? []} />
+          </TabsContent>
           <TabsContent value="ending">ending</TabsContent>
-          <TabsContent value="recent">recent</TabsContent>
         </div>
       </Tabs>
     </section>
