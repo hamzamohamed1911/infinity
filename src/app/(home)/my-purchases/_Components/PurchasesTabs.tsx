@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
 import { placeholder } from "../../../../../public";
+import NoDataMessage from "@/components/NoDataMessage";
 
 export default function PurchasesTabs({ data }: { data: MyPurchases }) {
   const { lesson = [], bundle = [], exam = [], book = [] } = data;
@@ -74,11 +75,7 @@ export default function PurchasesTabs({ data }: { data: MyPurchases }) {
 
 function PurchaseGrid({ purchases }: { purchases: Product[] }) {
   if (!purchases.length) {
-    return (
-      <p className="text-center text-neutral-800 py-10">
-        لا يوجد عناصر في هذا القسم
-      </p>
-    );
+    return <NoDataMessage text="لا يوجد عناصر في هذا القسم" />;
   }
 
   // 🟢 خريطة الأنواع بالعربي

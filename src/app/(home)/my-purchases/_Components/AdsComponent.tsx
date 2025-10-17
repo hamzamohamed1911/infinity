@@ -3,18 +3,23 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
 import Image from "next/image";
-
+import "swiper/css/autoplay";
+import { Pagination, Autoplay } from "swiper/modules";
 const AdsComponent = ({ adsData }: { adsData: ads[] }) => {
   return (
     <div className=" w-full container mx-auto  justify-center items-center p-4">
       <Swiper
-        modules={[Pagination]}
+        modules={[Pagination, Autoplay]}
         spaceBetween={30}
         slidesPerView={1}
         pagination={{ clickable: true }}
         loop={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        speed={1000}
       >
         {adsData.map((ad) => (
           <SwiperSlide key={ad.id}>
