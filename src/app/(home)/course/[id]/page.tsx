@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { RiBookMarkedLine } from "react-icons/ri";
-import { MdEditNote } from "react-icons/md";
+import { MdChevronRight, MdEditNote } from "react-icons/md";
 import { BiBookContent } from "react-icons/bi";
 import { Card } from "@/components/ui/card";
-
 import { ChevronRight, ExternalLink } from "lucide-react";
 import UnitSkeleton from "@/components/UnitSkeleton";
 import { Suspense } from "react";
@@ -19,15 +18,20 @@ async function CourseContent({ id }: { id: string }) {
   const UnitData = bundle && "data" in bundle ? bundle.data : undefined;
   return (
     <section className="flex flex-col gap-4 w-full p-4">
+      <div className="flex flex-wrap items-center gap-2 text-neural-800 text-sm md:text-base">
+        <Link href="/" className="hover:underline flex items-center gap-1">
+          الرئيسية
+          <MdChevronRight className="text-neural-500 shrink-0  lg:text-xl text-lg" />
+        </Link>
+
+        <span className="font-bold md:text-lg text-base">{UnitData?.name}</span>
+      </div>
       <div className="grid md:grid-cols-12 grid-cols-1 justify-center items-center gap-8 2xl:min-h-72  min-h-60 w-full">
         <div className="flex flex-col gap-6 col-span-5">
           <div className="flex flex-col gap-4">
             <h2 className="text-[#8E8E8E] text-xl font-semibold">
               تفاصيل الكورس
             </h2>
-            <h3 className="text-neural-800 text-xl font-semibold">
-              {UnitData?.name || "لا توجد بيانات"}
-            </h3>
             <p className="text-neural-800 lg:text-xl text-lg !leading-relaxed">
               {UnitData?.description || "لا توجد بيانات"}
             </p>
@@ -68,13 +72,14 @@ async function CourseContent({ id }: { id: string }) {
           {UnitData && Number(UnitData.price || 0) > 0 && (
             <Dialog>
               <DialogTrigger asChild>
-                <div className="w-full h-full flex justify-end items-end">
+                <div className="w-full h-full flex justify-center items-end">
                   <Button
-                    className="bg-primary-600  hover:bg-primary-500 text-white px-6 py-4 rounded-full     transition-all duration-300 cursor-pointer"
+                    className="bg-primary-600 w-full h-12 hover:bg-primary-500 text-white px-6 py-4 rounded-md     transition-all duration-300 cursor-pointer"
                     asChild
                   >
                     <span className="flex items-center gap-2">
-                      اشترى الان
+                      شراء الكورس
+                      <span>{UnitData.price} ج.م</span>
                       <ExternalLink className="w-4 h-4" />
                     </span>
                   </Button>

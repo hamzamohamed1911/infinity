@@ -19,7 +19,6 @@ async function UnitContent({
   const ExamData = Exam && "data" in Exam ? Exam.data : undefined;
   const Unit = await GetUnit({ unit_id: unitId });
   const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
-  // دالة لتنسيق التاريخ والوقت
 
   function formatDateTime(dateTimeString: string) {
     const dateObj = new Date(dateTimeString);
@@ -42,7 +41,6 @@ async function UnitContent({
       )}
       <Card className="m-0 ">
         <CardContent className="w-full  flex flex-col lg:gap-6 gap-4 m-0">
-          {/* عرض معلومات الامتحان */}
           {ExamData && (
             <div className="mt-6">
               <div className="flex items-center gap-2 mb-4">
@@ -171,7 +169,7 @@ export default async function Page({
 }: {
   params: Promise<{ unitId: string; examId: string }>;
 }) {
-  const { unitId, examId } = await params; // لازم await هنا
+  const { unitId, examId } = await params;
 
   return (
     <Suspense fallback={<AssignmentSkeleton />}>

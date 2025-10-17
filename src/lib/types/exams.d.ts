@@ -26,10 +26,11 @@ declare type ExamDetails = {
   questions: Question[];
   questions_count: number;
   user_exams_retries: UserExamRetry[];
-  answers: QuestionAnswer[]; // ✅ هنا التعديل
+  answers: QuestionAnswer[];
   questions: Question[];
   is_attempted: boolean;
   image?: string;
+  section_name: string;
 };
 // السؤال الواحد
 declare type Question = {

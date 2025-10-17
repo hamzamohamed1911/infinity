@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -15,6 +15,7 @@ import { AiOutlineCloudDownload } from "react-icons/ai";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useSession } from "next-auth/react";
 import { saveAnswer, submitAnswer } from "@/lib/apis/submit-exam.api";
+import { useRouter } from "next/navigation";
 
 export default function ExamComponent({
   examData,
@@ -26,6 +27,7 @@ export default function ExamComponent({
   const { data: session } = useSession();
   const token = session?.user?.token;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const router = useRouter();
   const [answers, setAnswers] = useState<Record<number, string | number>>({});
   const [imageFiles, setImageFiles] = useState<Record<number, File | null>>({});
   const [timeRemaining, setTimeRemaining] = useState(examData.period * 60);
@@ -33,24 +35,13 @@ export default function ExamComponent({
   const [imagePreviews, setImagePreviews] = useState<Record<number, string>>(
     {}
   );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [visitedQuestions, setVisitedQuestions] = useState<Set<number>>(
     new Set()
   );
 
   // المؤقت
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeRemaining((prev) => {
-        if (prev <= 0) {
-          clearInterval(timer);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -142,26 +133,48 @@ export default function ExamComponent({
     }
   };
 
-  const handleSubmitExam = async () => {
-    const formData = new FormData();
-    examData.questions.forEach((q, index) => {
-      const answerValue = answers[q.id] ?? "";
+  const handleSubmitExam = useCallback(async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
-      formData.append(`answers[${index}][question_id]`, q.id.toString());
-      formData.append(`answers[${index}][question_type]`, q.type_id);
-      formData.append(`answers[${index}][answer]`, answerValue.toString());
+    try {
+      const formData = new FormData();
 
-      if (q.type_id !== "radio") {
+      examData.questions.forEach((q, index) => {
+        const answerValue = answers[q.id] ?? "";
+        formData.append(`answers[${index}][question_id]`, q.id.toString());
+        formData.append(`answers[${index}][question_type]`, q.type_id);
+        formData.append(`answers[${index}][answer]`, answerValue.toString());
+
         const file = imageFiles[q.id];
         if (file) {
           formData.append(`answers[${index}][url]`, file);
         }
-      }
-    });
+      });
 
-    await submitMutation.mutateAsync(formData);
-  };
+      await submitMutation.mutateAsync(formData);
+      router.back();
+    } catch (err) {
+      console.error("فشل في الإرسال:", err);
+      router.back();
+    }
+  }, [isSubmitting, answers, imageFiles, examData, router, submitMutation]);
+  useEffect(() => {
+    if (isSubmitting) return;
 
+    const timer = setInterval(() => {
+      setTimeRemaining((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          handleSubmitExam();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isSubmitting, handleSubmitExam]);
   const confirmSubmitExam = async () => {
     await handleSubmitExam();
     setOpenDialog(false);

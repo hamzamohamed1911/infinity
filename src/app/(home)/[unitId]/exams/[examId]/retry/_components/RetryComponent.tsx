@@ -113,30 +113,27 @@ export default function RetryComponent({
                 {currentQuestion.options?.map((option) => {
                   const isSelected =
                     Number(currentAnswer?.answer) === option.id;
-                  const isCorrect = option.is_correct === true;
+                  const isCorrect = Number(option.is_correct) === 1;
 
-                  // نحدد اللون والعلامة حسب الحالة
                   let borderColor = "border-gray-200";
                   let bgColor = "bg-white";
                   let Icon = null;
 
                   if (isSelected && isCorrect) {
-                    borderColor = "border-secondary-600";
-                    bgColor = "bg-secondary-50";
-                    Icon = (
-                      <CheckCircle className="text-secondary-600" size={20} />
-                    );
+                    // الطالب اختار الصح ✅
+                    borderColor = "border-green-600";
+                    bgColor = "bg-green-50";
+                    Icon = <CheckCircle className="text-green-600" size={20} />;
                   } else if (isSelected && !isCorrect) {
+                    // الطالب اختار غلط ❌
                     borderColor = "border-red-600";
                     bgColor = "bg-red-50";
                     Icon = <XCircle className="text-red-600" size={20} />;
                   } else if (!isSelected && isCorrect) {
-                    // لو هو الصح والطالب ما اختاروش
-                    borderColor = "border-secondary-600";
-                    bgColor = "bg-secondary-50";
-                    Icon = (
-                      <CheckCircle className="text-secondary-600" size={20} />
-                    );
+                    // الصح الحقيقي (الطالب ما اختاروش) ✅
+                    borderColor = "border-green-600";
+                    bgColor = "bg-green-50";
+                    Icon = <CheckCircle className="text-green-600" size={20} />;
                   }
 
                   return (

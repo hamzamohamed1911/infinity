@@ -1,17 +1,12 @@
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { Card } from "@/components/ui/card";
+import { TiAttachmentOutline } from "react-icons/ti";
 
 import { GetUnit, GetLesson } from "@/lib/apis/course.api";
 import LessonSkeleton from "@/components/LessonSkeleton";
 import { Suspense } from "react";
 import { MdEditNote } from "react-icons/md";
 import { BiBookContent } from "react-icons/bi";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { MdOndemandVideo } from "react-icons/md";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -26,6 +21,7 @@ import PaymentDialog from "../payments/_components/PaymentDialog";
 import Image from "next/image";
 import { alertSvg } from "../../../../../public";
 import { Metadata } from "next";
+import YoutubePlayer from "./_components/YoutubePlayer";
 
 export async function generateMetadata({
   params,
@@ -64,7 +60,6 @@ async function LessonContent({
   const UnitData = Unit?.data;
   const LessonData = lesson?.data;
 
-  console.log(LessonData);
   if (!LessonData) {
     const preRequisites = lesson?.preRequisites || [];
     if (preRequisites.length > 0) {
@@ -123,50 +118,65 @@ async function LessonContent({
       )}
       <div className="grid md:grid-cols-12 grid-cols-1 lg:gap-8 md:gap-6 gap-4">
         <div className="col-span-12 md:col-span-7 flex flex-col gap-4">
-          <Tabs dir="rtl" defaultValue="player1" className="w-full my-8">
+          <Tabs dir="rtl" defaultValue="player" className="w-full my-8">
             <TabsList
               className="w-full bg-transparent gap-2 justify-start
       flex overflo-x-auto  whitespace-nowrap"
             >
               <TabsTrigger
-                value="player1"
+                value="player"
                 className="data-[state=active]:bg-[#3F7414] data-[state=active]:font-semibold  md:text-md text-sm data-[state=active]:text-white data-[state=active]:border-none border border-[#99E35D] text-[#3F7414] rounded-md py-2 px-4"
               >
                 مشغل 1
               </TabsTrigger>
-              <TabsTrigger
-                value="player2"
-                className="data-[state=active]:bg-[#3F7414] data-[state=active]:font-semibold md:text-md text-sm data-[state=active]:text-white data-[state=active]:border-none border border-[#99E35D] text-[#3F7414] rounded-md py-2 px-4"
-              >
-                مشغل 2
-              </TabsTrigger>
-              <TabsTrigger
-                value="player3"
-                className="data-[state=active]:bg-[#3F7414] data-[state=active]:font-semibold  md:text-md text-sm data-[state=active]:text-white data-[state=active]:border-none border border-[#99E35D] text-[#3F7414] rounded-md py-2 px-4"
-              >
-                مشغل 3
-              </TabsTrigger>
+              {LessonData.vimeo_id && (
+                <TabsTrigger
+                  value="vimeo"
+                  className="data-[state=active]:bg-[#3F7414] data-[state=active]:font-semibold md:text-md text-sm data-[state=active]:text-white data-[state=active]:border-none border border-[#99E35D] text-[#3F7414] rounded-md py-2 px-4"
+                >
+                  مشغل 2
+                </TabsTrigger>
+              )}
+
+              {LessonData.google_drive_id && (
+                <TabsTrigger
+                  value="google-drive"
+                  className="data-[state=active]:bg-[#3F7414] data-[state=active]:font-semibold  md:text-md text-sm data-[state=active]:text-white data-[state=active]:border-none border border-[#99E35D] text-[#3F7414] rounded-md py-2 px-4"
+                >
+                  مشغل 3
+                </TabsTrigger>
+              )}
+              {LessonData.encrypted_video_link && (
+                <TabsTrigger
+                  value="youtube"
+                  className="data-[state=active]:bg-[#3F7414] data-[state=active]:font-semibold  md:text-md text-sm data-[state=active]:text-white data-[state=active]:border-none border border-[#99E35D] text-[#3F7414] rounded-md py-2 px-4"
+                >
+                  مشغل 4
+                </TabsTrigger>
+              )}
             </TabsList>
 
             <div className="mt-6">
-              <TabsContent value="player1">
-                {" "}
+              <TabsContent value="player">
                 <div className="w-full h-full relative 2xl:min-h-96  min-h-72">
                   <Player1 encrypted={LessonData.encrypted_video_link} />
                 </div>
               </TabsContent>
-              <TabsContent value="player2">
+              <TabsContent value="vimeo">
                 <Player2 encrypted={LessonData.encrypted_video_link} />
               </TabsContent>
-              <TabsContent value="player3">
+              <TabsContent value="google-drive">
                 <Player3 googleDriveId={LessonData.google_drive_id} />
+              </TabsContent>
+              <TabsContent value="youtube">
+                <YoutubePlayer encrypted={LessonData.encrypted_video_link} />
               </TabsContent>
             </div>
           </Tabs>
 
           <Card className="w-full lg:p-8 md:p-6 p-4 flex flex-col lg:gap-6 gap-4">
             <div className="flex flex-col gap-4">
-              <h2 className="text-[#8E8E8E] text-lg font-semibold">
+              <h2 className="text-neural-900 text-lg font-semibold">
                 تفاصيل الدورة
               </h2>
 
@@ -185,7 +195,7 @@ async function LessonContent({
               {LessonData?.enable_assessments && (
                 <>
                   {/* امتحان المحاضرة */}
-                  <div className="text-[#8E8E8E] whitespace-nowrap lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
+                  <div className="text-neural-900 whitespace-nowrap lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
                     إمتحانات المحاضرة:
                     <div className="text-[#3187FF] underline flex gap-2 flex-wrap items-center cursor-pointer">
                       <MdEditNote className="shrik-0" size={24} />
@@ -205,7 +215,7 @@ async function LessonContent({
                     </ol>
                   </div>
                   {/* واجب المحاضرة */}
-                  <div className="text-[#8E8E8E] lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
+                  <div className="text-neural-900 lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
                     واجب المحاضرة:
                     <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
                       <BiBookContent size={24} />
@@ -223,6 +233,27 @@ async function LessonContent({
                         </li>
                       ))}
                     </ol>
+                  </div>
+                  <div className="text-neural-900 lg:text-xl md:text-lg text-md flex flex-col gap-4 ">
+                    <p>المرفقات</p>
+                    <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
+                      <TiAttachmentOutline size={24} />
+                      <span>{LessonData?.attachments.length} مرفق</span>
+                    </div>
+                    <ul className="list-disc list-inside space-y-1 flex flex-col gap-2">
+                      {LessonData.attachments.map((url, i) => (
+                        <li key={i}>
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-secondary-900 underline text-lg hover:text-secondary-800 transition-colors"
+                          >
+                            تحميل المرفق {i + 1}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </>
               )}
@@ -248,32 +279,29 @@ async function LessonContent({
         <div className="col-span-12 md:col-span-5">
           {LessonData?.sub_lessons.length > 0 ? (
             <Card className="w-full p-4">
-              <Accordion type="single" collapsible className="w-full">
-                <div className="space-y-3 ">
-                  {LessonData?.sub_lessons.map((lesson: SubLesson) => (
-                    <AccordionItem key={lesson.id} value={lesson.id.toString()}>
-                      <AccordionTrigger className="lg:text-lg text-md border px-4 py-4 rounded-lg hover:border-primary hover:text-primary group transition-all">
-                        {lesson.name}
-                      </AccordionTrigger>
-                      <AccordionContent className="border border-b-0 pb-0 text-primary lg:text-md text-sm">
-                        <Link
-                          href={`/${unitId}/${lesson.id}`}
-                          className="border-[1px] border-primary p-4 flex justify-between gap-2"
-                        >
-                          <div className="flex gap-2">
-                            <MdOndemandVideo size={24} />
-                            <span> {lesson.name} </span>
-                          </div>
-                          <Checkbox
-                            className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-white"
-                            checked={lesson.is_viewed}
-                          />
-                        </Link>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
+              <div className="flex flex-col  gap-3 ">
+                <div className="flex gap-2 items-center">
+                  <MdOndemandVideo size={24} />
+                  <span className="text-neural-900 text-xl"> دروس فرعية </span>
                 </div>
-              </Accordion>
+                {LessonData?.sub_lessons.map((lesson: SubLesson) => (
+                  <div key={lesson.id}>
+                    <Link
+                      href={`/${unitId}/${lesson.id}`}
+                      className="border-[1px] border-primary p-4 flex justify-between gap-2 text-primary"
+                    >
+                      <div className="flex gap-2">
+                        <MdOndemandVideo size={24} />
+                        <span> {lesson.name} </span>
+                      </div>
+                      <Checkbox
+                        className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-white"
+                        checked={lesson.is_viewed}
+                      />
+                    </Link>
+                  </div>
+                ))}
+              </div>
             </Card>
           ) : (
             <div className="h-[30vh] flex justify-center items-center"></div>

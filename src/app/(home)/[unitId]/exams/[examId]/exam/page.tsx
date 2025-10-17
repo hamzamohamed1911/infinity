@@ -6,7 +6,6 @@ import ExamComponent from "../../../[lessonId]/_components/ExamComponent";
 async function Exam({ examId }: { examId: string }) {
   const Exam = await GetExam({ exam_id: examId });
   const ExamData = Exam && "data" in Exam ? Exam.data : undefined;
-
   return (
     <section className="flex flex-col gap-4 w-full">
       <p className="text-neural-800  lg:text-xl md:text-lg text-md font-semibold py-2 px-4">
