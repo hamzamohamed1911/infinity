@@ -81,7 +81,6 @@ export async function GetClassesData({
   teacherId: number;
 }): Promise<APIResponse<Dclasses[]>> {
   const token = await getAuthToken();
-  console.log("token", token);
   const response = await fetch(`${API_URL}api/v1/teacher-course/${teacherId}`, {
     method: "GET",
     cache: "no-cache",

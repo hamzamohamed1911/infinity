@@ -1,6 +1,7 @@
 "use server";
 import { getAuthToken } from "../utils/auth-token";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export async function chargeCode({
   model_type,
   model_id,
@@ -20,7 +21,6 @@ export async function chargeCode({
     if (code) {
       formData.append("code", code);
     }
-    console.log(`${API_URL}api/v1/charge-by-code`);
 
     const token = await getAuthToken();
     const res = await fetch(`${API_URL}api/v1/charge-by-code`, {
@@ -28,11 +28,11 @@ export async function chargeCode({
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
-        "Content-Type": "application/json",
         type: "web",
       },
       body: formData,
     });
+
     if (!res.ok) {
       let errorMessage = `Failed: ${res.status}`;
       try {
@@ -45,7 +45,15 @@ export async function chargeCode({
       throw new Error(errorMessage);
     }
 
-    return await res.json();
+    // ✅ هنا بنشوف نوع المحتوى
+    const contentType = res.headers.get("content-type");
+
+    if (contentType && contentType.includes("application/json")) {
+      return await res.json();
+    } else {
+      const html = await res.text();
+      return { data: { page: html } };
+    }
   } catch (error) {
     console.error("Error in chargeCode:", error);
     throw error;

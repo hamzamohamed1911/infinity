@@ -34,7 +34,7 @@ export default function YoutubePlayer({ encrypted }: { encrypted: string }) {
     <iframe
       width="100%"
       height="100%"
-      className="w-full 2xl:min-h-96 min-h-72 mt-4"
+      className="w-full 2xl:min-h-96 min-h-72 mt-4 md:rounded-lg rounded-none"
       src={embedUrl}
       title="YouTube Video"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

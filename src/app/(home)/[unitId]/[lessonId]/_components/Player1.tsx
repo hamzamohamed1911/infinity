@@ -12,7 +12,7 @@ export default function Player1({ encrypted }: { encrypted: string }) {
 
   return (
     <div className="relative w-full 2xl:min-h-96 min-h-72 mt-4">
-      <div className="absolute inset-0 bg-black flex items-center justify-center rounded-lg">
+      <div className="absolute inset-0 bg-black flex items-center justify-center md:rounded-lg rounded-none">
         <button
           onClick={handleClick}
           className="text-white px-6 py-3 bg-primary rounded-full font-bold hover:bg-primary-400 transition flex justify-center items-center gap-2"

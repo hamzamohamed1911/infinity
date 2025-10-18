@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { chargeCode } from "@/lib/apis/payments";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -26,15 +27,23 @@ const CodeForm = ({ model_type, model_id }: FawryFormProps) => {
     resolver: zodResolver(CodeSchema),
     mode: "onChange",
   });
+  const router = useRouter();
 
-  // ✅ Mutation (ارسال البيانات للسيرفر)
   const { mutate, isPending, error } = useMutation({
     mutationFn: chargeCode,
-    onSuccess: () => {
+    onSuccess: async (data) => {
       reset();
-    },
-    onError: (err) => {
-      console.error("Form submission error:", err);
+      if (data?.data?.page) {
+        await fetch("/api/payments/store-html", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ html: data.data.page }),
+        });
+
+        router.push("/payment");
+      } else {
+        alert("تم الدفع بنجاح");
+      }
     },
   });
 

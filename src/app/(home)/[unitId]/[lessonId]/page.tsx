@@ -109,16 +109,22 @@ async function LessonContent({
   }
 
   return (
-    <section className="flex flex-col gap-4 w-full p-4">
+    <section className="flex flex-col gap-4 w-full md:p-4 p-0">
       {LessonData && UnitData && (
-        <BreadCrumb
-          lessonData={LessonData}
-          unitData={UnitData as CourseDetails}
-        />
+        <div className="p-4">
+          <BreadCrumb
+            lessonData={LessonData}
+            unitData={UnitData as CourseDetails}
+          />
+        </div>
       )}
       <div className="grid md:grid-cols-12 grid-cols-1 lg:gap-8 md:gap-6 gap-4">
         <div className="col-span-12 md:col-span-7 flex flex-col gap-4">
-          <Tabs dir="rtl" defaultValue="player" className="w-full my-8">
+          <Tabs
+            dir="rtl"
+            defaultValue="player"
+            className="w-full lg:my-8 md:my-6 my-4"
+          >
             <TabsList
               className="w-full bg-transparent gap-2 justify-start
       flex overflo-x-auto  whitespace-nowrap"
@@ -174,7 +180,7 @@ async function LessonContent({
             </div>
           </Tabs>
 
-          <Card className="w-full lg:p-8 md:p-6 p-4 flex flex-col lg:gap-6 gap-4">
+          <Card className="w-full lg:p-8 md:p-6 p-0 md:flex flex-col lg:gap-6 gap-4  hidden">
             <div className="flex flex-col gap-4">
               <h2 className="text-neural-900 text-lg font-semibold">
                 تفاصيل الدورة
@@ -216,7 +222,7 @@ async function LessonContent({
                   </div>
                   {/* واجب المحاضرة */}
                   <div className="text-neural-900 lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
-                    واجب المحاضرة:
+                    واجب المحاضرة :
                     <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
                       <BiBookContent size={24} />
                       <span>{LessonData?.sub_homeworks.length} واجبات</span>
@@ -275,8 +281,115 @@ async function LessonContent({
               </Button>
             </div>
           </Card>
+          <div className="w-full  p-4 md:hidden flex flex-col lg:gap-6 gap-4  ">
+            <p className="text-neural-800 text-xl ">
+              {LessonData?.name || "لا توجد بيانات"}
+            </p>
+            {/* ✅ Tabs بسيطة من shadcn */}
+            <Tabs
+              dir="rtl"
+              defaultValue="lectures"
+              className="w-full mt-2 !shadow-none"
+            >
+              <TabsList className="bg-transparent !shadow-none flex gap-6 border-b  w-full justify-start">
+                <TabsTrigger
+                  value="lectures"
+                  className="data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-primary text-neural-700 font-medium rounded-none pb-2 transition-all duration-300 !shadow-none"
+                >
+                  دروس فرعية
+                </TabsTrigger>
+                <TabsTrigger
+                  value="attachments"
+                  className="data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-primary text-neural-700 font-medium rounded-none pb-2 transition-all duration-300 !shadow-none"
+                >
+                  المرفقات
+                </TabsTrigger>
+              </TabsList>
+
+              {/* المحتوى */}
+              <div className="mt-4">
+                <TabsContent value="lectures">
+                  {LessonData?.sub_lessons.map(
+                    (lesson: SubLesson, index: number) => (
+                      <div key={lesson.id}>
+                        <Link
+                          href={`/${unitId}/${lesson.id}`}
+                          className="p-4 flex justify-between gap-2 text-primary "
+                        >
+                          <div className="flex gap-2 items-center">
+                            <span className="font-bold text-primary">
+                              {index + 1}
+                            </span>
+                            <MdOndemandVideo
+                              size={22}
+                              className="text-primary"
+                            />
+                            <span className="text-md">{lesson.name}</span>
+                          </div>
+                          <Checkbox
+                            className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-white"
+                            checked={lesson.is_viewed}
+                          />
+                        </Link>
+                      </div>
+                    )
+                  )}
+                </TabsContent>
+
+                <TabsContent
+                  className="flex flex-col gap-4"
+                  value="attachments"
+                >
+                  <div className="text-neural-900 text-lg flex flex-col gap-4 ">
+                    واجب المحاضرة:
+                    <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
+                      <BiBookContent size={24} />
+                      <span className="text-md">
+                        {LessonData?.sub_homeworks.length} واجبات
+                      </span>
+                    </div>
+                    <ol className="list-decimal ps-5 flex flex-col gap-2 w-full">
+                      {LessonData?.sub_homeworks.map((homework) => (
+                        <li key={homework.id}>
+                          <Link
+                            href={`/${unitId}/home-works/${homework.id}`}
+                            className="text-secondary-900 text-sm underline  hover:text-secondary-800 transition-colors"
+                          >
+                            {homework.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                  <div className="text-neural-900 text-lg flex flex-col gap-4 ">
+                    <p> المرفقات :</p>
+                    <div className="text-primary underline flex gap-2 items-center cursor-pointer">
+                      <TiAttachmentOutline size={24} />
+                      <span className="text-md">
+                        {LessonData?.attachments.length} مرفق
+                      </span>
+                    </div>
+                    <ul className="list-disc list-inside space-y-1 flex flex-col gap-2">
+                      {LessonData.attachments.map((url, i) => (
+                        <li key={i}>
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-secondary-900 text-sm underline  hover:text-secondary-800 transition-colors"
+                          >
+                            تحميل المرفق {i + 1}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </TabsContent>
+              </div>
+            </Tabs>
+          </div>
         </div>
-        <div className="col-span-12 md:col-span-5">
+        <div className="col-span-12 md:col-span-5 md:block hidden">
           {LessonData?.sub_lessons.length > 0 ? (
             <Card className="w-full p-4">
               <div className="flex flex-col  gap-3 ">
@@ -316,7 +429,7 @@ export default async function Page({
 }: {
   params: Promise<{ unitId: string; lessonId: string }>;
 }) {
-  const { unitId, lessonId } = await params; // لازم await هنا
+  const { unitId, lessonId } = await params;
 
   return (
     <Suspense fallback={<LessonSkeleton />}>
