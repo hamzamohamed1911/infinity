@@ -82,32 +82,42 @@ const ExamsComponent = ({
                 <p>{formatDate(exam.end_date) || "لا يوجد"} </p>
               </div>
             </div>
-            {exam.user_exams_retries?.length > 0 ? (
-              <Link
-                href={`/${exam.section_id}${
-                  type === "homework" ? "/home-works" : "/exams"
-                }/${exam.id}`}
-                className="group flex mt-auto items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
-              >
-                حله تاني
-                <IoIosArrowBack
-                  size={25}
-                  className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
-                />
-              </Link>
+            {exam.retries > 0 ? (
+              exam.user_exams_retries?.length > 0 ? (
+                <Link
+                  href={`/${exam.section_id}${
+                    type === "homework" ? "/home-works" : "/exams"
+                  }/${exam.id}`}
+                  className="group flex mt-auto items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
+                >
+                  حله تاني
+                  <IoIosArrowBack
+                    size={25}
+                    className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
+                  />
+                </Link>
+              ) : (
+                <Link
+                  href={`/${exam.section_id}${
+                    type === "homework" ? "/home-works" : "/exams"
+                  }/${exam.id}`}
+                  className="group flex mt-auto items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
+                >
+                  حل يا بطل
+                  <IoIosArrowBack
+                    size={25}
+                    className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
+                  />
+                </Link>
+              )
             ) : (
-              <Link
-                href={`/${exam.section_id}${
-                  type === "homework" ? "/home-works" : "/exams"
-                }/${exam.id}`}
-                className="group flex mt-auto items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
+              <button
+                disabled
+                className="group flex mt-auto items-center justify-center text-lg gap-2 text-gray-400 border-[1px] border-gray-300 w-full h-12 rounded-lg cursor-not-allowed"
               >
-                حل يا بطل
-                <IoIosArrowBack
-                  size={25}
-                  className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
-                />
-              </Link>
+                لا توجد محاولات
+                <IoIosArrowBack size={25} className="opacity-50" />
+              </button>
             )}
           </CardContent>
         </Card>

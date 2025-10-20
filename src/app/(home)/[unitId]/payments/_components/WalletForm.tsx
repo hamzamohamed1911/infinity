@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 interface FawryFormProps {
   model_type: string;
-  model_id: string | number;
+  model_id: number;
 }
 
 const WalletForm = ({ model_type, model_id }: FawryFormProps) => {
@@ -38,7 +38,7 @@ const WalletForm = ({ model_type, model_id }: FawryFormProps) => {
   const onSubmit = () => {
     mutate({
       model_type: model_type,
-      model_id: String(model_id),
+      model_id: model_id,
       provider: "wallet",
     });
   };
