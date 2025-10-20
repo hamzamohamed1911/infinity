@@ -32,7 +32,7 @@ async function UnitContent({
     });
     return { date, time };
   }
-
+  console.log("ExamData", ExamData);
   return (
     <section className="flex flex-col gap-4 w-full p-4">
       {ExamData && UnitData && (
@@ -131,15 +131,17 @@ async function UnitContent({
                       )}
 
                       {/* الزرار */}
-                      <div className="mt-2 w-full flex justify-end">
-                        <Link
-                          href={`${examId}/retry?exam=${exam.id}`}
-                          type="button"
-                          className="px-4 py-2 rounded-md bg-primary-500 text-white text-sm hover:bg-primary-600 transition"
-                        >
-                          اظهار الإجابات
-                        </Link>
-                      </div>
+                      {ExamData.show_answers === 1 && (
+                        <div className="mt-2 w-full flex justify-end">
+                          <Link
+                            href={`${examId}/retry?exam=${exam.id}`}
+                            type="button"
+                            className="px-4 py-2 rounded-md bg-primary-500 text-white text-sm hover:bg-primary-600 transition"
+                          >
+                            اظهار الإجابات
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   );
                 })}

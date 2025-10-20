@@ -24,6 +24,7 @@ export async function GetProfileData(): Promise<APIResponse<ProfileApiData>> {
     },
     next: { tags: ["profile"] },
   });
+  console.log("auth token", token);
   const payload: APIResponse<ProfileApiData> = await response.json();
   if (payload?.message === "Unauthenticated.") {
     redirect("/logout");

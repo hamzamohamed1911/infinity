@@ -14,7 +14,7 @@ import WalletForm from "./WalletForm";
 
 interface DialogTabsProps {
   model_type: string;
-  model_id: string | number;
+  model_id: number;
   name?: string;
 }
 const PaymentDialog = ({ model_type, model_id, name }: DialogTabsProps) => {

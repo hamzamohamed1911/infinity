@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 interface FawryFormProps {
   model_type: string;
-  model_id: string | number;
+  model_id: number;
 }
 
 const FawryForm = ({ model_type, model_id }: FawryFormProps) => {
@@ -16,8 +16,11 @@ const FawryForm = ({ model_type, model_id }: FawryFormProps) => {
     mutationFn: chargeCode,
     onSuccess: async (data) => {
       reset();
-      if (data?.data?.page) {
-        // نحفظ الـ HTML في الـ API route
+      if (
+        data?.data?.page &&
+        typeof data.data.page === "string" &&
+        data.data.page.trim() !== ""
+      ) {
         await fetch("/api/payments/store-html", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -38,7 +41,7 @@ const FawryForm = ({ model_type, model_id }: FawryFormProps) => {
   const onSubmit = () => {
     mutate({
       model_type: model_type,
-      model_id: String(model_id),
+      model_id: Number(model_id),
       provider: "fawry",
     });
   };

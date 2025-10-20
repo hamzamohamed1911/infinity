@@ -16,7 +16,7 @@ import PaymentDialog from "../../[unitId]/payments/_components/PaymentDialog";
 async function CourseContent({ id }: { id: string }) {
   const bundle = await GetBundle({ bundle_id: id });
   const UnitData = bundle && "data" in bundle ? bundle.data : undefined;
-  console.log("bundle", bundle);
+  console.log("UnitData", UnitData);
   return (
     <section className="flex flex-col gap-4 w-full p-4">
       <div className="flex flex-wrap items-center gap-2 text-neural-800 text-sm md:text-base">
@@ -70,29 +70,31 @@ async function CourseContent({ id }: { id: string }) {
               )}
             </div>
           </div>
-          {UnitData && Number(UnitData.price || 0) > 0 && (
-            <Dialog>
-              <DialogTrigger asChild>
-                <div className="w-full h-full flex justify-center items-end">
-                  <Button
-                    className="bg-primary-600 w-full h-12 hover:bg-primary-500 text-white px-6 py-4 rounded-md     transition-all duration-300 cursor-pointer"
-                    asChild
-                  >
-                    <span className="flex items-center gap-2">
-                      شراء الكورس
-                      <span>{UnitData.price} ج.م</span>
-                      <ExternalLink className="w-4 h-4" />
-                    </span>
-                  </Button>
-                </div>
-              </DialogTrigger>
-              <PaymentDialog
-                name={UnitData.name}
-                model_type={UnitData.type ? UnitData.type : "bundle"}
-                model_id={UnitData.id}
-              />
-            </Dialog>
-          )}
+          {UnitData &&
+            Number(UnitData.price || 0) > 0 &&
+            UnitData.booking_status === 0 && (
+              <Dialog>
+                <DialogTrigger asChild>
+                  <div className="w-full h-full flex justify-center items-end">
+                    <Button
+                      className="bg-primary-600 w-full h-12 hover:bg-primary-500 text-white px-6 py-4 rounded-md transition-all duration-300 cursor-pointer"
+                      asChild
+                    >
+                      <span className="flex items-center gap-2">
+                        شراء الكورس
+                        <span>{UnitData.price} ج.م</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </span>
+                    </Button>
+                  </div>
+                </DialogTrigger>
+                <PaymentDialog
+                  name={UnitData.name}
+                  model_type={UnitData.type ? UnitData.type : "bundle"}
+                  model_id={UnitData.id}
+                />
+              </Dialog>
+            )}
         </div>
 
         <div className=" w-full h-full relative 2xl:min-h-96  min-h-72 col-span-7 ">

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { getAuthToken } from "../utils/auth-token";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -9,53 +10,56 @@ export async function chargeCode({
   code,
 }: {
   model_type: string;
-  model_id: string;
+  model_id: number;
   provider: string;
   code?: string;
 }) {
   try {
-    const formData = new FormData();
-    formData.append("model_type", model_type);
-    formData.append("model_id", model_id);
-    formData.append("provider", provider);
-    if (code) {
-      formData.append("code", code);
-    }
-
+    const body = { model_type, model_id, provider, ...(code && { code }) };
     const token = await getAuthToken();
+
     const res = await fetch(`${API_URL}api/v1/charge-by-code`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
-        Accept: "application/json",
+        "Content-Type": "application/json",
         type: "web",
       },
-      body: formData,
+      body: JSON.stringify(body),
     });
 
-    if (!res.ok) {
-      let errorMessage = `Failed: ${res.status}`;
-      try {
-        const errorData = await res.json();
-        errorMessage = errorData.message || errorMessage;
-      } catch {
-        const errorText = await res.text();
-        if (errorText) errorMessage = errorText;
-      }
-      throw new Error(errorMessage);
-    }
-
-    // ✅ هنا بنشوف نوع المحتوى
     const contentType = res.headers.get("content-type");
+    const isJSON = contentType?.includes("application/json");
 
-    if (contentType && contentType.includes("application/json")) {
-      return await res.json();
-    } else {
-      const html = await res.text();
-      return { data: { page: html } };
+    // لو فيه خطأ من السيرفر
+    if (!res.ok) {
+      if (res.status === 429) {
+        return {
+          success: false,
+          message: "تم تجاوز عدد المحاولات، حاول مرة أخرى بعد فترة.",
+        };
+      }
+
+      if (!isJSON) {
+        return {
+          success: false,
+          message: "البوابة غير متاحة حالياً. حاول لاحقاً.",
+        };
+      }
+
+      const errorData = await res.json();
+      return { success: false, message: errorData?.message || "حدث خطأ." };
     }
-  } catch (error) {
+
+    if (isJSON) {
+      return await res.json();
+    }
+
+    // لو response HTML
+    const html = await res.text();
+    return { data: { page: html } };
+  } catch (error: any) {
     console.error("Error in chargeCode:", error);
-    throw error;
+    return { success: false, message: error.message || "حدث خطأ." };
   }
 }
