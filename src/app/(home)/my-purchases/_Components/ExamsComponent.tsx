@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Progress } from "@/components/ui/progress";
 import { MdEditNote } from "react-icons/md";
 import { formatDate } from "@/lib/utils/format-date";
+import NoDataMessage from "@/components/NoDataMessage";
 
 const ExamsComponent = ({
   ExamsData,
@@ -16,8 +17,8 @@ const ExamsComponent = ({
 }) => {
   if (!ExamsData || ExamsData.length === 0) {
     return (
-      <div className="flex justify-center items-center w-full h-60">
-        <p className="text-gray-500 text-lg">لا توجد بيانات</p>
+      <div className="flex justify-center items-center w-full h-[60vh]">
+        <NoDataMessage text="لا توجد بيانات" />
       </div>
     );
   }

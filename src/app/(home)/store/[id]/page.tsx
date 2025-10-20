@@ -11,7 +11,7 @@ async function UnitsContent({ courseId }: { courseId: string }) {
   const availableCourses =
     ClassesData?.filter(
       (course: CourseType) =>
-        course.is_purchased_before === false && Number(course.price) > 0
+        course.booking_status === 0 && Number(course.price) > 0
     ) || [];
 
   return (

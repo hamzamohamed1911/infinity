@@ -153,10 +153,10 @@ export default function ExamComponent({
       });
 
       await submitMutation.mutateAsync(formData);
-      router.back();
+      router.push(`/${examData.section_id}/exams/${examData.id}`);
     } catch (err) {
       console.error("فشل في الإرسال:", err);
-      router.back();
+      router.push(`/${examData.section_id}/exams/${examData.id}`);
     }
   }, [isSubmitting, answers, imageFiles, examData, router, submitMutation]);
   useEffect(() => {

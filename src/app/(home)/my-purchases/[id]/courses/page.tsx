@@ -10,6 +10,16 @@ async function UnitsContent({ courseId }: { courseId: string }) {
   const myCourses = ClassesData?.filter(
     (course: CourseType) => course.booking_status === 1
   );
+
+  const today = new Date();
+  const endingSoon = ClassesData?.filter((course: CourseType) => {
+    if (!course.ended_at) return false;
+    const endDate = new Date(course.ended_at);
+    const diffInDays =
+      (endDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
+    return diffInDays >= 0 && diffInDays <= 7;
+  });
+
   return (
     <section>
       <Tabs dir="rtl" defaultValue="all" className="w-full my-8">
@@ -44,7 +54,9 @@ async function UnitsContent({ courseId }: { courseId: string }) {
           <TabsContent value="my-courses">
             <AllCourses CoursesData={myCourses ?? []} />
           </TabsContent>
-          <TabsContent value="ending">ending</TabsContent>
+          <TabsContent value="ending">
+            <AllCourses CoursesData={endingSoon ?? []} />
+          </TabsContent>
         </div>
       </Tabs>
     </section>

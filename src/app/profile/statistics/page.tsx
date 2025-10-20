@@ -14,7 +14,6 @@ async function DahsboardContnet() {
     return;
   }
   const Statistics = await GetStatistics(selectedId);
-  console.log(Statistics);
   const dataList = [
     {
       value:

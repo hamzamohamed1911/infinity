@@ -10,7 +10,6 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import PaymentDialog from "@/app/(home)/[unitId]/payments/_components/PaymentDialog";
 
 const AllLive = ({ liveData }: { liveData: LiveItem[] }) => {
-  console.log(liveData);
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {liveData.map((live) => (

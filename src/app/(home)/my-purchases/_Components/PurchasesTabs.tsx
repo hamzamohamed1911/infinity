@@ -35,7 +35,6 @@ export default function PurchasesTabs({ data }: { data: MyPurchases }) {
         className="w-full  gap-2 
             grid-cols-3 lg:grid sm:flex overflo-x-auto  whitespace-nowrap  h-18  p-3 rounded-md"
       >
-        {" "}
         <TabsTrigger
           value="all"
           className="data-[state=active]:bg-primary lg:text-xl md:text-lg text-sm data-[state=active]:text-white bg-white text-neutral-800 rounded-md py-2"
@@ -133,8 +132,15 @@ function PurchaseGrid({ purchases }: { purchases: Product[] }) {
               <Link
                 href={
                   product.product_type === "bundle"
-                    ? `/course/${product.id}`
-                    : `/${product.product_section_id || ""}/${product.id}`
+                    ? `/course/${product.product_id}`
+                    : product.product_type === "lesson"
+                    ? `/${product.product_section_id}/${product.product_id}`
+                    : product.product_type === "exam"
+                    ? `/${product.product_section_id}/exams/${product.product_id}`
+                    : product.product_type === "course" ||
+                      product.product_type === "lecture"
+                    ? `/${product.product_section_id}`
+                    : `/${product.product_section_id}`
                 }
                 className="group flex items-center justify-center gap-2 w-full h-12 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
               >

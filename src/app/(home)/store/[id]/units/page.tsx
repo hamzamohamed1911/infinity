@@ -12,7 +12,6 @@ async function UnitsContent({ courseId }: { courseId: string }) {
   const availableUnits = UnitsData.filter(
     (unit) => unit.booking_status !== 1 && Number(unit.price) > 0
   );
-  console.log(UnitsData);
   return (
     <section>
       {availableUnits.length > 0 ? (

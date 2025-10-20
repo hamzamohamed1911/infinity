@@ -108,6 +108,7 @@ declare type CourseType = {
   lessons?: Lesson[];
   is_purchased_before: boolean;
   booking_status: number;
+  ended_at: string;
 };
 
 declare type CourseDetails = {

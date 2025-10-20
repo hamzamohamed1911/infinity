@@ -31,7 +31,6 @@ export async function generateMetadata() {
 }
 export default async function Home() {
   const landingData = await getLandingPage();
-  console.log(landingData);
   if (!landingData) {
     return <p className="text-center text-primary mt-20">فشل تحميل البيانات</p>;
   }

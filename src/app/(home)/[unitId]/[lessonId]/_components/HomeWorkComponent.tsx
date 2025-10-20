@@ -14,6 +14,7 @@ import { useMutation } from "@tanstack/react-query";
 import ConfirmSubmitDialog from "./ConfirmSubmitDialog";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 export default function HomeWorkComponent({
   examData,
@@ -31,7 +32,7 @@ export default function HomeWorkComponent({
   const [visitedQuestions, setVisitedQuestions] = useState<Set<number>>(
     new Set()
   );
-
+  const router = useRouter();
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -42,6 +43,7 @@ export default function HomeWorkComponent({
   const confirmSubmitExam = async () => {
     await handleSubmitExam();
     setOpenDialog(false);
+    router.push(`/${examData.section_id}/home-works/${examData.id}`);
   };
 
   // Format time display
