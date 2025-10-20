@@ -32,7 +32,6 @@ async function UnitContent({
     });
     return { date, time };
   }
-  console.log("ExamData", ExamData);
   return (
     <section className="flex flex-col gap-4 w-full p-4">
       {ExamData && UnitData && (

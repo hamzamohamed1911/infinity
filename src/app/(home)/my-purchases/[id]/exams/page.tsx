@@ -8,7 +8,6 @@ async function ExamContent({ courseId }: { courseId: string }) {
   const exams = await GetExams({ course_id: courseId, assessment_type: 1 });
 
   const ExamsData = exams && "data" in exams ? exams.data : [];
-  console.log("ExamsData", ExamsData);
   // اليوم + بكرة
   const today = new Date();
   const tomorrow = new Date();
