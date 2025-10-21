@@ -60,86 +60,93 @@ async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
               </div>
             </div>
           )}
+          {(ExamData?.user_exams_retries?.length ?? 0) > 0 && (
+            <div className="flex flex-col lg:gap-6 gap-4 mt-6">
+              <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
+                محاولاتك السابقة
+              </p>
+              {(ExamData?.user_exams_retries?.length ?? 0) > 0 && (
+                <div className="flex flex-col lg:gap-6 gap-4 mt-6">
+                  <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
+                    محاولاتك السابقة
+                  </p>
+                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-10 lg:gap-8 md:gap-6 gap-4">
+                    {ExamData?.user_exams_retries.map((exam, index) => {
+                      const start = formatDateTime(exam.started_at);
+                      const end = formatDateTime(exam.ended_at);
 
-          <div className="flex flex-col lg:gap-6 gap-4 mt-6">
-            <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
-              محاولاتك السابقة
-            </p>
-            {(ExamData?.user_exams_retries?.length ?? 0) > 0 && (
-              <div className="flex flex-col lg:gap-6 gap-4 mt-6">
-                <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
-                  محاولاتك السابقة
-                </p>
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-10 lg:gap-8 md:gap-6 gap-4">
-                  {ExamData?.user_exams_retries.map((exam, index) => {
-                    const start = formatDateTime(exam.started_at);
-                    const end = formatDateTime(exam.ended_at);
-
-                    return (
-                      <div
-                        key={exam.id}
-                        className="border border-gray-200 rounded-md p-4 flex flex-col gap-4 bg-white shadow-sm font-semibold w-full"
-                      >
-                        {/* عنوان المحاولة + الدرجة */}
-                        <div className="w-full flex justify-between items-center border-b pb-2">
-                          <p className="text-md text-gray-700 font-semibold">
-                            المحاولة {index + 1}
-                          </p>
-                          <span className="text-secondary-900 text-sm">
-                            {exam.final_grade}/{ExamData.questions_count}
-                          </span>
-                        </div>
-
-                        {/* وقت البداية */}
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[#A4A4A4] font-semibold text-md">
-                            وقت البداية
-                          </span>
-                          <span className="text-secondary-900 text-sm">
-                            {start.date} – {start.time}
-                          </span>
-                        </div>
-
-                        {/* وقت النهاية */}
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[#A4A4A4] font-semibold text-md">
-                            وقت النهاية
-                          </span>
-                          <span className="text-secondary-900 text-sm">
-                            {end.date} – {end.time}
-                          </span>
-                        </div>
-
-                        {/* الحالة */}
-                        {exam.message && (
-                          <div className="flex flex-col gap-1">
-                            <span className="text-[#A4A4A4] font-semibold text-md">
-                              الحالة
-                            </span>
+                      return (
+                        <div
+                          key={exam.id}
+                          className="border border-gray-200 rounded-md p-4 flex flex-col gap-4 bg-white shadow-sm font-semibold w-full"
+                        >
+                          {/* عنوان المحاولة + الدرجة */}
+                          <div className="w-full flex justify-between items-center border-b pb-2">
+                            <p className="text-md text-gray-700 font-semibold">
+                              المحاولة {index + 1}
+                            </p>
                             <span className="text-secondary-900 text-sm">
-                              {exam.message}
+                              {exam.final_grade}/{ExamData.questions_count}
                             </span>
                           </div>
-                        )}
 
-                        {/* الزرار */}
-                        <div className="mt-2 w-full flex justify-end">
-                          <Link
-                            href={`${hwId}/retry?homework=${exam.id}`}
-                            type="button"
-                            className="px-4 py-2 rounded-md bg-primary-500 text-white text-sm hover:bg-primary-600 transition"
-                          >
-                            اظهار الإجابات
-                          </Link>
+                          {/* وقت البداية */}
+                          <div className="flex flex-col gap-1">
+                            <span className="text-[#A4A4A4] font-semibold text-md">
+                              وقت البداية
+                            </span>
+                            <span className="text-secondary-900 text-sm">
+                              {start.date} – {start.time}
+                            </span>
+                          </div>
+
+                          {/* وقت النهاية */}
+                          <div className="flex flex-col gap-1">
+                            <span className="text-[#A4A4A4] font-semibold text-md">
+                              وقت النهاية
+                            </span>
+                            <span className="text-secondary-900 text-sm">
+                              {end.date} – {end.time}
+                            </span>
+                          </div>
+
+                          {/* الحالة */}
+                          {/* الحالة */}
+                          {exam.message && (
+                            <div className="flex flex-col gap-1">
+                              <span className="text-[#A4A4A4] font-semibold text-md">
+                                الحالة
+                              </span>
+                              <span className="text-secondary-900 text-sm">
+                                {exam.is_success === 1
+                                  ? "ناجح"
+                                  : exam.is_success === 0
+                                  ? "راسب"
+                                  : exam.message}
+                              </span>
+                            </div>
+                          )}
+
+                          {/* الزرار */}
+                          {ExamData.show_answers === 1 && (
+                            <div className="mt-2 w-full flex justify-end">
+                              <Link
+                                href={`${hwId}/retry?homework=${exam.id}`}
+                                type="button"
+                                className="px-4 py-2 rounded-md bg-primary-500 text-white text-sm hover:bg-primary-600 transition"
+                              >
+                                اظهار الإجابات
+                              </Link>
+                            </div>
+                          )}
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-
+              )}
+            </div>
+          )}
           <div className="whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">
             <p className="text-neural-800  ">محاولاتك المتبقية :</p>
             <span className="text-primary font-bold">{ExamData?.retries}</span>

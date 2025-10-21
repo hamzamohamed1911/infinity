@@ -8,7 +8,6 @@ export default function PaymentPage() {
     (async () => {
       const res = await fetch("/api/payments/get-html");
       const data = await res.json();
-      console.log("HTML from API:", data.html);
       setHtml(data.html);
     })();
   }, []);

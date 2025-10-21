@@ -6,6 +6,27 @@ import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import PaymentDialog from "../../[unitId]/payments/_components/PaymentDialog";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  const book = await GetBook({ id: id });
+  const bookData = book?.data;
+  const { item } = bookData;
+
+  return {
+    title: item?.name,
+    description: item?.description,
+    icons: {
+      icon: item?.image,
+    },
+  };
+}
 
 async function BookContent({ id }: { id: string }) {
   const Book = await GetBook({ id: id });
@@ -15,7 +36,6 @@ async function BookContent({ id }: { id: string }) {
   }
 
   const { item } = BookData;
-  console.log("BookData", BookData);
 
   return (
     <section className="min-h-screen ">

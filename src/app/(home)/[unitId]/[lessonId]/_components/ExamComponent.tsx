@@ -16,6 +16,7 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useSession } from "next-auth/react";
 import { saveAnswer, submitAnswer } from "@/lib/apis/submit-exam.api";
 import { useRouter } from "next/navigation";
+import { CheckCircle } from "lucide-react"; // أيقونة الصح
 
 export default function ExamComponent({
   examData,
@@ -32,6 +33,8 @@ export default function ExamComponent({
   const [imageFiles, setImageFiles] = useState<Record<number, File | null>>({});
   const [timeRemaining, setTimeRemaining] = useState(examData.period * 60);
   const [openDialog, setOpenDialog] = useState(false);
+  const [shownAnswers, setShownAnswers] = useState<Record<number, boolean>>({});
+
   const [imagePreviews, setImagePreviews] = useState<Record<number, string>>(
     {}
   );
@@ -40,7 +43,7 @@ export default function ExamComponent({
   const [visitedQuestions, setVisitedQuestions] = useState<Set<number>>(
     new Set()
   );
-
+  console.log(examData);
   // المؤقت
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
@@ -344,6 +347,23 @@ export default function ExamComponent({
                 </div>
               </div>
             )}
+            {currentQuestion.type_id === "radio" &&
+              examData.show_correct_answer === 1 && (
+                <div className="w-full flex justify-end">
+                  <Button
+                    variant="outline"
+                    onClick={() =>
+                      setShownAnswers((prev) => ({
+                        ...prev,
+                        [currentQuestion.id]: true,
+                      }))
+                    }
+                    className="border-primary-500 w-32  text-primary-500 hover:text-primary-400 hover:bg-transparent hover:border-primary-400 bg-transparent"
+                  >
+                    الإجابة
+                  </Button>
+                </div>
+              )}
 
             {currentQuestion.type_id === "radio" && (
               <RadioGroup
@@ -355,14 +375,18 @@ export default function ExamComponent({
                 className="flex flex-col gap-6 "
               >
                 {currentQuestion.options?.map((option) => (
-                  <div key={option.id} className="flex items-start  gap-3">
+                  <div
+                    key={option.id}
+                    className="flex items-start gap-3 relative"
+                  >
                     <RadioGroupItem
                       value={option.id.toString()}
                       id={option.id.toString()}
                     />
+
                     <Label
                       htmlFor={option.id.toString()}
-                      className="flex-1 cursor-pointer  rounded-md font-semibold text-xl text-primary"
+                      className="flex-1 cursor-pointer rounded-md font-semibold text-xl text-primary flex items-center gap-2"
                     >
                       {option.url ? (
                         <div className="flex items-center gap-3">
@@ -384,6 +408,11 @@ export default function ExamComponent({
                           dangerouslySetInnerHTML={{ __html: option.title }}
                         />
                       )}
+
+                      {shownAnswers[currentQuestion.id] &&
+                        Number(option.is_correct) === 1 && (
+                          <CheckCircle className="text-green-600 w-6 h-6" />
+                        )}
                     </Label>
                   </div>
                 ))}

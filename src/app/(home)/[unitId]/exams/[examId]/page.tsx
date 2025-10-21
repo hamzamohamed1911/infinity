@@ -124,7 +124,11 @@ async function UnitContent({
                             الحالة
                           </span>
                           <span className="text-secondary-900 text-sm">
-                            {exam.message}
+                            {exam.is_success === 1
+                              ? "ناجح"
+                              : exam.is_success === 0
+                              ? "راسب"
+                              : exam.message}
                           </span>
                         </div>
                       )}

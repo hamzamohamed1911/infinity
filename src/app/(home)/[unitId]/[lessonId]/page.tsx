@@ -59,7 +59,6 @@ async function LessonContent({
 
   const UnitData = Unit?.data;
   const LessonData = lesson?.data;
-  console.log("LessonData", LessonData);
 
   if (!LessonData) {
     const preRequisites = lesson?.preRequisites || [];

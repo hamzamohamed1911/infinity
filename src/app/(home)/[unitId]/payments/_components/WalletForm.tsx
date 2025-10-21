@@ -14,7 +14,6 @@ const WalletForm = ({ model_type, model_id }: FawryFormProps) => {
   const { mutate, isPending, error } = useMutation({
     mutationFn: chargeCode,
     onSuccess: async (data) => {
-      console.log("chargeCode response:", data);
       reset();
       if (data?.data?.page) {
         const newWindow = window.open("", "_self");

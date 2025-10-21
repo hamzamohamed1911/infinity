@@ -15,6 +15,7 @@ import ConfirmSubmitDialog from "./ConfirmSubmitDialog";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import { CheckCircle } from "lucide-react";
 
 export default function HomeWorkComponent({
   examData,
@@ -29,6 +30,8 @@ export default function HomeWorkComponent({
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     undefined
   );
+  const [shownAnswers, setShownAnswers] = useState<Record<number, boolean>>({});
+
   const [visitedQuestions, setVisitedQuestions] = useState<Set<number>>(
     new Set()
   );
@@ -275,6 +278,22 @@ export default function HomeWorkComponent({
                 </div>
               </div>
             )}
+            {currentQuestion.type_id === "radio" && (
+              <div className="w-full flex justify-end">
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    setShownAnswers((prev) => ({
+                      ...prev,
+                      [currentQuestion.id]: true,
+                    }))
+                  }
+                  className="border-primary-500 w-32 text-primary-500 hover:text-primary-400 hover:bg-transparent hover:border-primary-400 bg-transparent"
+                >
+                  الإجابة
+                </Button>
+              </div>
+            )}
 
             {/* radio */}
             {currentQuestion.type_id === "radio" && (
@@ -294,7 +313,7 @@ export default function HomeWorkComponent({
                     />
                     <Label
                       htmlFor={option.id.toString()}
-                      className="flex-1 cursor-pointer  rounded-md font-semibold text-xl text-primary"
+                      className="flex-1 cursor-pointer rounded-md font-semibold text-xl text-primary flex items-center gap-2"
                     >
                       {option.url ? (
                         <div className="flex items-center gap-3">
@@ -314,6 +333,10 @@ export default function HomeWorkComponent({
                           dangerouslySetInnerHTML={{ __html: option.title }}
                         />
                       )}
+                      {shownAnswers[currentQuestion.id] &&
+                        Number(option.is_correct) === 1 && (
+                          <CheckCircle className="text-green-600 w-6 h-6" />
+                        )}
                     </Label>
                   </div>
                 ))}
