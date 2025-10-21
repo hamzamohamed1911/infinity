@@ -19,7 +19,7 @@ interface DialogTabsProps {
 }
 const PaymentDialog = ({ model_type, model_id, name }: DialogTabsProps) => {
   return (
-    <DialogContent className="md:max-w-3xl max-w-[90%]">
+    <DialogContent className="md:max-w-3xl max-w-[90%] rounded-lg">
       <DialogHeader className="text-center w-full flex justify-center items-center gap-4">
         <DialogTitle>اختيار وسيلة الدفع</DialogTitle>
         <DialogDescription className="flex flex-col gap-2 ">

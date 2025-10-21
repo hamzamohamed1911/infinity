@@ -39,12 +39,14 @@ const CodeForm = ({ model_type, model_id }: FawryFormProps) => {
       reset();
       setServerError(null);
       if (data?.data?.page) {
-        await fetch("/api/payments/store-html", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ html: data.data.page }),
-        });
-        router.push("/payment");
+        const newWindow = window.open("", "_self");
+        newWindow?.document.write(data.data.page);
+        newWindow?.document.close();
+        // await fetch("/api/payments/store-html", {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json" },
+        //   body: JSON.stringify({ html: data.data.page }),
+        // });
       } else if (data?.success) {
         toast.success("تم الدفع بنجاح", {
           className: "!bg-primary !text-white !border-primary",

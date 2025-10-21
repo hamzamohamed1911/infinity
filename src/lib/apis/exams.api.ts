@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -146,21 +147,31 @@ export async function GetAssignmentRetry({
   exam_id: string;
   retry_id: string;
 }): Promise<APIResponse<ExamDetails>> {
-  const token = await getAuthToken();
-  const response = await fetch(
-    `${API_URL}api/v1/exams/${exam_id}?join_exam=true&users_exams_id=${retry_id}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  try {
+    const token = await getAuthToken();
+    const response = await fetch(
+      `${API_URL}api/v1/exams/${exam_id}?join_exam=true&users_exams_id=${retry_id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-  const payload = await response.json();
-  if (payload?.message === "Unauthenticated.") {
-    redirect("/logout");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const payload = await response.json();
+
+    if (payload?.message === "Unauthenticated.") {
+      redirect("/logout");
+    }
+
+    return payload;
+  } catch (error: any) {
+    throw error;
   }
-  return payload;
 }

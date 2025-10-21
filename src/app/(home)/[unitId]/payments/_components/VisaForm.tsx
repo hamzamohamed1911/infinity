@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { chargeCode } from "@/lib/apis/payments";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 interface FawryFormProps {
   model_type: string;
@@ -11,23 +11,24 @@ interface FawryFormProps {
 
 const VisaForm = ({ model_type, model_id }: FawryFormProps) => {
   const { handleSubmit, reset } = useForm();
-  const router = useRouter();
   const { mutate, isPending, error } = useMutation({
     mutationFn: chargeCode,
     onSuccess: async (data) => {
       reset();
       if (data?.data?.page) {
-        // نحفظ الـ HTML في الـ API route
-        await fetch("/api/payments/store-html", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ html: data.data.page }),
-        });
-
-        // نروح للصفحة الجديدة
-        router.push("/payment");
+        const newWindow = window.open("", "_self");
+        newWindow?.document.write(data.data.page);
+        newWindow?.document.close();
+        // await fetch("/api/payments/store-html", {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json" },
+        //   body: JSON.stringify({ html: data.data.page }),
+        // });
+        // router.push("/payment");
       } else {
-        alert("تم الدفع بنجاح");
+        toast.error(data?.message, {
+          className: "!bg-red-500 !text-white",
+        });
       }
     },
     onError: (err) => {

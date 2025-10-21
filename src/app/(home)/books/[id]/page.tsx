@@ -15,6 +15,7 @@ async function BookContent({ id }: { id: string }) {
   }
 
   const { item } = BookData;
+  console.log("BookData", BookData);
 
   return (
     <section className="min-h-screen ">
@@ -25,10 +26,9 @@ async function BookContent({ id }: { id: string }) {
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white tracking-tight">
               {item.name}
             </h1>
-            <div
-              className="prose prose-xl text-gray-600 dark:text-gray-300"
-              dangerouslySetInnerHTML={{ __html: item.content }}
-            />
+            <div className="prose prose-xl text-gray-600 dark:text-gray-300">
+              {item.description}
+            </div>
             {item.price > 0 && (
               <p className="text-2xl font-semibold text-secondary-900 dark:text-secondary-800">
                 ${item.price}
@@ -39,10 +39,10 @@ async function BookContent({ id }: { id: string }) {
                 <DialogTrigger asChild>
                   <div className="w-full flex justify-end items-end">
                     <Button
-                      className="bg-primary text-white px-6 py-4 rounded-full hover:bg-primary-400    transition-all duration-300"
+                      className="bg-primary cursor-pointer text-white px-6 py-4 rounded-full hover:bg-primary-400    transition-all duration-300"
                       asChild
                     >
-                      <a href="#purchase" className="flex items-center gap-2">
+                      <a className="flex items-center gap-2 cursor-pointer">
                         اشترى الان
                         <ExternalLink className="w-4 h-4" />
                       </a>
