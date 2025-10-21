@@ -167,7 +167,7 @@ export default function HomeWorkComponent({
               {Array.from({ length: totalQuestions }, (_, index) => {
                 const isCurrent = index === currentQuestionIndex;
                 const hasAnswer = !!answers[examData.questions[index].id];
-                const isVisited = visitedQuestions.has(index); // بدّلها كده
+                const isVisited = visitedQuestions.has(index) || hasAnswer;
 
                 let styles = "";
 
@@ -294,7 +294,7 @@ export default function HomeWorkComponent({
                     />
                     <Label
                       htmlFor={option.id.toString()}
-                      className="flex-1 cursor-pointer"
+                      className="flex-1 cursor-pointer  rounded-md font-semibold text-xl text-primary"
                     >
                       {option.url ? (
                         <div className="flex items-center gap-3">

@@ -59,6 +59,7 @@ async function LessonContent({
 
   const UnitData = Unit?.data;
   const LessonData = lesson?.data;
+  console.log("LessonData", LessonData);
 
   if (!LessonData) {
     const preRequisites = lesson?.preRequisites || [];
@@ -198,14 +199,19 @@ async function LessonContent({
                   {LessonData?.remaining_views}
                 </span>
               </div>
-              {LessonData?.enable_assessments && (
+              {LessonData?.enable_assessments ? (
                 <>
                   {/* امتحان المحاضرة */}
                   <div className="text-neural-900 whitespace-nowrap lg:text-xl md:text-lg text-md flex flex-wrap gap-4 items-center">
                     إمتحانات المحاضرة:
                     <div className="text-[#3187FF] underline flex gap-2 flex-wrap items-center cursor-pointer">
                       <MdEditNote className="shrik-0" size={24} />
-                      <span>{LessonData?.sub_exams.length} إمتحانات</span>
+                      <span>
+                        {LessonData?.sub_exams.length > 0
+                          ? LessonData.sub_exams.length
+                          : ""}
+                        إمتحانات
+                      </span>
                     </div>
                     <ol className="list-decimal ps-5 flex flex-col gap-2 w-full">
                       {LessonData?.sub_exams.map((exam) => (
@@ -225,7 +231,12 @@ async function LessonContent({
                     واجب المحاضرة :
                     <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
                       <BiBookContent size={24} />
-                      <span>{LessonData?.sub_homeworks.length} واجبات</span>
+                      <span>
+                        {LessonData?.sub_homeworks.length > 0
+                          ? LessonData.sub_homeworks.length
+                          : ""}
+                        واجبات
+                      </span>
                     </div>
                     <ol className="list-decimal ps-5 flex flex-col gap-2 w-full">
                       {LessonData?.sub_homeworks.map((homework) => (
@@ -244,7 +255,11 @@ async function LessonContent({
                     <p>المرفقات</p>
                     <div className="text-[#3187FF] underline flex gap-2 items-center cursor-pointer">
                       <TiAttachmentOutline size={24} />
-                      <span>{LessonData?.attachments.length} مرفق</span>
+                      <span>
+                        {LessonData?.attachments.length > 0
+                          ? LessonData.attachments.length
+                          : ""}
+                      </span>
                     </div>
                     <ul className="list-disc list-inside space-y-1 flex flex-col gap-2">
                       {LessonData.attachments.map((url, i) => (
@@ -262,6 +277,8 @@ async function LessonContent({
                     </ul>
                   </div>
                 </>
+              ) : (
+                ""
               )}
             </div>
             <div className="flex justify-between md:gap-4 gap-2 w-full">
