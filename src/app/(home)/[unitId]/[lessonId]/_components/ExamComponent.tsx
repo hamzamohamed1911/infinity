@@ -43,7 +43,6 @@ export default function ExamComponent({
   const [visitedQuestions, setVisitedQuestions] = useState<Set<number>>(
     new Set()
   );
-  console.log(examData);
   // المؤقت
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);

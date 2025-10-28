@@ -91,11 +91,11 @@ export async function GetUnit({
   });
 
   const payload = await response.json();
+  console.log("Payloadddd:", payload);
 
   if (!payload || !payload.data) {
     throw new Error("فشل في جلب البيانات");
   }
-
   return payload;
 }
 export async function GetLessons({

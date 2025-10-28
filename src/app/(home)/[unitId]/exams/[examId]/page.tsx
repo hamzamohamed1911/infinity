@@ -17,8 +17,13 @@ async function UnitContent({
 }) {
   const Exam = await GetExam({ exam_id: examId });
   const ExamData = Exam && "data" in Exam ? Exam.data : undefined;
-  const Unit = await GetUnit({ unit_id: unitId });
-  const UnitData = Unit && "data" in Unit ? Unit.data : undefined;
+  let UnitData: CourseDetails | undefined = undefined;
+  try {
+    const Unit = await GetUnit({ unit_id: unitId });
+    UnitData = Unit && "data" in Unit ? Unit.data ?? undefined : undefined;
+  } catch (error) {
+    console.error("GetUnit Error:", error);
+  }
   function formatDateTime(dateTimeString: string) {
     const dateObj = new Date(dateTimeString);
     const date = dateObj.toLocaleDateString("ar-EG", {
