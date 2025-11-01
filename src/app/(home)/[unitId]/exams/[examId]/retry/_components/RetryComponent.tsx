@@ -6,13 +6,19 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { placeholder } from "../../../../../../../../public";
 import { CheckCircle, XCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { TiArrowForwardOutline } from "react-icons/ti";
 
 export default function RetryComponent({
   examData,
 }: {
   examData: ExamDetails;
 }) {
+  console.log("examData", examData);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const router = useRouter();
+
   const currentQuestion = examData.questions[currentQuestionIndex];
   const totalQuestions = examData.questions.length;
 
@@ -23,6 +29,8 @@ export default function RetryComponent({
   const goToNextQuestion = () => {
     if (currentQuestionIndex < examData.questions_count - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
+    } else {
+      router.back();
     }
   };
 
@@ -34,6 +42,14 @@ export default function RetryComponent({
 
   return (
     <div className="lg:px-6 md:px-4 px-2">
+      <button
+        onClick={() => router.back()}
+        className="my-2 flex gap-2 items-center justify-center text-xl text-primary-500 hover:underline"
+      >
+        <TiArrowForwardOutline />
+        الرجوع
+      </button>
+
       <Card className="mb-6">
         <CardContent className="lg:p-8 p-4 flex flex-col md:gap-6 gap-4">
           {/* التنقل بين الأسئلة */}
@@ -167,6 +183,34 @@ export default function RetryComponent({
                 })}
               </div>
             )}
+          </div>
+          <div className="flex md:flex-row flex-col gap-4 items-center justify-between w-full">
+            <Button
+              onClick={goToPreviousQuestion}
+              disabled={currentQuestionIndex === 0}
+              variant="outline"
+              className="flex items-center gap-2 text-white bg-primary-500 hover:bg-primary-400 hover:text-white h-12 md:w-auto w-full"
+            >
+              <ChevronRight className="w-6 h-6" />
+              السؤال السابق
+            </Button>
+
+            <Button
+              onClick={goToNextQuestion}
+              className="flex items-center gap-2 text-white bg-primary-500 hover:bg-primary-400 h-12 md:w-auto w-full"
+            >
+              {currentQuestionIndex < examData.questions_count - 1 ? (
+                <>
+                  السؤال التالي
+                  <ChevronLeft className="w-6 h-6" />
+                </>
+              ) : (
+                <>
+                  الرجوع
+                  <ChevronLeft className="w-6 h-6" />
+                </>
+              )}
+            </Button>
           </div>
         </CardContent>
       </Card>

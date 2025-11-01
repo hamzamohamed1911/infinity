@@ -7,6 +7,9 @@ import ExamButton from "../../[lessonId]/_components/ExamButton";
 import Deadlines from "../../[lessonId]/_components/Deadlines";
 import AssignmentSkeleton from "@/components/AssignmentSkeleton";
 import Link from "next/link";
+import { FaRegClock } from "react-icons/fa";
+import { Badge } from "@/components/ui/badge";
+import ExamPieChart from "@/app/(home)/my-purchases/_Components/ExamPieChart";
 
 async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
   const Exam = await GetExam({ exam_id: hwId });
@@ -62,89 +65,142 @@ async function UnitContent({ hwId, unitId }: { unitId: string; hwId: string }) {
           )}
           {(ExamData?.user_exams_retries?.length ?? 0) > 0 && (
             <div className="flex flex-col lg:gap-6 gap-4 mt-6">
-              <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
-                محاولاتك السابقة
-              </p>
-              {(ExamData?.user_exams_retries?.length ?? 0) > 0 && (
-                <div className="flex flex-col lg:gap-6 gap-4 mt-6">
-                  <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
-                    محاولاتك السابقة
-                  </p>
-                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-10 lg:gap-8 md:gap-6 gap-4">
-                    {ExamData?.user_exams_retries.map((exam, index) => {
-                      const start = formatDateTime(exam.started_at);
-                      const end = formatDateTime(exam.ended_at);
+              <div className="flex  items-center gap-2">
+                <FaRegClock className="text-primary-500 lg:text-xl md:text-lg text-md " />
+                <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
+                  محاولاتك السابقة
+                </p>
+              </div>
 
-                      return (
-                        <div
-                          key={exam.id}
-                          className="border border-gray-200 rounded-md p-4 flex flex-col gap-4 bg-white shadow-sm font-semibold w-full"
-                        >
-                          {/* عنوان المحاولة + الدرجة */}
-                          <div className="w-full flex justify-between items-center border-b pb-2">
-                            <p className="text-md text-gray-700 font-semibold">
-                              المحاولة {index + 1}
-                            </p>
-                            <span className="text-secondary-900 text-sm">
-                              {exam.final_grade}/{ExamData.questions_count}
-                            </span>
-                          </div>
+              <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-10 lg:gap-8 md:gap-6 gap-4">
+                {ExamData?.user_exams_retries.map((exam, index) => {
+                  const start = formatDateTime(exam.started_at);
+                  const end = formatDateTime(exam.ended_at);
 
-                          {/* وقت البداية */}
-                          <div className="flex flex-col gap-1">
-                            <span className="text-[#A4A4A4] font-semibold text-md">
-                              وقت البداية
-                            </span>
-                            <span className="text-secondary-900 text-sm">
-                              {start.date} – {start.time}
-                            </span>
-                          </div>
+                  return (
+                    <div
+                      key={exam.id}
+                      className="border border-gray-200 rounded-md p-4 flex flex-col gap-4 bg-white shadow-sm font-semibold w-full"
+                    >
+                      <div className="flex justify-center items-center">
+                        <Badge className="text-pink-950 bg-primary-200 text-center flex justify-center items-center h-8 w-20">
+                          واجب
+                        </Badge>
+                      </div>
 
-                          {/* وقت النهاية */}
-                          <div className="flex flex-col gap-1">
-                            <span className="text-[#A4A4A4] font-semibold text-md">
-                              وقت النهاية
-                            </span>
-                            <span className="text-secondary-900 text-sm">
-                              {end.date} – {end.time}
-                            </span>
-                          </div>
-
-                          {/* الحالة */}
-                          {/* الحالة */}
+                      <h1 className="text-center md:text-2xl text-xl">
+                        {ExamData.name}
+                      </h1>
+                      <div
+                        className="  grid 
+              w-full 
+              gap-2 
+              grid-cols-1 
+              sm:grid-cols-2 
+              xl:grid-cols-3"
+                      >
+                        <Card className=" h-32 shadow-none flex flex-col gap-2 items-center justify-center">
+                          <span className="text-xs text-neural-800">
+                            عدد الأسئلة
+                          </span>
+                          <span className="text-2xl text-primary-500">
+                            {ExamData?.questions_count}
+                          </span>
+                        </Card>
+                        <Card className=" h-32 shadow-none flex flex-col gap-2 items-center justify-center">
                           {exam.message && (
-                            <div className="flex flex-col gap-1">
-                              <span className="text-[#A4A4A4] font-semibold text-md">
+                            <div className="flex flex-col gap-1 text-center">
+                              <span className="text-xs text-neural-800 font-semibold text-md">
                                 الحالة
                               </span>
-                              <span className="text-secondary-900 text-sm">
+                              <Badge className="text-secondary-950 text-xs bg-secondary-200 text-center flex justify-center items-center py-2 px-2">
                                 {exam.is_success === 1
                                   ? "ناجح"
                                   : exam.is_success === 0
                                   ? "راسب"
                                   : exam.message}
-                              </span>
+                              </Badge>
                             </div>
                           )}
+                        </Card>
+                        <Card className=" h-32 shadow-none flex flex-col gap-2 items-center justify-center relative">
+                          <span className="text-xs text-neural-800 font-semibold">
+                            النسبة المئوية
+                          </span>
 
-                          {/* الزرار */}
-                          {ExamData.show_answers === 1 && (
-                            <div className="mt-2 w-full flex justify-end">
-                              <Link
-                                href={`${hwId}/retry?homework=${exam.id}`}
-                                type="button"
-                                className="px-4 py-2 rounded-md bg-primary-500 text-white text-sm hover:bg-primary-600 transition"
-                              >
-                                اظهار الإجابات
-                              </Link>
-                            </div>
-                          )}
+                          {(() => {
+                            const percentage =
+                              exam.final_grade && ExamData.questions_count
+                                ? (exam.final_grade /
+                                    ExamData.questions_count) *
+                                  100
+                                : 0;
+
+                            const color =
+                              exam.is_success === 1
+                                ? "#10B981" // ناجح
+                                : exam.is_success === 0
+                                ? "#EF4444" // راسب
+                                : "#F59E0B"; // تحت المراجعة
+
+                            return (
+                              <div className="relative">
+                                <ExamPieChart
+                                  percentage={percentage}
+                                  color={color}
+                                  total={ExamData.questions_count}
+                                  completed={exam.final_grade}
+                                />
+                              </div>
+                            );
+                          })()}
+                        </Card>
+                      </div>
+                      <div className="w-full flex justify-between items-center border-b pb-2">
+                        <p className="text-md text-gray-700 font-semibold">
+                          المحاولة رقم {index + 1}
+                        </p>
+                        <span className="text-secondary-900 text-sm">
+                          {exam.final_grade}/{ExamData.questions_count}
+                        </span>
+                      </div>
+
+                      {/* وقت البداية */}
+                      <div className="flex flex-col gap-1">
+                        <span className="text-[#A4A4A4] font-semibold text-md">
+                          وقت البداية
+                        </span>
+                        <span className="text-secondary-900 text-sm">
+                          {start.date} – {start.time}
+                        </span>
+                      </div>
+
+                      {/* وقت النهاية */}
+                      <div className="flex flex-col gap-1">
+                        <span className="text-[#A4A4A4] font-semibold text-md">
+                          وقت النهاية
+                        </span>
+                        <span className="text-secondary-900 text-sm">
+                          {end.date} – {end.time}
+                        </span>
+                      </div>
+
+                      {/* الزرار */}
+                      {ExamData.show_answers === 1 && (
+                        <div className="mt-2 w-full flex justify-end">
+                          <Link
+                            href={`${hwId}/retry?homework=${exam.id}`}
+                            type="button"
+                            className="px-4 py-2 rounded-md bg-primary-500 text-white text-sm hover:bg-primary-600 transition"
+                          >
+                            اظهار الإجابات
+                          </Link>
                         </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           )}
           <div className="whitespace-nowrap lg:text-xl md:text-lg text-md flex gap-2 items-center">

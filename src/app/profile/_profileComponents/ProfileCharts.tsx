@@ -7,7 +7,7 @@ interface ChartItemProps {
   total: number;
   completed: number;
   color: string;
-  label: string;
+  label?: string;
   type: string;
 }
 
@@ -70,8 +70,9 @@ const ProfileCharts = ({
           من {total}
         </span>
       </div>
-
-      <p className="text-base font-medium  text-neural-800">{label}</p>
+      {label && (
+        <p className="text-base font-medium  text-neural-800">{label}</p>
+      )}
     </div>
   );
 };

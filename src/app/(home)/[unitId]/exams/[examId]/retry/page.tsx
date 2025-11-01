@@ -12,6 +12,10 @@ async function Exam({ examId, retryId }: { examId: string; retryId: string }) {
     <section className="flex flex-col gap-4 w-full">
       <div className="flex flex-wrap items-center gap-2 text-neural-800 text-sm md:text-base">
         {/* /238/exams/117 */}
+        <Link className="hover:underline flex items-center gap-1" href="/">
+          الصفحه الرئيسيه
+          <MdChevronRight className="text-neural-500 shrink-0  lg:text-xl text-lg" />
+        </Link>
         <Link
           href={`/${ExamData?.section_id}`}
           className="hover:underline flex items-center gap-1"

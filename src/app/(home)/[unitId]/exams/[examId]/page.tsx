@@ -7,6 +7,12 @@ import Deadlines from "../../[lessonId]/_components/Deadlines";
 import ExamButton from "../../[lessonId]/_components/ExamButton";
 import AssignmentSkeleton from "@/components/AssignmentSkeleton";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { FaRegClock } from "react-icons/fa";
+import ExamPieChart from "@/app/(home)/my-purchases/_Components/ExamPieChart";
+import Image from "next/image";
+import successImg from "@/../public/avatars/success.jpg";
+import failImg from "@/../public/avatars/fail.jpg";
 
 async function UnitContent({
   examId,
@@ -77,11 +83,16 @@ async function UnitContent({
               )}
             </div>
           )}
+
           {(ExamData?.user_exams_retries?.length ?? 0) > 0 && (
             <div className="flex flex-col lg:gap-6 gap-4 mt-6">
-              <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
-                محاولاتك السابقة
-              </p>
+              <div className="flex  items-center gap-2">
+                <FaRegClock className="text-primary-500 lg:text-xl md:text-lg text-md " />
+                <p className="text-neural-800  lg:text-xl md:text-lg text-md ">
+                  محاولاتك السابقة
+                </p>
+              </div>
+
               <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-10 lg:gap-8 md:gap-6 gap-4">
                 {ExamData?.user_exams_retries.map((exam, index) => {
                   const start = formatDateTime(exam.started_at);
@@ -92,10 +103,102 @@ async function UnitContent({
                       key={exam.id}
                       className="border border-gray-200 rounded-md p-4 flex flex-col gap-4 bg-white shadow-sm font-semibold w-full"
                     >
-                      {/* عنوان المحاولة + الدرجة */}
+                      <div className="flex justify-center items-center">
+                        <Badge className="text-pink-950 bg-primary-200 text-center flex justify-center items-center h-8 w-20">
+                          امتحان
+                        </Badge>
+                      </div>
+
+                      <h1 className="text-center md:text-2xl text-xl">
+                        {ExamData.name}
+                      </h1>
+                      <div
+                        className="  grid 
+    w-full 
+    gap-2 
+    grid-cols-1 
+    sm:grid-cols-2 
+    xl:grid-cols-3"
+                      >
+                        <Card className=" h-32 shadow-none flex flex-col gap-2 items-center justify-center">
+                          <span className="text-xs text-neural-800">
+                            عدد الأسئلة
+                          </span>
+                          <span className="text-2xl text-primary-500">
+                            {ExamData?.questions_count}
+                          </span>
+                        </Card>
+                        <Card className=" h-32 shadow-none flex flex-col gap-2 items-center justify-center">
+                          {exam.message && (
+                            <div className="flex flex-col gap-1 items-center text-center">
+                              <span className="text-xs text-neural-800 font-semibold text-md">
+                                الحالة
+                              </span>
+                              <Badge className="text-secondary-950 text-xs bg-secondary-200 text-center flex justify-center items-center py-2 px-2">
+                                {exam.is_success === 1
+                                  ? "ناجح"
+                                  : exam.is_success === 0
+                                  ? "راسب"
+                                  : exam.message}
+                              </Badge>
+                              {exam.is_success === 1 ? (
+                                <Image
+                                  src={successImg}
+                                  alt="success"
+                                  width={40}
+                                  height={40}
+                                  priority
+                                />
+                              ) : exam.is_success === 0 ? (
+                                <Image
+                                  src={failImg}
+                                  alt="fail"
+                                  width={40}
+                                  height={40}
+                                  priority
+                                />
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          )}
+                        </Card>
+                        <Card className=" h-32 shadow-none flex flex-col gap-2 items-center justify-center relative">
+                          <span className="text-xs text-neural-800 font-semibold">
+                            النسبة المئوية
+                          </span>
+
+                          {(() => {
+                            const percentage =
+                              exam.final_grade && ExamData.questions_count
+                                ? (exam.final_grade /
+                                    ExamData.questions_count) *
+                                  100
+                                : 0;
+
+                            const color =
+                              exam.is_success === 1
+                                ? "#10B981" // ناجح
+                                : exam.is_success === 0
+                                ? "#EF4444" // راسب
+                                : "#F59E0B"; // تحت المراجعة
+
+                            return (
+                              <div className="relative">
+                                <ExamPieChart
+                                  percentage={percentage}
+                                  color={color}
+                                  total={ExamData.questions_count}
+                                  completed={exam.final_grade}
+                                />
+                              </div>
+                            );
+                          })()}
+                        </Card>
+                      </div>
                       <div className="w-full flex justify-between items-center border-b pb-2">
                         <p className="text-md text-gray-700 font-semibold">
-                          المحاولة {index + 1}
+                          المحاولة رقم {index + 1}
                         </p>
                         <span className="text-secondary-900 text-sm">
                           {exam.final_grade}/{ExamData.questions_count}
@@ -121,22 +224,6 @@ async function UnitContent({
                           {end.date} – {end.time}
                         </span>
                       </div>
-
-                      {/* الحالة */}
-                      {exam.message && (
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[#A4A4A4] font-semibold text-md">
-                            الحالة
-                          </span>
-                          <span className="text-secondary-900 text-sm">
-                            {exam.is_success === 1
-                              ? "ناجح"
-                              : exam.is_success === 0
-                              ? "راسب"
-                              : exam.message}
-                          </span>
-                        </div>
-                      )}
 
                       {/* الزرار */}
                       {ExamData.show_answers === 1 && (

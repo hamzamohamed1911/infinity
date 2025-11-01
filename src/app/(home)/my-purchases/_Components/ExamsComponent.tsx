@@ -3,7 +3,6 @@ import { IoIosArrowBack } from "react-icons/io";
 import Image from "next/image";
 import { placeholder } from "../../../../../public";
 import Link from "next/link";
-import { Progress } from "@/components/ui/progress";
 import { MdEditNote } from "react-icons/md";
 import { formatDate } from "@/lib/utils/format-date";
 import NoDataMessage from "@/components/NoDataMessage";
@@ -37,33 +36,6 @@ const ExamsComponent = ({
             <h3 className="text-lg font-semibold text-neural-800">
               {exam.name}
             </h3>
-            {exam.is_attempted &&
-              (() => {
-                const lastRetry =
-                  exam.user_exams_retries?.length > 0
-                    ? exam.user_exams_retries[
-                        exam.user_exams_retries.length - 1
-                      ]
-                    : null;
-
-                const progressValue =
-                  lastRetry && exam.degree
-                    ? Math.min((lastRetry.final_grade / exam.degree) * 100, 100)
-                    : 0;
-
-                return (
-                  <div className="flex gap-2 justify-center items-center">
-                    <Progress
-                      indicatorClassName="bg-secondary-600"
-                      value={progressValue}
-                      className="w-full bg-gray-200 my-2"
-                    />
-                    <span className="text-secondary-600">
-                      {progressValue.toFixed(0)}%
-                    </span>
-                  </div>
-                );
-              })()}
 
             <div className="flex flex-wrap gap-2 justify-between items-center text-neural-800 text-sm">
               <div className="flex items-center gap-2  ">
