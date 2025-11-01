@@ -15,7 +15,6 @@ export default function RetryComponent({
 }: {
   examData: ExamDetails;
 }) {
-  console.log("examData", examData);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const router = useRouter();
 

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { FiChevronLeft } from "react-icons/fi";
 import { studentstudying } from "../../../../../../public";
-import { Progress } from "@/components/ui/progress";
 import { GetExams } from "@/lib/apis/exams.api";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -57,71 +56,55 @@ const Deadlines = async ({ unitId, examId, examType = 1 }: ExamButtonProps) => {
         </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredExams.map((exam: ExamDetails) => (
-            <div
-              key={exam.id}
-              className="border rounded-xl overflow-hidden shadow-sm bg-white"
-            >
-              {/* صورة الامتحان */}
-              <Image
-                src={studentstudying}
-                alt={exam.name}
-                className="w-full h-52 object-cover"
-              />
+          {filteredExams.map((exam: ExamDetails) => {
+            const endDate = new Date(exam.end_date);
+            const isExpired = endDate < new Date();
+            return (
+              <div
+                key={exam.id}
+                className="border rounded-xl overflow-hidden shadow-sm bg-white"
+              >
+                {/* صورة الامتحان */}
+                <Image
+                  src={studentstudying}
+                  alt={exam.name}
+                  className="w-full h-52 object-cover"
+                />
 
-              <div className="p-4">
-                {/* عنوان الامتحان */}
-                <h3 className="text-right font-semibold text-gray-800">
-                  {exam.name}
-                </h3>
+                <div className="p-4">
+                  {/* عنوان الامتحان */}
+                  <h3 className="text-right font-semibold text-gray-800">
+                    {exam.name}
+                  </h3>
 
-                {/* Progress Bar */}
-                <div className="mt-2">
-                  <div className="flex justify-between text-xs text-secondary-500">
-                    <span>
-                      {exam.user_degree
-                        ? Math.round((exam.user_degree / exam.degree) * 100)
-                        : 0}
-                      %
-                    </span>
+                  {/* معلومات التاريخ وعدد الأسئلة */}
+                  <div className="flex justify-between text-sm text-neural-800 mt-2">
+                    <div>
+                      <span>الصلاحية : </span>
+                      {new Date(exam.end_date).toLocaleDateString("ar-EG")}
+                    </div>
+                    <span>{exam.questions_count} سؤال</span>
                   </div>
 
-                  <Progress
-                    value={
-                      exam.user_degree
-                        ? Math.round((exam.user_degree / exam.degree) * 100)
-                        : 0
+                  {/* زر بدء الحل */}
+                  <Link
+                    href={
+                      unitId && examId
+                        ? `/${unitId}/exams/${exam.id}`
+                        : `/exam/${exam.id}`
                     }
-                    className="w-full bg-gray-200 my-2"
-                  />
+                    className="mt-4 group w-full border border-primary text-primary flex items-center justify-center text-md gap-1 h-10 hover:bg-primary-400 hover:text-white transition rounded-md"
+                  >
+                    <span>{isExpired ? "عرض التفاصيل" : "ابدأ حل"}</span>
+                    <FiChevronLeft
+                      size={25}
+                      className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
+                    />
+                  </Link>
                 </div>
-
-                {/* معلومات التاريخ وعدد الأسئلة */}
-                <div className="flex justify-between text-sm text-neural-800 mt-2">
-                  <span>
-                    {new Date(exam.end_date).toLocaleDateString("ar-EG")}
-                  </span>
-                  <span>{exam.questions_count} سؤال</span>
-                </div>
-
-                {/* زر بدء الحل */}
-                <Link
-                  href={
-                    unitId && examId
-                      ? `/${unitId}/${examId}/exams/${exam.id}`
-                      : `/exam/${exam.id}`
-                  }
-                  className="mt-4 group w-full border border-primary text-primary flex items-center justify-center text-md gap-1 h-10 hover:bg-primary-400 hover:text-white transition rounded-md"
-                >
-                  <span>ابدأ حل</span>
-                  <FiChevronLeft
-                    size={25}
-                    className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
-                  />
-                </Link>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

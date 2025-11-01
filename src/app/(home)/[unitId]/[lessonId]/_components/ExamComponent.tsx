@@ -354,10 +354,14 @@ export default function ExamComponent({
                     onClick={() =>
                       setShownAnswers((prev) => ({
                         ...prev,
-                        [currentQuestion.id]: true,
+                        [currentQuestion.id]: !prev[currentQuestion.id],
                       }))
                     }
-                    className="border-primary-500 w-32  text-primary-500 hover:text-primary-400 hover:bg-transparent hover:border-primary-400 bg-transparent"
+                    className={`border-primary-500 w-32 ${
+                      shownAnswers[currentQuestion.id]
+                        ? "text-red-500 border-red-400 hover:text-red-400"
+                        : "text-primary-500 hover:text-primary-400"
+                    } hover:bg-transparent bg-transparent transition-colors`}
                   >
                     الإجابة
                   </Button>

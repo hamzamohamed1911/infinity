@@ -48,14 +48,30 @@ const ExamsComponent = ({
               <div className="flex gap-2 justify-center items-center ">
                 <span>
                   {type === "homework"
-                    ? "ًصلاحية الواجب :"
+                    ? "صلاحية الواجب :"
                     : "صلاحية الامتحان :"}
                 </span>
                 <p>{formatDate(exam.end_date) || "لا يوجد"} </p>
               </div>
             </div>
             {exam.retries > 0 ? (
-              exam.user_exams_retries?.length > 0 ? (
+              // ✅ الحالة دي لو ليه عدد محاولات محددة
+              exam.user_exams_retries?.length >= exam.retries ||
+              new Date(exam.end_date) < new Date() ? (
+                // 🔹 انتهت المحاولات أو عدى تاريخ الانتهاء
+                <Link
+                  href={`/${exam.section_id}${
+                    type === "homework" ? "/home-works" : "/exams"
+                  }/${exam.id}`}
+                  className="group flex mt-auto items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
+                >
+                  عرض التفاصيل
+                  <IoIosArrowBack
+                    size={25}
+                    className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
+                  />
+                </Link>
+              ) : exam.user_exams_retries?.length > 0 ? (
                 <Link
                   href={`/${exam.section_id}${
                     type === "homework" ? "/home-works" : "/exams"
@@ -69,6 +85,7 @@ const ExamsComponent = ({
                   />
                 </Link>
               ) : (
+                // 🔹 أول مرة يجرب
                 <Link
                   href={`/${exam.section_id}${
                     type === "homework" ? "/home-works" : "/exams"
@@ -83,13 +100,19 @@ const ExamsComponent = ({
                 </Link>
               )
             ) : (
-              <button
-                disabled
-                className="group flex mt-auto items-center justify-center text-lg gap-2 text-gray-400 border-[1px] border-gray-300 w-full h-12 rounded-lg cursor-not-allowed"
+              // 🔹 لو مفيش retries أصلاً (عرض فقط)
+              <Link
+                href={`/${exam.section_id}${
+                  type === "homework" ? "/home-works" : "/exams"
+                }/${exam.id}`}
+                className="group flex mt-auto items-center justify-center text-lg gap-2 text-primary border-[1px] border-primary hover:bg-primary hover:text-white w-full h-12 rounded-lg transition-all duration-300"
               >
-                لا توجد محاولات
-                <IoIosArrowBack size={25} className="opacity-50" />
-              </button>
+                عرض التفاصيل
+                <IoIosArrowBack
+                  size={25}
+                  className="transform transition-all duration-300 group-hover:-translate-x-2 group-hover:scale-110"
+                />
+              </Link>
             )}
           </CardContent>
         </Card>
