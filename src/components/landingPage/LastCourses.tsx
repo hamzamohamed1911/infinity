@@ -9,7 +9,7 @@ import "swiper/css";
 
 const LastCourses = ({ data }: { data: CourseDetails[] }) => {
   return (
-    <section id="courses" className="py-16  ">
+    <section id="courses" className="py-16  max-w-[90%] mx-auto">
       <h2 className="text-3xl md:text-4xl  !leading-relaxed font-bold mb-12 text-start text-landing-primary">
         كورساتنا المتاحة للعام 2025/2026
       </h2>

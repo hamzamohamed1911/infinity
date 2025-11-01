@@ -7,31 +7,30 @@ const ScrollToTopButton = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
+    const scrollContainer = document.querySelector(".site-scroll-landing");
+
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const windowHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = (scrollTop / windowHeight) * 100;
+      if (!scrollContainer) return;
+
+      const scrollTop = scrollContainer.scrollTop;
+      const scrollHeight =
+        scrollContainer.scrollHeight - scrollContainer.clientHeight;
+      const scrolled = (scrollTop / scrollHeight) * 100;
 
       setScrollPosition(scrolled);
-
-      if (scrollTop > 400) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(scrollTop > 400);
     };
 
-    window.addEventListener("scroll", handleScroll);
-
+    scrollContainer?.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      scrollContainer?.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const scrollToTop = () => {
-    if (isVisible) {
-      window.scrollTo({
+    const scrollContainer = document.querySelector(".site-scroll-landing");
+    if (scrollContainer) {
+      scrollContainer.scrollTo({
         top: 0,
         behavior: "smooth",
       });
@@ -40,7 +39,7 @@ const ScrollToTopButton = () => {
 
   return (
     <div
-      className={`fixed bottom-14 right-4 h-14 w-14 flex items-center justify-center cursor-pointer shadow-md transition-opacity duration-300 z-40 ${
+      className={`fixed bottom-14 right-4 h-14 w-14 flex items-center justify-center cursor-pointer shadow-md transition-opacity duration-300 z-50 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       onClick={scrollToTop}
@@ -50,7 +49,6 @@ const ScrollToTopButton = () => {
         padding: "6px",
       }}
     >
-      {/* Inner div with solid white background */}
       <div className="bg-white h-full w-full rounded-full flex items-center justify-center">
         <FaArrowUp className="text-landing-primary" size={22} />
       </div>

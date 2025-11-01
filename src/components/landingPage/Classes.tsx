@@ -11,7 +11,7 @@ import { Badge } from "../ui/badge";
 
 const Classes = ({ data, label }: { data: CourseDetails[]; label: string }) => {
   return (
-    <section id="courses" className="py-16 relative">
+    <section id="courses" className="py-16 relative max-w-[90%] mx-auto">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-landing-primary">
         {label}
       </h2>

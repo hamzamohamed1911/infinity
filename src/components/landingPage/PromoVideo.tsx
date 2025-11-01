@@ -12,7 +12,7 @@ const PromoVideo = ({ data }: { data: Academy }) => {
   }
 
   return (
-    <section id="promo-video" className="py-16   w-full">
+    <section id="promo-video" className="py-16 max-w-[90%] mx-auto  w-full">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start justify-start">
         <div className="text-right flex flex-col lg:gap-6 gap-4 col-span-2 justify-start">
           <h2 className=" md:text-4xl text-3xl font-bold text-landing-primary !leading-relaxed ">

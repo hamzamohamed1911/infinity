@@ -15,7 +15,7 @@ const Store = ({ products }: { products: ProductsResponse }) => {
   const allItems = [...books];
 
   return (
-    <section id="store" className="py-16 ">
+    <section id="store" className="py-16 max-w-[90%] mx-auto">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-landing-primary">
         متجر الكتب
       </h2>

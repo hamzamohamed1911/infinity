@@ -12,7 +12,7 @@ import { Academy } from "@/lib/types/landing";
 
 const Footer = ({ data }: { data: Academy }) => {
   return (
-    <footer id="contact" className="py-16  ">
+    <footer id="contact" className="py-16  max-w-[90%] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-right items-start">
         {/* Right Side: Logo & Description */}
         <div className="flex flex-col items-center md:items-start gap-4 md:gap-6">

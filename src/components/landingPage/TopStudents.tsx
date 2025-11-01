@@ -16,7 +16,7 @@ import { placeholder } from "../../../public";
 
 const TopStudents = ({ data }: { data: TopStudent[] }) => {
   return (
-    <section className="py-16">
+    <section className="py-16 max-w-[90%] mx-auto">
       <h2 className="text-3xl md:text-4xl font-extrabold text-center text-landing-primary mb-12 relative">
         الطلاب الأوائل
       </h2>

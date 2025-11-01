@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const DownloadAppSection = () => {
   return (
-    <section id="app" className="py-16  ">
+    <section id="app" className="py-16  max-w-[90%] mx-auto">
       <motion.h2
         className="text-3xl md:text-4xl font-bold text-center mb-8 text-landing-primary"
         initial={{ opacity: 0 }}

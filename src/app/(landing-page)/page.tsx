@@ -37,9 +37,9 @@ export default async function Home() {
 
   return (
     <LandingThemeProvider landingData={landingData}>
-      <section className="bg-landing-secondary site-scroll-landing ">
+      <section className=" relative w-full mx-auto">
         <div
-          className="min-h-screen relative  text-white font-sans overflow-hidden container max-w-[90%] mx-auto"
+          className="min-h-screen relative  text-white font-sans overflow-hidden   "
           dir="rtl"
         >
           {/*  header */}
@@ -66,9 +66,6 @@ export default async function Home() {
           {/* Last Courses Section */}
           <LastCourses data={landingData.data.courses} />
 
-          {/* books Store Section */}
-          <Store products={landingData.data.products} />
-
           {/* Top Students */}
           <TopStudents data={landingData.data.top_student} />
 
@@ -76,7 +73,8 @@ export default async function Home() {
           {landingData.data.academy.web_config.video.active === "on" && (
             <PromoVideo data={landingData.data.academy} />
           )}
-
+          {/* books Store Section */}
+          <Store products={landingData.data.products} />
           {/* Download App Section */}
           <DownloadAppSection />
 
