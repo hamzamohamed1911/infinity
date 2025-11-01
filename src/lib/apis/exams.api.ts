@@ -15,6 +15,8 @@ export async function GetExam({
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      type: "web",
+      Accept: "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
