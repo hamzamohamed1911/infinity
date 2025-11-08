@@ -13,6 +13,7 @@ import AboutSection from "@/components/landingPage/AboutSection";
 import { getLandingPage } from "@/lib/apis/webconfig.api";
 import TopStudents from "@/components/landingPage/TopStudents";
 import LandingThemeProvider from "@/context/LandingThemeProvider";
+import WhyChooseUs from "@/components/landingPage/WhyChooseUs";
 
 export async function generateMetadata() {
   try {
@@ -65,10 +66,10 @@ export default async function Home() {
 
           {/* Last Courses Section */}
           <LastCourses data={landingData.data.courses} />
-
+          {/* WhyChooseUs */}
+          <WhyChooseUs />
           {/* Top Students */}
           <TopStudents data={landingData.data.top_student} />
-
           {/* Promo Video Section */}
           {landingData.data.academy.web_config.video.active === "on" && (
             <PromoVideo data={landingData.data.academy} />

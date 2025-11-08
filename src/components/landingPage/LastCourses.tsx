@@ -4,15 +4,22 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { placeholder } from "../../../public";
 import { Button } from "../ui/button";
+import { motion } from "framer-motion";
 
 import "swiper/css";
 
 const LastCourses = ({ data }: { data: CourseDetails[] }) => {
   return (
     <section id="courses" className="py-16  max-w-[90%] mx-auto">
-      <h2 className="text-3xl md:text-4xl  !leading-relaxed font-bold mb-12 text-start text-landing-primary">
+      <motion.h2
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        className="text-4xl sm:text-5xl font-extrabold mb-12 text-black text-start !leading-relaxed "
+      >
         كورساتنا المتاحة للعام 2025/2026
-      </h2>
+      </motion.h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {data.map((cls) => (

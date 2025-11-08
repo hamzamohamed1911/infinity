@@ -8,13 +8,20 @@ import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Badge } from "../ui/badge";
+import { motion } from "framer-motion";
 
 const Classes = ({ data, label }: { data: CourseDetails[]; label: string }) => {
   return (
     <section id="courses" className="py-16 relative max-w-[90%] mx-auto">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-landing-primary">
+      <motion.h2
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        className="text-center text-4xl sm:text-5xl font-extrabold mb-12 text-black"
+      >
         {label}
-      </h2>
+      </motion.h2>
 
       <div dir="ltr" className="relative max-w-7xl mx-auto">
         <Swiper

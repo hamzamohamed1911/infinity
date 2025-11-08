@@ -1,3 +1,4 @@
+"use client";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { placeholder } from "../../../public";
@@ -6,6 +7,7 @@ import { Button } from "../ui/button";
 import { ShoppingBag } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { ProductsResponse } from "@/lib/types/landing";
+import { motion } from "framer-motion";
 
 const Store = ({ products }: { products: ProductsResponse }) => {
   const books = (products?.books || []).slice(0, 8).map((item) => ({
@@ -16,9 +18,15 @@ const Store = ({ products }: { products: ProductsResponse }) => {
 
   return (
     <section id="store" className="py-16 max-w-[90%] mx-auto">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-landing-primary">
+      <motion.h2
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        className="text-center text-4xl sm:text-5xl font-extrabold mb-12 text-black"
+      >
         متجر الكتب
-      </h2>
+      </motion.h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {allItems.map((item) => (

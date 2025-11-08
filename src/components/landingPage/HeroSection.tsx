@@ -7,15 +7,14 @@ import Counter from "@/lib/utils/Counter";
 
 const HeroSection = ({ hero }: { hero: Academy }) => {
   return (
-    <section className="bg-landing-secondary" id="home">
-      <div className="flex flex-col md:flex-row-reverse items-center justify-center min-h-screen  pt-20 w-full  max-w-[90%] mx-auto">
+    <section className="bg-landing-secondary min-h-screen" id="home">
+      <div className="flex flex-col md:flex-row-reverse items-center justify-center   pt-20 w-full  max-w-[90%] mx-auto">
         <motion.div
           className="md:w-1/2 mt-8 md:mt-0"
           animate={{
             opacity: 1,
             scale: 1,
             y: [0, -10, 0],
-            rotate: [0, 2, -2, 0],
           }}
           transition={{
             opacity: { duration: 1, delay: 0.4 },
@@ -38,63 +37,42 @@ const HeroSection = ({ hero }: { hero: Academy }) => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          <h1 className="text-3xl md:text-4xl lg:text-5xl text-landing-primary font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl  font-bold mb-4">
             {hero.web_config?.hero?.title}
           </h1>
-          <p className="text-lg md:text-xl text-landing-primary mb-6 !leading-8">
+          <p className="text-lg md:text-xl  mb-6 !leading-8">
             {hero.web_config?.hero?.desc}
           </p>
           <div className="w-full flex md:justify-start justify-center">
             <Link
               href="/my-classes"
-              className="btn-link-landing   rounded-md group "
+              className="rounded-lg bg-white text-landing-secondary md:w-72 w-64 h-[9vh]  flex justify-center items-center hover:bg-transparent hover:border-white hover:border hover:text-white transition-colors duration-500"
             >
-              <svg
-                width="180"
-                height="60"
-                viewBox="0 0 180 60"
-                className="absolute top-0 left-0 w-full h-full border-svg"
-              >
-                <polyline
-                  points="179,1 179,59 1,59 1,1 179,1"
-                  className="stroke-white"
-                />
-                <polyline
-                  points="179,1 179,59 1,59 1,1 179,1"
-                  className="stroke-white"
-                />
-              </svg>
-              <span className="relative z-10 text-white text-lg font-medium">
-                اشترك دلوقتى
-              </span>
+              اشترك دلوقتى !
             </Link>
           </div>
-          <div className="w-full flex md:justify-start justify-end lg:gap-12 md:gap-8 gap-6 mt-auto">
+          <div className="w-full flex md:justify-start justify-center lg:gap-12 md:gap-8 gap-6 mt-auto my-4">
             {/* Courses Count */}
             <div className="flex flex-col ">
-              <span className="text-landing-primary lg:text-5xl md:text-4xl text-3xl font-bold">
+              <span className=" lg:text-5xl md:text-4xl text-3xl font-bold">
                 <Counter
                   to={Number(hero.web_config?.hero?.courses_count) || 0}
                 />
                 +
               </span>
-              <span className="text-lg text-landing-primary-400 mt-1">
-                عدد الكورسات
-              </span>
+              <span className="text-lg  mt-1">عدد الكورسات</span>
             </div>
 
             {/* Students Count */}
             <div className="flex flex-col ">
-              <span className="text-landing-primary lg:text-5xl md:text-4xl text-3xl font-bold">
+              <span className=" lg:text-5xl md:text-4xl text-3xl font-bold">
                 <Counter
                   to={Number(hero.web_config?.hero?.students_count) || 0}
                 />
                 +
               </span>
 
-              <span className="text-lg text-landing-primary-400 mt-1 text-start">
-                عدد الطلاب
-              </span>
+              <span className="text-lg  mt-1 text-start">عدد الطلاب</span>
             </div>
           </div>
         </motion.div>

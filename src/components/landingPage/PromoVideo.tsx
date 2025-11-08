@@ -15,10 +15,10 @@ const PromoVideo = ({ data }: { data: Academy }) => {
     <section id="promo-video" className="py-16 max-w-[90%] mx-auto  w-full">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start justify-start">
         <div className="text-right flex flex-col lg:gap-6 gap-4 col-span-2 justify-start">
-          <h2 className=" md:text-4xl text-3xl font-bold text-landing-primary !leading-relaxed ">
+          <h2 className=" md:text-4xl text-3xl font-bold text-black !leading-relaxed ">
             {data?.web_config?.video.title}
           </h2>
-          <p className="text-lg md:text-xl text-secondary mb-6 !leading-8">
+          <p className="text-lg md:text-xl text-landing-primary-500 mb-6 !leading-8">
             {data?.web_config?.video.desc}
           </p>
           <div className="w-full flex md:justify-start justify-center">

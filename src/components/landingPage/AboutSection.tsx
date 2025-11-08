@@ -4,10 +4,11 @@ import { Academy } from "@/lib/types/landing";
 import { motion } from "framer-motion";
 
 const AboutSection = ({ data }: { data: Academy }) => {
+  console.log("data?.web_config?.about?", data?.web_config?.about);
   return (
     <section id="about" className="py-16  text-center max-w-[90%] mx-auto">
       <motion.h2
-        className="text-3xl md:text-4xl font-bold mb-8 !leading-relaxed text-landing-primary"
+        className="text-3xl md:text-4xl font-bold mb-8 !leading-relaxed text-black"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}

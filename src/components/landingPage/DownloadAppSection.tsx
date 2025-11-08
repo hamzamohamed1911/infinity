@@ -7,11 +7,11 @@ const DownloadAppSection = () => {
   return (
     <section id="app" className="py-16  max-w-[90%] mx-auto">
       <motion.h2
-        className="text-3xl md:text-4xl font-bold text-center mb-8 text-landing-primary"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
+        className="text-center text-4xl sm:text-5xl font-extrabold mb-12 text-black"
       >
         احصل على تطبيقنا
       </motion.h2>
